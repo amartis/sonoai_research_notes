@@ -1,0 +1,13 @@
+# Patient data never goes into notes; only text and metric plots (as .svg).
+*.png
+*.jp*g
+*.bmp
+*.tif*
+*.gif
+*.dcm
+*.npy
+*.pkl
+*.xls*
+*.csv
+.DS_Store
+.ipynb_checkpoints/
