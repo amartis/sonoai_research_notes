@@ -30,6 +30,8 @@ The name `submit1` is historical; never rename it.
 
 - `label2`: label obfuscated with `enc_label` (decode with `dec_label`);
 - `polygons` only: `x_2`, `y_2` = point + `p * 10` (decode with `dec_point`);
+  for how the decoded `x`, `y` map to image pixels, see `plain.md`
+  "Polygon coordinates";
 - other columns (`project_id`, `task_id`, `annotation_id`, `tag_type`,
   `tag_group`, ...) are plain.
 
