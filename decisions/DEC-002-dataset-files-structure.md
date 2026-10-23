@@ -1,58 +1,148 @@
-# Definition
+# DEC-002: Dataset files structure
 
-Training dataset or simply dataset is the dataset fed into training session.
+- Date: 2026-10-22
+- Status: proposed
 
-# Higher Level Concepts
+## Context
 
-dataset version - the versioning of dataset content
-dataset style - the encryption, folder structure (plainified or structured) style of dataset
-dataset - has content version and content style defined, and the content.
-dataset codename - the combination of dataset version and style - unique identifier of the dataset
-dataset components - regardless of the version and style, the content is composed in certain structure with defined component types which are described in [Content Components](#content-components) section.
+A training session reads images, the crop definitions for each training
+sample, and label tables. We need to rebuild datasets (new cases, relabelling,
+cleaning) and also ship them in different forms: plain on the trusted
+workstation, encrypted (DEC-001) on the Windows GPU box and RunPod. A single
+layout and naming scheme lets code, configs and notes point at a dataset by
+one name, whatever its form.
 
-# Dataset Components
+## Terms
 
-- image files, accompanied with taskcrops_df
-    - image files can be in plain or encrypted form
-        - if encrypted the encryption word should be in credential file of SONOAI_DATA_KEY_FILE
-- taskcrops_df.pkl
-    defines the cropping area (in the image) for each training sample, and other important meta information of the images (width, height, md5 value, ...)
-- labeling dataframes - flags, polygons, texts
+| Term | Meaning |
+|---|---|
+| **dataset** | The data fed into a training session: one content version in one style. |
+| **version** | Which content: the images, crops and labels as of a build date. |
+| **style** | How the content is stored: plain or encrypted, flat or hierarchical image folders, and any other storage choices. Documented once in `dataset_styles/<style>.md`. |
+| **codename** | `<version>_<style>`; the unique id of a dataset. |
+| **components** | The parts every dataset has, whatever its version and style (below). |
 
-# Dataset version, style, codename
+The same version can exist in several styles (for example a plain copy on the
+workstation and an encrypted copy on the GPU box); their content is identical.
 
-- version : YYMMDD
-- style : human readable name (can be short as the dataset has style)
+## Decision
 
-## Codename of data version+style
+### Codename
 
-Codename Convention: YYMMDD_alphabetname
-Example: 261022_submit1
+```
+<version>_<style>        e.g. 261022_submit1
+```
 
+- `version`: `YYMMDD`, the date the content was built.
+- `style`: lowercase letters and digits only, no `_` (so the codename splits
+  unambiguously at the first `_`). Short is fine.
+- If two different contents are built on the same day, the second one gets a
+  suffix letter on the version: `261022b_submit1`.
+- Codenames and style names must not contain patient, case or site
+  identifiers; they appear in configs, run names and notes.
+- `submit1` is an existing name kept for historical reasons; never rename it.
 
-{data_files_root}
-    |- dataset_styles (Note 1)
-        |- style1.md
-        |- style2.md
-        |- ...
-    |- datasets
-        |- {dataset-codename}
-            |- style 
-            |- images/
-                |- image files in plain structure or in hierarchies (Note 2)
-                |- taskcrops_df.pkl (Note 3)
-            |- labels/
-                |- flags_df.pkl
-                |- polygons_df.pkl
-                |- texts_df.pkl
+### Components
 
-Note 1:
-explains the details of the data version - encryptions, decisions made for the version, etc ; credendtials of encryption should be kept in proper folder of the project codebase ; this should never be pushed to any server
+1. **Images**: the source image files, plain or encrypted.
+2. **`taskcrops_df.pkl`**: one row per training sample. Defines the crop area
+   within its image and the image metadata (width, height, md5 of the plain
+   image bytes, ...).
+3. **Label tables**: `flags_df.pkl`, `polygons_df.pkl`, `texts_df.pkl`.
 
-Note 2:
-The image files can be replaced with softlink or hardlink or text files with relative or absolute path to the image files of another dataset folder
+Extra per-sample information is added in one of two ways:
 
-Note 3:
-Additional information can be fed in two styles:
-First style, taskcrops_df.pkl may have additional columns like datasource_id
-Second style, additional dataframe pkl file is accompanied to taskcrops_df.pkl
+- extra columns in `taskcrops_df.pkl` (e.g. `datasource_id`), or
+- an extra `<name>_df.pkl` next to `taskcrops_df.pkl`, keyed by the same
+  sample id so it joins one-to-one.
+
+Use extra columns for a few scalar fields; use a separate table when the
+information is large or optional for most consumers. Either way, the style
+doc lists what was added.
+
+### Layout
+
+```
+{data_files_root}/
+├── dataset_styles/
+│   ├── submit1.md            one doc per style (see "Style docs")
+│   └── ...
+└── datasets/
+    └── {codename}/
+        ├── style             one line: the style name (machine-readable check)
+        ├── images/
+        │   ├── ...           image files, flat or in sub-folders (per style)
+        │   ├── taskcrops_df.pkl
+        │   └── <name>_df.pkl optional extra per-sample tables
+        └── labels/
+            ├── flags_df.pkl
+            ├── polygons_df.pkl
+            └── texts_df.pkl
+```
+
+For an encrypted style, `datasets/{codename}/` is an `EncryptedStore` root
+(`manifest.enc` + `blobs/`). The tree above is then the *logical* layout:
+the paths inside the store (`images/...`, `labels/...`), read with
+`store.read_image(...)` / `store.read_pickle(...)`. On disk nothing of it is
+visible. The `style` file is the only plaintext file and stays outside the
+store.
+
+`{data_files_root}` is machine-specific and comes from an environment variable
+via `sonoai.paths`, never a hard-coded path.
+
+### Style docs
+
+`dataset_styles/<style>.md` records, for every dataset in that style:
+
+- plain or encrypted; for encrypted, which key it uses (by label, e.g.
+  "data key 2026-10", never the key itself),
+- image folder structure (flat or hierarchical, and how files are named),
+- extra columns or extra tables beyond the standard components,
+- any other choice made when building it.
+
+The doc describes the format only, so it may hold no patient data. A copy or
+summary goes in `research_notes/datasets/` so the decision is versioned.
+
+### Encryption key
+
+Encrypted datasets follow DEC-001. Code gets the key only through
+`sonoai.secure.load_key()` (`SONOAI_DATA_KEY`, `SONOAI_DATA_KEY_FILE`, or a
+prompt). The key is kept in the password manager; it is never stored in the
+codebase, in `{data_files_root}`, or on a shared machine.
+
+### Reusing images of another dataset
+
+A new version that changes only labels or crops can point at an existing
+dataset's images instead of copying them. Allowed only for **plain** styles,
+and only with paths relative to `{data_files_root}`:
+
+- symlinks or hardlinks to the other dataset's files, or
+- a text file in place of an image, holding the relative path to it.
+
+Not for encrypted styles: blob names and AAD are bound to the logical path, so
+a blob cannot be shared under another path. `sonoai-vault encrypt` follows
+symlinks, so encrypting a linked plain dataset produces a full, self-contained
+encrypted copy, which is what we want to ship.
+
+## Consequences
+
+- One string (the codename) identifies a dataset in configs, run metadata and
+  notes; a plain and an encrypted copy of the same content share the version.
+- Readers must handle flat and hierarchical image folders; the style doc and
+  `taskcrops_df` are the source of truth for which files belong to a dataset,
+  not a directory listing.
+- Linked plain datasets break if the target dataset is moved or deleted;
+  don't delete a dataset that another one links to.
+- Symlinks may not survive the VMware shared folder or a Windows copy;
+  build the encrypted store first and ship that.
+- `.pkl` tables are tied to the pandas version that wrote them; pin pandas
+  (`requirements.txt`) or rewrite the tables when upgrading.
+
+## Open questions
+
+- Name of the environment variable for `{data_files_root}` (e.g.
+  `SONOAI_DATA_FILES_ROOT`), and how it relates to `SONOAI_ENC_ROOT`.
+- Column name of the sample id that `taskcrops_df` and extra tables join on.
+- Whether label tables also key on the sample id or on the image.
+- Whether the `style` file should become a small `dataset.yaml` (style,
+  version, parent dataset it links to, build commit).
