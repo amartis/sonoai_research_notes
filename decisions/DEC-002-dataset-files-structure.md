@@ -87,8 +87,14 @@ the paths inside the store (`images/...`, `labels/...`), read with
 visible. The `style` file is the only plaintext file and stays outside the
 store.
 
-`{data_files_root}` is machine-specific and comes from an environment variable
-via `sonoai.paths`, never a hard-coded path.
+`{data_files_root}` is `$SONOAI_DATA_FILES_ROOT`, read through `sonoai.paths`;
+it is never hard-coded. Code finds a dataset by codename at
+`$SONOAI_DATA_FILES_ROOT/datasets/{codename}`, whatever its style.
+
+There is no separate root for encrypted data: encrypted is just another
+style, so `SONOAI_ENC_ROOT` is retired. On the trusted workstation,
+`{data_files_root}` may hold datasets of any style. On the Windows GPU box and
+RunPod it holds only encrypted-style datasets (DEC-001).
 
 ### Style docs
 
@@ -137,11 +143,13 @@ encrypted copy, which is what we want to ship.
   build the encrypted store first and ship that.
 - `.pkl` tables are tied to the pandas version that wrote them; pin pandas
   (`requirements.txt`) or rewrite the tables when upgrading.
+- Retiring `SONOAI_ENC_ROOT` means changing `sonoai.paths`, `scripts/train.py`
+  (choose the dataset by codename instead of a store path), `.env.example`,
+  the README, `CLAUDE.md`, the experiment configs, the T7-upload notebook, and
+  `deploy/` (shipping the whole store becomes shipping
+  `datasets/{codename}/`).
 
 ## Open questions
-
-- Name of the environment variable for `{data_files_root}` (e.g.
-  `SONOAI_DATA_FILES_ROOT`), and how it relates to `SONOAI_ENC_ROOT`.
 - Column name of the sample id that `taskcrops_df` and extra tables join on.
 - Whether label tables also key on the sample id or on the image.
 - Whether the `style` file should become a small `dataset.yaml` (style,
