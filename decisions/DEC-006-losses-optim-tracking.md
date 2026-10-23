@@ -66,9 +66,11 @@ Every evaluation produces, per layer of the task:
      largest ground-truth region (most pixels); `background` if it has none
      (a negative).
    - Predicted class: the disease-layer class with the most predicted pixels
-     inside the ground-truth organ region where it is annotated, else in the
-     whole crop; `background` if fewer than `image_min_pixels` (task setting,
-     default 1).
+     in the whole crop; `background` if fewer than `image_min_pixels` (task
+     setting, default 1). Ground truth and prediction use the same area (the
+     whole crop): restricting the prediction to the organ outline made a
+     perfect prediction score below 1, because some disease polygons extend
+     past the organ outline (amended 2026-10-23, before any run).
    - Samples whose disease layer is entirely ignored are not counted.
 
 Both matrices are **saved at every evaluation**, as integers, in the run
@@ -137,6 +139,14 @@ The disease tasks get a v2 eligibility rule:
   and its eligibility takes `(spec, rows, context)`.
 - Every single disease stays an independent task; no class weighting in the
   loss.
+- **Graded diseases (steatosis)**: only organ area carrying a grade is a
+  target. In the disease layer, liver pixels not covered by a
+  `hepatic_steatosis__{0..3}` polygon, or covered by
+  `hepatic_steatosis__ignore`, are `ignore_index`; pixels outside the liver
+  stay background. Only crops with a grade take part, so the negatives are
+  grade 0, never unlabelled livers (ungraded does not mean normal). In 261023
+  this ignores ~2% of liver pixels and leaves out 2,474 ungraded liver crops
+  (amended 2026-10-23, before any run).
 - `lseg_cirrhosis_v2` drops precirrhosis for now: samples with a
   precirrhosis polygon are not eligible (205 in 261023), so they are neither
   positives nor negatives.
@@ -145,7 +155,7 @@ Tasks of the next run, counts on 261023 (crops with polygons):
 
 | Task | Positives | Negatives, same projects | (all projects) | Organ layer annotated |
 |---|---:|---:|---:|---:|
-| `lseg_steatosis_v2` | 14,154 | 2,574 + grade 0 in positives | 15,011 | 100% |
+| `lseg_steatosis_v2` | 14,071 graded crops | none: grade 0 (6,401 crops) is the negative | - | 100% |
 | `lseg_cirrhosis_v2` | 1,815 (cirrhosis only) | 14,708 | 27,145 | 100% |
 | `lseg_hepatoma_v2` | 1,679 | 15,049 | 27,486 | 97% |
 
