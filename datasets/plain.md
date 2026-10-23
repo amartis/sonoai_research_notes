@@ -17,6 +17,9 @@ Copy of `{data_files_root}/dataset_styles/plain.md` (DEC-002). Format only, no p
   styles, DEC-002 "Reusing images of another dataset"). Do not delete or
   move the source dataset; editing an image in place changes both.
 - `taskcrops_df.filepath2` is the path of an image relative to `images/`.
+  Its first folder is the datasource, `dsid{datasource_id:04d}`; this holds
+  for every row of `261023_plain` (72 datasources, checked 2026-10-23).
+  Helpers: `sonoai.data.datasource`.
 
 ## Tables
 

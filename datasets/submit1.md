@@ -17,6 +17,9 @@ The name `submit1` is historical; never rename it.
 
 - `images/` is a hierarchical tree (sub-folders, original file names),
   `.png` / `.jpg` / `.bmp`, mixed channel counts. Own files, not links.
+- Top level of `images/` is one folder per **datasource** (an origin of
+  images): `dsid{datasource_id:04d}/`, matching `taskcrops_df.datasource_id`.
+  Helpers: `sonoai.data.datasource`.
 - `taskcrops_df.filepath2` is the path of an image relative to `images/`.
 
 ## Tables
