@@ -1,7 +1,7 @@
 # DEC-004: Training tasks
 
 - Date: 2026-10-22
-- Status: proposed
+- Status: accepted
 
 ## Context
 

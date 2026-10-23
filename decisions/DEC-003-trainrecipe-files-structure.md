@@ -1,7 +1,7 @@
 # DEC-003: Train recipe, plan and run files structure
 
 - Date: 2026-10-22
-- Status: proposed
+- Status: accepted
 
 ## Context
 

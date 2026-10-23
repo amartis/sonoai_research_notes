@@ -1,7 +1,7 @@
 # DEC-002: Dataset files structure
 
 - Date: 2026-10-22
-- Status: proposed
+- Status: accepted
 
 ## Context
 
