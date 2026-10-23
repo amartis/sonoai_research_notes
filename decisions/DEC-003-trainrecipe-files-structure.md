@@ -22,13 +22,14 @@ time it was actually executed.
 
 | Term | Meaning | Where |
 |---|---|---|
-| **recipe** | *What* is trained: dataset version and split, model, loss, optimisation, evaluation, seed. Machine-independent. A partial definition. | `configs/train/recipes/` (git) |
+| **task** | The learning problem: task type, labels used, classes, targets, metrics. Named and versioned (DEC-004), e.g. `seg_anatomy_v1`. | `src/sonoai/tasks/` |
+| **recipe** | *What* is trained: task, dataset version and split, model, loss, optimisation, evaluation, seed. Machine-independent. A partial definition. | `configs/train/recipes/` (git) |
 | **plan** | *How and where* a recipe is executed: the recipe plus machine and execution settings. A complete definition, but it says nothing about whether it was executed. | `configs/train/plans/` (git) |
 | **machine profile** | Default execution settings of one machine, shared by its plans. | `configs/train/machines/` (git) |
 | **run** | *One actual execution* of a plan: status, logs, metrics, checkpoints. | `$SONOAI_RUNS_ROOT/` (not in git) |
-| **trainer** | A named training loop in `src/sonoai/training/` (`smoke`, `segmentation`, ...). | `src/` |
+| **trainer** | A named training loop in `src/sonoai/training/` (`smoke`, `segmentation`, ...). By default chosen by the task type. | `src/` |
 
-One recipe has zero or more plans (local debugging, the GPU box, a RunPod
+One task has zero or more recipes; one recipe has zero or more plans (local debugging, the GPU box, a RunPod
 pod); one plan has zero or more runs (first attempt, a fresh restart after a
 crash). Runs of plans of the same recipe are directly comparable.
 
@@ -42,13 +43,14 @@ to the plan.**
 
 | Recipe | Plan (or its machine profile) |
 |---|---|
+| task (`seg_anatomy_v1`): classes, targets, metrics (DEC-004) | |
 | dataset version (`261022`), split / fold | dataset style used on that machine (codename `261022_submit1`, ...) |
 | model name + args, init weights | machine label, device(s), number of GPUs |
 | loss, optimizer, LR schedule, epochs/steps | per-device micro-batch, gradient accumulation (derived so the recipe's global batch holds) |
 | **global** batch size, precision (`bf16`/`fp32`), grad clipping, EMA | `num_workers`, prefetch, pinned memory |
 | augmentation, input size, crop policy | key source (prompt / env / RunPod secret) |
-| evaluation metrics, validation frequency, checkpoint selection criterion | |
-| seed, trainer name | |
+| validation frequency, checkpoint selection criterion (metrics come from the task) | |
+| seed, trainer (when not the task type's default) | |
 
 A plan **adds to** its recipe and never overrides it. It refers to the recipe
 by name (composition), not by Python inheritance or import, and `TrainPlan`
@@ -66,12 +68,12 @@ configs/train/                              all training definitions (git)
 │   └── runpod_a100.py
 ├── recipes/
 │   ├── smoke.py                            machine check (replaces experiments/smoke.yaml)
-│   └── <group>/                            task or study, e.g. seg/, cls/
+│   └── <task name>/                        e.g. seg_anatomy_v1/, cls_view_v1/
 │       └── <recipe name>.py
 └── plans/
     ├── smoke/
     │   └── <plan name>.py
-    └── <group>/
+    └── <task name>/
         └── <recipe name>/                  one folder per recipe (variants share the file's folder)
             └── <plan name>.py
 
@@ -96,8 +98,9 @@ the leading digits in names are fine.
 
 - `YYMMDD` is the date the file was created. Slugs and machine labels:
   lowercase letters, digits and `_`, short.
-- Recipe names are unique across groups; the group folder is for browsing
-  only and is not part of the name. Plan names are unique within a recipe.
+- Recipe names are unique across tasks; the task folder is not part of the
+  name, but it must equal the recipe's `task` field (the loader checks this).
+  Plan names are unique within a recipe.
 - No patient, case or site identifiers in any name (they end up in notes).
 - Once a recipe or plan has a run cited in `research_notes/`, do not change its
   meaning. Fix typos freely; for a different setting, add a variant, a new
@@ -118,21 +121,24 @@ and optionally a `train(ctx)` function (imperative style).
 `sonoai.training.recipe`. They must resolve to plain JSON (`to_dict()`), so
 every run records the full resolved recipe, also for imperative recipes.
 
-**Descriptive style** (the default): pick a registered trainer, describe
-everything as data.
+Every recipe names exactly one task (DEC-004). The task supplies classes,
+targets, metrics, the model's output size and the default trainer and loss.
+
+**Descriptive style** (the default): name the task and describe everything
+else as data.
 
 ```python
-# configs/train/recipes/seg/261022_resenc_fold0.py
+# configs/train/recipes/seg_anatomy_v1/261022_resenc_fold0.py
 from sonoai.training.recipe import Data, Eval, Model, Optim, TrainRecipe
 
 RECIPE = TrainRecipe(
-    trainer="segmentation",
+    task="seg_anatomy_v1",                 # trainer "segmentation" and n_classes come from the task
     data=Data(dataset="261022", split="kfold5/0", input_size=(256, 256), augment="us_basic_v1"),
-    model=Model("resenc_unet", in_channels=3, n_classes=4),
+    model=Model("resenc_unet", in_channels=3),
     loss="dice_ce",
     optim=Optim("adamw", lr=3e-4, weight_decay=1e-4, global_batch=32, epochs=100,
                 schedule="cosine", warmup_epochs=5, precision="bf16"),
-    eval=Eval(metrics=["dice"], every_epochs=1, select="val/dice:max"),
+    eval=Eval(every_epochs=1, select="val/dice:max"),
     seed=0,
 )
 ```
@@ -140,34 +146,37 @@ RECIPE = TrainRecipe(
 **Variants**: each is its own recipe.
 
 ```python
-# configs/train/recipes/seg/261022_resenc_lr.py
+# configs/train/recipes/seg_anatomy_v1/261022_resenc_lr.py
 from sonoai.training.presets import resenc_seg_base   # shared defaults live in src/, not in configs/
 
 RECIPES = {
-    f"lr{lr:g}_s{seed}": resenc_seg_base(dataset="261022").replace(optim__lr=lr, seed=seed)
+    f"lr{lr:g}_s{seed}": resenc_seg_base(task="seg_anatomy_v1", dataset="261022").replace(optim__lr=lr, seed=seed)
     for lr in (1e-4, 3e-4, 1e-3)
     for seed in (0, 1, 2)
 }
 ```
 
-**Imperative style**: still declare `RECIPE` (data, model, seed, ...) so its
-runs are indexed the same way, set `trainer="custom"`, and write the loop:
+**Imperative style**: still declare `RECIPE` (task, data, model, seed, ...) so
+its runs are indexed and evaluated the same way, set `trainer="custom"`, and
+write the loop:
 
 ```python
-# configs/train/recipes/seg/261023_transunet_twostage.py
+# configs/train/recipes/seg_anatomy_v1/261023_transunet_twostage.py
 from sonoai.training.recipe import Data, Model, TrainRecipe
 
 RECIPE = TrainRecipe(
+    task="seg_anatomy_v1",
     trainer="custom",
     data=Data(dataset="261022", split="kfold5/0", input_size=(224, 224)),
-    model=Model("transunet", n_classes=4),
+    model=Model("transunet"),
     seed=0,
     extra={"stage1_epochs": 20, "stage2_epochs": 80},
 )
 
 
 def train(ctx):
-    """ctx: recipe, plan, run (sonoai.tracking.Run), dataset, device, build_model(), build_loader(split)."""
+    """ctx: recipe, plan, task, run (sonoai.tracking.Run), dataset, device,
+    build_model(), build_loader(split), evaluate(model, split)."""
     model = ctx.build_model()
     ...
 ```
@@ -193,7 +202,7 @@ come from env vars via `sonoai.paths`.
 ### Plan files
 
 ```python
-# configs/train/plans/seg/261022_resenc_fold0/261023_gpubox.py
+# configs/train/plans/seg_anatomy_v1/261022_resenc_fold0/261023_gpubox.py
 from sonoai.training.plan import TrainPlan
 
 PLAN = TrainPlan(recipe="261022_resenc_fold0", machine="gpubox", micro_batch=8)
@@ -202,7 +211,7 @@ PLAN = TrainPlan(recipe="261022_resenc_fold0", machine="gpubox", micro_batch=8)
 - `recipe` is a recipe name (with `.<variant>` for a variant); `machine` is a
   machine profile label. Every other field is optional and overrides the
   profile's default, never the recipe.
-- The plan's folder must match its recipe (`plans/<group>/<recipe file
+- The plan's folder must match its recipe (`plans/<task name>/<recipe file
   stem>/`); the loader checks this, so the folder tree can be trusted when
   browsing.
 - Before training, the loader checks that `PLAN.machine` equals
@@ -231,6 +240,7 @@ $SONOAI_RUNS_ROOT/<recipe name>/<plan name>/<run id>/
 ├── recipe.py          copy of the recipe file source as executed
 ├── plan.py            copy of the plan file source
 ├── recipe.json        resolved recipe (TrainRecipe.to_dict())
+├── task.json          resolved task spec (DEC-004); its fingerprint goes in meta.json
 ├── plan.json          resolved plan, with machine profile defaults filled in and
 │                      derived values (gradient accumulation, dataset codename)
 ├── meta.json          git commit + dirty flag, machine label, host, GPU model, driver/CUDA/torch/python
@@ -255,7 +265,7 @@ For smoke tests and debugging without writing a plan file, a recipe can be run
 directly with a machine profile:
 
 ```bash
-python scripts/train.py configs/train/recipes/seg/261022_resenc_fold0.py --machine ws --debug
+python scripts/train.py configs/train/recipes/seg_anatomy_v1/261022_resenc_fold0.py --machine ws --debug
 ```
 
 These runs go to `<recipe name>/_adhoc_<machine>/<run id>/`, are marked
@@ -265,14 +275,14 @@ file count as results.
 ### Entry point
 
 ```bash
-python scripts/train.py configs/train/plans/seg/261022_resenc_fold0/261023_gpubox.py
-python scripts/train.py configs/train/plans/seg/261022_resenc_fold0/261023_gpubox.py --resume 261023-213005
-python scripts/train.py configs/train/recipes/seg/261022_resenc_lr.py --list           # list variants
+python scripts/train.py configs/train/plans/seg_anatomy_v1/261022_resenc_fold0/261023_gpubox.py
+python scripts/train.py configs/train/plans/seg_anatomy_v1/261022_resenc_fold0/261023_gpubox.py --resume 261023-213005
+python scripts/train.py configs/train/recipes/seg_anatomy_v1/261022_resenc_lr.py --list   # list variants
 python scripts/train.py <recipe file>[:<variant>] --machine ws --debug                 # ad hoc run
 ```
 
-`scripts/train.py` loads the plan, then its recipe and machine profile,
-checks the machine, resolves the dataset version to a codename present on the
+`scripts/train.py` loads the plan, then its recipe, the recipe's task and the
+machine profile, checks the machine and the task/model fit, resolves the dataset version to a codename present on the
 machine, creates the `Run`, writes the copies and resolved JSON, then calls
 the trainer, or the recipe's `train(ctx)` when `trainer="custom"`.
 
@@ -289,7 +299,9 @@ the trainer, or the recipe's `train(ctx)` when `trainer="custom"`.
 - Recipes and plans are code-reviewed, diffable and versioned with the model
   code they use. The same recipe runs on every machine without edits; only a
   short plan file differs.
-- Results from different machines are comparable by recipe name. Bitwise
+- Results of different recipes are comparable when task, dataset version and
+  split match (DEC-004); results from different machines are comparable by
+  recipe name. Bitwise
   equality is not expected (GPU model, cuDNN algorithms, driver versions
   differ), which is why `meta.json` records hardware and versions; running one
   recipe under two plans is also a cheap way to measure that noise.
@@ -316,7 +328,7 @@ the trainer, or the recipe's `train(ctx)` when `trainer="custom"`.
 - Should a plan file be able to cover all variants of a recipe file (`PLANS`
   dict, executed one after another), or is one plan per variant enough?
 - Split definitions: inside the dataset (DEC-002 extra table, e.g.
-  `splits_df.pkl`) or in `configs/data/`? The recipe only names the split.
+  `splits_df.pkl`) or in `configs/data/`? The recipe only names the split
+  (see also DEC-004 on whether the split belongs to the task).
 - Whether to keep a small runs index (one JSON line per finished run) for
   quick comparison across machines, or always scan `$SONOAI_RUNS_ROOT`.
-- Exact `TrainRecipe` fields for classification tasks.
