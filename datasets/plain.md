@@ -31,8 +31,9 @@ Copy of `{data_files_root}/dataset_styles/plain.md` (DEC-002). Format only, no p
   `height`, `width` (`Int64`). `np_md5_c3` (original) is kept, and the two
   may differ.
 
-`labels/{flags,polygons,texts}_df.pkl`, from the source
-`labels/<name>_df(enc).pkl`, de-obfuscated with `sonoai.data.obfuscation`:
+`labels/{flags,polygons}_df.pkl`, from the source
+`labels/<name>_df(enc).pkl`, de-obfuscated with `sonoai.data.obfuscation`. `texts_df` was retired on 2026-10-27 (moved out of every dataset version, removed from `261023_enc1`); no dataset carries it.
+
 
 - `label2` -> `label` (`dec_label`), same column position;
 - `polygons_df` only: `x_2`, `y_2` -> `x`, `y` (`x = x_2 - p * 10`), in percent

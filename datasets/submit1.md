@@ -29,7 +29,7 @@ The name `submit1` is historical; never rename it.
 `datasource_id`, `top`, `bottom`, `left`, `right`, `roi_i`, `roi_cnt`,
 `filepath2`. Index is not unique. No image size columns.
 
-`labels/<name>_df(enc).pkl` for `flags`, `polygons`, `texts`:
+`labels/<name>_df(enc).pkl` for `flags`, `polygons` (`texts` retired 2026-10-27, moved out of the dataset):
 
 - `label2`: label obfuscated with `enc_label` (decode with `dec_label`);
 - `polygons` only: `x_2`, `y_2` = point + `p * 10` (decode with `dec_point`);

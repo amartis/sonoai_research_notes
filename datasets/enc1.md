@@ -28,8 +28,8 @@ Exactly the content of the `plain` dataset of the same version (see
   names, `.png` / `.jpg` / `.bmp`); read with `store.read_image(...)`;
 - `images/taskcrops_df.pkl`: the plain taskcrops table (`filepath2` relative
   to `images/`, with `np_md5_c3_current`, `height`, `width`);
-- `labels/{flags,polygons,texts}_df.pkl`: de-obfuscated label tables
-  (`label`, and `x` / `y` in percent for polygons).
+- `labels/{flags,polygons}_df.pkl`: de-obfuscated label tables
+  (`label`, and `x` / `y` in percent for polygons). `texts_df` was retired on 2026-10-27 (moved out of every dataset version, removed from `261023_enc1`); no dataset carries it.
 
 The plain dataset's own `style` file is not copied into the store. No extra
 tables. Tables are pandas 2.3.3 pickles (pinned in `requirements.txt`); the
@@ -66,4 +66,4 @@ Train with `data.dataset: <codename>` (or `--dataset`).
 
 | Codename | Built from | Passphrase label | Date | Check |
 |---|---|---|---|---|
-| `261023_enc1` | `261023_plain` | _(fill in)_ | 2026-10-23 | all passed (`--sample 0`): 29,472 files, 4 tables, 29,468 images |
+| `261023_enc1` | `261023_plain` | _(fill in)_ | 2026-10-23 | all passed (`--sample 0`): 29,472 files, 4 tables, 29,468 images. 2026-10-27: `labels/texts_df.pkl` removed (`scripts/remove_from_enc_dataset.py`); all passed (`--sample 300`): 29,471 files, 3 tables |
