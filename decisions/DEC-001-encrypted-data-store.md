@@ -1,7 +1,13 @@
+---
+id: DEC-001
+title: Encrypted data store for all off-workstation data
+status: accepted
+created: 2026-10-22
+from: []
+related: []
+superseded_by:
+---
 # DEC-001: Encrypted data store for all off-workstation data
-
-- Date: 2026-10-22
-- Status: accepted
 
 ## Context
 

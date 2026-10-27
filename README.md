@@ -4,13 +4,52 @@ Lab notebook for the sonoai ultrasound ML project. Separate git repo from the
 code in `..` (which ignores this folder).
 
 ```
+INDEX.md       generated overview of all DIS / DEC / TSK / EXP notes and their links
+discussions/   DIS-NNN: a discussion, the options weighed, and what came out of it
+decisions/     DEC-NNN: short records of choices that shape the project (ADR style)
+tasks/         TSK-NNN: a well-defined piece of work, its done-criteria and implementation log
+experiments/   EXP-NNN: hypothesis, runs, results, conclusion
 journal/       daily notes: journal/2026/2026-10-22.md
-experiments/   one file per experiment: hypothesis, runs, results, conclusion
 datasets/      dataset/label versions, cleaning decisions, statistics (aggregates only)
 literature/    paper notes
-decisions/     short records of choices that shape the project (ADR style)
 templates/     copy these to start a note
+tools/         build_index.py (regenerates INDEX.md)
 ```
+
+## Workflow: discussion → decision → task
+
+```
+DIS-007 ──▶ DEC-007, DEC-008 ──▶ TSK-015, TSK-016 ──▶ EXP-003
+   ▲                                   │
+   └──────── a new question comes up ──┘  (DIS-009)
+```
+
+1. **Discuss.** A topic gets `discussions/DIS-NNN-slug.md` (status `open`): the
+   question, options, conclusion, open questions. It ends `concluded` or `parked`.
+2. **Decide.** Each lasting choice becomes `decisions/DEC-NNN-slug.md`, first
+   `proposed`, then `accepted` once agreed. Decisions are not rewritten later:
+   a change of mind is a new DEC, and the old one becomes `superseded`
+   (`superseded_by: DEC-NNN`). Small clarifications may amend in place.
+3. **Task.** Work to do becomes `tasks/TSK-NNN-slug.md` with a goal and
+   "done when" checklist. A small, obvious task may come straight from a DIS.
+4. **Log.** While working, append dated entries under `## Log` in the task
+   file: what changed, code commit, run names, problems. Status goes
+   `open → in-progress → done` (or `blocked`, `dropped`).
+5. **Index.** Run `python tools/build_index.py` after any change to front
+   matter; commit `INDEX.md` with the notes. `--check` verifies it is current
+   and that every link resolves.
+
+Rules:
+
+- IDs are sequential per prefix, three digits, never reused or renumbered.
+  File name is `<ID>-<short-slug>.md`; the `id` in front matter must match.
+- Links live in front matter: `from` (what this came out of), `outcomes`
+  (DIS only: what it produced), `related` (anything else),
+  `superseded_by` (DEC only). Mention IDs freely in the text too.
+- Code commits in `..` name the records they implement, e.g. a subject ending
+  `(TSK-015)` or a trailer `Refs: TSK-015, DEC-006`, so
+  `git -C .. log --grep TSK-015` finds them.
+- The journal stays the free-form daily log; it refers to IDs.
 
 ## Linking to code and runs
 

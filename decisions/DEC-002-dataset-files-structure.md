@@ -1,7 +1,13 @@
+---
+id: DEC-002
+title: Dataset files structure
+status: accepted
+created: 2026-10-22
+from: []
+related: [DEC-001]
+superseded_by:
+---
 # DEC-002: Dataset files structure
-
-- Date: 2026-10-22
-- Status: accepted
 
 ## Context
 

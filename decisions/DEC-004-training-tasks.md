@@ -1,7 +1,13 @@
+---
+id: DEC-004
+title: Training tasks
+status: accepted
+created: 2026-10-22
+from: []
+related: [DEC-002, DEC-003]
+superseded_by:
+---
 # DEC-004: Training tasks
-
-- Date: 2026-10-22
-- Status: accepted
 
 ## Context
 

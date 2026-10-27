@@ -1,7 +1,13 @@
+---
+id: DEC-005
+title: `enc1` dataset style and key handling for off-workstation training
+status: accepted
+created: 2026-10-22
+from: []
+related: [DEC-001, DEC-002]
+superseded_by:
+---
 # DEC-005: `enc1` dataset style and key handling for off-workstation training
-
-- Date: 2026-10-22
-- Status: accepted
 
 ## Context
 

@@ -1,7 +1,13 @@
+---
+id: DEC-006
+title: Losses, optimisation, confusion-based metrics and result tracking
+status: accepted
+created: 2026-10-23
+from: []
+related: [DEC-003, DEC-004]
+superseded_by:
+---
 # DEC-006: Losses, optimisation, confusion-based metrics and result tracking
-
-- Date: 2026-10-23
-- Status: accepted
 
 ## Context
 
