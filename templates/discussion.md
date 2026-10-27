@@ -3,8 +3,8 @@ id: DIS-NNN
 title: <topic>
 status: open          # open | concluded | parked
 created: YYYY-MM-DD
-outcomes: []          # DEC-NNN / TSK-NNN this discussion produced
-related: []           # other DIS / DEC / TSK / EXP it builds on
+outcomes: []          # DEC-NNN this discussion produced (board TASK-NNN go in the text)
+related: []           # other DIS / DEC / EXP it builds on
 ---
 # DIS-NNN: <topic>
 
@@ -19,7 +19,7 @@ What we set out to settle, and why now.
 
 ## Conclusion
 
-What we agreed, pointing at the DEC / TSK records that carry it.
+What we agreed, pointing at the DEC records and board TASK-NNN tasks that carry it.
 For a parked or dropped topic: why, and what would reopen it.
 
 ## Open questions

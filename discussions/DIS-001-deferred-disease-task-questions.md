@@ -3,7 +3,7 @@ id: DIS-001
 title: Deferred disease-task questions (precirrhosis, kidney tasks, image-level area)
 status: parked        # open | concluded | parked
 created: 2026-10-23
-outcomes: []          # DEC-NNN / TSK-NNN this discussion produced
+outcomes: []          # DEC-NNN this discussion produced (board: TASK-001)
 related: [DEC-004, DEC-006]
 ---
 # DIS-001: Deferred disease-task questions (precirrhosis, kidney tasks, image-level area)

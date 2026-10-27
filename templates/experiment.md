@@ -3,7 +3,7 @@ id: EXP-NNN
 title: <title>
 status: planned       # planned | running | done | dropped
 created: YYYY-MM-DD
-from: []              # TSK-NNN / DEC-NNN that call for it
+from: []              # DEC-NNN that call for it (board TASK-NNN go in the text)
 related: []
 ---
 # EXP-NNN: <title>

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build INDEX.md from the front matter of DIS / DEC / TSK / EXP notes.
+"""Build INDEX.md from the front matter of DIS / DEC / EXP notes.
 
     python tools/build_index.py           # write INDEX.md
     python tools/build_index.py --check   # exit 1 if INDEX.md is stale or a link is broken
@@ -20,11 +20,10 @@ INDEX = ROOT / "INDEX.md"
 KINDS = {  # prefix -> (folder, heading)
     "DIS": ("discussions", "Discussions"),
     "DEC": ("decisions", "Decisions"),
-    "TSK": ("tasks", "Tasks"),
     "EXP": ("experiments", "Experiments"),
 }
 LINK_FIELDS = ("from", "outcomes", "related", "superseded_by")
-ID_RE = re.compile(r"^(DIS|DEC|TSK|EXP)-\d{3}$")
+ID_RE = re.compile(r"^(DIS|DEC|EXP)-\d{3}$")
 
 
 def parse_front_matter(path: Path) -> dict | None:
@@ -118,7 +117,7 @@ def render(notes: dict[str, dict]) -> str:
     edges = sorted({(src, nid) for nid, m in notes.items() for src in m.get("from") or []}
                    | {(nid, dst) for nid, m in notes.items() for dst in m.get("outcomes") or []})
     if edges:
-        out += ["## Graph", "", "Arrows follow `from` / `outcomes` (discussion → decision → task).", "",
+        out += ["## Graph", "", "Arrows follow `from` / `outcomes` (discussion → decision → experiment).", "",
                 "```mermaid", "flowchart LR"]
         out += [f"  {a.replace('-', '_')}[{a}] --> {b.replace('-', '_')}[{b}]" for a, b in edges]
         out += ["```", ""]
