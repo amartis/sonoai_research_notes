@@ -77,6 +77,14 @@ Agreed with the user on 2026-10-28:
   trainers) and TASK-019 (run tracking, runs index, display, `compare_runs`),
   all `method`, in Triage. TASK-009 gets a criterion: trainers are registered
   in `training/`, not in `scripts/train.py`.
+- Stray worktrees: four under `.claude/worktrees/` (desktop-app sessions,
+  2026-10-27), all fully merged; the only unique content, an uncommitted
+  `brief` skill draft, is kept. No new DEC (enforces DEC-007). TASK-020
+  (`infra`, Triage, m-0): move the skill draft to the main checkout, remove the
+  worktrees and merged `claude/*` branches, make `scripts/check.sh` fail on
+  extra worktrees, and stop hiding `.claude/worktrees/` in `.git/info/exclude`.
+  The app has no setting to turn worktrees off for new sessions (only their
+  location), so the check is the guard.
 
 ## Open questions
 
@@ -86,5 +94,4 @@ Still to discuss for m-0:
 - Backlog's own `decisions/`, `docs/`, `drafts/` folders are empty and overlap
   with DEC records.
 - Where results and chosen models go once runs start.
-- Stray git worktrees under `.claude/worktrees/` (against DEC-007).
 - Guards: the notes repo has no pre-commit hook.
