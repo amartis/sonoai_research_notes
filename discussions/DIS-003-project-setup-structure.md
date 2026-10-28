@@ -1,7 +1,7 @@
 ---
 id: DIS-003
 title: Project setup structure review (milestone m-0)
-status: open
+status: concluded
 created: 2026-10-28
 outcomes: [DEC-011, DEC-012, DEC-013, DEC-014, DEC-015, DEC-016]
 related: [DIS-002, DEC-002, DEC-007, DEC-008, DEC-009]
@@ -128,9 +128,8 @@ Agreed with the user on 2026-10-28:
 
 ## Open questions
 
-Still to discuss for m-0:
+Discussion closed by the user on 2026-10-28; what is left is on the board:
 
-- Off-machine copy: target to choose (TASK-027, Parked, `needs-decision`);
-  the recommendation (restic, scope above) waits on it.
-- Workflow docs and `CLAUDE.md` still say the repo has no remote.
-- Whether encrypted datasets also go into the common box (DEC-015).
+- Off-machine copy target: TASK-027 (Parked, `needs-decision`).
+- Encrypted datasets in the common box: TASK-030 (Parked, `needs-decision`).
+- Workflow docs and `CLAUDE.md` still say the repo has no remote: TASK-022.
