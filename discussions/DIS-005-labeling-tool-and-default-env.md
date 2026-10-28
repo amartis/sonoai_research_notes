@@ -1,7 +1,7 @@
 ---
 id: DIS-005
 title: Dedicated labeling tool for review tasks, and a default env matching the GPU box
-status: open
+status: concluded
 created: 2026-10-28
 outcomes: [DEC-019, DEC-020]
 related: [DEC-017, DEC-018, DEC-012]
@@ -53,7 +53,7 @@ question: which venv is the default on machine01.
 
 Agreed with the user on 2026-10-28; carried by DEC-019 (Label Studio for
 review projects, layout of their files) and DEC-020 (default venv), both
-proposed. Board tasks: TASK-034 (`infra`: the new default venv), TASK-035
+accepted 2026-10-28. Board tasks: TASK-034 (`infra`: the new default venv), TASK-035
 (`infra`: the local Label Studio server), TASK-036 (`method`: the
 `sonoai.labeling` package and `sonoai-label` CLI). TASK-032 waits on
 TASK-035 and TASK-036.

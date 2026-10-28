@@ -1,7 +1,7 @@
 ---
 id: DEC-020
 title: New default venv on machine01, matching the GPU box training env and running Label Studio
-status: proposed
+status: accepted
 created: 2026-10-28
 from: [DIS-005]
 related: [DEC-019]
