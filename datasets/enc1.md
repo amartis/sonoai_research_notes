@@ -40,8 +40,8 @@ training env on every machine must read them with a compatible pandas.
 On the trusted workstation:
 
 ```bash
-python scripts/make_enc_dataset.py <version>_plain <version>_enc1 [--root DIR]
-python scripts/check_enc_dataset.py <version>_plain <version>_enc1 [--root DIR] --sample 0
+sonoai-data make-enc <version>_plain <version>_enc1 [--root DIR]
+sonoai-data check-enc <version>_plain <version>_enc1 [--root DIR] --sample 0
 ```
 
 - `--root` writes to `DIR/datasets/<codename>` instead of

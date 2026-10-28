@@ -6,7 +6,7 @@ Copy of `{data_files_root}/dataset_styles/plain.md` (DEC-002). Format only, no p
 
 - **Plain**: no encryption and no obfuscation. Trusted workstation only;
   never ship to the Windows GPU box or RunPod (DEC-001). The shippable copy is
-  the `enc1` style (`scripts/make_enc_dataset.py`, see `enc1.md`).
+  the `enc1` style (`sonoai-data make-enc`, see `enc1.md`).
 - `style` file: `plain`.
 
 ## Images
@@ -77,8 +77,8 @@ crop box and cannot be placed in an image.
 ## Build and check
 
 ```bash
-python scripts/make_plain_dataset.py <version>_submit1 <version>_plain
-python scripts/check_plain_dataset.py <version>_submit1 <version>_plain --sample 0
+sonoai-data make-plain <version>_submit1 <version>_plain
+sonoai-data check-plain <version>_submit1 <version>_plain --sample 0
 ```
 
 The check re-encodes every change and compares with the source.

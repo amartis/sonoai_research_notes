@@ -99,6 +99,9 @@ python scripts/make_enc_dataset.py <version>_plain <version>_enc1 [--root DIR]
 python scripts/check_enc_dataset.py <version>_plain <version>_enc1 [--root DIR] --sample 0
 ```
 
+Since DEC-008 these are `sonoai-data make-enc` and `sonoai-data check-enc`
+(same arguments).
+
 The build refuses a non-plain source, a version mismatch, an already-built
 target and too little free space. It resumes if interrupted and writes `style`
 last. The check asks for the passphrase again (a wrong one fails at once).

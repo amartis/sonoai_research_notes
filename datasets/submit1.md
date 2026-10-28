@@ -42,8 +42,8 @@ No extra tables.
 
 ## Derived styles
 
-- `plain`: `scripts/make_plain_dataset.py` (see `plain.md`).
-- Encrypted: via `plain`, then `enc1` (`scripts/make_enc_dataset.py`, see `enc1.md`).
+- `plain`: `sonoai-data make-plain` (see `plain.md`).
+- Encrypted: via `plain`, then `enc1` (`sonoai-data make-enc`, see `enc1.md`).
 
 ## Datasets in this style
 
