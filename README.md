@@ -7,7 +7,6 @@ code in `..` (which ignores this folder).
 INDEX.md       generated overview of all DIS / DEC / EXP notes and their links
 discussions/   DIS-NNN: a discussion, the options weighed, and what came out of it
 decisions/     DEC-NNN: short records of choices that shape the project (ADR style)
-tasks/         retired: work items are Backlog.md tasks in ../backlog/ (see below)
 experiments/   EXP-NNN: hypothesis, runs, results, conclusion
 journal/       daily notes: journal/2026/2026-10-22.md
 datasets/      dataset/label versions, cleaning decisions, statistics (aggregates only)
@@ -31,7 +30,7 @@ DIS-007 ──▶ DEC-007, DEC-008 ──▶ TASK-015, TASK-016 ──▶ EXP-00
    a change of mind is a new DEC, and the old one becomes `superseded`
    (`superseded_by: DEC-NNN`). Small clarifications may amend in place.
 3. **Task.** Work to do becomes a Backlog.md task in the code repo
-   (`../backlog/tasks/`, managed with the `backlog` CLI; see `../CLAUDE.md`),
+   (`../backlog/tasks/`, managed with the `backlog` CLI; see `../docs/workflow.md`),
    not a TSK record here. It carries a scope (`coord`, `data`, `method`,
    `exp`, `infra`), the files or areas it `touches`, and acceptance criteria,
    and points back with `--ref` at the DEC it came from (a small, obvious
@@ -39,7 +38,7 @@ DIS-007 ──▶ DEC-007, DEC-008 ──▶ TASK-015, TASK-016 ──▶ EXP-00
 4. **Log.** Progress lives on the task: plan, notes (code commit, run
    names, problems) and final summary. Status goes
    `Triage → To Do → In Progress → Review → Done` (or `Parked` while it
-   waits on a decision). The why stays here in DIS / DEC / EXP.
+   waits on a decision); small, obvious tasks skip Triage (DEC-009). The why stays here in DIS / DEC / EXP.
 5. **Index.** Run `python tools/build_index.py` after any change to front
    matter; commit `INDEX.md` with the notes. `--check` verifies it is current
    and that every link resolves.
