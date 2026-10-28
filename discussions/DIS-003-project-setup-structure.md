@@ -3,7 +3,7 @@ id: DIS-003
 title: Project setup structure review (milestone m-0)
 status: open
 created: 2026-10-28
-outcomes: [DEC-011, DEC-012, DEC-013]
+outcomes: [DEC-011, DEC-012, DEC-013, DEC-014]
 related: [DIS-002, DEC-002, DEC-007, DEC-008, DEC-009]
 ---
 # DIS-003: Project setup structure review (milestone m-0)
@@ -47,6 +47,12 @@ is still unclear. Topics settled so far:
   stays the exact official TransUNet loss; (B) also rebuild `dice_ce` on the
   soft matrix (less code, but no longer the official squared-denominator Dice);
   (C) keep formulas separate as in DEC-006. A chosen.
+- **Backups / remote**: neither repo has a remote. (1) bare mirror on
+  machine02 via the shared folder; (2) private hosted repos (GitHub); (3) git
+  bundles to the user's own storage; (4) a self-hosted git service: Forgejo
+  (push mirrors, active), Gitea, or Gogs (lightest, no push mirrors, slow
+  security fixes). machine01 is a VM on machine02, so anything on either
+  machine shares its hardware. The user chose Gogs on machine01.
 - **Tag table**: first read (wrongly) as plaintext patient labels; the user
   clarified it is the label definitions of version 261023, so it is
   documentation of that version and goes into its notes folder.
@@ -85,12 +91,17 @@ Agreed with the user on 2026-10-28:
   extra worktrees, and stop hiding `.claude/worktrees/` in `.git/info/exclude`.
   The app has no setting to turn worktrees off for new sessions (only their
   location), so the check is the guard.
+- DEC-014: Gogs on machine01, localhost only, as remote `gogs` of
+  both repos. TASK-021 (`infra`, m-0) installs it; the user does the first-run
+  wizard and creates the account and repos. Not a backup by itself.
 
 ## Open questions
 
 Still to discuss for m-0:
 
-- Backups: neither repo has a remote.
+- Off-machine copy of the repos (and later the runs): Gogs on machine01
+  shares the VM disk.
+- Workflow docs and `CLAUDE.md` still say the repo has no remote.
 - Backlog's own `decisions/`, `docs/`, `drafts/` folders are empty and overlap
   with DEC records.
 - Where results and chosen models go once runs start.
