@@ -44,6 +44,8 @@ no ready-made tool handles mixed-vendor screenshots with two-image layouts
 - **Output store**: a table of boxes per dataset version, next to (not
   replacing) `taskcrops_df`. Label polygons are placed through image pixels
   (`add_pos_in_img`) into the new boxes. No crops are written to disk.
+  Amended 2026-10-28 (DEC-018): built locally from the plain dataset, in
+  `<version>_plain/derived/`.
 - **Checks**:
   - synthetic tests (generated speckle fans, text headers, colour Doppler
     patches, colour bars, one- and two-image layouts, spectral strips);
