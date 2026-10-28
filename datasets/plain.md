@@ -23,7 +23,7 @@ Copy of `{data_files_root}/dataset_styles/plain.md` (DEC-002). Format only, no p
 
 ## Tables
 
-`images/taskcrops_df.pkl`, built as in `notebooks/data_prep/T7-upload.ipynb`:
+`images/taskcrops_df.pkl`, built as in `notebooks/human/data_prep/T7-upload.ipynb`:
 
 - source columns kept unchanged, same index and row order;
 - dropped: `filepath`, `reqpath`;
