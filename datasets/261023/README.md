@@ -30,3 +30,9 @@ together: [`docs/workflow.md`](../../../docs/workflow.md) in the code repo.
 
 - `261023_plain`: 72 datasources; every `taskcrops_df.filepath2` starts with
   its datasource folder (checked 2026-10-23).
+
+## Label definitions
+
+- `label_projects.xlsx`: the labeling-project tag table of this version
+  (label definitions per project, no patient data; DEC-012). The code repo's
+  `configs/data/label_projects.yaml` is exported from it.

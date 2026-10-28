@@ -8,6 +8,8 @@
 *.npy
 *.pkl
 *.xls*
+# Except a dataset version's labeling-project tag table (label definitions, DEC-012).
+!datasets/*/label_projects.xlsx
 *.csv
 .DS_Store
 .ipynb_checkpoints/
