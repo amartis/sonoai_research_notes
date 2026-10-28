@@ -108,7 +108,8 @@ last. The check asks for the passphrase again (a wrong one fails at once).
 It then fails on any non-store file on disk, decrypts every blob in RAM and
 compares it with the source bytes, compares every table, and decodes images
 (all of them with `--sample 0`) and compares pixels and `np_md5_c3_current`.
-Both print counts only. The style doc is `datasets/enc1.md`.
+Both print counts only. The style doc is `datasets/enc1.md`; since DEC-012 the
+spec is `docs/datasets/styles/enc1.md` in the code repo.
 
 ## Consequences
 
