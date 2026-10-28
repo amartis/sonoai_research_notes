@@ -1,7 +1,7 @@
 ---
 id: DEC-017
 title: Classical B-mode box cropper, checked against label polygons and a reviewed set
-status: proposed
+status: accepted
 created: 2026-10-28
 from: [DIS-004]
 related: [DEC-012]
@@ -67,6 +67,6 @@ identifiers in notes or tasks.
   style docs (`docs/datasets/styles/`, DEC-012).
 - The review needs the user's time (about 20 frames per datasource), viewed
   only in the user's own session, as the data rules require.
-- Board tasks: a `method` task (cropper and synthetic tests, touches
+- Board tasks: TASK-031, a `method` task (cropper and synthetic tests, touches
   `src/sonoai/data/`, `tests/`, `configs/`) and a `data` task depending on it
-  (run, polygon check, review set, box table).
+  (TASK-032: run, polygon check, review set, box table).

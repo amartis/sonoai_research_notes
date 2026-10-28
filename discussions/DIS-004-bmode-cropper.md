@@ -1,7 +1,7 @@
 ---
 id: DIS-004
 title: B-mode cropper for ultrasound frames
-status: open
+status: concluded
 created: 2026-10-28
 outcomes: [DEC-017]
 related: [DEC-012]
@@ -56,10 +56,10 @@ regardless of where the B-mode area is (user, 2026-10-28).
 
 ## Conclusion
 
-Agreed with the user on 2026-10-28; carried by DEC-017 (proposed). Board
-tasks follow once DEC-017 is accepted: a `method` task for the cropper with
-synthetic tests, and a `data` task for running it, the polygon check and the
-review set.
+Agreed with the user on 2026-10-28; carried by DEC-017 (accepted
+2026-10-28). Board tasks: TASK-031 (`method`: the cropper, batch command and
+synthetic tests) and TASK-032 (`data`, depends on TASK-031: run it, polygon
+check, reviewed set, box table).
 
 ## Open questions
 
