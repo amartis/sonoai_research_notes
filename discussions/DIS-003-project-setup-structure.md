@@ -60,6 +60,14 @@ is still unclear. Topics settled so far:
   box on machine02 (`D:\codework\ml_research_commonbox`, shared to machine01
   and seen by the GPU box in WSL) for runs, checkpoints and models; metrics
   kept forever, unused weights pruned.
+- **Off-machine copy**: everything (working copies, Gogs, the common box) sits
+  on machine02's hardware. Targets: encrypted cloud storage (restic, or rclone
+  with encryption), an external USB drive, a private GitHub remote (repos
+  only), institution storage. Scope: both repos, Gogs data, common box `runs/`
+  and `models/` (cited checkpoints), encrypted datasets only if no other copy
+  of the source data exists. The user had no preference; recommended restic
+  with a daily systemd user timer on machine01. The target needs the user's
+  own account or drive, so it is parked.
 - **Tag table**: first read (wrongly) as plaintext patient labels; the user
   clarified it is the label definitions of version 261023, so it is
   documentation of that version and goes into its notes folder.
@@ -113,8 +121,8 @@ Agreed with the user on 2026-10-28:
 
 Still to discuss for m-0:
 
-- Off-machine copy of the repos and of the common box (`runs/`, `models/`):
-  Gogs and the box share machine02's hardware.
+- Off-machine copy: target to choose (TASK-027, Parked, `needs-decision`);
+  the recommendation (restic, scope above) waits on it.
 - Workflow docs and `CLAUDE.md` still say the repo has no remote.
 - Backlog's own `decisions/`, `docs/`, `drafts/` folders are empty and overlap
   with DEC records.
