@@ -3,7 +3,7 @@ id: DIS-003
 title: Project setup structure review (milestone m-0)
 status: open
 created: 2026-10-28
-outcomes: [DEC-011, DEC-012, DEC-013, DEC-014, DEC-015]
+outcomes: [DEC-011, DEC-012, DEC-013, DEC-014, DEC-015, DEC-016]
 related: [DIS-002, DEC-002, DEC-007, DEC-008, DEC-009]
 ---
 # DIS-003: Project setup structure review (milestone m-0)
@@ -68,6 +68,11 @@ is still unclear. Topics settled so far:
   of the source data exists. The user had no preference; recommended restic
   with a daily systemd user timer on machine01. The target needs the user's
   own account or drive, so it is parked.
+- **Backlog's empty folders and a notes hook**: the `decisions/`, `docs/`,
+  `drafts/` folders are untracked and recreated by the CLI, so deleting them
+  is pointless; the risk is using those features. The code repo's hook cannot
+  serve the notes (it blocks the DEC-012 tag table and has no `INDEX.md`
+  check), so the notes get their own.
 - **Tag table**: first read (wrongly) as plaintext patient labels; the user
   clarified it is the label definitions of version 261023, so it is
   documentation of that version and goes into its notes folder.
@@ -113,6 +118,10 @@ Agreed with the user on 2026-10-28:
   a root is missing. Board: TASK-023 (`infra`, m-0, box setup), TASK-024
   (`method`, m-0, `MODELS_ROOT` and missing-root error), TASK-025 (`method`,
   m-1, promote / prune), TASK-026 (`coord`, m-0, EXP template).
+- DEC-016: notes pre-commit hook (data and binary types refused except the
+  DEC-012 tag table, 1 MB limit, `INDEX.md` check); Backlog's decision, doc
+  and draft features are not used. Board: TASK-028 (`infra`, hook),
+  TASK-029 (`coord`, workflow rule), both Triage, m-0.
 - DEC-014: Gogs on machine01, localhost only, as remote `gogs` of
   both repos. TASK-021 (`infra`, m-0) installs it; the user does the first-run
   wizard and creates the account and repos. Not a backup by itself.
@@ -124,7 +133,4 @@ Still to discuss for m-0:
 - Off-machine copy: target to choose (TASK-027, Parked, `needs-decision`);
   the recommendation (restic, scope above) waits on it.
 - Workflow docs and `CLAUDE.md` still say the repo has no remote.
-- Backlog's own `decisions/`, `docs/`, `drafts/` folders are empty and overlap
-  with DEC records.
 - Whether encrypted datasets also go into the common box (DEC-015).
-- Guards: the notes repo has no pre-commit hook.
