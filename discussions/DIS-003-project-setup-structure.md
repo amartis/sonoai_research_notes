@@ -3,7 +3,7 @@ id: DIS-003
 title: Project setup structure review (milestone m-0)
 status: open
 created: 2026-10-28
-outcomes: [DEC-011, DEC-012]
+outcomes: [DEC-011, DEC-012, DEC-013]
 related: [DIS-002, DEC-002, DEC-007, DEC-008, DEC-009]
 ---
 # DIS-003: Project setup structure review (milestone m-0)
@@ -24,6 +24,11 @@ is still unclear. Topics settled so far:
    at the repo root, gitignored. It holds the tags of the labeling projects
    that produced the 261023 label files (label definitions, no patient data),
    and `configs/data/label_projects.yaml` is exported from it.
+4. Training code layout: checked against DEC-006, which already fixes the
+   `training/`, `evaluation/` and `tracking/` modules and the split of
+   metrics between tasks (which metrics, `S`) and `evaluation/` (formulas on
+   matrices). Not reopened. The user raised one point: losses and metrics
+   overlap, since a Dice-type loss is the same measure as the metric.
 
 ## Options considered
 
@@ -37,6 +42,11 @@ is still unclear. Topics settled so far:
   (C) `research_notes/datasets/styles/`. B chosen: the specs are "how it works
   now" and implemented by code, and C would again point code at a repo that is
   not always there.
+- **Losses and metrics**: (A) one set of matrix formulas used by metrics and,
+  through a soft confusion matrix, by a new loss `fdsc_ce`, while `dice_ce`
+  stays the exact official TransUNet loss; (B) also rebuild `dice_ce` on the
+  soft matrix (less code, but no longer the official squared-denominator Dice);
+  (C) keep formulas separate as in DEC-006. A chosen.
 - **Tag table**: first read (wrongly) as plaintext patient labels; the user
   clarified it is the label definitions of version 261023, so it is
   documentation of that version and goes into its notes folder.
@@ -55,17 +65,23 @@ Agreed with the user on 2026-10-28:
   the data-root `dataset_styles/` holds copies of the `docs/` specs; no
   `research_notes/datasets/styles/`. `label_projects.yaml` names the version
   it was exported from.
+- DEC-013: losses reuse the matrix score formulas of
+  `evaluation/scores.py` through a soft confusion matrix; new loss `fdsc_ce`
+  with the task's `S`; `dice_ce` unchanged and still the default.
 - Board (Triage, m-0): TASK-011 (style specs and version registers),
   TASK-012 (tag table move and `label_projects.yaml` version).
+- The DEC-006 / DEC-013 implementation is development, not project setup: a
+  new milestone m-1 "First Training Run" holds TASK-014 (shared score
+  formulas), TASK-015 (losses), TASK-016 (optimisation), TASK-017
+  (image-level matrices, `evaluate`), TASK-018 (shared loop and segmentation
+  trainers) and TASK-019 (run tracking, runs index, display, `compare_runs`),
+  all `method`, in Triage. TASK-009 gets a criterion: trainers are registered
+  in `training/`, not in `scripts/train.py`.
 
 ## Open questions
 
 Still to discuss for m-0:
 
-- Where training code goes: trainers are registered in `scripts/train.py`,
-  `src/sonoai/training/` is nearly empty, and losses/optimisers (DEC-006) have
-  no agreed home.
-- Metrics in two places: `src/sonoai/tasks/` (DEC-004) and `evaluation/`.
 - Backups: neither repo has a remote.
 - Backlog's own `decisions/`, `docs/`, `drafts/` folders are empty and overlap
   with DEC records.
