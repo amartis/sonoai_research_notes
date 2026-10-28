@@ -32,13 +32,14 @@ DIS-007 ──▶ DEC-007, DEC-008 ──▶ TASK-015, TASK-016 ──▶ EXP-00
    (`superseded_by: DEC-NNN`). Small clarifications may amend in place.
 3. **Task.** Work to do becomes a Backlog.md task in the code repo
    (`../backlog/tasks/`, managed with the `backlog` CLI; see `../CLAUDE.md`),
-   not a TSK record here. It carries the goal and acceptance criteria, and
-   points back at the DIS / DEC it came from with `--ref`. A small, obvious
-   task may come straight from a DIS.
+   not a TSK record here. It carries a scope (`coord`, `data`, `method`,
+   `exp`, `infra`), the files or areas it `touches`, and acceptance criteria,
+   and points back with `--ref` at the DEC it came from (a small, obvious
+   task may come straight from a DIS).
 4. **Log.** Progress lives on the task: plan, notes (code commit, run
    names, problems) and final summary. Status goes
-   `To Do → In Progress → Review → Done` (or `Parked` while it waits on a
-   decision). The why stays here in DIS / DEC / EXP.
+   `Triage → To Do → In Progress → Review → Done` (or `Parked` while it
+   waits on a decision). The why stays here in DIS / DEC / EXP.
 5. **Index.** Run `python tools/build_index.py` after any change to front
    matter; commit `INDEX.md` with the notes. `--check` verifies it is current
    and that every link resolves.
