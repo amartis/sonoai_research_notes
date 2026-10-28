@@ -3,7 +3,7 @@ id: DIS-003
 title: Project setup structure review (milestone m-0)
 status: open
 created: 2026-10-28
-outcomes: [DEC-011, DEC-012, DEC-013, DEC-014]
+outcomes: [DEC-011, DEC-012, DEC-013, DEC-014, DEC-015]
 related: [DIS-002, DEC-002, DEC-007, DEC-008, DEC-009]
 ---
 # DIS-003: Project setup structure review (milestone m-0)
@@ -53,6 +53,13 @@ is still unclear. Topics settled so far:
   (push mirrors, active), Gitea, or Gogs (lightest, no push mirrors, slow
   security fixes). machine01 is a VM on machine02, so anything on either
   machine shares its hardware. The user chose Gogs on machine01.
+- **Results and chosen models**: runs root outside or inside the repo on
+  machine01; checkpoints fetched to machine01 or left on the GPU box; chosen
+  models as a models folder with a model card or only a cited run ref;
+  checkpoint retention. machine01 has ~16 GB free. The user set up a common
+  box on machine02 (`D:\codework\ml_research_commonbox`, shared to machine01
+  and seen by the GPU box in WSL) for runs, checkpoints and models; metrics
+  kept forever, unused weights pruned.
 - **Tag table**: first read (wrongly) as plaintext patient labels; the user
   clarified it is the label definitions of version 261023, so it is
   documentation of that version and goes into its notes folder.
@@ -91,6 +98,13 @@ Agreed with the user on 2026-10-28:
   extra worktrees, and stop hiding `.claude/worktrees/` in `.git/info/exclude`.
   The app has no setting to turn worktrees off for new sessions (only their
   location), so the check is the guard.
+- DEC-015: common box on machine02 with `runs/` ($SONOAI_RUNS_ROOT,
+  checkpoints included) and `models/` ($SONOAI_MODELS_ROOT,
+  `<task name>/<YYMMDD>_<slug>/` with `best.pt` and `model.json`); RunPod
+  rsyncs back; prune unused weights after the user confirms; fail clearly when
+  a root is missing. Board: TASK-023 (`infra`, m-0, box setup), TASK-024
+  (`method`, m-0, `MODELS_ROOT` and missing-root error), TASK-025 (`method`,
+  m-1, promote / prune), TASK-026 (`coord`, m-0, EXP template).
 - DEC-014: Gogs on machine01, localhost only, as remote `gogs` of
   both repos. TASK-021 (`infra`, m-0) installs it; the user does the first-run
   wizard and creates the account and repos. Not a backup by itself.
@@ -99,10 +113,10 @@ Agreed with the user on 2026-10-28:
 
 Still to discuss for m-0:
 
-- Off-machine copy of the repos (and later the runs): Gogs on machine01
-  shares the VM disk.
+- Off-machine copy of the repos and of the common box (`runs/`, `models/`):
+  Gogs and the box share machine02's hardware.
 - Workflow docs and `CLAUDE.md` still say the repo has no remote.
 - Backlog's own `decisions/`, `docs/`, `drafts/` folders are empty and overlap
   with DEC records.
-- Where results and chosen models go once runs start.
+- Whether encrypted datasets also go into the common box (DEC-015).
 - Guards: the notes repo has no pre-commit hook.
