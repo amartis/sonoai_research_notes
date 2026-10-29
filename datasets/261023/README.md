@@ -1,6 +1,6 @@
 # Dataset version 261023
 
-Register of the styles built for version `261023` (DEC-002, DEC-012): codenames,
+Register of the styles built for version `261023` ([DEC-002](../../decisions/DEC-002-dataset-files-structure.md), [DEC-012](../../decisions/DEC-012-dataset-docs-layout.md)): codenames,
 what each was built from, dates and check results. Aggregates only; no patient
 data, file names or identifiers.
 

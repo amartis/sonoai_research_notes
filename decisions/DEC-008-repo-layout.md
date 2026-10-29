@@ -11,7 +11,7 @@ superseded_by:
 
 ## Context
 
-DIS-002 found the README layout stale, the dataset tools spread over six
+[DIS-002](../discussions/DIS-002-workflow-and-folder-structure.md) found the README layout stale, the dataset tools spread over six
 untested scripts, empty placeholder packages, and no rule for notebooks.
 
 ## Decision
@@ -22,7 +22,7 @@ untested scripts, empty placeholder packages, and no rule for notebooks.
   `src/sonoai/data/` and is tested with synthetic data; behaviour and output
   (counts only) stay as they were. `scripts/` keeps only `train.py` and repo
   tools (`strip_notebook_outputs.py`, `check.sh`, ...). The old script names
-  in DEC-005 and earlier notes map one to one onto the subcommands.
+  in [DEC-005](DEC-005-enc1-dataset-style.md) and earlier notes map one to one onto the subcommands.
 - **No empty packages.** `src/sonoai/labeling/`, `serving/` and `viz/` are
   removed (only empty `__init__.py`, nothing imports them). A package is added
   when there is code for it.
@@ -37,7 +37,7 @@ untested scripts, empty placeholder packages, and no rule for notebooks.
 - **Base branch** stays `master`. The repo has no remote, so a `main` that
   tooling proposes is only a guess.
 - **Training config.** `configs/experiments/*.yaml` is the interim format
-  `scripts/train.py` reads until the DEC-003 recipes/plans are implemented,
+  `scripts/train.py` reads until the [DEC-003](DEC-003-trainrecipe-files-structure.md) recipes/plans are implemented,
   which comes after the labeling documentation.
 
 ## Consequences

@@ -56,9 +56,9 @@ regardless of where the B-mode area is (user, 2026-10-28).
 
 ## Conclusion
 
-Agreed with the user on 2026-10-28; carried by DEC-017 (accepted
-2026-10-28). Board tasks: TASK-031 (`method`: the cropper, batch command and
-synthetic tests) and TASK-032 (`data`, depends on TASK-031: run it, polygon
+Agreed with the user on 2026-10-28; carried by [DEC-017](../decisions/DEC-017-bmode-cropper.md) (accepted
+2026-10-28). Board tasks: [TASK-031](../../backlog/tasks/task-031%20-%20B-mode-box-cropper-and-batch-command-DEC-017.md) (`method`: the cropper, batch command and
+synthetic tests) and [TASK-032](../../backlog/tasks/task-032%20-%20Run-the-B-mode-cropper-on-a-dataset-version-polygon-check-reviewed-set-box-table-DEC-017.md) (`data`, depends on TASK-031: run it, polygon
 check, reviewed set, box table).
 
 ## Open questions

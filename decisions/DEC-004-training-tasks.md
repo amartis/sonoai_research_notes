@@ -11,10 +11,10 @@ superseded_by:
 
 ## Context
 
-One dataset version (DEC-002) carries several kinds of labels (`flags_df`,
+One dataset version ([DEC-002](DEC-002-dataset-files-structure.md)) carries several kinds of labels (`flags_df`,
 `polygons_df`, `texts_df`) and can be used for several learning problems:
 anatomy segmentation from polygons, lesion detection from the same polygons
-as boxes, view classification from flags, and so on. A recipe (DEC-003)
+as boxes, view classification from flags, and so on. A recipe ([DEC-003](DEC-003-trainrecipe-files-structure.md))
 needs to say which of these it trains, and results are only comparable when
 the labels were turned into targets the same way and the metrics were
 computed the same way.

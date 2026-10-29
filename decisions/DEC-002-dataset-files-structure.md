@@ -14,7 +14,7 @@ superseded_by:
 A training session reads images, the crop definitions for each training
 sample, and label tables. We need to rebuild datasets (new cases, relabelling,
 cleaning) and also ship them in different forms: plain on the trusted
-workstation, encrypted (DEC-001) on the Windows GPU box and RunPod. A single
+workstation, encrypted ([DEC-001](DEC-001-encrypted-data-store.md)) on the Windows GPU box and RunPod. A single
 layout and naming scheme lets code, configs and notes point at a dataset by
 one name, whatever its form.
 

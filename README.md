@@ -12,7 +12,7 @@ journal/       daily notes: journal/2026/2026-10-22.md
 datasets/      dataset/label versions, cleaning decisions, statistics (aggregates only)
 literature/    paper notes
 templates/     copy these to start a note
-tools/         build_index.py (regenerates INDEX.md)
+tools/         build_index.py (regenerates INDEX.md, links IDs in note text)
 ```
 
 ## Workflow: discussion → decision → task
@@ -39,9 +39,11 @@ DIS-007 ──▶ DEC-007, DEC-008 ──▶ TASK-015, TASK-016 ──▶ EXP-00
    names, problems) and final summary. Status goes
    `Triage → To Do → In Progress → Review → Done` (or `Parked` while it
    waits on a decision); small, obvious tasks skip Triage (DEC-009). The why stays here in DIS / DEC / EXP.
-5. **Index.** Run `python tools/build_index.py` after any change to front
-   matter; commit `INDEX.md` with the notes. `--check` verifies it is current
-   and that every link resolves.
+5. **Index.** Run `python tools/build_index.py` after any change to a note;
+   it links IDs in the text (see "Links in note text") and rewrites
+   `INDEX.md`. Commit both with the notes. `--check` changes nothing and
+   exits 1 if `INDEX.md` is stale, an ID in the text is unlinked or unknown,
+   or a link does not resolve.
 
 Rules:
 
@@ -49,14 +51,35 @@ Rules:
   File name is `<ID>-<short-slug>.md`; the `id` in front matter must match.
 - Links live in front matter: `from` (what this came out of), `outcomes`
   (DIS only: what it produced), `related` (anything else),
-  `superseded_by` (DEC only). Mention IDs freely in the text too.
-- Board task IDs (`TASK-NNN`) go in the text, not front matter:
-  `build_index.py` only resolves DIS / DEC / EXP links.
+  `superseded_by` (DEC only). `INDEX.md` shows them as links. Mention IDs
+  freely in the text too; the index tool links them.
+- Board task IDs (`TASK-NNN`) go in the text, not front matter: front matter
+  only resolves DIS / DEC / EXP links.
 - Code commits in `..` name the task and records they implement, e.g. a
   trailer `Refs: TASK-015, DEC-006`, so `git -C .. log --grep TASK-015`
   finds them.
 - TSK records are replaced by Backlog.md tasks; no TSK was ever created.
 - The journal stays the free-form daily log; it refers to IDs.
+
+## Links in note text
+
+Links between notes are made by `tools/build_index.py`, not by hand (DEC-021).
+Write IDs as plain text; each run turns the first bare mention of each
+DIS / DEC / EXP / TASK ID in a note into a relative markdown link, e.g.
+`DEC-012` becomes `[DEC-012](DEC-012-dataset-docs-layout.md)` in a decision.
+
+- Notes covered: `discussions/`, `decisions/`, `experiments/`, `journal/`,
+  `datasets/`, `literature/`. Not `README.md`, `INDEX.md` or `templates/`.
+- TASK IDs (subtasks too, e.g. `TASK-001.01`) link to the task file under
+  `../backlog/tasks/` (or `completed/`, `archive/tasks/` once moved there).
+- Left alone: front matter, fenced code, code spans, existing links (an ID
+  anywhere in a link's text counts as linked), URLs, HTML comments, and the
+  note's own ID. Later mentions of an ID stay plain, so a second run changes
+  nothing.
+- An ID with no note or task (e.g. one not created yet) is an error; put it in
+  a code span to mention it anyway.
+- If a link breaks (for example, a task file is renamed), `--check` reports
+  it: replace the link with the bare ID and run the tool again.
 
 ## Linking to code and runs
 

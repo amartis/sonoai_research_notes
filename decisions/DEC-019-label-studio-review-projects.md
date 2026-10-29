@@ -11,13 +11,13 @@ superseded_by:
 
 ## Context
 
-Reviews such as TASK-032 (about 1,400 B-mode boxes) are too slow in notebook
+Reviews such as [TASK-032](../../backlog/tasks/task-032%20-%20Run-the-B-mode-cropper-on-a-dataset-version-polygon-check-reviewed-set-box-table-DEC-017.md) (about 1,400 B-mode boxes) are too slow in notebook
 widgets. No labeling server exists; plain data may not leave machine01
-(DEC-018). DIS-005.
+([DEC-018](DEC-018-plain-style-for-local-research.md)). [DIS-005](../discussions/DIS-005-labeling-tool-and-default-env.md).
 
 ## Decision
 
-- **Tool**: Label Studio, installed in the default venv (DEC-020), running on
+- **Tool**: Label Studio, installed in the default venv ([DEC-020](DEC-020-default-venv-matches-gpu-box.md)), running on
   machine01 only, bound to `127.0.0.1:8080`, with local file serving rooted at
   `$SONOAI_DATA_FILES_ROOT/datasets`. Server state in `$SONOAI_LABELSTUDIO_ROOT`
   (default `$SONOAI_DATA_FILES_ROOT/labelstudio/`). Sign-up disabled; usage

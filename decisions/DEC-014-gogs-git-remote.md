@@ -12,7 +12,7 @@ superseded_by:
 ## Context
 
 Neither the code repo nor `research_notes/` has a remote; every decision and
-the board exist only on machine01, a VM guest on machine02. DIS-003 weighed a
+the board exist only on machine01, a VM guest on machine02. [DIS-003](../discussions/DIS-003-project-setup-structure.md) weighed a
 bare mirror on machine02, private hosted repos (GitHub), git bundles to the
 user's own storage, and a self-hosted git service (Forgejo / Gitea / Gogs).
 The user chose Gogs, hosted on machine01.
@@ -24,7 +24,7 @@ The user chose Gogs, hosted on machine01.
   SQLite, data in `~/apps/gogs-data/` (outside both repos and the data roots).
   Registration is disabled after the user's own account exists. Pushes use a
   dedicated key, `~/.ssh/gogs_localhost` (set as `core.sshCommand` in both
-  repos). Set up 2026-10-28 (Gogs 0.14.3, TASK-021).
+  repos). Set up 2026-10-28 (Gogs 0.14.3, [TASK-021](../../backlog/tasks/task-021%20-%20Self-hosted-Gogs-on-machine01-as-git-remote-for-both-repos.md)).
 - The code repo and `research_notes/` each get a remote named `gogs` holding
   private repos `ml_research` and `research_notes`. `master` (code) and `main`
   (notes) are pushed there after a merge or notes commit.

@@ -15,7 +15,7 @@ Frames hold one or two B-mode images among burned-in meta information,
 sometimes with colour Doppler. Training and inference both need the B-mode
 area. The `taskcrops_df` boxes are unreliable (many cover the whole file), and
 no ready-made tool handles mixed-vendor screenshots with two-image layouts
-(DIS-004).
+([DIS-004](../discussions/DIS-004-bmode-cropper.md)).
 
 ## Decision
 
@@ -44,7 +44,7 @@ no ready-made tool handles mixed-vendor screenshots with two-image layouts
 - **Output store**: a table of boxes per dataset version, next to (not
   replacing) `taskcrops_df`. Label polygons are placed through image pixels
   (`add_pos_in_img`) into the new boxes. No crops are written to disk.
-  Amended 2026-10-28 (DEC-018): built locally from the plain dataset, in
+  Amended 2026-10-28 ([DEC-018](DEC-018-plain-style-for-local-research.md)): built locally from the plain dataset, in
   `<version>_plain/derived/`.
 - **Checks**:
   - synthetic tests (generated speckle fans, text headers, colour Doppler
@@ -66,9 +66,9 @@ identifiers in notes or tasks.
 - One code path crops for training and inference; changing it means a new
   cropper version and a re-run of the checks.
 - Training data gains a box table per dataset version, specified in the
-  style docs (`docs/datasets/styles/`, DEC-012).
+  style docs (`docs/datasets/styles/`, [DEC-012](DEC-012-dataset-docs-layout.md)).
 - The review needs the user's time (about 20 frames per datasource), viewed
   only in the user's own session, as the data rules require.
-- Board tasks: TASK-031, a `method` task (cropper and synthetic tests, touches
+- Board tasks: [TASK-031](../../backlog/tasks/task-031%20-%20B-mode-box-cropper-and-batch-command-DEC-017.md), a `method` task (cropper and synthetic tests, touches
   `src/sonoai/data/`, `tests/`, `configs/`) and a `data` task depending on it
-  (TASK-032: run, polygon check, review set, box table).
+  ([TASK-032](../../backlog/tasks/task-032%20-%20Run-the-B-mode-cropper-on-a-dataset-version-polygon-check-reviewed-set-box-table-DEC-017.md): run, polygon check, review set, box table).

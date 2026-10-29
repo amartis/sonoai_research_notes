@@ -14,7 +14,7 @@ superseded_by:
 machine01 uses `py310_for_ml` (Python 3.10). The GPU box (machine02) trains in
 `~/venvs/torch`: Python 3.12.3, torch 2.11.0+cu128, and this repo's
 dependencies (checked 2026-10-28; pillow there is 13.0.0, `requirements.txt`
-pins 12.3.0). Label Studio (DEC-019) needs its own packages. DIS-005.
+pins 12.3.0). Label Studio ([DEC-019](DEC-019-label-studio-review-projects.md)) needs its own packages. [DIS-005](../discussions/DIS-005-labeling-tool-and-default-env.md).
 
 ## Decision
 

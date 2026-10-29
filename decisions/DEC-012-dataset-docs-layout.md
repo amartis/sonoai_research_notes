@@ -11,7 +11,7 @@ superseded_by:
 
 ## Context
 
-DEC-002 puts each style doc in `{data_files_root}/dataset_styles/<style>.md`
+[DEC-002](DEC-002-dataset-files-structure.md) puts each style doc in `{data_files_root}/dataset_styles/<style>.md`
 and "a copy or summary" in `research_notes/datasets/`. Each of those files
 mixes a format spec (storage, images, tables, polygon coordinates, build and
 check) with a "Datasets in this style" register. Code docstrings cite the notes
@@ -22,7 +22,7 @@ code repo root; `configs/data/label_projects.yaml` is exported from it.
 ## Decision
 
 - **Style specs**: `docs/datasets/styles/<style>.md` in the code repo is the
-  source of truth for each style's format (DEC-011). Code and README cite it.
+  source of truth for each style's format ([DEC-011](DEC-011-docs-vs-research-notes.md)). Code and README cite it.
 - **Data root copy**: `{data_files_root}/dataset_styles/<style>.md` stays, so
   the data describes itself, as a copy of the `docs/` spec (not edited there).
 - **Dataset versions**: one folder per version in

@@ -11,11 +11,11 @@ superseded_by:
 
 ## Context
 
-DIS-003 asked whether `docs/` should move into `research_notes/`. Both hold
+[DIS-003](../discussions/DIS-003-project-setup-structure.md) asked whether `docs/` should move into `research_notes/`. Both hold
 prose about the project, and without a rule it is unclear where a new text
 goes. `CLAUDE.md` imports `@docs/workflow.md`; `research_notes/` is a separate
 repo, gitignored in the code repo and absent on clones, the GPU box and RunPod
-(DEC-007).
+([DEC-007](DEC-007-session-branches-no-worktrees.md)).
 
 ## Decision
 
@@ -35,4 +35,4 @@ repo, gitignored in the code repo and absent on clones, the GPU box and RunPod
 
 - A text's home follows from what it is: current description → `docs/`,
   decision or finding → `research_notes/`.
-- Format specs now in `research_notes/datasets/` move to `docs/` (DEC-012).
+- Format specs now in `research_notes/datasets/` move to `docs/` ([DEC-012](DEC-012-dataset-docs-layout.md)).

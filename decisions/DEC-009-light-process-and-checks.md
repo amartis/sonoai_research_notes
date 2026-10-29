@@ -30,7 +30,7 @@ small commits.
     `python research_notes/tools/build_index.py --check` (skipped when
     `research_notes/` is absent).
   - The board's Definition of Done is "scripts/check.sh passes".
-- **Docs.** The workflow (records, board, git and DEC-007, checks, notebooks)
+- **Docs.** The workflow (records, board, git and [DEC-007](DEC-007-session-branches-no-worktrees.md), checks, notebooks)
   moves to `docs/workflow.md`, imported into `CLAUDE.md` with
   `@docs/workflow.md`. The hard rules (patient data, no worktrees, NOTOUCH,
   `submit1` naming) stay in `CLAUDE.md` itself.

@@ -12,7 +12,7 @@ superseded_by:
 ## Context
 
 We train several model families (`resenc_unet`, `transunet`, `swin_unet`, ...)
-with different optimisation settings on different datasets (DEC-002), and run
+with different optimisation settings on different datasets ([DEC-002](DEC-002-dataset-files-structure.md)), and run
 the same training on the workstation, the Windows GPU box and RunPod pods.
 Today an experiment is a YAML file in `configs/experiments/` that mixes what
 to train (`trainer`, `trainer_args`) with where to run it (`data.store`, a
@@ -28,7 +28,7 @@ time it was actually executed.
 
 | Term | Meaning | Where |
 |---|---|---|
-| **task** | The learning problem: task type, labels used, classes, targets, metrics. Named and versioned (DEC-004), e.g. `seg_anatomy_v1`. | `src/sonoai/tasks/` |
+| **task** | The learning problem: task type, labels used, classes, targets, metrics. Named and versioned ([DEC-004](DEC-004-training-tasks.md)), e.g. `seg_anatomy_v1`. | `src/sonoai/tasks/` |
 | **recipe** | *What* is trained: task, dataset version and split, model, loss, optimisation, evaluation, seed. Machine-independent. A partial definition. | `configs/train/recipes/` (git) |
 | **plan** | *How and where* a recipe is executed: the recipe plus machine and execution settings. A complete definition, but it says nothing about whether it was executed. | `configs/train/plans/` (git) |
 | **machine profile** | Default execution settings of one machine, shared by its plans. | `configs/train/machines/` (git) |

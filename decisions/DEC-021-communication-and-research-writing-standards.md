@@ -16,7 +16,7 @@ context, bare paths and IDs, and questions about small choices. Notes did not
 link to each other, and the EXP template had no place for n, confidence
 intervals or a baseline. The user wants communication that respects their
 time and keeps the quality of joint decisions, and research outputs that meet
-the standards of SCI-indexed journals. DIS-006.
+the standards of SCI-indexed journals. [DIS-006](../discussions/DIS-006-human-friendly-communication.md).
 
 ## Decision
 
@@ -50,7 +50,7 @@ the standards of SCI-indexed journals. DIS-006.
 4. **Links between notes** are made by `research_notes/tools/build_index.py`:
    the first bare mention of an ID in a note becomes a relative link,
    `INDEX.md` shows its link columns as links, and `--check` fails on
-   unlinked IDs (TASK-038).
+   unlinked IDs ([TASK-038](../../backlog/tasks/task-038%20-%20Auto-link-record-IDs-and-add-backlinks-in-build_index.py-DEC-021.md)).
 5. **Review on 2026-11-11**: rules that changed no reply are cut (an
    amendment here); if the rules are not followed from `CLAUDE.md`, a custom
    output style is considered in a new DEC.
@@ -64,4 +64,4 @@ the standards of SCI-indexed journals. DIS-006.
 - `~/.claude/CLAUDE.md` is not under version control; changes to its rules
   are recorded here (amendment or new DEC).
 - One more document to keep current (`docs/writing.md`), edited in place per
-  DEC-011.
+  [DEC-011](DEC-011-docs-vs-research-notes.md).

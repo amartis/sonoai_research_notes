@@ -10,7 +10,7 @@ related: [DEC-004, DEC-006]
 
 ## Question
 
-While reviewing DEC-006 (2026-10-23) three questions were set aside so the
+While reviewing [DEC-006](../decisions/DEC-006-losses-optim-tracking.md) (2026-10-23) three questions were set aside so the
 next run would contain only tasks judged sound: `lseg_steatosis_v2`,
 `lseg_cirrhosis_v2` (without precirrhosis) and `lseg_hepatoma_v2`. This
 record holds them until they are taken up.

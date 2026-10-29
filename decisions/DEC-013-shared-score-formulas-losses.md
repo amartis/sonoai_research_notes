@@ -11,12 +11,12 @@ superseded_by:
 
 ## Context
 
-DEC-006 makes every score (DSC, IoU, flexible DSC / IoU with the task's
+[DEC-006](DEC-006-losses-optim-tracking.md) makes every score (DSC, IoU, flexible DSC / IoU with the task's
 satisfaction matrix `S`) a pure function of a confusion matrix, and defines
 the losses separately (`dice_ce`, following the official TransUNet code).
 A Dice-type loss is the same kind of measure as the metric, so writing the
 formula twice lets the two drift, and `S` would exist in a metric form only.
-Discussed with the user in DIS-003 (2026-10-28).
+Discussed with the user in [DIS-003](../discussions/DIS-003-project-setup-structure.md) (2026-10-28).
 
 ## Decision
 
@@ -34,7 +34,7 @@ Amends the Losses section of DEC-006; the rest of DEC-006 stands.
   formulas. Losses import from `evaluation`; `evaluation` does not import
   from `training`.
 - **New loss `fdsc_ce`**: `ce_weight * CE + fdsc_weight * (1 - soft FDSC)`,
-  with the task's `S` (DEC-004: `S` belongs to the task). With `S` the
+  with the task's `S` ([DEC-004](DEC-004-training-tasks.md): `S` belongs to the task). With `S` the
   identity it is a linear soft Dice + CE. Selected per recipe by name.
 - **`dice_ce` stays as DEC-006 has it**, matching the official TransUNet
   loss (including its squared denominator), so the baseline is a faithful

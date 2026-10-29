@@ -11,13 +11,13 @@ superseded_by:
 
 ## Context
 
-DEC-003 and DEC-006 fix the layout of one run under `$SONOAI_RUNS_ROOT` and
+[DEC-003](DEC-003-trainrecipe-files-structure.md) and [DEC-006](DEC-006-losses-optim-tracking.md) fix the layout of one run under `$SONOAI_RUNS_ROOT` and
 say that `gpu fetch` brings back everything except checkpoints. They do not
 say where the runs root is on each machine, where checkpoints end up, how a
 chosen model is kept, or when weights may be deleted. machine01 (the
 workstation) has about 16 GB free; the GPU box is WSL on machine02. The user
 created `D:\codework\ml_research_commonbox` on machine02 to be shared by all
-machines (DIS-003, 2026-10-28).
+machines ([DIS-003](../discussions/DIS-003-project-setup-structure.md), 2026-10-28).
 
 ## Decision
 
@@ -53,7 +53,7 @@ machines (DIS-003, 2026-10-28).
   dropped), code fails with a clear message instead of creating an empty
   folder on the local disk.
 - **Content rules unchanged**: the box holds no plaintext patient data;
-  weights and aggregates only (DEC-001, DEC-006). Whether encrypted datasets
+  weights and aggregates only ([DEC-001](DEC-001-encrypted-data-store.md), DEC-006). Whether encrypted datasets
   also go into the box is left open.
 
 ## Consequences

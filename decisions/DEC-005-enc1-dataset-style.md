@@ -12,11 +12,11 @@ superseded_by:
 ## Context
 
 Training runs on machine02 (the Windows GPU box) and RunPod, which may only
-hold encrypted data (DEC-001). The `plain` style (de-obfuscated tables, images
+hold encrypted data ([DEC-001](DEC-001-encrypted-data-store.md)). The `plain` style (de-obfuscated tables, images
 hard-linked to `submit1`) is workstation-only. T7-upload.ipynb started an
 encrypted store by hand, under the old `imgs/` paths and with images only. We
 need one shippable style that holds a whole dataset (images, `taskcrops_df`,
-label tables) in the DEC-002 layout, plus a build and a check that prove it
+label tables) in the [DEC-002](DEC-002-dataset-files-structure.md) layout, plus a build and a check that prove it
 equals its source.
 
 ## Decision
@@ -99,7 +99,7 @@ python scripts/make_enc_dataset.py <version>_plain <version>_enc1 [--root DIR]
 python scripts/check_enc_dataset.py <version>_plain <version>_enc1 [--root DIR] --sample 0
 ```
 
-Since DEC-008 these are `sonoai-data make-enc` and `sonoai-data check-enc`
+Since [DEC-008](DEC-008-repo-layout.md) these are `sonoai-data make-enc` and `sonoai-data check-enc`
 (same arguments).
 
 The build refuses a non-plain source, a version mismatch, an already-built
@@ -108,7 +108,7 @@ last. The check asks for the passphrase again (a wrong one fails at once).
 It then fails on any non-store file on disk, decrypts every blob in RAM and
 compares it with the source bytes, compares every table, and decodes images
 (all of them with `--sample 0`) and compares pixels and `np_md5_c3_current`.
-Both print counts only. The style doc is `datasets/enc1.md`; since DEC-012 the
+Both print counts only. The style doc is `datasets/enc1.md`; since [DEC-012](DEC-012-dataset-docs-layout.md) the
 spec is `docs/datasets/styles/enc1.md` in the code repo.
 
 ## Consequences

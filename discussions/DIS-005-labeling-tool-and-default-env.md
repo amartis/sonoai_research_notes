@@ -10,7 +10,7 @@ related: [DEC-017, DEC-018, DEC-012]
 
 ## Question
 
-TASK-032 asks the user to review about 20 B-mode boxes per datasource (about
+[TASK-032](../../backlog/tasks/task-032%20-%20Run-the-B-mode-cropper-on-a-dataset-version-polygon-check-reviewed-set-box-table-DEC-017.md) asks the user to review about 20 B-mode boxes per datasource (about
 1,400 frames, 72 datasources). The first attempt used ipywidgets sliders in
 the review notebook; the user found labeling inside VS Code not human
 friendly (2026-10-28) and asked for a dedicated labeling tool, with one
@@ -36,7 +36,7 @@ question: which venv is the default on machine01.
   - Keep the notebook sliders: kept only as a fallback.
 - **Where the server runs**: no labeling server exists today; the labels in
   use are files only. A server on machine02 could not serve plain data
-  (DEC-018), so a local one on machine01, bound to 127.0.0.1.
+  ([DEC-018](../decisions/DEC-018-plain-style-for-local-research.md)), so a local one on machine01, bound to 127.0.0.1.
 - **Automation**: the user creates projects by hand vs. the agent drives
   everything through the API (create project, connect local storage, import
   tasks with pre-annotations, report progress, export and convert). The user
@@ -51,10 +51,10 @@ question: which venv is the default on machine01.
 
 ## Conclusion
 
-Agreed with the user on 2026-10-28; carried by DEC-019 (Label Studio for
-review projects, layout of their files) and DEC-020 (default venv), both
-accepted 2026-10-28. Board tasks: TASK-034 (`infra`: the new default venv), TASK-035
-(`infra`: the local Label Studio server), TASK-036 (`method`: the
+Agreed with the user on 2026-10-28; carried by [DEC-019](../decisions/DEC-019-label-studio-review-projects.md) (Label Studio for
+review projects, layout of their files) and [DEC-020](../decisions/DEC-020-default-venv-matches-gpu-box.md) (default venv), both
+accepted 2026-10-28. Board tasks: [TASK-034](../../backlog/tasks/task-034%20-%20New-default-venv-py312_for_ml-matching-the-GPU-box-with-Label-Studio-DEC-020.md) (`infra`: the new default venv), [TASK-035](../../backlog/tasks/task-035%20-%20Local-Label-Studio-server-on-machine01-for-review-projects-DEC-019.md)
+(`infra`: the local Label Studio server), [TASK-036](../../backlog/tasks/task-036%20-%20sonoai.labeling-package-and-sonoai-label-CLI-bmode_boxes-project-kind-DEC-019.md) (`method`: the
 `sonoai.labeling` package and `sonoai-label` CLI). TASK-032 waits on
 TASK-035 and TASK-036.
 
@@ -73,7 +73,7 @@ TASK-035 and TASK-036.
 | Aggregate results per project | `research_notes/datasets/<version>/` | notes repo |
 
 The labeling projects that produced the labels in use (tag tables and
-`configs/data/label_projects.yaml`, DEC-012) are historical and stay where
+`configs/data/label_projects.yaml`, [DEC-012](../decisions/DEC-012-dataset-docs-layout.md)) are historical and stay where
 they are; review projects never modify the existing label tables.
 
 ## Open questions

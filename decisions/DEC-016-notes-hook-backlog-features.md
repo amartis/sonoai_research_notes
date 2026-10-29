@@ -12,9 +12,9 @@ superseded_by:
 ## Context
 
 The code repo refuses data files and stale notebooks in a pre-commit hook
-(DEC-009); `research_notes/` has no hook, only its `.gitignore`, which
+([DEC-009](DEC-009-light-process-and-checks.md)); `research_notes/` has no hook, only its `.gitignore`, which
 `git add -f` bypasses. The code hook cannot be reused as is: it blocks every
-`.xlsx`, while DEC-012 allows the labeling-project tag table in dataset
+`.xlsx`, while [DEC-012](DEC-012-dataset-docs-layout.md) allows the labeling-project tag table in dataset
 version folders, and notes need an `INDEX.md` check instead of lint.
 Separately, `backlog init` created `backlog/decisions/`, `docs/` and `drafts/`.
 They are empty and untracked (git keeps no empty folders), and the CLI
@@ -35,7 +35,7 @@ decisions and docs next to DEC records and `docs/`.
   It must take about a second. The notes README names the setup step.
 - **Backlog features**: Backlog's decisions, docs and drafts are not used.
   Decisions are DEC records in `research_notes/`, docs go in `docs/`
-  (DEC-011), and new tasks start in Triage (or To Do for small obvious ones,
+  ([DEC-011](DEC-011-docs-vs-research-notes.md)), and new tasks start in Triage (or To Do for small obvious ones,
   DEC-009), not as drafts. The empty folders are left alone.
 
 ## Consequences

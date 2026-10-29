@@ -20,7 +20,7 @@ the quality of the decisions made together.
 
 What the repo showed on that date:
 
-- No DEC body linked to another note; IDs such as DIS-005 were plain text.
+- No DEC body linked to another note; IDs such as [DIS-005](DIS-005-labeling-tool-and-default-env.md) were plain text.
   Only the id column of `INDEX.md` had links.
 - No user-level `~/.claude/CLAUDE.md` and no custom output style: every
   session started from Claude's defaults.
@@ -52,7 +52,7 @@ The rules start from these human traits:
 - **Research-writing standard**: `@`-imported into `CLAUDE.md` (costs context
   in every session) vs. `docs/writing.md`, linked from `CLAUDE.md` and read
   when writing a research output (chosen; process docs live in `docs/`,
-  DEC-011). Journal style in chat was rejected: chat stays conversational,
+  [DEC-011](../decisions/DEC-011-docs-vs-research-notes.md)). Journal style in chat was rejected: chat stays conversational,
   rigour goes into the outputs.
 - **Reporting guidelines** for this project (diagnostic ultrasound AI):
   CLAIM 2024 (AI in medical imaging), STARD 2015 with its AI extension
@@ -72,9 +72,9 @@ The rules start from these human traits:
 
 Agreed with the user on 2026-10-28, with the proposed defaults: the
 communication rules apply to all projects; Claude decides reversible in-task
-choices and reports them; replies are in English. Carried by DEC-021
-(accepted 2026-10-28). Board tasks: TASK-037 (`coord`: user-level rules,
-`docs/writing.md`, EXP template) and TASK-038 (`infra`: auto-links and
+choices and reports them; replies are in English. Carried by [DEC-021](../decisions/DEC-021-communication-and-research-writing-standards.md)
+(accepted 2026-10-28). Board tasks: [TASK-037](../../backlog/tasks/task-037%20-%20Communication-rules-and-research-writing-standard-DEC-021.md) (`coord`: user-level rules,
+`docs/writing.md`, EXP template) and [TASK-038](../../backlog/tasks/task-038%20-%20Auto-link-record-IDs-and-add-backlinks-in-build_index.py-DEC-021.md) (`infra`: auto-links and
 backlinks in `build_index.py`).
 
 Review on 2026-11-11: cut rules that changed no reply, and decide whether an

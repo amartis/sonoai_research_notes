@@ -10,7 +10,7 @@ related: [DEC-003, DEC-007]
 
 ## Question
 
-After the board (Backlog.md), DEC-007 and the first dataset tools landed,
+After the board (Backlog.md), [DEC-007](../decisions/DEC-007-session-branches-no-worktrees.md) and the first dataset tools landed,
 the repo was reviewed with the user (2026-10-27): does the folder layout
 still match what is there, is the process light enough for one person
 working with agents, and can a run be traced back to the task it serves?
@@ -31,7 +31,7 @@ working with agents, and can a run be traced back to the task it serves?
 4. **Base branch.** The repo has no remote; the app proposes `main`, but the
    branch is `master`.
 5. **Training config.** `configs/experiments/*.yaml` is what `train.py`
-   reads today; DEC-003 recipes/plans are designed but not implemented.
+   reads today; [DEC-003](../decisions/DEC-003-trainrecipe-files-structure.md) recipes/plans are designed but not implemented.
 6. **Process weight.** Every task passes through Triage, even small obvious
    ones; checks are not tiered (the hook runs no lint, and there is no single
    pre-merge check).
@@ -55,17 +55,17 @@ working with agents, and can a run be traced back to the task it serves?
 
 Agreed with the user on 2026-10-27:
 
-- DEC-008: repo layout (dataset CLI `sonoai-data`, no empty packages,
+- [DEC-008](../decisions/DEC-008-repo-layout.md): repo layout (dataset CLI `sonoai-data`, no empty packages,
   `notebooks/human/` vs task notebooks, base branch stays `master`,
   experiments YAML is interim until DEC-003 is implemented).
-- DEC-009: lighter process (small obvious tasks go straight to To Do) and
+- [DEC-009](../decisions/DEC-009-light-process-and-checks.md): lighter process (small obvious tasks go straight to To Do) and
   checks tiered by cost (`ruff` on staged files in the hook, `scripts/check.sh`
   before merging); workflow docs move to `docs/workflow.md`.
-- DEC-010: runs record the board task (`--task TASK-NNN`).
-- Board: TASK-002 (README, empty packages), TASK-003 (`sonoai-data`),
-  TASK-004 (notebooks), TASK-005 (`--task`), TASK-006 (checks), TASK-007
-  (workflow docs, notes cleanup), TASK-008 (labeling documentation, Triage),
-  TASK-009 (DEC-003 recipes/plans, after TASK-008).
+- [DEC-010](../decisions/DEC-010-runs-record-task.md): runs record the board task (`--task TASK-NNN`).
+- Board: [TASK-002](../../backlog/tasks/task-002%20-%20README-layout-fix-and-empty-package-removal.md) (README, empty packages), [TASK-003](../../backlog/tasks/task-003%20-%20sonoai-data-CLI-for-the-dataset-tools.md) (`sonoai-data`),
+  [TASK-004](../../backlog/tasks/task-004%20-%20Notebooks-layout-human-and-per-scope-task-notebooks.md) (notebooks), [TASK-005](../../backlog/tasks/task-005%20-%20Training-runs-record-the-board-task-task.md) (`--task`), [TASK-006](../../backlog/tasks/task-006%20-%20Tiered-checks-ruff-in-pre-commit-scripts-check.sh.md) (checks), [TASK-007](../../backlog/tasks/task-007%20-%20Workflow-docs-and-lighter-process.md)
+  (workflow docs, notes cleanup), [TASK-008](../../backlog/tasks/task-008%20-%20Proper-labeling-documentation.md) (labeling documentation, Triage),
+  [TASK-009](../../backlog/tasks/task-009%20-%20Implement-DEC-003-training-recipes-and-plans.md) (DEC-003 recipes/plans, after TASK-008).
 - `research_notes/tasks/` is removed.
 
 ## Open questions

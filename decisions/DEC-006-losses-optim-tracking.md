@@ -11,7 +11,7 @@ superseded_by:
 
 ## Context
 
-DEC-003 fixes what a recipe, plan and run are; DEC-004 fixes what a task is.
+[DEC-003](DEC-003-trainrecipe-files-structure.md) fixes what a recipe, plan and run are; [DEC-004](DEC-004-training-tasks.md) fixes what a task is.
 Neither says how a loss or optimiser is chosen and built, how training is
 made machine-independent, how results are measured beyond plain DSC / IoU,
 or where non-scalar results go.
