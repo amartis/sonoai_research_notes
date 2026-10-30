@@ -22,7 +22,7 @@ address changes, AWS sign-in needed as well as the key).
 
 - **SSH through SSM**: `ssh aws-labelstud` uses the `AWS-StartSSHSession` document as a
   proxy. Port 22 stays closed; the security group keeps 443 only ([DEC-025](DEC-025-aws-labelstud-public-https.md)).
-- **IAM** (policy v4): `ssm:StartSession` with `AWS-StartSSHSession` or
+- **IAM** (deploy policy, version v5 in IAM): `ssm:StartSession` with `AWS-StartSSHSession` or
   `AWS-StartPortForwardingSession`, only on instances tagged `Project=sonoai-labelstudio`.
   Other session documents (interactive SSM shells) stay denied.
 - **On machine01**: the Session Manager plugin in `~/.local/bin` (no root), a key made for
@@ -41,6 +41,6 @@ address changes, AWS sign-in needed as well as the key).
 - AWS records that a session started (CloudTrail) but not what happens in it; our log
   has one line per session. Commands typed inside an interactive session are not checked
   by `run`'s guard: the agent's rules are the only limit there.
-- To revoke: remove the key from `authorized_keys` (or restore policy v3); delete
+- To revoke: remove the key from `authorized_keys` (or restore an older policy version); delete
   `~/.ssh/aws-labelstud` and the config entry on machine01.
 - If the stack is recreated, the instance ID changes: run `ssh-setup` again.
