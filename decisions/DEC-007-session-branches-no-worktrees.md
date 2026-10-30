@@ -1,11 +1,11 @@
 ---
 id: DEC-007
 title: Sessions use branches in the main checkout, never git worktrees
-status: accepted
+status: superseded
 created: 2026-10-27
 from: []
 related: []
-superseded_by:
+superseded_by: DEC-028
 ---
 # DEC-007: Sessions use branches in the main checkout, never git worktrees
 
