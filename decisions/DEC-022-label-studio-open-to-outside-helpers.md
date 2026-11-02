@@ -52,7 +52,7 @@ recorded here.
   is local only.
 - This amends DEC-019 ("bound to `127.0.0.1:8080`") and DEC-018 (plain data stays
   on machine01) for the images Label Studio serves during such a session. The rest
-  of both stays as it is. Implemented in [TASK-043](../../backlog/tasks/task-043%20-%20Label-Studio-bind-address-option-for-outside-helpers-DEC-022.md).
+  of both stays as it is. Implemented in [TASK-043](../../backlog/archive/tasks/task-043%20-%20Label-Studio-bind-address-option-for-outside-helpers-DEC-022.md).
 
 ## Consequences
 

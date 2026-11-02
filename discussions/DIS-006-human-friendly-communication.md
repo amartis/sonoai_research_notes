@@ -73,8 +73,8 @@ The rules start from these human traits:
 Agreed with the user on 2026-10-28, with the proposed defaults: the
 communication rules apply to all projects; Claude decides reversible in-task
 choices and reports them; replies are in English. Carried by [DEC-021](../decisions/DEC-021-communication-and-research-writing-standards.md)
-(accepted 2026-10-28). Board tasks: [TASK-037](../../backlog/tasks/task-037%20-%20Communication-rules-and-research-writing-standard-DEC-021.md) (`coord`: user-level rules,
-`docs/writing.md`, EXP template) and [TASK-038](../../backlog/tasks/task-038%20-%20Auto-link-record-IDs-and-add-backlinks-in-build_index.py-DEC-021.md) (`infra`: auto-links and
+(accepted 2026-10-28). Board tasks: [TASK-037](../../backlog/archive/tasks/task-037%20-%20Communication-rules-and-research-writing-standard-DEC-021.md) (`coord`: user-level rules,
+`docs/writing.md`, EXP template) and [TASK-038](../../backlog/archive/tasks/task-038%20-%20Auto-link-record-IDs-and-add-backlinks-in-build_index.py-DEC-021.md) (`infra`: auto-links and
 backlinks in `build_index.py`).
 
 Review on 2026-11-11: cut rules that changed no reply, and decide whether an

@@ -94,8 +94,8 @@ Agreed with the user on 2026-10-28:
 - [DEC-013](../decisions/DEC-013-shared-score-formulas-losses.md): losses reuse the matrix score formulas of
   `evaluation/scores.py` through a soft confusion matrix; new loss `fdsc_ce`
   with the task's `S`; `dice_ce` unchanged and still the default.
-- Board (Triage, m-0): [TASK-011](../../backlog/tasks/task-011%20-%20Dataset-style-specs-to-docs-per-version-registers-in-notes-DEC-012.md) (style specs and version registers),
-  [TASK-012](../../backlog/tasks/task-012%20-%20Move-the-261023-labeling-project-tag-table-into-its-notes-folder-DEC-012.md) (tag table move and `label_projects.yaml` version).
+- Board (Triage, m-0): [TASK-011](../../backlog/archive/tasks/task-011%20-%20Dataset-style-specs-to-docs-per-version-registers-in-notes-DEC-012.md) (style specs and version registers),
+  [TASK-012](../../backlog/archive/tasks/task-012%20-%20Move-the-261023-labeling-project-tag-table-into-its-notes-folder-DEC-012.md) (tag table move and `label_projects.yaml` version).
 - The DEC-006 / DEC-013 implementation is development, not project setup: a
   new milestone m-1 "First Training Run" holds [TASK-014](../../backlog/tasks/task-014%20-%20Matrix-score-formulas-for-NumPy-and-torch-matrices-DEC-013.md) (shared score
   formulas), [TASK-015](../../backlog/tasks/task-015%20-%20Losses-registry-dice_ce-dice_ce_per_layer-fdsc_ce-DEC-006-DEC-013.md) (losses), [TASK-016](../../backlog/tasks/task-016%20-%20Optimisation-SGD-and-poly-schedule-gradient-accumulation-DEC-006.md) (optimisation), [TASK-017](../../backlog/tasks/task-017%20-%20Image-level-matrices-and-evaluatetask-model-loader-DEC-006.md)
@@ -123,7 +123,7 @@ Agreed with the user on 2026-10-28:
   and draft features are not used. Board: [TASK-028](../../backlog/tasks/task-028%20-%20Pre-commit-hook-for-the-research_notes-repo-DEC-016.md) (`infra`, hook),
   [TASK-029](../../backlog/tasks/task-029%20-%20Workflow-docs-do-not-use-Backlog-decisions-docs-or-drafts-DEC-016.md) (`coord`, workflow rule), both Triage, m-0.
 - [DEC-014](../decisions/DEC-014-gogs-git-remote.md): Gogs on machine01, localhost only, as remote `gogs` of
-  both repos. [TASK-021](../../backlog/tasks/task-021%20-%20Self-hosted-Gogs-on-machine01-as-git-remote-for-both-repos.md) (`infra`, m-0) installs it; the user does the first-run
+  both repos. [TASK-021](../../backlog/archive/tasks/task-021%20-%20Self-hosted-Gogs-on-machine01-as-git-remote-for-both-repos.md) (`infra`, m-0) installs it; the user does the first-run
   wizard and creates the account and repos. Not a backup by itself.
 
 ## Open questions

@@ -24,7 +24,7 @@ The user chose Gogs, hosted on machine01.
   SQLite, data in `~/apps/gogs-data/` (outside both repos and the data roots).
   Registration is disabled after the user's own account exists. Pushes use a
   dedicated key, `~/.ssh/gogs_localhost` (set as `core.sshCommand` in both
-  repos). Set up 2026-10-28 (Gogs 0.14.3, [TASK-021](../../backlog/tasks/task-021%20-%20Self-hosted-Gogs-on-machine01-as-git-remote-for-both-repos.md)).
+  repos). Set up 2026-10-28 (Gogs 0.14.3, [TASK-021](../../backlog/archive/tasks/task-021%20-%20Self-hosted-Gogs-on-machine01-as-git-remote-for-both-repos.md)).
 - The code repo and `research_notes/` each get a remote named `gogs` holding
   private repos `ml_research` and `research_notes`. `master` (code) and `main`
   (notes) are pushed there after a merge or notes commit.

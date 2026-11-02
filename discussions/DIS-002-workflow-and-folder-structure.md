@@ -62,8 +62,8 @@ Agreed with the user on 2026-10-27:
   checks tiered by cost (`ruff` on staged files in the hook, `scripts/check.sh`
   before merging); workflow docs move to `docs/workflow.md`.
 - [DEC-010](../decisions/DEC-010-runs-record-task.md): runs record the board task (`--task TASK-NNN`).
-- Board: [TASK-002](../../backlog/tasks/task-002%20-%20README-layout-fix-and-empty-package-removal.md) (README, empty packages), [TASK-003](../../backlog/tasks/task-003%20-%20sonoai-data-CLI-for-the-dataset-tools.md) (`sonoai-data`),
-  [TASK-004](../../backlog/tasks/task-004%20-%20Notebooks-layout-human-and-per-scope-task-notebooks.md) (notebooks), [TASK-005](../../backlog/tasks/task-005%20-%20Training-runs-record-the-board-task-task.md) (`--task`), [TASK-006](../../backlog/tasks/task-006%20-%20Tiered-checks-ruff-in-pre-commit-scripts-check.sh.md) (checks), [TASK-007](../../backlog/tasks/task-007%20-%20Workflow-docs-and-lighter-process.md)
+- Board: [TASK-002](../../backlog/archive/tasks/task-002%20-%20README-layout-fix-and-empty-package-removal.md) (README, empty packages), [TASK-003](../../backlog/archive/tasks/task-003%20-%20sonoai-data-CLI-for-the-dataset-tools.md) (`sonoai-data`),
+  [TASK-004](../../backlog/archive/tasks/task-004%20-%20Notebooks-layout-human-and-per-scope-task-notebooks.md) (notebooks), [TASK-005](../../backlog/archive/tasks/task-005%20-%20Training-runs-record-the-board-task-task.md) (`--task`), [TASK-006](../../backlog/archive/tasks/task-006%20-%20Tiered-checks-ruff-in-pre-commit-scripts-check.sh.md) (checks), [TASK-007](../../backlog/archive/tasks/task-007%20-%20Workflow-docs-and-lighter-process.md)
   (workflow docs, notes cleanup), [TASK-008](../../backlog/tasks/task-008%20-%20Proper-labeling-documentation.md) (labeling documentation, Triage),
   [TASK-009](../../backlog/tasks/task-009%20-%20Implement-DEC-003-training-recipes-and-plans.md) (DEC-003 recipes/plans, after TASK-008).
 - `research_notes/tasks/` is removed.

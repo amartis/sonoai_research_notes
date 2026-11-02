@@ -53,8 +53,8 @@ question: which venv is the default on machine01.
 
 Agreed with the user on 2026-10-28; carried by [DEC-019](../decisions/DEC-019-label-studio-review-projects.md) (Label Studio for
 review projects, layout of their files) and [DEC-020](../decisions/DEC-020-default-venv-matches-gpu-box.md) (default venv), both
-accepted 2026-10-28. Board tasks: [TASK-034](../../backlog/tasks/task-034%20-%20New-default-venv-py312_for_ml-matching-the-GPU-box-with-Label-Studio-DEC-020.md) (`infra`: the new default venv), [TASK-035](../../backlog/tasks/task-035%20-%20Local-Label-Studio-server-on-machine01-for-review-projects-DEC-019.md)
-(`infra`: the local Label Studio server), [TASK-036](../../backlog/tasks/task-036%20-%20sonoai.labeling-package-and-sonoai-label-CLI-bmode_boxes-project-kind-DEC-019.md) (`method`: the
+accepted 2026-10-28. Board tasks: [TASK-034](../../backlog/archive/tasks/task-034%20-%20New-default-venv-py312_for_ml-matching-the-GPU-box-with-Label-Studio-DEC-020.md) (`infra`: the new default venv), [TASK-035](../../backlog/archive/tasks/task-035%20-%20Local-Label-Studio-server-on-machine01-for-review-projects-DEC-019.md)
+(`infra`: the local Label Studio server), [TASK-036](../../backlog/archive/tasks/task-036%20-%20sonoai.labeling-package-and-sonoai-label-CLI-bmode_boxes-project-kind-DEC-019.md) (`method`: the
 `sonoai.labeling` package and `sonoai-label` CLI). TASK-032 waits on
 TASK-035 and TASK-036.
 
