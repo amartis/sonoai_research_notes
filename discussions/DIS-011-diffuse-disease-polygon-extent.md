@@ -3,7 +3,7 @@ id: DIS-011
 title: Diffuse-disease polygons may cover part of the organ
 status: concluded
 created: 2026-11-03
-outcomes: []
+outcomes: [DEC-034]
 related: [DEC-006, DIS-001]
 ---
 # DIS-011: Diffuse-disease polygons may cover part of the organ
@@ -42,11 +42,9 @@ shows the disease, which may be the whole organ or part of it. The label guide
 (TASK-008) states this, and the old rule "draw a diffuse disease on the whole organ"
 is removed.
 
-The effect on the organ layer is not decided here. It goes to [TASK-055](../../backlog/tasks/task-055%20-%20Layered-disease-tasks-treat-diffuse-disease-polygons-as-the-whole-organ-outline-but-they-may-cover-only-part-of-it.md) (Parked
-until decided), which will produce a DEC amending DEC-006.
+The organ layer is decided in [DEC-034](../decisions/DEC-034-organ-layer-from-organ-polygons-only.md) (organ polygons only), carried out by
+[TASK-055](../../backlog/tasks/task-055%20-%20Layered-disease-tasks-treat-diffuse-disease-polygons-as-the-whole-organ-outline-but-they-may-cover-only-part-of-it.md).
 
 ## Open questions
 
-- Organ layer for diffuse polygons (TASK-055): keep counting them as the outline,
-  use them only where no organ polygon exists, or ignore the organ layer outside
-  drawn organ polygons.
+- None. Fallback if the organ layer loses too many crops: DEC-034, Consequences.
