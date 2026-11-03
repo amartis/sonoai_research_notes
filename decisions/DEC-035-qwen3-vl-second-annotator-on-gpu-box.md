@@ -25,8 +25,13 @@ an open vision-language model on the GPU box, so no frame leaves the user's mach
   4-bit method (bitsandbytes NF4 by default) is recorded with the labels.
 - **Where it runs.** The Windows GPU box (RTX 3060). It reads the frames from the enc1
   store and decrypts them in memory (`EncryptedStore.read_*`), as DEC-024 already allows.
-  No plain frame is written on the GPU box. The weights are already in the common box
-  (`ml_research_commonbox`, [DEC-015](DEC-015-commonbox-runs-models.md)); they are not downloaded again.
+  No plain frame is written on the GPU box. The weights live in the common box
+  (`ml_research_commonbox`, [DEC-015](DEC-015-commonbox-runs-models.md)). Amended 2026-11-03: the common box held only the
+  4B, so the user chose to download the 8B there ([TASK-032.04](../../backlog/tasks/task-032.04%20-%20GPU-box-install-the-Qwen3-VL-libraries-and-download-the-4-bit-model-weights-DEC-035.md)).
+- **Frame key and transfer** (clarified 2026-11-03). Frames are named by the opaque blob
+  ids of the project's frame-id table, the ids aws-labelstud uses. The result table (blob
+  id, boxes, `model_version`) goes to the run's folder in the common box. Only machine01
+  maps blob ids back to frames.
 - **Which frames.** Only the 1,371 frames of the TASK-032 labeling project
   (`task-032-bmode-boxes`). The code reads the frame list from that project and refuses
   any other frame.
