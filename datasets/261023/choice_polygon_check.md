@@ -56,9 +56,9 @@ no model is trained or evaluated, no split is made, no thresholds are chosen.
   dropped). Regions never span datasources, so the per-datasource counts sum
   exactly to the totals (checked: 0 labels differ). For a label in fewer than 5
   datasources the bootstrap has too few distinct resamples to be meaningful (it can
-  look exact, e.g. 35.0-35.0 for one datasource); Table 1 shows "n/a" there. A
-  share of 0 in every datasource gives a bootstrap interval of 0.0-0.0 by
-  construction.
+  look exact, e.g. 35.0-35.0 for `skip_coarse`); Table 1 shows "n/a" there. A
+  share of 0 in every datasource gives a bootstrap interval of 0.0-0.0, and a share
+  of 1 in every datasource gives 100.0-100.0, by construction.
 - Masking (code of TASK-060): a share and its CIs are blank when the numerator or
   its complement is 1-4, or n is below 5.
 
@@ -86,7 +86,8 @@ by the choice's project (`checked`), or any polygon (`quality`, `exclusion`,
 with a related polygon / regions (checkable regions for `presence`), with the 95%
 Wilson confidence interval (CI); next column: 95% datasource cluster-bootstrap CI
 (4,000 resamples; "n/a" for labels in fewer than 5 datasources, where it is not
-meaningful; 0.0-0.0 where no datasource has a related polygon).
+meaningful; 0.0-0.0 where no datasource has a related polygon; 100.0-100.0 where
+no datasource lacks one, e.g. `skip_otherdisease`).
 Same-project share: see Terms. Conflicts: `presence` without a related polygon,
 `absence` with one. "<5": a count of 1-4; "a + <5": a total with one masked part;
 blank share: numerator or complement below 5 (or n below 5).
@@ -245,15 +246,16 @@ hold the group, seed 61, percentile).
    - Exploratory sensitivity check (map widened in memory only, not committed):
      counting any steatosis polygon (any grade, `__ignore`, `__unknown`) as related,
      the share with a polygon rose from 51.1% to 65.4% (grade 0), 70.2% to 77.1%
-     (grade 1), 68.2% to 72.5% (grade 2) and 85.3% to 88.1% (grade 3). So 256 of
+     (grade 1), 68.2% to 72.5% (grade 2) and 85.3% to 88.1% (grade 3); no CI
+     computed (exploratory). So 256 of
      3,741 grade-1 regions carry a polygon of another grade only, and 332 of 960
      grade-0 regions carry no steatosis polygon at all.
    - `hepatitis`: with hepatitis, cirrhosis, precirrhosis or steatosis polygons
-     counted, 368 of 376 regions (97.9%) have one. Hepatitis choices are mostly
+     counted, 368 of 376 regions (97.9%; no CI computed, exploratory) have one. Hepatitis choices are mostly
      drawn as other diffuse polygons, not as hepatitis polygons.
    - `hepatic_duct`: with any duct or vessel polygon (`hepatic_blood_duct`,
      `portal_vein`, `hepatic_vascular_branch`, `common_biliary_duct`) counted,
-     66.2% (1,352 of 2,043) have one.
+     66.2% (1,352 of 2,043; no CI computed, exploratory) have one.
 3. **Absence choices agree with the polygons.** 37 of 20,581 regions (0.2%, 95%
    CI 0.1-0.2 Wilson, 0.1-0.3 datasource bootstrap; Table 2) with an absence choice
    have a related polygon; the most are `notfound` (12 of 3,494,
@@ -274,8 +276,8 @@ hold the group, seed 61, percentile).
    `skip_no_organ_found` 96.8%, `skip_smallliver` 95.2%, `skip_anatomyunclear`
    77.8%. Mostly without polygons: `skip_notliver` (13 of 287, 4.5%),
    `skip_notultrasound` (24 of 287, 8.4%), `skip_notabdomen` (<5 of 276 regions
-   with a polygon) and the quality label `skip_coarse` (179 of 511, 35.0%; one
-   datasource, same-project share 35.0%). For
+   with a polygon) and the quality label `skip_coarse` (179 of 511, 35.0%; fewer than 5
+   datasources, same-project share 35.0%). For
    `skip_badimagequality` the polygons come from other projects (same-project
    share 0.0%); for `skip_lowdim` and `skip_otherdisease` from the same project.
    Leaving out quality or exclusion regions therefore removes polygon-labelled
