@@ -12,6 +12,14 @@ targets: no model is trained or evaluated, no split is made.
 
 ## Terms
 
+- **v2, v3**: the task versions `lseg_<disease>_v2` (class map of DEC-006:
+  diffuse polygons also count as the liver) and `lseg_<disease>_v3` (class map of
+  DEC-034: only liver polygons count as the liver).
+- **Organ layer**: the segmentation channel for the whole liver (background or
+  liver).
+- **Disease layer**: the segmentation channel for the disease classes of the task.
+- **`ignore_index`**: the label value that the loss skips; pixels with it are
+  neither trained nor scored.
 - **Crop**: one row of `taskcrops_df` (one labelled task image). Polygon tasks
   without a crop row (83 for steatosis, 173 for cirrhosis, 183 for hepatoma) are left out.
 - **Eligible crop**: a crop the task samples. Eligibility is the same in v2 and v3
@@ -44,7 +52,8 @@ Hepatitis has no layered task. A hepatitis task with the same eligibility rule
 would have exactly the counts of the hepatoma row (its labeling projects give the
 same counts); 176 of its lost crops carry a hepatitis polygon.
 
-Table 2. The crops that lose the organ target, by what else they carry.
+Table 2. The crops that lose the organ target, by what else they carry. The
+shares are descriptive and have no CIs.
 
 | Task | Lost crops, n | Lost crops with a polygon of the task's own disease, n | Share of lost crops in the datasource with most of them, % | Share of lost crops in the 3 datasources with most of them, % |
 |---|---|---|---|---|
@@ -65,7 +74,8 @@ The lost crops are a whole-datasource effect, not scattered crops:
 
 Steatosis only (DEC-034, rule 3): in its 4,773 lost crops (33.9%) every pixel
 outside the grade polygons is now ignored in the disease layer, where v2 made the
-area outside the diffuse polygon background. That layer is the assessed one, so
+area outside the diffuse polygon background. That layer is the assessed one
+([DEC-034](../../decisions/DEC-034-organ-layer-from-organ-polygons-only.md), Consequences: only the disease layer is assessed), so
 in a third of the steatosis crops the disease layer has no background pixels in
 training or evaluation.
 
