@@ -44,11 +44,12 @@ together: [`docs/workflow.md`](../../../docs/workflow.md) in the code repo.
   the 15 of 57 datasources with no liver polygon.
 
 - `261023_plain` choice-polygon relation table under [DEC-036](../../decisions/DEC-036-choice-polygon-relation-table.md) ([TASK-061](../../../backlog/tasks/task-061%20-%20Run-choice-check-on-261023_plain-and-write-the-choice-polygon-relation-record-DEC-036.md),
-  `derived/choice_flags_df.pkl`): [choice_polygon_check.md](choice_polygon_check.md): 116 choice
-  labels on 31,252 regions; absence conflicts 0.2% (37 of 20,581 regions), presence
-  conflicts in 35.6% of 9,420 regions (mostly steatosis grades, `hepatic_duct`,
-  `hepatitis`); 75.1% of 5,066 quality or exclusion regions still have polygons;
-  23.3% of choice pairs (6 projects) have no crop row and are not in the table.
+  `derived/choice_flags_df.pkl`), exploratory: [choice_polygon_check.md](choice_polygon_check.md): 116 choice
+  labels on 31,252 regions; absence conflicts 0.2% (37 of 20,581 regions; 95% CI
+  datasource bootstrap 0.1-0.3), presence conflicts in 35.6% of 9,420 regions
+  (15.8-53.3; mostly steatosis grades, `hepatic_duct`, `hepatitis`); 75.1% of 5,066
+  quality or exclusion regions still have polygons (59.9-87.7); 23.3% of choice
+  pairs (6 projects) have no crop row and are not in the table.
 
 ## Label definitions
 
