@@ -4,7 +4,7 @@
 images, file names or identifiers; counts below 5 are shown as "<5", and no
 pair of numbers here differs by a masked count. Computed on 2026-11-03 on
 `261023_plain` ([DEC-018](../../decisions/DEC-018-plain-style-for-local-research.md)), in memory, with the task code of the code repo's
-`master` at commit 60db495 (v3 liver tasks, TASK-055). Nothing was written to the
+`master` at commit 60db495 (v3 liver tasks, [TASK-055](../../../backlog/tasks/task-055%20-%20Layered-disease-tasks-treat-diffuse-disease-polygons-as-the-whole-organ-outline-but-they-may-cover-only-part-of-it.md)). Nothing was written to the
 dataset.
 
 Reporting checklists (CLAIM, STARD): not applicable. This is a count of training
@@ -22,7 +22,7 @@ targets: no model is trained or evaluated, no split is made.
   organ layer.
 - **Diffuse polygon**: a polygon of steatosis (any grade, `__ignore`, `__unknown`),
   cirrhosis, precirrhosis or hepatitis. In v2 these also drew the organ layer
-  (DEC-006).
+  ([DEC-006](../../decisions/DEC-006-losses-optim-tracking.md)).
 - **Loses its organ target**: an eligible crop with a diffuse polygon and no liver
   polygon. In v2 its organ layer was drawn from the diffuse polygon; in v3 it is
   ignored (`ignore_index`) in the whole crop.
