@@ -3,7 +3,7 @@ id: DIS-009
 title: Claude as a second, blind annotator for the TASK-032 B-mode boxes
 status: concluded
 created: 2026-10-30
-outcomes: [DEC-029]
+outcomes: [DEC-029, DEC-035]
 related: [DEC-017, DEC-019, DEC-024, DEC-025, DEC-026]
 ---
 # DIS-009: Claude as a second, blind annotator for the [TASK-032](../../backlog/tasks/task-032%20-%20Run-the-B-mode-cropper-on-a-dataset-version-polygon-check-reviewed-set-box-table-DEC-017.md) B-mode boxes
@@ -69,6 +69,20 @@ Recorded in [DEC-029](../decisions/DEC-029-claude-labels-named-labeling-projects
 - The comparison follows once both sets are done.
 
 Board tasks: `TASK-032.01` (`method`, the code) and `TASK-032.02` (`exp`, the run and EXP record).
+
+## Update 2026-11-03: Qwen instead of Claude
+
+The user changed the model choice to the first option above: Qwen3-VL-8B in 4-bit on the GPU
+box, labelling the local mirror project on machine01. Recorded in [DEC-035](../decisions/DEC-035-qwen3-vl-second-annotator-on-gpu-box.md), which supersedes
+DEC-029.
+- The GPU box reads the frames from the enc1 store in memory, so DEC-024 holds as it is and
+  no frame goes to an outside service. The Message Batches script above is not built.
+- Unchanged from DEC-029: the local mirror project, the `ai-annotator` account, and the
+  blind rules.
+- Board tasks: [TASK-032.03](../../backlog/tasks/task-032.03%20-%20Qwen3-VL-second-annotator-GPU-box-labelling-command-and-local-Label-Studio-import-DEC-035.md) (`method`, the code), [TASK-032.04](../../backlog/tasks/task-032.04%20-%20GPU-box-install-the-Qwen3-VL-libraries-and-download-the-4-bit-model-weights-DEC-035.md) (`infra`, the GPU-box
+  environment and weights) and [TASK-032.05](../../backlog/tasks/task-032.05%20-%20Run-the-Qwen3-VL-second-annotator-on-the-TASK-032-frames-and-compare-with-the-human-labels-DEC-035.md) (`exp`, the run and the comparison).
+  The earlier `TASK-032.01`/`TASK-032.02` were never created.
+- The open question below no longer gates anything: no frame leaves the user's machines.
 
 ## Open questions
 

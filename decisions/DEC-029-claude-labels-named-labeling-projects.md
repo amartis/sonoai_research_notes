@@ -1,13 +1,16 @@
 ---
 id: DEC-029
 title: Claude (Anthropic API) may label the frames of labeling projects the user names, starting with TASK-032
-status: proposed
+status: superseded
 created: 2026-10-30
 from: [DIS-009]
 related: [DEC-017, DEC-019, DEC-024, DEC-026]
-superseded_by:
+superseded_by: DEC-035
 ---
 # DEC-029: Claude (Anthropic API) may label the frames of labeling projects the user names, starting with [TASK-032](../../backlog/tasks/task-032%20-%20Run-the-B-mode-cropper-on-a-dataset-version-polygon-check-reviewed-set-box-table-DEC-017.md)
+
+> Superseded on 2026-11-03, before acceptance, by [DEC-035](DEC-035-qwen3-vl-second-annotator-on-gpu-box.md): the user chose Qwen3-VL-8B
+> (4-bit) on the GPU box instead of the Anthropic API. Nothing below took effect.
 
 ## Context
 
