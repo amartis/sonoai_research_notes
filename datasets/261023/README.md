@@ -31,6 +31,13 @@ together: [`docs/workflow.md`](../../../docs/workflow.md) in the code repo.
 - `261023_plain`: 72 datasources; every `taskcrops_df.filepath2` starts with
   its datasource folder (checked 2026-10-23).
 
+- `261023_plain` B-mode box table (cropper version 1, `derived/bmode_boxes_df.pkl`):
+  29,468 images, 364 with 2 boxes, 6,717 fallback, 0 unreadable. Polygon check
+  and DICOM question ([TASK-032](../../../backlog/tasks/task-032%20-%20Run-the-B-mode-cropper-on-a-dataset-version-polygon-check-reviewed-set-box-table-DEC-017.md)): [bmode_crop_check.md](bmode_crop_check.md):
+  0.006 of polygon area outside the boxes (95% CI 0.003-0.009, 68
+  datasources); 0.750 of two-image frames not split (n = 900, 2 datasources);
+  no DICOM region tags in any datasource.
+
 ## Label definitions
 
 - `label_projects.xlsx`: the labeling-project tag table of this version
