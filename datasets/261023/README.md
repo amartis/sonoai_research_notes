@@ -38,6 +38,11 @@ together: [`docs/workflow.md`](../../../docs/workflow.md) in the code repo.
   datasources); 0.750 of two-image frames not split (n = 900, 2 datasources);
   no DICOM region tags in any datasource.
 
+- `261023_plain` organ layer under [DEC-034](../../decisions/DEC-034-organ-layer-from-organ-polygons-only.md) ([TASK-058](../../../backlog/tasks/task-058%20-%20Count-crops-whose-diffuse-disease-polygon-has-no-organ-polygon-DEC-034.md)): [diffuse_organ_check.md](diffuse_organ_check.md):
+  33.9-39.3% of eligible liver-task crops lose their organ target (steatosis 4,773
+  of 14,071; cirrhosis 6,303 of 16,340; hepatoma 6,508 of 16,545), nearly all in
+  the 15 of 57 datasources with no liver polygon.
+
 ## Label definitions
 
 - `label_projects.xlsx`: the labeling-project tag table of this version
