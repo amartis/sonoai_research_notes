@@ -5,10 +5,17 @@ status: accepted
 area: [training]
 created: 2026-10-22
 from: []
-related: [DEC-002, DEC-003]
+related: [DEC-002, DEC-003, DEC-041]
 superseded_by:
 ---
 # DEC-004: Training tasks
+
+> **Amended by [DEC-041](DEC-041-label-groups-per-recipe.md) (2026-11-04).** The classes and class map in task code are the
+> task's defaults; a recipe may replace them. Task code keeps the task kind (type, label
+> tables, target form, eligibility, metrics, the unknown-label error), and only a change
+> to the kind bumps `v<N>`. Results are identified by task kind + class-map fingerprint +
+> dataset version + split. The registered v1-v3 tasks stay frozen. The amended places
+> below are marked *(DEC-041)*.
 
 ## Context
 
@@ -36,7 +43,8 @@ look comparable.
 
 One dataset version serves many tasks; one task is trained by many recipes.
 A result is identified by **task + dataset version + split**; metrics are
-comparable only when all three match.
+comparable only when all three match. *(DEC-041: plus the class-map fingerprint, since a
+recipe may set its own class map; the task name alone no longer fixes the classes.)*
 
 ## Decision
 
@@ -50,7 +58,8 @@ comparable only when all three match.
 - `subject`: lowercase letters, digits and `_`, short; says what is predicted.
 - `v<N>`: bumped whenever anything that changes targets or metrics changes:
   classes, class map, merge/ignore rules, sample eligibility, target
-  rendering (e.g. polygon rasterisation), metric definitions. Code refactors
+  rendering (e.g. polygon rasterisation), metric definitions. *(DEC-041: classes and
+  class map changed by a recipe need no new version; they change the fingerprint.)* Code refactors
   that leave targets and metrics identical keep the version.
 - A task name is never reused for a different definition, and old versions
   stay in the code as long as runs cite them.
@@ -95,7 +104,8 @@ with functions recorded by qualified name).
 - **Unknown label values are an error.** If a dataset version contains a
   label value missing from the class map, the task refuses to build targets
   instead of silently dropping it. Adding the value means a new task version
-  (or an explicit `IGNORE` entry in a new version).
+  (or an explicit `IGNORE` entry in a new version). *(DEC-041: or in the recipe's class
+  map; the error stays.)*
 - **Eligibility is part of the task.** Which samples take part (e.g. only
   samples with at least one polygon, only samples with a view flag) is
   decided by the task and applied *inside* each split, so splits stay defined
@@ -119,7 +129,8 @@ with functions recorded by qualified name).
 - Each run stores the resolved task spec in `task.json` and its fingerprint
   (hash of `to_dict()`) in `meta.json`. If a task's fingerprint differs from
   earlier runs of the same task name, the loader warns: the definition was
-  changed without a version bump.
+  changed without a version bump. *(DEC-041: this check compares only runs that use the
+  task's default class map; runs with a recipe class map are compared by fingerprint.)*
 
 ### Task notes
 

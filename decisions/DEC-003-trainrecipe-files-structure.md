@@ -5,10 +5,15 @@ status: accepted
 area: [training]
 created: 2026-10-22
 from: []
-related: [DEC-002, DEC-004]
+related: [DEC-002, DEC-004, DEC-041]
 superseded_by:
 ---
 # DEC-003: Train recipe, plan and run files structure
+
+> **Amended by [DEC-041](DEC-041-label-groups-per-recipe.md) (2026-11-04).** A recipe may set its own classes (or layers) and
+> class map over the task kind; the task then supplies the kind only (target form,
+> eligibility, metrics). Results compare when task kind, class-map fingerprint, dataset
+> version and split all match. The amended places below are marked *(DEC-041)*.
 
 ## Context
 
@@ -29,7 +34,7 @@ time it was actually executed.
 
 | Term | Meaning | Where |
 |---|---|---|
-| **task** | The learning problem: task type, labels used, classes, targets, metrics. Named and versioned ([DEC-004](DEC-004-training-tasks.md)), e.g. `seg_anatomy_v1`. | `src/sonoai/tasks/` |
+| **task** | The learning problem: task type, labels used, classes, targets, metrics (classes and class map are defaults a recipe may replace; *DEC-041*). Named and versioned ([DEC-004](DEC-004-training-tasks.md)), e.g. `seg_anatomy_v1`. | `src/sonoai/tasks/` |
 | **recipe** | *What* is trained: task, dataset version and split, model, loss, optimisation, evaluation, seed. Machine-independent. A partial definition. | `configs/train/recipes/` (git) |
 | **plan** | *How and where* a recipe is executed: the recipe plus machine and execution settings. A complete definition, but it says nothing about whether it was executed. | `configs/train/plans/` (git) |
 | **machine profile** | Default execution settings of one machine, shared by its plans. | `configs/train/machines/` (git) |
@@ -51,6 +56,7 @@ to the plan.**
 | Recipe | Plan (or its machine profile) |
 |---|---|
 | task (`seg_anatomy_v1`): classes, targets, metrics (DEC-004) | |
+| classes and class map, when the task's defaults are not used *(DEC-041)* | |
 | dataset version (`261022`), split / fold | dataset style used on that machine (codename `261022_submit1`, ...) |
 | model name + args, init weights | machine label, device(s), number of GPUs |
 | loss, optimizer, LR schedule, epochs/steps | per-device micro-batch, gradient accumulation (derived so the recipe's global batch holds) |
@@ -130,6 +136,8 @@ every run records the full resolved recipe, also for imperative recipes.
 
 Every recipe names exactly one task (DEC-004). The task supplies classes,
 targets, metrics, the model's output size and the default trainer and loss.
+*(DEC-041)* A recipe may replace the task's classes and class map (fields `classes` or
+`layers`, `class_map`, `grouping`); the output size then follows the recipe's classes.
 
 **Descriptive style** (the default): name the task and describe everything
 else as data.
@@ -307,7 +315,7 @@ the trainer, or the recipe's `train(ctx)` when `trainer="custom"`.
   code they use. The same recipe runs on every machine without edits; only a
   short plan file differs.
 - Results of different recipes are comparable when task, dataset version and
-  split match (DEC-004); results from different machines are comparable by
+  split match (DEC-004), and the class-map fingerprint matches *(DEC-041)*; results from different machines are comparable by
   recipe name. Bitwise
   equality is not expected (GPU model, cuDNN algorithms, driver versions
   differ), which is why `meta.json` records hardware and versions; running one
