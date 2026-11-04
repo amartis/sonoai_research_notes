@@ -5,7 +5,7 @@ status: accepted
 area: [labeling, infra]
 created: 2026-11-03
 from: [DIS-009]
-related: [DEC-017, DEC-024, DEC-025, DEC-029]
+related: [DEC-017, DEC-024, DEC-025, DEC-029, DEC-042]
 superseded_by:
 ---
 # DEC-035: Qwen3-VL-8B (4-bit) on the GPU box is the second, blind annotator for the [TASK-032](../../backlog/tasks/task-032%20-%20Run-the-B-mode-cropper-on-a-dataset-version-polygon-check-reviewed-set-box-table-DEC-017.md) B-mode boxes
@@ -49,6 +49,9 @@ an open vision-language model on the GPU box, so no frame leaves the user's mach
     (`model_version` fixed).
   - Prompt tuning uses a fixed 72-frame subset of the sample, scored only against the
     cropper and the existing label polygons.
+  - Amended 2026-11-04 by [DEC-042](DEC-042-qwen-tuning-and-comparison-on-the-users-v1-review.md):
+    the last two bullets are replaced; tuning and comparison use the user's v1 review,
+    split by datasource as in [DEC-037](DEC-037-cropper-v2-and-second-review-project.md).
 - **No change for agents' own tools.** Agents still never open images with their tools,
   and the patient-data hook stays.
 
