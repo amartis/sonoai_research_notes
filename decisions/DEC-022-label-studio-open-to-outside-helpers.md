@@ -2,6 +2,7 @@
 id: DEC-022
 title: Label Studio may be opened to outside helpers for a labeling session
 status: proposed
+area: [labeling, data-security]
 created: 2026-10-29
 from: []
 related: [DEC-019, DEC-018]

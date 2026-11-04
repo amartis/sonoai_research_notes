@@ -2,6 +2,7 @@
 id: DEC-007
 title: Sessions use branches in the main checkout, never git worktrees
 status: superseded
+area: [workflow]
 created: 2026-10-27
 from: []
 related: []

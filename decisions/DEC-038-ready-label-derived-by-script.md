@@ -2,6 +2,7 @@
 id: DEC-038
 title: A derived ready label on board tasks, kept in sync by ready_tasks.py from three hooks
 status: accepted
+area: [workflow]
 created: 2026-11-03
 from: [DIS-014]
 related: [DEC-016, DEC-032, DEC-031]

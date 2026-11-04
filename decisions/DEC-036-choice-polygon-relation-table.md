@@ -2,6 +2,7 @@
 id: DEC-036
 title: Map every choice label to a role and related polygon labels, and report one choice-polygon relation table per dataset version
 status: accepted
+area: [labeling, datasets]
 created: 2026-11-03
 from: [DIS-012]
 related: [DEC-012, DEC-018, DEC-034]

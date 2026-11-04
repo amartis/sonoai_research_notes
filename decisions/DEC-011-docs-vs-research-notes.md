@@ -2,6 +2,7 @@
 id: DEC-011
 title: docs/ describes how things work now; research_notes/ records why
 status: accepted
+area: [workflow]
 created: 2026-10-28
 from: [DIS-003]
 related: [DEC-007, DEC-009]

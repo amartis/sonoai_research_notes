@@ -2,6 +2,7 @@
 id: DEC-039
 title: Generated Mermaid dependency pages on the board, one per milestone, refreshed with the ready label
 status: accepted
+area: [workflow]
 created: 2026-11-03
 from: [DIS-015]
 related: [DEC-031, DEC-038]

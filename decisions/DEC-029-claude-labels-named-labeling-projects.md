@@ -2,6 +2,7 @@
 id: DEC-029
 title: Claude (Anthropic API) may label the frames of labeling projects the user names, starting with TASK-032
 status: superseded
+area: [labeling]
 created: 2026-10-30
 from: [DIS-009]
 related: [DEC-017, DEC-019, DEC-024, DEC-026]

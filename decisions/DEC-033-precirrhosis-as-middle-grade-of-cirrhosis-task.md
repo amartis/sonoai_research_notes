@@ -2,6 +2,7 @@
 id: DEC-033
 title: Precirrhosis returns to the cirrhosis task as the middle of three ordered grades
 status: proposed      # proposed | accepted | superseded
+area: [training]
 created: 2026-11-02
 from: [DIS-001]
 related: [DEC-004, DEC-006]

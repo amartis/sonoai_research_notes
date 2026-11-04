@@ -2,6 +2,7 @@
 id: DEC-008
 title: Repo layout - dataset CLI, no empty packages, notebook areas
 status: accepted
+area: [workflow]
 created: 2026-10-27
 from: [DIS-002]
 related: [DEC-002, DEC-003, DEC-005, DEC-007]

@@ -2,6 +2,7 @@
 id: DEC-027
 title: The cloud agent has SSH access to aws-labelstud, through SSM (no open port)
 status: accepted
+area: [aws]
 created: 2026-10-29
 from: []
 related: [DEC-025, DEC-026]

@@ -2,6 +2,7 @@
 id: DEC-019
 title: Local Label Studio for review projects, one project per review task, driven through its API
 status: accepted
+area: [labeling]
 created: 2026-10-28
 from: [DIS-005]
 related: [DEC-017, DEC-018, DEC-012]

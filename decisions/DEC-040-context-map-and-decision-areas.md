@@ -2,6 +2,7 @@
 id: DEC-040
 title: A root context map in docs/README.md, decisions tagged by area, and workflow.md linked instead of imported
 status: accepted
+area: [workflow]
 created: 2026-11-04
 from: [DIS-016]
 related: [DEC-011, DEC-021, DEC-031, DEC-032]

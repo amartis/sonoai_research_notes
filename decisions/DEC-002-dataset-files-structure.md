@@ -2,6 +2,7 @@
 id: DEC-002
 title: Dataset files structure
 status: accepted
+area: [datasets]
 created: 2026-10-22
 from: []
 related: [DEC-001]

@@ -2,6 +2,7 @@
 id: DEC-032
 title: Agent roster, named spawns, /consult and /lead skills, up to 2 parallel writers
 status: accepted
+area: [workflow]
 created: 2026-11-02
 from: [DIS-010]
 related: [DEC-026, DEC-027, DEC-028, DEC-009]

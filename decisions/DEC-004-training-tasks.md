@@ -2,6 +2,7 @@
 id: DEC-004
 title: Training tasks
 status: accepted
+area: [training]
 created: 2026-10-22
 from: []
 related: [DEC-002, DEC-003]

@@ -2,6 +2,7 @@
 id: DEC-012
 title: Dataset docs - style specs in docs/, one notes folder per dataset version
 status: accepted
+area: [datasets]
 created: 2026-10-28
 from: [DIS-003]
 related: [DEC-002, DEC-005, DEC-008, DEC-011]

@@ -2,6 +2,7 @@
 id: DEC-010
 title: Training runs record the board task they serve
 status: accepted
+area: [training]
 created: 2026-10-27
 from: [DIS-002]
 related: [DEC-006]

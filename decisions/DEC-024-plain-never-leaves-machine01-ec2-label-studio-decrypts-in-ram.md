@@ -2,6 +2,7 @@
 id: DEC-024
 title: Plain-style data never leaves machine01; S3 holds enc1 images only; Label Studio on EC2 decrypts them in RAM
 status: accepted
+area: [data-security, aws]
 created: 2026-10-29
 from: []
 related: [DEC-005, DEC-018, DEC-022, DEC-023]

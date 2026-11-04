@@ -2,6 +2,7 @@
 id: DEC-030
 title: A public copy of the TASK-032 labeller's guide, with its 8 example frames served from S3
 status: proposed
+area: [labeling, aws]
 created: 2026-10-30
 from: []
 related: [DEC-023, DEC-024, DEC-025, DEC-029]

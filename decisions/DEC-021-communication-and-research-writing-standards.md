@@ -2,6 +2,7 @@
 id: DEC-021
 title: Communication rules for Claude, a research-writing standard, and links between notes made by the index tool
 status: accepted
+area: [workflow]
 created: 2026-10-28
 from: [DIS-006]
 related: [DEC-009, DEC-011]

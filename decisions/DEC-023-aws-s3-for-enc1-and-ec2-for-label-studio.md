@@ -2,6 +2,7 @@
 id: DEC-023
 title: AWS S3 hosts the enc1 dataset files; EC2 hosts the Label Studio server
 status: accepted
+area: [aws, data-security]
 created: 2026-10-29
 from: []
 related: [DEC-018, DEC-019, DEC-022]

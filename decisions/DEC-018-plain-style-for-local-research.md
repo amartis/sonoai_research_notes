@@ -2,6 +2,7 @@
 id: DEC-018
 title: Local research on machine01 uses the plain dataset style
 status: accepted
+area: [data-security, datasets]
 created: 2026-10-28
 from: []
 related: [DEC-002, DEC-005, DEC-017]

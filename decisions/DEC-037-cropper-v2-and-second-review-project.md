@@ -2,6 +2,7 @@
 id: DEC-037
 title: Cropper v2 is tuned on the user's v1 review with a datasource hold-out, and prelabels a second project with the unfinished v1 frames
 status: accepted
+area: [labeling]
 created: 2026-11-03
 from: [DIS-013]
 related: [DEC-017, DEC-019, DEC-018]

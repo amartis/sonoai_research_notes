@@ -2,6 +2,7 @@
 id: DEC-015
 title: Common box on machine02 for runs, checkpoints and chosen models
 status: accepted
+area: [infra]
 created: 2026-10-28
 from: [DIS-003]
 related: [DEC-001, DEC-003, DEC-006, DEC-010]

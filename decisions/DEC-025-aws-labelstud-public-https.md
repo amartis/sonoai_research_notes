@@ -2,6 +2,7 @@
 id: DEC-025
 title: aws-labelstud, the Label Studio server on EC2, is reached over public HTTPS; first project's images only; idle stop
 status: accepted
+area: [aws]
 created: 2026-10-29
 from: []
 related: [DEC-019, DEC-022, DEC-023, DEC-024]

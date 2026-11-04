@@ -2,6 +2,7 @@
 id: DEC-028
 title: Each session works in its own git worktree, made by scripts/worktree.sh
 status: accepted
+area: [workflow]
 created: 2026-10-30
 from: []
 related: [DEC-007]

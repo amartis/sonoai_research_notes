@@ -2,6 +2,7 @@
 id: DEC-001
 title: Encrypted data store for all off-workstation data
 status: accepted
+area: [data-security]
 created: 2026-10-22
 from: []
 related: []

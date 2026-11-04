@@ -2,6 +2,7 @@
 id: DEC-031
 title: DEC / DIS records and docs/ shown on the task board as read-only copies
 status: accepted
+area: [workflow]
 created: 2026-11-02
 from: []
 related: [DEC-016, DEC-011, DEC-021]

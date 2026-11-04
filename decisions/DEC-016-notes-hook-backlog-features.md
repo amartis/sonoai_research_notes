@@ -2,6 +2,7 @@
 id: DEC-016
 title: Pre-commit hook for research_notes; Backlog decision, doc and draft features unused
 status: accepted
+area: [workflow]
 created: 2026-10-28
 from: [DIS-003]
 related: [DEC-009, DEC-011, DEC-012]

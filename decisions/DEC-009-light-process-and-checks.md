@@ -2,6 +2,7 @@
 id: DEC-009
 title: Lighter task process and checks tiered by cost
 status: accepted
+area: [workflow]
 created: 2026-10-27
 from: [DIS-002]
 related: [DEC-007]

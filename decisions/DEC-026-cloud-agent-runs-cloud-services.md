@@ -2,6 +2,7 @@
 id: DEC-026
 title: A cloud agent runs the cloud services, with shell commands on aws-labelstud and a log of its actions
 status: accepted
+area: [aws]
 created: 2026-10-29
 from: []
 related: [DEC-023, DEC-024, DEC-025]

@@ -2,6 +2,7 @@
 id: DEC-035
 title: Qwen3-VL-8B (4-bit) on the GPU box is the second, blind annotator for the TASK-032 B-mode boxes
 status: accepted
+area: [labeling, infra]
 created: 2026-11-03
 from: [DIS-009]
 related: [DEC-017, DEC-024, DEC-025, DEC-029]

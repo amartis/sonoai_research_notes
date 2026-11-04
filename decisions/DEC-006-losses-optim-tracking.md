@@ -2,6 +2,7 @@
 id: DEC-006
 title: Losses, optimisation, confusion-based metrics and result tracking
 status: accepted
+area: [training]
 created: 2026-10-23
 from: []
 related: [DEC-003, DEC-004]

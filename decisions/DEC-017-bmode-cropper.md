@@ -2,6 +2,7 @@
 id: DEC-017
 title: Classical B-mode box cropper, checked against label polygons and a reviewed set
 status: accepted
+area: [labeling]
 created: 2026-10-28
 from: [DIS-004]
 related: [DEC-012]

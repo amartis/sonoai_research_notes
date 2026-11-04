@@ -2,6 +2,7 @@
 id: DEC-034
 title: The organ layer of disease tasks uses organ polygons only
 status: accepted
+area: [datasets, training]
 created: 2026-11-03
 from: [DIS-011]
 related: [DEC-006, DEC-033]

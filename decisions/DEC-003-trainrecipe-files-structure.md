@@ -2,6 +2,7 @@
 id: DEC-003
 title: Train recipe, plan and run files structure
 status: accepted
+area: [training]
 created: 2026-10-22
 from: []
 related: [DEC-002, DEC-004]

@@ -2,6 +2,7 @@
 id: DEC-014
 title: Self-hosted Gogs on machine01 as the git remote of both repos
 status: accepted
+area: [infra]
 created: 2026-10-28
 from: [DIS-003]
 related: [DEC-007]

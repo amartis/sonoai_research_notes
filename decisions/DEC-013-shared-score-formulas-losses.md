@@ -2,6 +2,7 @@
 id: DEC-013
 title: Losses reuse the matrix score formulas (soft confusion matrix, fdsc_ce)
 status: accepted
+area: [training]
 created: 2026-10-28
 from: [DIS-003]
 related: [DEC-004, DEC-006]
