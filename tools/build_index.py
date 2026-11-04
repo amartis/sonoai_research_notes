@@ -33,6 +33,7 @@ KINDS = {  # prefix -> (folder, heading)
 BODY_FOLDERS = ("journal", "datasets", "literature")  # other notes whose bodies get links
 BACKLOG = ROOT.parent / "backlog"
 TASK_FOLDERS = ("tasks", "completed", "archive/tasks")  # where the backlog CLI keeps task files
+AREAS = ("data-security", "datasets", "labeling", "training", "workflow", "infra", "aws")  # DEC-040
 LINK_FIELDS = ("from", "outcomes", "related", "superseded_by")
 ID_RE = re.compile(r"^(DIS|DEC|EXP)-\d{3}$")
 MENTION_RE = re.compile(r"(?<![\w-])((?:DIS|DEC|EXP)-\d{3}|TASK-\d{3}(?:\.\d+)?)(?![\w-])")
@@ -104,6 +105,14 @@ def load_notes() -> tuple[dict[str, dict], list[str]]:
             if nid in notes:
                 errors.append(f"{nid}: duplicate id")
             meta["path"] = path.relative_to(ROOT).as_posix()
+            if prefix == "DEC":
+                areas = meta.get("area") or []
+                areas = [areas] if isinstance(areas, str) else areas
+                if not areas:
+                    errors.append(f"{nid}: missing area (one or more of {', '.join(AREAS)})")
+                for a in areas:
+                    if a not in AREAS:
+                        errors.append(f"{nid}: unknown area {a!r} (allowed: {', '.join(AREAS)})")
             notes[nid] = meta
     for nid, meta in notes.items():
         for target in links(meta):
@@ -239,6 +248,17 @@ def render(notes: dict[str, dict]) -> str:
                 link_list(m.get("related") or []),
             ]
             out.append("| " + " | ".join(row) + " |")
+        out.append("")
+
+    by_area = {a: sorted(n for n, m in notes.items() if n.startswith("DEC") and m.get("status") == "accepted"
+                         and a in ([m["area"]] if isinstance(m.get("area"), str) else m.get("area") or []))
+               for a in AREAS}
+    out += ["## Accepted decisions by area", "",
+            "Accepted DECs only; a decision with two areas is listed under both. "
+            "Superseded and proposed ones are in the Decisions table above.", ""]
+    for a in AREAS:
+        out += [f"### {a}", ""]
+        out += [f"- {link(n)}: {notes[n].get('title', '')}" for n in by_area[a]] or ["- none"]
         out.append("")
 
     edges = sorted({(src, nid) for nid, m in notes.items() for src in m.get("from") or []}

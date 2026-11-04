@@ -49,6 +49,13 @@ Rules:
 
 - IDs are sequential per prefix, three digits, never reused or renumbered.
   File name is `<ID>-<short-slug>.md`; the `id` in front matter must match.
+- Every DEC has `area: [..]` in front matter: one or more of `data-security`,
+  `datasets`, `labeling`, `training`, `workflow`, `infra`, `aws` (list fixed by
+  DEC-040; a new area is a new DEC that edits the list and `AREAS` in
+  `tools/build_index.py`). Pick by what the decision governs now, not by where it
+  came from; use two areas only when it truly governs both (e.g. an AWS service
+  that holds patient data: `aws`, `data-security`). Superseded DECs get an area too.
+  `INDEX.md` lists accepted DECs by area; `--check` fails on a missing or unknown area.
 - Links live in front matter: `from` (what this came out of), `outcomes`
   (DIS only: what it produced), `related` (anything else),
   `superseded_by` (DEC only). `INDEX.md` shows them as links. Mention IDs
