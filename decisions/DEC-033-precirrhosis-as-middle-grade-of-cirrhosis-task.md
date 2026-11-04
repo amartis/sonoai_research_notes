@@ -47,7 +47,8 @@ own class with half credit for a neighbouring miss.
 1. **Ask the annotators first.** Before the new task is built, the labeling team states in
    one or two sentences what separated precirrhosis from cirrhosis and from a normal liver.
    If they used no consistent rule, this decision is withdrawn and precirrhosis stays out.
-2. **New task version `lseg_cirrhosis_v3`.** The disease layer has three ordered classes:
+2. **New task version**, the next free one after [DEC-034](DEC-034-organ-layer-from-organ-polygons-only.md)'s `lseg_cirrhosis_v3`
+   (expected `lseg_cirrhosis_v4`; or the same `_v3` if both are built together). The disease layer has three ordered classes:
    background (0), precirrhosis (1), cirrhosis (2). Cirrhosis is drawn after precirrhosis, so
    cirrhosis wins where the two polygons overlap.
 3. **Scoring.** Same rule as steatosis grades (DEC-006):
@@ -65,7 +66,7 @@ own class with half credit for a neighbouring miss.
   the liver. So a precirrhosis prediction outside the liver earns 0.5 instead of 0. Check this
   with the first run; if it inflates scores, restrict the half credit to liver pixels (a
   method change and a new version).
-- Reported results for v3 must also give the cirrhosis-vs-rest score (precirrhosis counted
+- Reported results for the new version must also give the cirrhosis-vs-rest score (precirrhosis counted
   as not cirrhosis), so they stay comparable with v2.
 - Work: a `method` task (touches `src/sonoai/tasks/disease.py`, synthetic tests) after this
   decision is accepted and step 1 is answered. Closes TASK-001.01.

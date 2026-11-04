@@ -58,6 +58,17 @@ Reopen when the next run's results are in, or before the task set is
 extended beyond those three tasks. Each answer should become a DEC that
 amends or supersedes the relevant part of DEC-006.
 
+Review on 2026-11-04 (no run yet):
+
+1. Precirrhosis: [DEC-033](../decisions/DEC-033-precirrhosis-as-middle-grade-of-cirrhosis-task.md)
+   proposes it as the middle of three ordered grades; still proposed ([TASK-001.01](../../backlog/tasks/task-001.01%20-%20Decide-whether-precirrhosis-returns-to-the-cirrhosis-task.md)).
+2. Kidney tasks: moved to board task [TASK-056](../../backlog/tasks/task-056%20-%20Disease-tasks-for-crops-whose-organ-is-not-outlined-kidney-disease-projects.md) (disease tasks for crops whose organ
+   is not outlined). [DEC-034](../decisions/DEC-034-organ-layer-from-organ-polygons-only.md)
+   rule 2 (organ layer ignored without an organ polygon) answers part of it.
+3. Image-level area: dropped; the whole crop stays (implemented in [TASK-017](../../backlog/tasks/task-017%20-%20Image-level-matrices-and-evaluatetask-model-loader-DEC-006.md)).
+   Reopen as a new task if the first run shows overhanging hepatoma polygons
+   hurting scores.
+
 ## Open questions
 
 - Review the `flags_df` values (names and meaning, aggregates only) before
