@@ -7,7 +7,7 @@ Computed on 2026-11-05 on `261023_plain` ([DEC-018](../../decisions/DEC-018-plai
 ## Terms
 
 - **Sample**: image hash plus crop box. **Positive**: has a cirrhosis polygon. **Group**: datasource group (DEC-044 rule 2).
-- **Frame skipped in v1**: skipped in the local project "TASK-032 B-mode boxes v1". The skipped list was refreshed from the local Label Studio before the run (66 skipped of 1,371 tasks; the saved list had 8). Later skips are not in this table.
+- **Frame skipped in v1**: skipped in the local project "B-mode boxes v1". The skipped list was refreshed from the local Label Studio before the run (66 skipped of 1,371 tasks; the saved list had 8). Later skips are not in this table.
 
 ## Counts after each step (DEC-044 rules 3-4)
 
