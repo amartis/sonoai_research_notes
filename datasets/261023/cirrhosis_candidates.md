@@ -53,4 +53,8 @@ The candidate crop list for the GPU box exists only as enc1 (`ai-label frames`);
 
 ## Open: minimum shorter side
 
-Not chosen. The user picks it before the sample file is fixed (DEC-044 rule 5). Recorded choice: _pending_.
+Chosen by the user on 2026-11-05: **128 px** shorter side (DEC-044 rule 5). It leaves 16,181 samples (3,047 positives, 13,134 negatives, 59 groups) after step 5.
+
+`derived/cirrhosis_v4_quality_min128_df.pkl` (plain, machine01 only): the eligible samples with shorter side at least 128 px, with `known` and `in_candidates`: 18,946 samples in 61 groups, of which 16,181 are candidates; known good 453, known bad 2,765. The known-bad crops are kept so the Qwen3-VL filter can be scored on them.
+
+The enc1 crop list for the GPU box is not made yet: `ai-label frames --question quality` needs a few-shot examples table from the search part (a prompt-tuning input, TASK-086) and the data passphrase typed by the user.
