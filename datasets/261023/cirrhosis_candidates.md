@@ -39,22 +39,26 @@ Reading: the loss is small up to 224 px (at most 0.8% of samples, 2 positives); 
 ## Tables written inside `261023_plain` (`derived/`, plain, never leave machine01)
 
 - `derived/cirrhosis_v4_candidates_df.pkl`: the 16,251 samples after step 4 (output of the command).
-- `derived/cirrhosis_v4_quality_samples_df.pkl`: the 19,047 eligible samples with a `known` column (good, bad or empty) and `in_candidates` (true for the 16,251). This is the `--samples` table for `sonoai-label ai-label frames --question quality`, so that bad examples are in the list. Rule (task note of TASK-085): bad if a quality or exclusion choice is on the crop or its frame was skipped in v1 (the choice wins when both apply); good if its frame was finished in v1 without a skip and the crop is not bad.
+- `derived/cirrhosis_v4_quality_samples_df.pkl`: the 19,047 eligible samples with a `known` column (good, bad or empty) and `in_candidates` (true for the 16,251 candidates). It is the `--samples` table for `sonoai-label ai-label frames --question quality`, so that bad examples are in the list.
+- `derived/cirrhosis_v4_quality_min128_df.pkl`: the same, for samples with shorter side at least 128 px (see below).
 
-| known | Samples | Groups | Below 128 px | Below 256 px |
+**Known rule** (accepted, task note of TASK-085; "quality only", 2026-11-05): bad if the crop has a choice label with role `quality`, or its frame was skipped in v1; good if its frame was finished in v1 without a skip; the quality choice wins when both apply. Everything else, including crops whose only filter choice has role `exclusion`, is unknown (empty). Note that step 3 above still drops quality and exclusion crops from the candidates.
+
+| known | Samples (eligible) | Groups | Samples (at least 128 px) | Groups |
 |---|---|---|---|---|
-| good | 453 | 54 | 0 | 22 |
-| bad | 2,796 | 39 | 31 | 52 |
-| empty (not reviewed in v1) | 15,798 | - | - | - |
+| good | 453 | 54 | 453 | 54 |
+| bad | 1,442 | 36 | 1,413 | 35 |
+| unknown | 17,152 | - | 17,080 | - |
+| total | 19,047 | 62 | 18,946 | 61 |
 
-Bad = 2,747 by a choice, 49 by a skip only (5 samples have both). Known-good is small because only 802 of 1,371 v1 tasks were finished when this was computed (503 still to go), so the acceptance test of DEC-044 rule 6 has 453 known-good samples, not more. The known column was made with a one-off script, not repo code (see TASK-085 notes).
+Bad splits into 1,388 by a quality choice only, 49 by a skip only and 5 with both (1,393 have a quality choice). Exclusion-only crops (no quality choice, frame not skipped): 1,354, all unknown; 30 of them sit in frames finished in v1 and are not counted as good. Known-good is small because only 802 of 1,371 v1 tasks were finished when this was computed (503 still to go), so the acceptance test of DEC-044 rule 6 has 453 known-good samples. The known column was made with a one-off script, not repo code.
 
 The candidate crop list for the GPU box exists only as enc1 (`ai-label frames`); no plain list leaves machine01 ([DEC-024](../../decisions/DEC-024-plain-never-leaves-machine01-ec2-label-studio-decrypts-in-ram.md)).
 
-## Open: minimum shorter side
+## Chosen minimum shorter side
 
 Chosen by the user on 2026-11-05: **128 px** shorter side (DEC-044 rule 5). It leaves 16,181 samples (3,047 positives, 13,134 negatives, 59 groups) after step 5.
 
-`derived/cirrhosis_v4_quality_min128_df.pkl` (plain, machine01 only): the eligible samples with shorter side at least 128 px, with `known` and `in_candidates`: 18,946 samples in 61 groups, of which 16,181 are candidates; known good 453, known bad 2,765. The known-bad crops are kept so the Qwen3-VL filter can be scored on them.
+The 128 px table is `derived/cirrhosis_v4_quality_min128_df.pkl` (plain, machine01 only): 18,946 samples in 61 groups, of which 16,181 are candidates; known counts in the table above.
 
 The enc1 crop list for the GPU box is not made yet: `ai-label frames --question quality` needs a few-shot examples table from the search part (a prompt-tuning input) and the data passphrase typed by the user.
