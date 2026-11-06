@@ -51,6 +51,11 @@ together: [`docs/workflow.md`](../../../docs/workflow.md) in the code repo.
   quality or exclusion regions still have polygons (59.9-87.7); 23.3% of choice
   pairs (6 projects) have no crop row and are not in the table.
 
+- `261023_plain` cirrhosis v4 sample file and split under [DEC-044](../../decisions/DEC-044-cirrhosis-sample-set-quality-filter-and-split.md) and [DEC-046](../../decisions/DEC-046-cirrhosis-v4-drops-the-qwen3-vl-quality-step.md) ([TASK-087](../../../backlog/tasks/task-087%20-%20Fix-the-cirrhosis-sample-file-and-its-train-val-test-split-dataset-record-with-counts-per-split-DEC-044.md),
+  `derived/cirrhosis_v4_samples_df.pkl`): [cirrhosis_v4_samples.md](cirrhosis_v4_samples.md): 16,181 samples (3,047
+  positive, 18.8%), 59 groups; train 12,135 / val 2,428 / test 1,618 (75/15/10%); no Qwen3-VL step;
+  453 known-good (2.8%).
+
 ## Label definitions
 
 - `label_projects.xlsx`: the labeling-project tag table of this version
