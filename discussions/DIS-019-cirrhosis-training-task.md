@@ -66,6 +66,8 @@ Why now: no liver-disease task has been trained yet (milestone m-1), and the exi
   quality filter, fixed sample file, the three splits.
 - [DEC-045](../decisions/DEC-045-per-sample-confusion-matrices-in-runs.md): per-sample confusion matrices in runs each epoch (amends DEC-006).
 - Board tasks: see the task list in the DECs' consequences (created 2026-11-05).
+- [DEC-046](../decisions/DEC-046-cirrhosis-v4-drops-the-qwen3-vl-quality-step.md) (2026-11-05, later in the day): after two Qwen3-VL tuning runs gave no
+  usable filter, the Qwen3-VL step of DEC-044 is dropped; choice labels and user skips only.
 
 ## Open questions
 

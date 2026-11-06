@@ -5,7 +5,7 @@ status: accepted
 area: [datasets, labeling]
 created: 2026-11-05
 from: [DIS-019]
-related: [DEC-035, DEC-036, DEC-037, DEC-042, DEC-043, DIS-012]
+related: [DEC-035, DEC-036, DEC-037, DEC-042, DEC-043, DEC-046, DIS-012]
 superseded_by:
 ---
 # DEC-044: Cirrhosis sample set, quality filter and split
@@ -36,7 +36,8 @@ exclusion crops is still open ([TASK-062](../../backlog/tasks/task-062%20-%20Dec
    skipped by the user in the local project "[TASK-032](../../backlog/tasks/task-032%20-%20Run-the-B-mode-cropper-on-a-dataset-version-polygon-check-reviewed-set-box-table-DEC-017.md) B-mode boxes v1".
 5. **Size**: drop crops whose shorter side is below a minimum. The data task reports the
    counts at a few candidate minimums; the user picks one before the sample file is fixed.
-6. **Qwen3-VL-8B-Instruct filter** (4-bit, on the GPU box, enc1 in memory, [DEC-035](DEC-035-qwen3-vl-second-annotator-on-gpu-box.md)): the
+6. *(Not used for `lseg_cirrhosis_v4`: dropped by [DEC-046](DEC-046-cirrhosis-v4-drops-the-qwen3-vl-quality-step.md), 2026-11-05.)*
+   **Qwen3-VL-8B-Instruct filter** (4-bit, on the GPU box, enc1 in memory, [DEC-035](DEC-035-qwen3-vl-second-annotator-on-gpu-box.md)): the
    prompt asks whether the crop is a normal-quality liver B-mode scan (not dark, blurred,
    low-resolution, a paper scan, from an unusual device, or covered in marks).
    - Bad examples for the prompt: crops with a `quality` choice and frames the user skipped in
