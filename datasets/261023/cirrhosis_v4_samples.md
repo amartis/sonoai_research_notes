@@ -9,7 +9,7 @@ Made on 2026-11-05 on `261023_plain` ([DEC-018](../../decisions/DEC-018-plain-st
 - Sample file: `derived/cirrhosis_v4_samples_df.pkl` in `261023_plain` (plain, machine01 only), columns: sample number, `taskcrops_df` ids, datasource group, positive, split. An encrypted copy is in the enc1 store at the same path ([DEC-024](../../decisions/DEC-024-plain-never-leaves-machine01-ec2-label-studio-decrypts-in-ram.md)).
 - Table sha256: `854a87c949ab0a64bbad92c985a7938a212ec2ae14901660c04305e0da066f66` (checked on the plain file after the run). A changed table is a new file name (DEC-044 rule 7).
 - Seed 87 (test search and train/val split); minimum shorter side 128 px (chosen by the user, 2026-11-05).
-- **The Qwen3-VL quality step was not used** (DEC-046; DEC-044 rule 6 does not apply). Bad samples are left out only by `quality` or `exclusion` choice labels and by frames skipped in the local project "TASK-032 B-mode boxes v1" (66 skipped of 1,371 tasks at the time: 802 submitted, 66 skipped, 503 still to go). Poor-quality crops with neither a label nor a skip stay in the set.
+- **The Qwen3-VL quality step was not used** (DEC-046; DEC-044 rule 6 does not apply). Bad samples are left out only by `quality` or `exclusion` choice labels and by frames skipped in the local project "[TASK-032](../../../backlog/tasks/task-032%20-%20Run-the-B-mode-cropper-on-a-dataset-version-polygon-check-reviewed-set-box-table-DEC-017.md) B-mode boxes v1" (66 skipped of 1,371 tasks at the time: 802 submitted, 66 skipped, 503 still to go). Poor-quality crops with neither a label nor a skip stay in the set.
 
 ## Counts after each filter step
 
