@@ -13,14 +13,29 @@ Made on 2026-11-09 on `261023_plain` ([DEC-018](../../decisions/DEC-018-plain-st
 
 ## Open points (counts only)
 
-1. **Group 52 with 49 has 0 samples.** Every 52 case and 52U is 0, so the 49-52 pairing could not be assessed. The freeze was accepted with this (user, 2026-11-09).
+1. **Project group 52 (with 49) has 0 samples.** Every 52 case and 52U is 0, so the 49-52 pairing could not be assessed. The freeze was accepted with this (user, 2026-11-09).
 2. **Positive share is 4.6%** (639 of 13,777; 95% CI 4.3-5.0), against 18.8% in the TASK-087 record.
 3. **5,666 samples are in no project group** (final case `none`, of 31,104 samples).
 4. Test holds 0 samples with a 36 case, and 29 of the 31 `7P1` positives; train and val hold the 36 samples.
 
-## Cases (DEC-047), all 31,104 samples before the filters
+## Terms and case codes
 
-"Crop-group pairs" counts a crop once per group it belongs to. "Final" counts samples by their final case.
+A **project group** (7, 14, 36, 52) is the set of labeling projects whose rules judge a crop ([DEC-047](../../decisions/DEC-047-cirrhosis-v4-cases-per-project-group-and-liver-fallback.md) section 1). A **datasource group** is a set of datasources that share an image (the split unit, DEC-044 rule 2). Case code = project group number + outcome:
+
+- **P1** positive, included. **N1** negative, included.
+- **E1** polygon cirrhosis without the matching choice (group 14: not looked at). **E2** choice cirrhosis without a polygon. **E3** nothing to judge. **E4** a skip label. All excluded.
+- **xE5** a precirrhosis label in any project of the sample, excluded. **xC1** conflict between project groups, excluded.
+- **U** the crop has no partner crop (36 needs 35, 52 needs 49), excluded.
+- **none** the sample is in no project group.
+
+## Pairing
+
+- **35-36:** group 36 has 2,206 crop-group pairs (36P1 303 + 36N1 1,309 + 36E1 399 + 36E2 28 + 36E4 167; 36E3 and 36U are 0). 36U = 0, so all 2,206 crops of project 36 pair with a project 35 crop (same image hash and box): 2,206 crops paired, 0 unpaired. The number is of crops in project 36, counted before the filters; it is not a count of 35-36 pairs among all project 35 crops.
+- **49-52:** 0 crops pair, because project group 52 has no crop (52U = 0 and every 52 case is 0).
+
+## Case counts
+
+Table 1. Case counts of the 31,104 samples before the filters. "Crop-group pairs" counts a crop once per project group it belongs to; "Final" counts samples by their final case (the case of the first including project group in the order 7, 14, 36, 52, DEC-047 section 3). Zero counts are shown.
 
 | Case | Crop-group pairs | Final |
 |---|---|---|
@@ -51,13 +66,80 @@ Made on 2026-11-09 on `261023_plain` ([DEC-018](../../decisions/DEC-018-plain-st
 | 52U | 0 | 0 |
 | xE5 | 205 | 205 |
 | xC1 | 0 | 0 |
-| none (in no group) | - | 5,666 |
+| none (in no project group) | - | 5,666 |
 
-Pairing: 36U = 0, so every crop of project 36 pairs with project 35. Project 52 has no crop, so 52U = 0 and nothing pairs with 49. Case counts after each later filter step were not produced by the freeze; the table below gives the cases of the samples that remain.
+Table 2. Final case counts (samples) after each filter step. Step 1 is Table 1; steps 2-5 were computed in memory with the freeze code (no file written) and agree with the file: step 5 equals the "all" column of Table 5b. Steps: 1 all samples; 2 eligible (DEC-047 cases); 3 no `quality` or `exclusion` choice; 4 frame not skipped in v1; 5 shorter side at least 128 px.
+
+| Case | Step 1 | Step 2 | Step 3 | Step 4 | Step 5 |
+|---|---|---|---|---|---|
+| 7P1 | 35 | 35 | 31 | 31 | 31 |
+| 7N1 | 3,379 | 3,379 | 3,205 | 3,197 | 3,128 |
+| 7E1 | 0 | 0 | 0 | 0 | 0 |
+| 7E2 | 0 | 0 | 0 | 0 | 0 |
+| 7E3 | 0 | 0 | 0 | 0 | 0 |
+| 7E4 | 2,447 | 0 | 0 | 0 | 0 |
+| 14P1 | 338 | 338 | 335 | 335 | 335 |
+| 14N1 | 9,348 | 9,348 | 8,842 | 8,836 | 8,835 |
+| 14E1 | 1,878 | 0 | 0 | 0 | 0 |
+| 14E3 | 4,585 | 0 | 0 | 0 | 0 |
+| 14E4 | 1,017 | 0 | 0 | 0 | 0 |
+| 36P1 | 303 | 303 | 273 | 273 | 273 |
+| 36N1 | 1,309 | 1,309 | 1,175 | 1,175 | 1,175 |
+| 36E1 | 399 | 0 | 0 | 0 | 0 |
+| 36E2 | 28 | 0 | 0 | 0 | 0 |
+| 36E3 | 0 | 0 | 0 | 0 | 0 |
+| 36E4 | 167 | 0 | 0 | 0 | 0 |
+| 36U | 0 | 0 | 0 | 0 | 0 |
+| 52P1 | 0 | 0 | 0 | 0 | 0 |
+| 52N1 | 0 | 0 | 0 | 0 | 0 |
+| 52E1 | 0 | 0 | 0 | 0 | 0 |
+| 52E2 | 0 | 0 | 0 | 0 | 0 |
+| 52E3 | 0 | 0 | 0 | 0 | 0 |
+| 52E4 | 0 | 0 | 0 | 0 | 0 |
+| 52U | 0 | 0 | 0 | 0 | 0 |
+| xE5 | 205 | 0 | 0 | 0 | 0 |
+| xC1 | 0 | 0 | 0 | 0 | 0 |
+| none (in no project group) | 5,666 | 0 | 0 | 0 | 0 |
+
+Table 3. Crop-group pairs per case after each filter step (same steps as Table 2). A crop counts once per project group it belongs to; the 94 + 2 crops that group 14 shares with group 7 are counted here but get a group 7 final case in Table 2.
+
+| Case | Step 1 | Step 2 | Step 3 | Step 4 | Step 5 |
+|---|---|---|---|---|---|
+| 7P1 | 35 | 35 | 31 | 31 | 31 |
+| 7N1 | 3,379 | 3,379 | 3,205 | 3,197 | 3,128 |
+| 7E1 | 0 | 0 | 0 | 0 | 0 |
+| 7E2 | 0 | 0 | 0 | 0 | 0 |
+| 7E3 | 0 | 0 | 0 | 0 | 0 |
+| 7E4 | 2,447 | 0 | 0 | 0 | 0 |
+| 14P1 | 338 | 338 | 335 | 335 | 335 |
+| 14N1 | 9,442 | 9,442 | 8,936 | 8,930 | 8,929 |
+| 14E1 | 1,878 | 0 | 0 | 0 | 0 |
+| 14E3 | 4,587 | 2 | 2 | 2 | 2 |
+| 14E4 | 1,017 | 0 | 0 | 0 | 0 |
+| 36P1 | 303 | 303 | 273 | 273 | 273 |
+| 36N1 | 1,309 | 1,309 | 1,175 | 1,175 | 1,175 |
+| 36E1 | 399 | 0 | 0 | 0 | 0 |
+| 36E2 | 28 | 0 | 0 | 0 | 0 |
+| 36E3 | 0 | 0 | 0 | 0 | 0 |
+| 36E4 | 167 | 0 | 0 | 0 | 0 |
+| 36U | 0 | 0 | 0 | 0 | 0 |
+| 52P1 | 0 | 0 | 0 | 0 | 0 |
+| 52N1 | 0 | 0 | 0 | 0 | 0 |
+| 52E1 | 0 | 0 | 0 | 0 | 0 |
+| 52E2 | 0 | 0 | 0 | 0 | 0 |
+| 52E3 | 0 | 0 | 0 | 0 | 0 |
+| 52E4 | 0 | 0 | 0 | 0 | 0 |
+| 52U | 0 | 0 | 0 | 0 | 0 |
+| xE5 | 205 | 0 | 0 | 0 | 0 |
+| xC1 | 0 | 0 | 0 | 0 | 0 |
+
+Group 14 counts in Table 3 (step 5: 14N1 8,929, 14P1 335, 14E3 2) differ from Table 2 and Table 5b (14N1 8,835). The final case is the case of the first including project group ([DEC-047](../../decisions/DEC-047-cirrhosis-v4-cases-per-project-group-and-liver-fallback.md) section 3). 94 samples are negative in both group 7 and group 14, so their final case is `7N1`; 2 more have `14E3` in group 14 and are included by group 7 (`7N1`). This is the same gap as 9,442 pairs against 9,348 final in Table 1 (94). The 2 `14E3` pairs are in Table 3 only (Table 2 has 0).
 
 ## Counts after each filter step
 
-| Step | Samples | Positives | Negatives | Groups |
+Table 4. Samples after each filter step ([DEC-044](../../decisions/DEC-044-cirrhosis-sample-set-quality-filter-and-split.md) rules 3-5).
+
+| Step | Samples | Positives | Negatives | Datasource groups |
 |---|---|---|---|---|
 | 1 All samples | 31,104 | - | - | 70 |
 | 2 Eligible (DEC-047 cases, rule 3) | 14,712 | 676 | 14,036 | 55 |
@@ -67,16 +149,18 @@ Pairing: 36U = 0, so every crop of project 36 pairs with project 35. Project 52 
 
 ## Counts per split
 
-| Split | Samples | Share of samples | Positives | Negatives | Positive share (95% CI) | Datasource groups |
+Table 5a. Samples per split (n = 13,777). Positive share with 95% Wilson CI, each over the split's own n.
+
+| Split | Samples | Share of samples | Positives | Negatives | Positive share (95% CI), n | Datasource groups |
 |---|---|---|---|---|---|---|
-| train | 10,331 | 75.0% | 478 | 9,853 | 4.6% (4.2-5.0) | 41 |
-| val | 2,068 | 15.0% | 97 | 1,971 | 4.7% (3.9-5.7) | 41 |
-| test | 1,378 | 10.0% | 64 | 1,314 | 4.6% (3.7-5.9) | 11 |
-| all | 13,777 | 100% | 639 | 13,138 | 4.6% (4.3-5.0) | 53 |
+| train | 10,331 | 75.0% | 478 | 9,853 | 4.6% (4.2-5.0), n = 10,331 | 41 |
+| val | 2,068 | 15.0% | 97 | 1,971 | 4.7% (3.9-5.7), n = 2,068 | 41 |
+| test | 1,378 | 10.0% | 64 | 1,314 | 4.6% (3.7-5.9), n = 1,378 | 11 |
+| all | 13,777 | 100% | 639 | 13,138 | 4.6% (4.3-5.0), n = 13,777 | 53 |
 
-Group counts do not add up: train and val share datasources (random split, DEC-044 rule 10); the 11 test groups are in no other split (rule 9). Test positive share equals the whole set's (limit 2 points). All sizes are inside the DEC-044 ranges (train 70-85%, val 15-23%, test 8-13%), so rule 11 did not trigger.
+Datasource group counts do not add up: train and val share datasources (random split, DEC-044 rule 10); the 11 test groups are in no other split (rule 9). Test positive share (4.6%, n = 1,378) equals the whole set's (4.6%, n = 13,777); limit 2 points. All sizes are inside the DEC-044 ranges (train 70-85%, val 15-23%, test 8-13%), so rule 11 did not trigger. The 95% CIs are Wilson intervals; samples of one datasource are not independent, so they are too narrow.
 
-## Final case of the samples in the file, per split
+Table 5b. Final case of the samples in the file, per split (all other codes, including 52 and xC1, are 0 in every split).
 
 | Final case | train | val | test | all |
 |---|---|---|---|---|
@@ -86,12 +170,9 @@ Group counts do not add up: train and val share datasources (random split, DEC-0
 | 14N1 | 6,764 | 1,350 | 721 | 8,835 |
 | 36P1 | 224 | 49 | 0 | 273 |
 | 36N1 | 977 | 198 | 0 | 1,175 |
-| all other codes (including 52 and xC1) | 0 | 0 | 0 | 0 |
 | all | 10,331 | 2,068 | 1,378 | 13,777 |
 
-Group cases in the file (crop-group pairs): group 7: 3,128 7N1 and 31 7P1; group 14: 8,929 14N1, 335 14P1, 2 14E3 (the sample is included by another group); group 36: 1,175 36N1 and 273 36P1; group 52: none.
-
-## Liver area (DEC-047 section 5)
+Table 5c. Liver area per split ([DEC-047](../../decisions/DEC-047-cirrhosis-v4-cases-per-project-group-and-liver-fallback.md) section 5): own `liver` polygon, fallback from other polygons of the image, or no liver area.
 
 | Split | Own `liver` polygon | Fallback from the image | No liver area |
 |---|---|---|---|
