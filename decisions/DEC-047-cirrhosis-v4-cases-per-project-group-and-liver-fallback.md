@@ -83,6 +83,14 @@ narrowed it to the two fat_regions choices (DIS-020 option 2A).
 - Else (one says positive and another negative, or one includes and another gave `E1` or
   `E2`), it is excluded as case **xC1**.
 
+Two rules the user added on 2026-11-09 ([TASK-096](../../backlog/tasks/task-096%20-%20Cirrhosis-v4-sample-cases-per-project-group-7-14-3635-5249-with-case-codes-precirrhosis-excluded-and-the-liver-area-fallback-DEC-047.md) questions):
+
+- **Q3.** If a group ignored as `36U` or `52U` has a `hepatic_cirrhosis` polygon (in
+  project 36 or 52), and the remaining groups include the sample as negative, the sample is
+  excluded as case **xC1** (conflict). An ignored group is otherwise not used.
+- **E1/E2.** If the remaining groups gave only `E1` or `E2`, the final case is the first
+  of them in group order 7, 14, 36, 52. The sample is excluded.
+
 The sample file keeps every group's case; the counts report the combinations.
 
 ### 4. After the cases
