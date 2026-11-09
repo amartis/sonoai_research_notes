@@ -98,6 +98,9 @@ Three tie rules the user accepted on 2026-11-09 (TASK-096), all with group order
 - If every group gave `E3` or `U`, the final case is the first of them.
 - If several remaining groups gave `E4` or `xE5`, the final case is the first of them.
 
+An included sample's final case is the code of its first including group, in the same
+order (e.g. groups 14 and 36 both negative give `14N1`); user decision 2026-11-09.
+
 The sample file keeps every group's case; the counts report the combinations.
 
 ### 4. After the cases
