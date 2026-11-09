@@ -51,8 +51,8 @@ together: [`docs/workflow.md`](../../../docs/workflow.md) in the code repo.
   quality or exclusion regions still have polygons (59.9-87.7); 23.3% of choice
   pairs (6 projects) have no crop row and are not in the table.
 
-- `261023_plain` cirrhosis v4 sample file under the DEC-047 cases ([TASK-097](../../../backlog/tasks/task-097%20-%20Re-freeze-the-cirrhosis-v4-sample-file-under-the-DEC-047-cases-dataset-record-with-one-count-per-case-code-per-group-and-per-split.md),
-  `derived/cirrhosis_v4_dec047_samples_df.pkl`, replaces the TASK-087 file): [cirrhosis_v4_samples.md](cirrhosis_v4_samples.md): 13,777 samples (639
+- `261023_plain` cirrhosis v4 sample file under the [DEC-047](../../decisions/DEC-047-cirrhosis-v4-cases-per-project-group-and-liver-fallback.md) cases ([TASK-097](../../../backlog/tasks/task-097%20-%20Re-freeze-the-cirrhosis-v4-sample-file-under-the-DEC-047-cases-dataset-record-with-one-count-per-case-code-per-group-and-per-split.md),
+  `derived/cirrhosis_v4_dec047_samples_df.pkl`, replaces the [TASK-087](../../../backlog/tasks/task-087%20-%20Fix-the-cirrhosis-sample-file-and-its-train-val-test-split-dataset-record-with-counts-per-split-DEC-044.md) file): [cirrhosis_v4_samples.md](cirrhosis_v4_samples.md): 13,777 samples (639
   positive, 4.6%), 53 groups; train 10,331 / val 2,068 / test 1,378 (75/15/10%); group 52+49 empty; no Qwen3-VL step.
 
 ## Label definitions
