@@ -91,6 +91,13 @@ Two rules the user added on 2026-11-09 ([TASK-096](../../backlog/tasks/task-096%
 - **E1/E2.** If the remaining groups gave only `E1` or `E2`, the final case is the first
   of them in group order 7, 14, 36, 52. The sample is excluded.
 
+Three tie rules the user accepted on 2026-11-09 (TASK-096), all with group order 7, 14,
+36, 52; the sample is excluded in each:
+
+- A sample in no group has the final case `none`.
+- If every group gave `E3` or `U`, the final case is the first of them.
+- If several remaining groups gave `E4` or `xE5`, the final case is the first of them.
+
 The sample file keeps every group's case; the counts report the combinations.
 
 ### 4. After the cases
