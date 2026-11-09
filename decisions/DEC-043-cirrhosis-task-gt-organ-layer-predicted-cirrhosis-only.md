@@ -5,10 +5,13 @@ status: accepted
 area: [training, datasets]
 created: 2026-11-05
 from: [DIS-019]
-related: [DEC-004, DEC-006, DEC-033, DEC-034, DEC-041, DEC-044, DEC-045]
+related: [DEC-004, DEC-006, DEC-033, DEC-034, DEC-041, DEC-044, DEC-045, DEC-047]
 superseded_by:
 ---
 # DEC-043: Cirrhosis task `lseg_cirrhosis_v4`
+
+> Changed on 2026-11-09 by [DEC-047](DEC-047-cirrhosis-v4-cases-per-project-group-and-liver-fallback.md): rule 5 (eligibility) and the liver part of rules 2-3
+> are replaced by per-project-group cases and a liver-area fallback. The other rules stand.
 
 ## Context
 
