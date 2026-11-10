@@ -191,16 +191,18 @@ Made on 2026-11-09 on `261023_plain` with `sonoai-data sample-set all 261023_pla
 - Columns: the sample-file columns (sample number, `taskcrops_df` ids, datasource group, positive (empty when not eligible), final case, cases per project group 7, 14, 36, 52, liver source), plus `short_side` (px), `excluded_by` (first step that dropped the sample, or `kept`) and `split` (the frozen file's; empty when not kept).
 - The kept rows equal the frozen file exactly (checked by the command).
 
-Table 2. Samples by the first step that dropped them (n = 31,104). Equal to the step counts in the TASK-097 record.
+Table 6. Samples of the all-samples table by the step that first dropped them (n = 31,104). Each sample is in exactly one row, so the rows add up to 31,104. The running totals equal the step totals of Table 4. The 16,392 not-eligible samples have no positive value (empty), because positive is defined only for eligible samples.
 
-| excluded_by | Samples | Step |
+| Step that first dropped the sample (value of `excluded_by`) | Samples | Step and running total after it |
 |---|---|---|
-| not eligible | 16,392 | 1 to 2 (31,104 to 14,712) |
-| quality or exclusion choice | 851 | 3 (to 13,861) |
-| frame skipped | 14 | 4 (to 13,847) |
-| shorter side under the minimum (128 px) | 70 | 5 (to 13,777) |
-| Qwen3-VL verdict | 0 | not run (DEC-046) |
-| kept | 13,777 | train 10,331, val 2,068, test 1,378 |
+| not eligible | 16,392 | Steps 1 to 2: 31,104 to 14,712 |
+| quality or exclusion choice | 851 | Step 3: 13,861 |
+| frame skipped | 14 | Step 4: 13,847 |
+| shorter side under the minimum (128 px) | 70 | Step 5: 13,777 |
+| Qwen3-VL quality verdict (not run, DEC-046) | 0 | Step 5: 13,777 |
+| kept | 13,777 | In the sample file (split: train 10,331, val 2,068, test 1,378) |
+
+---
 
 ## Earlier file (TASK-087, superseded; do not use)
 
