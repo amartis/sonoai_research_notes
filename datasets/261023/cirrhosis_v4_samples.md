@@ -183,6 +183,25 @@ Table 5c. Liver area per split ([DEC-047](../../decisions/DEC-047-cirrhosis-v4-c
 
 ---
 
+## All-samples table (TASK-100)
+
+Made on 2026-11-09 on `261023_plain` with `sonoai-data sample-set all 261023_plain --frozen derived/cirrhosis_v4_dec047_samples_df.pkl` ([TASK-100](../../../backlog/tasks/task-100%20-%20Write-the-all-samples-cirrhosis-v4-table-for-261023_plain-with-exclusion-step-and-add-its-counts-to-the-dataset-record.md); code from [TASK-099](../../../backlog/tasks/task-099%20-%20sample-set-all-write-a-table-of-every-cirrhosis-v4-sample-with-the-filter-step-that-excluded-it-beside-the-frozen-sample-file.md)). Plain only, machine01 only, no enc1 copy. Aggregates only.
+
+- Table: `derived/cirrhosis_v4_dec047_samples_all_df.pkl`, sha256 `524ff91c7ee9c9d1cfa214e32298e445ad23d4ae25a87538942a93e9bcd9502c`. One row per sample of step 1 (31,104), kept or not. The frozen sample file is unchanged (sha256 `59e174bf...` before and after).
+- Columns: the sample-file columns (sample number, `taskcrops_df` ids, datasource group, positive (empty when not eligible), final case, cases per project group 7, 14, 36, 52, liver source), plus `short_side` (px), `excluded_by` (first step that dropped the sample, or `kept`) and `split` (the frozen file's; empty when not kept).
+- The kept rows equal the frozen file exactly (checked by the command).
+
+Table 2. Samples by the first step that dropped them (n = 31,104). Equal to the step counts in the TASK-097 record.
+
+| excluded_by | Samples | Step |
+|---|---|---|
+| not eligible | 16,392 | 1 to 2 (31,104 to 14,712) |
+| quality or exclusion choice | 851 | 3 (to 13,861) |
+| frame skipped | 14 | 4 (to 13,847) |
+| shorter side under the minimum (128 px) | 70 | 5 (to 13,777) |
+| Qwen3-VL verdict | 0 | not run (DEC-046) |
+| kept | 13,777 | train 10,331, val 2,068, test 1,378 |
+
 ## Earlier file (TASK-087, superseded; do not use)
 
 ### Result (TASK-087 file)
