@@ -20,7 +20,7 @@ TransUNet runs at 512 px) were not in it. Why, and how do we keep milestones com
   a title and a free-text description. A task belongs to a milestone only when its own
   `milestone:` field is set (`backlog task create -m` / `task edit -m`).
 - No skill or doc told sessions or agents to set `-m`. Of the tasks created from
-  [TASK-089](../../backlog/tasks/task-089%20-%20Loss-and-evaluate-pass-only-the-predicted-GT-layers-to-the-loss-for-tasks-with-predicted_layers-DEC-043.md) onward, about half had no milestone; agents' Triage tasks almost never had one.
+  [TASK-089](../../backlog/tasks/task-089%20-%20Loss-and-evaluate-pass-only-the-predicted-GT-layers-to-the-loss-for-tasks-with-predicted_layers-DEC-043.md) onward (24 tasks to TASK-112), 16 had no milestone.
 - The m-1 description was out of date: it named only the training stack (losses,
   optimisation, loop, evaluation, tracking), not tasks, sample sets, GPU-box runs or
   EXP records, so it could not guide a choice either.
