@@ -11,7 +11,7 @@ labeling task, given labeling). Tag lists:
 **Status: draft, exploratory.** Every rule here is a candidate. How far each rule is
 respected in the labeled data is the next step and is not measured here; rules that are
 not respected will be dropped. Aggregates only; no images, file names or identifiers.
-Not reviewed.
+Not reviewed. The user answered the open points on 2026-11-12 (see Decisions).
 
 ## Summary
 
@@ -35,8 +35,24 @@ Not reviewed.
    on 6 tags, 8 comparisons), so its tags get rules inside the task only. P3 was never labeled.
 5. **Cross-project rules exist only inside a family**, so the rules table stays short:
    P1, P29, P30, P31 and P32 have rules inside the task only.
-6. **Three measure codes are proposed here** (analyst): A8 exclusive options, A9 implied tag,
-   B4 repeat labeling inside one project.
+6. **Three measure codes were added** (user, 2026-11-12; QA report Amendment 2): A8 exclusive
+   options, A9 implied tag, B4 repeat labeling inside one project.
+
+## Decisions (user, 2026-11-12)
+
+- **R04**: `thyroiditis_abscent` means no thyroid disease in the task, so it reads all three
+  thyroid polygon tags as negative.
+- **R10**: `heaptic_steatosis_absent` means no disease in tag group `fat_regions`. Its target
+  is now the 10 disease tags of the group; `hepatic_steatosis__0` (no steatosis) and
+  `__ignore` (not graded) are not diseases and do not conflict with it (analyst's reading).
+- **R16**: `hepatic_steatosis_checked` means the whole tag group `fat_regions` (12 tags) was
+  visited.
+- **R19**: a skip reason (A3, category C1 skip-sample) leaves the sample out of every
+  project. R19 now covers every skip tag of Table 5; R18 stays as the test inside the task.
+- **R64**: repeat labelings of one sample in one project are expected to be the same: the
+  same choice tags and similar polygon areas.
+- **Codes**: A8, A9 and B4 are QA measures now (QA report Amendment 2); "proposed" is
+  removed from them.
 
 ## Terms
 
@@ -46,7 +62,7 @@ Not reviewed.
 - **Subject**: the tag whose given labeling triggers the rule (labeling project, tag group,
   tag name), or a state of the labeling task (for example "no given labeling").
 - **Measure code**: the QA measure the rule comes from: A1-A7, B1-B3 of the QA report, or
-  a code proposed here (A8, A9, B4; marked "proposed"). The category (C1-C5) follows in
+  A8, A9, B4 (added in the QA report's Amendment 2, 2026-11-12). The category (C1-C5) follows in
   brackets.
 - **Target**: what the rule changes: a tag, a tag group, the labeling task (all its tags),
   or the sample (the labeling tasks of other labeling projects on the same sample).
@@ -75,8 +91,8 @@ The configs above were read for the tags. Nothing was written apart from this no
    they act on, from the tag groups, the role map and the label guide
    ([label-guide.md](../../../docs/label-guide.md) section 3, Q1-Q14).
 3. Added links between tags that the QA report did not name but that the tag lists imply
-   (options that exclude each other, one tag that implies another). These carry new
-   codes, marked "proposed (analyst)".
+   (options that exclude each other, one tag that implies another). These carry the codes A8
+   and A9 (QA report Amendment 2).
 4. **Project relationships**: placed each labeling task with a crop row on its sample and
    image, and counted for each pair of projects the shared samples, the shared visited
    samples and the shared images.
@@ -168,15 +184,15 @@ in the same task.
 | R01 | P15, P26 `gallbladder_polyp_absent`; P19 `gallbladder_stone_absent`; P20 `renal_calculus_absent`; P21 `nephritis_absent`; P22 `hydronephrosis_absent`; P23 `nephrocystosis_absent`; P24 `renal_carcinoma_absent`; P27 `cholecystitis_absent`; P28, P32 `gallbladder_tumor_absent` | A1 (C4) | the project's one polygon tag of the same finding, e.g. P20 `renal_calculus` (same task) | one finding per project (B1) |
 | R02 | P29 `breast_disease_no` | A1 (C4) | polygon tags `breast_tumor`, `breast_abscess` (same task) | |
 | R03 | P30 `lung_absent` | A1 (C4) | polygon tags `lung_disease_1`, `lung_disease_2` (same task) | both targets are ignored by recipes (label-guide Q8) |
-| R04 | P31 `thyroiditis_abscent` | A1 (C4) | polygon tags `thyroid_tumor`, `thyroid_cyst`, `thyroiditis` (same task) | open: the name says thyroiditis only; the role map reads all three |
+| R04 | P31 `thyroiditis_abscent` | A1 (C4) | polygon tags `thyroid_tumor`, `thyroid_cyst`, `thyroiditis` (same task) | means no thyroid disease in the task (user, 2026-11-12) |
 | R05 | P37 `kidney_nodisease`, P39 `bladder_nodisease`, P42 `prostate_nodisease`, P43 `disk_nodisease`, P45 `thyroid_nodisease`, P50 `no_hepatic_stone` (group `checking`) | A1 (C4) | every polygon tag of group `diseases` of the same project (same task) | |
 | R06 | P46 `uterus_nodisease` | A1 (C4) | group `diseases` without `pregnancy` and `ovarian_follicle` (same task) | these two are not diseases (role map) |
 | R07 | P7 `notfound` (group `tumor_check`) | A1 (C4) | tag group `tumor_regions`, 7 polygon tags (same task) | |
 | R08 | P14 `anatomy_absent` | A1 (C4) | tag group `anatomy_liver`, 17 polygon tags (same task) | |
 | R09 | P14 `signs_absent` | A1 (C4) | tag group `liver_signs`, 16 polygon tags (same task) | |
-| R10 | P14 `heaptic_steatosis_absent` | A1 (C4) | steatosis tags of group `fat_regions`: `hepatic_steatosis__0`-`__3`, `__ignore` (same task) | open: whether it also covers the 7 disease tags of the same group |
+| R10 | P14 `heaptic_steatosis_absent` | A1 (C4) | the 10 disease tags of group `fat_regions`: `hepatic_steatosis__1`-`__3`, `hepatoma`, `hemangioma`, `hepatic_cyst`, `hepatic_cirrhosis`, `gastric_tumor`, `gallbladder_stone`, `hepatitis` (same task) | means no disease in the group (user, 2026-11-12); `__0` and `__ignore` are not diseases (analyst). The role map lists other targets |
 | R11 | P49 `spine_nodisease`, `thyroid_nodisease`, `uterus_nodisease`, `prostate_nodisease`, `bladder_nodisease`, `kidney_nodisease`, `bursa_nodisease` (each in its group `check_disease__<Organ>`) | A1 (C4) | the disease choice tags of the same tag group (same task); uterus as R06 | choice against choice, not polygon |
-| R12 | P47, P52 `bursa_nodisease` (a polygon: outline of a normal bursa) | A1, polygon form (proposed, analyst) | polygon tag `bursitis` (same task) | the only "absent" answer that is a polygon |
+| R12 | P47, P52 `bursa_nodisease` (a polygon: outline of a normal bursa) | A1, polygon form (added, analyst) | polygon tag `bursitis` (same task) | the only "absent" answer that is a polygon |
 
 ### 2.2 "Checked" mark (A2)
 
@@ -190,8 +206,8 @@ a given target tag also carries the mark (the mark was set every time).
 | R13 | P36-39, P41-47, P50 `checked` (group `checking`) | A2 (C3) | every polygon tag of group `diseases` of the same project (same task) | P36, P38, P41, P44, P47 have no "absent" answer: the mark is their only closure |
 | R14 | P9 `checked` (group `discard_reason`) | A2 (C3) | tag group `anatomy_liver`, 16 sign polygon tags (same task) | |
 | R15 | P7 `checked` (group `tumor_check`) | A2 (C3) | tag group `tumor_regions` (same task) | in P7 it also means "found and drawn": R24 |
-| R16 | P14 `anatomy_checked`, `signs_checked`, `hepatic_steatosis_checked`, `signal_regions_checked` | A2 (C3) | each mark's own tag group: `anatomy_liver`, `liver_signs`, `fat_regions`, `signal_regions` (same labeling group) | the visit is per labeling group, not per task |
-| R17 | P14 `imagequality_checked` (group `image_quality`) | A2 (C3) (proposed, analyst; role `other` in the map) | the skip tags of group `image_quality` (same task): none given = quality accepted | expected also: never given with a skip tag of the group |
+| R16 | P14 `anatomy_checked`, `signs_checked`, `hepatic_steatosis_checked`, `signal_regions_checked` | A2 (C3) | each mark's own tag group: `anatomy_liver`, `liver_signs`, `fat_regions`, `signal_regions` (same labeling group) | the visit is per labeling group, not per task; `hepatic_steatosis_checked` covers all 12 tags of `fat_regions`, disease tags included (user, 2026-11-12) |
+| R17 | P14 `imagequality_checked` (group `image_quality`) | A2 (C3) (added, analyst; role `other` in the map) | the skip tags of group `image_quality` (same task): none given = quality accepted | expected also: never given with a skip tag of the group |
 
 ### 2.3 Skip reason (A3) and "cannot decide" (A4)
 
@@ -202,34 +218,33 @@ listed in Table 5.
 | Rule | Subject (labeling project: tag) | Measure code | Target (scope) | Reading | Expected in the data |
 |---|---|---|---|---|---|
 | R18 | every skip tag of Table 5 (roles `quality` and `exclusion`, with `skip_anatomyunclear`) | A3 (C1) | the labeling task: all its other tags (same task) | left out: the task gives no label; its tags are missing, not negative | no other given labeling in the task, except other skip tags and text notes |
-| R19 | the skip tags that describe the image (marked * in Table 5): role `quality`, `skip_notultrasound`, `skip_anatomyunclear` | A3 (C1) | the sample: every labeling task of the other projects on the same sample (Table 1 shows which projects share samples; for P4, P9, P11 through their task-order link) | left out of every project's labels ("leaves the sample out as a whole") | the other projects' tasks on the same sample also carry a skip tag, or have no given labeling |
+| R19 | every skip tag of Table 5 | A3 (C1) | the sample: every labeling task of the other projects on the same sample (Table 1 shows which projects share samples; for P4, P9, P11 through their task-order link) | left out of every project's labels (user, 2026-11-12) | the other projects' tasks on the same sample also carry a skip tag, or have no given labeling |
 | R20 | P7 `cannotdiag` (group `tumor_check`) | A4 (C2) | tag group `tumor_regions` (same task) | missing, not negative; the rest of the task stays | no `tumor_regions` polygon in the task |
 | R21 | P7, P14 polygon `hepatic_steatosis__ignore` (group `fat_regions`) | A4 (C2) | the grade polygon tags `hepatic_steatosis__0`-`__3` inside its outline (same task, pixel level) | the outlined area has no grade (not grade 0) | it does not overlap a grade polygon of the task (label-guide Q1: drawn beside graded areas) |
 
-R19 leaves out the exclusion skips that name the project's own question (`skip_no_organ_found`,
-`skip_notliver`, `skip_smallliver`, `skip_notabdomen`, `skip_otherdisease`,
-`skip_othercase`, `skip_toofat`, `skip_liver_c`): "the kidney is not in view" does not make
-the sample useless for the liver. Those stay at task scope (R18). This split is the
-analyst's, not the user's. Where the task-order link is used (P4, P9, P11), R19 is not an
-independent test: the link itself was found with skip tags.
+R19 is the user's reading (2026-11-12): a skip reason leaves the sample out of every
+project, whatever the reason. R18 stays as the test inside the task: after a skip, the
+labeler is expected to give nothing else. Where the task-order link is used (P4, P9, P11),
+R19 is not an independent test: the link itself was found with skip tags.
 
 Table 5. Skip tags (subjects of R18 and R19) per labeling project of 261023, with their
-role in the map. Q = role `quality`, E = role `exclusion`; * = in R19 (describes the image).
+role in the map. Q = role `quality`, E = role `exclusion`. Every tag listed is a subject of
+both rules.
 
 | Labeling project | Skip tags |
 |---|---|
-| P1 | `skip_toofat` E, `skip_lowdim` Q*, `skip_cropped` Q*, `skip_liver_c` E, `skip_otherdisease` E |
-| P2 | `skip_notultrasound` E*, `skip_lowdim` Q*, `skip_anatomyunclear` E* |
-| P3, P4 | `skip_notultrasound` E*, `skip_lowdim` Q*, `skip_coarse` Q* |
-| P7 | `skip_lowdim` Q*, `skip_notliver` E, `skip_smallliver` E, `skip_otherdisease` E |
-| P9 | `skip_coarse` Q*, `skip_blurred` Q*, `skip_darkened` Q*, `skip_smallliver` E, `skip_brightened` Q*, `skip_cropped` Q*, `skip_lowdim` Q*, `skip_notliver` E, `skip_anatomyunclear` E* |
-| P11 | `skip_lowdim` Q*, `skip_notliver` E, `skip_anatomyunclear` E* |
-| P14 | `skip_notultrasound` E*, `skip_coarse` Q*, `skip_paperscan` Q*, `skip_olddevice` Q*, `skip_darkened` Q*, `skip_notabdomen` E, `skip_smallliver` E, `skip_brightened` Q*, `skip_cropped` Q*, `skip_blurred` Q*, `skip_toomanyannotations` Q* (`skip_untouched`: R42) |
-| P15, P20-24, P26-32 | `skip_badimagequality` Q* |
-| P33 | `skip_anatomyunclear` E* |
-| P35 | `skip_badimagequality` Q*, `skip_othercase` E |
-| P36-39, P41-47, P50 | `skip_no_organ_found` E, `skip_badimagequality` Q* |
-| P49 | `skip_badimagequality` Q*, `skip_notultrasound` E*, `skip_othercase` E |
+| P1 | `skip_toofat` E, `skip_lowdim` Q, `skip_cropped` Q, `skip_liver_c` E, `skip_otherdisease` E |
+| P2 | `skip_notultrasound` E, `skip_lowdim` Q, `skip_anatomyunclear` E |
+| P3, P4 | `skip_notultrasound` E, `skip_lowdim` Q, `skip_coarse` Q |
+| P7 | `skip_lowdim` Q, `skip_notliver` E, `skip_smallliver` E, `skip_otherdisease` E |
+| P9 | `skip_coarse` Q, `skip_blurred` Q, `skip_darkened` Q, `skip_smallliver` E, `skip_brightened` Q, `skip_cropped` Q, `skip_lowdim` Q, `skip_notliver` E, `skip_anatomyunclear` E |
+| P11 | `skip_lowdim` Q, `skip_notliver` E, `skip_anatomyunclear` E |
+| P14 | `skip_notultrasound` E, `skip_coarse` Q, `skip_paperscan` Q, `skip_olddevice` Q, `skip_darkened` Q, `skip_notabdomen` E, `skip_smallliver` E, `skip_brightened` Q, `skip_cropped` Q, `skip_blurred` Q, `skip_toomanyannotations` Q (`skip_untouched`: R42) |
+| P15, P20-24, P26-32 | `skip_badimagequality` Q |
+| P33 | `skip_anatomyunclear` E |
+| P35 | `skip_badimagequality` Q, `skip_othercase` E |
+| P36-39, P41-47, P50 | `skip_no_organ_found` E, `skip_badimagequality` Q |
+| P49 | `skip_badimagequality` Q, `skip_notultrasound` E, `skip_othercase` E |
 | P19, P52 | none |
 
 ### 2.4 Same fact entered twice (A5)
@@ -246,14 +261,14 @@ disagree, the fact is a conflict.
 | R25 | P11 `hepatorenal_contrast_liverbrighter` (choice) | A5 (C4) (added, analyst) | polygon tag `sign_hepatorenal_wall_highecho` (same task) | both or neither (role-map note) |
 | R26 | P14 polygon `liver_ascites` (group `anatomy_liver`) | A5 (C4) (added, analyst) | polygon tags `sign_liver_ascites`, `sign_liquid_near_liver` (group `liver_signs`, same task) | drawn together; one meaning (label-guide Q7) |
 
-### 2.5 Options that exclude each other (A8, proposed) and implied tags (A9, proposed)
+### 2.5 Options that exclude each other (A8) and implied tags (A9)
 
-Two kinds of link are not QA measures of the QA report but are built into the tag lists.
-Proposed codes (analyst): **A8 exclusive options**: at most one tag of a set per task;
+Two kinds of link are built into the tag lists; the QA report added them as measures in
+Amendment 2 (user, 2026-11-12): **A8 exclusive options**: at most one tag of a set per task;
 two given make the answer a conflict. **A9 implied tag**: the subject implies the target;
 the subject without the target is a conflict. Both are double conformance (C4).
 
-Table 7. Rules from exclusive options (A8) and implied tags (A9), proposed. Reading for
+Table 7. Rules from exclusive options (A8) and implied tags (A9). Reading for
 A8 rows: two tags of the set in one task make the set's answer a conflict (missing). For
 A9 rows: a subject without its target is a conflict.
 
@@ -282,7 +297,7 @@ visited check, derived from the project design: QA report Table 12).
 | R39 | any given labeling of a labeling group, P7 and P14 | C3, derived | the tags of that tag group only (same labeling group) | a group with nothing given and no group mark was not visited: its tags are missing | not testable from the tables (reading only) |
 | R40 | a labeling task with no given labeling (`task_stat` `empty` or `draft`, `annotated` without any mark, or no crop row and no mark), all projects | C3 | every tag of the task | missing, not negative | none (definition) |
 | R41 | a P11 labeling task | C3, none | P11 polygon tags not given | missing, never negative (no closing answer exists) | none (definition) |
-| R42 | P14 `skip_untouched` | C3 (proposed, analyst; meaning not documented) | the labeling task (same task) | not visited: every tag missing | no other given labeling in the task |
+| R42 | P14 `skip_untouched` | C3 (added, analyst; meaning not documented) | the labeling task (same task) | not visited: every tag missing | no other given labeling in the task |
 | R43 | a P52 labeling task | C3, open | P52 polygon tags not given | open: the first 1,271 tasks were visited, the rest were not (QA report section 5) | to decide |
 
 ## 3. Rules between labeling projects
@@ -293,7 +308,7 @@ share none (or cannot be placed), so only the rules of Section 2 apply to them.
 ### 3.1 Staged routing (B2) and implied organ across projects (A9)
 
 Table 9. Rules from staged routing (measure B2, category C5 other) and from a finding that
-implies its organ in another project of the same family (A9, proposed). Reading of the B2
+implies its organ in another project of the same family (A9). Reading of the B2
 rows: the later task exists because the earlier tag puts the organ in view, so the later
 project's "absent" answer is a real negative for an organ that is there.
 
@@ -304,8 +319,8 @@ project's "absent" answer is a real negative for an organ that is there.
 | R46 | P2, P14 polygon `liver` | B2 (C5) | the P50 labeling task on the same sample | every P50 sample has the polygon |
 | R47 | P33 organ polygon or P35 organ choice (`check_anatomy`) or disease choice (`check_disease__<Organ>`): `liver` → P36, `kidney` → P37, `gallbladder` → P38, `bladder` → P39, `lung` → P41, `prostate` → P42, `spine` → P43, `stomach` → P44, `thyroid` → P45, `uterus` → P46, `knee` → P47 | B2 (C5) | the organ project's labeling task on the same sample | every sample of an organ project has its organ in P33 or P35 |
 | R48 | P36-39, P41-47, P50 `skip_no_organ_found` | B2 (C5) | the routing source tag of R46-R47 on the same sample | not given: the routed organ is in view (a given skip is a conflict with the source tag) |
-| R49 | P7 polygon tags of `fat_regions` and `tumor_regions` | A9 (C4) (proposed, analyst) | the organ polygon in P2 on the same sample (F1): `liver`; `gallbladder` for `gallbladder_stone`; `stomach` for `gastric_tumor` | the organ is drawn in P2 whenever P7 draws its finding (organ layer, DEC-034) |
-| R50 | P7, P9, P11 `skip_notliver` | A9 (C4) (proposed, analyst) | P2 polygon `liver` on the same sample (F1; P9, P11 through task order) | no `liver` polygon in P2 |
+| R49 | P7 polygon tags of `fat_regions` and `tumor_regions` | A9 (C4) (added, analyst) | the organ polygon in P2 on the same sample (F1): `liver`; `gallbladder` for `gallbladder_stone`; `stomach` for `gastric_tumor` | the organ is drawn in P2 whenever P7 draws its finding (organ layer, DEC-034) |
+| R50 | P7, P9, P11 `skip_notliver` | A9 (C4) (added, analyst) | P2 polygon `liver` on the same sample (F1; P9, P11 through task order) | no `liver` polygon in P2 |
 
 ### 3.2 One finding per project (B1) and tags not asked
 
@@ -338,14 +353,14 @@ given or both not given), on samples visited and not skipped in both.
 | R62 | P9 `hepatorenal_contrast_possible`, `hepatorenal_contrast_liverbrighter` | B3 (C4) | the same tag in P11, same sample (both through task order) | up to 1,517 (P11 visited) | F1, inferred link |
 | R63 | P2 polygon `liver_ascites` | B3 (C4) | P9 polygons `sign_liver_ascites`, `sign_liquid_near_liver`, same sample (one meaning, label-guide Q7) | 5,913 tasks by order | F1, inferred link |
 
-### 3.4 Repeat labeling inside one project (B4, proposed)
+### 3.4 Repeat labeling inside one project (B4)
 
 Table 12. Rule for a sample labeled more than once inside one labeling project (measure B4,
-proposed by the analyst; category C4 double conformance). Counts from Section 1.
+category C4 double conformance). Counts from Section 1.
 
 | Rule | Subject | Measure code | Target (scope) | Reading | Expected in the data |
 |---|---|---|---|---|---|
-| R64 | a sample with two or more visited labeling tasks in one project (P2 52 samples, P7 53, P20-24 104-105 each, P15, P19, P27, P28 1 each) | B4 (C4) (proposed) | the other visited tasks of the same project on the same sample | two labelings of one fact; how to combine them is open | the same set of given tags in each task |
+| R64 | a sample with two or more visited labeling tasks in one project (P2 52 samples, P7 53, P20-24 104-105 each, P15, P19, P27, P28 1 each) | B4 (C4) | the other visited tasks of the same project on the same sample | compared: the labelings should be the same; a difference makes the tag a conflict on that sample (user, 2026-11-12) | the same choice tags, and polygons of each tag over similar areas (similarity threshold to set with the drop threshold) |
 
 ## 4. Not used
 
@@ -367,18 +382,17 @@ proposed by the analyst; category C4 double conformance). Counts from Section 1.
 - The task-order links were found with skip tags, so the respect statistics of R19 and
   R50 on those projects are not independent tests.
 - Rules come from the tag lists, the role map and the label guide. Nothing records what the
-  labelers were told, so some rules (marked "proposed" or "weak") may not match the
+  labelers were told, so some rules (marked "analyst" or "weak") may not match the
   instructions. The respect statistics are the check.
 - Shared tags were matched by name, the Q7 one-meaning groups and one misspelling. Tags with
   the same meaning under other names are not paired.
 
 ## 6. Open points
 
-- R04 (`thyroiditis_abscent` targets), R10 (`heaptic_steatosis_absent` targets), R16
-  (whether `hepatic_steatosis_checked` covers the disease tags of `fat_regions`).
-- R19: whether a skip-sample reason leaves the sample out of every project (as C1 says), or
-  only out of its own labeling task (R18). Both stay candidates (user, 2026-11-12).
-- R64: how to combine two labelings of one sample in one project.
-- The proposed codes A8, A9 and B4 are the analyst's; the QA report does not have them
-  (kept as candidates, user, 2026-11-12).
-- Before the respect statistics run: fix the threshold for dropping a rule (suggestion).
+- The role map [choice_labels.yaml](../../../configs/data/choice_labels.yaml) (DEC-036)
+  lists other targets for `heaptic_steatosis_absent` than R10 does now (grade 0 and
+  `__ignore` in, the disease tags out). The choice-polygon check reads that map; changing it
+  is a separate task in the code repo.
+- R43: how to read a P52 labeling task (visited only in its first 1,271 tasks).
+- R64: the similarity threshold for polygon areas (for example intersection over union).
+- Before the respect statistics run: fix the threshold for dropping a rule.

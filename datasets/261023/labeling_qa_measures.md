@@ -13,6 +13,9 @@ categories with their own codes (C1 skip-sample, C2 skip-part, C3 visited check,
 C4 double conformance, C5 other), and some options move between measures A1-A5. No
 count changed. See [Amendments](#amendments).
 
+**Amended 2026-11-12** (Amendment 2): measures A8 (exclusive options), A9 (implied tag)
+and B4 (repeat labeling inside one project) are added to category C4. No count changed.
+
 **Quality-assurance (QA) measure** here means: something built into a labeling project
 so that a human labeling error can be noticed.
 
@@ -515,4 +518,31 @@ only group `tumor_check`; in project 14 the marks are optional; in project 38, 3
 marked tasks carry only a size choice. Tasks submitted without any mark (1,914, of which
 1,866 in project 14; Table 3) break both rules: they were submitted, yet left no trace.
 The safe reading is "not visited": their labels are missing, not negative (analyst).
+
+## Amendment 2 (2026-11-12): measures A8, A9 and B4 added
+
+From the user's decision on 2026-11-12, made while listing the data interpretation rules
+of 261023 ([interpretation_rules.md](interpretation_rules.md)). It adds three measures to
+category C4 (double conformance). It changes no count and no earlier table. The new
+measures have no counts here; their use will be measured by the respect statistics of the
+interpretation rules.
+
+Table 13. QA measures added to the labeling projects of 261023 in Amendment 2: category,
+what each measure is, how it can reveal an error, the projects that offer it (from
+`label_projects.yaml`) and the interpretation rules that use it.
+
+| Measure code | Category | Measure | How it can reveal an error | Projects that offer it | Interpretation rules |
+|---|---|---|---|---|---|
+| A8 | C4 Double conformance | Options that exclude each other: at most one tag of a set in one task (steatosis grades; the `tumor_check` answers; gallbladder size states; opposite signs; a group's "checked" and "absent" marks; generic against organ-specific tumor and cyst) | Two answers to one question in one task show as a conflict | 9 (1, 7, 9, 11, 14, 35, 38, 49, 52) | R27-R33 |
+| A9 | C4 Double conformance | Implied tag: one tag implies another (a disease of an organ implies the organ; "liver brighter" implies "contrast possible"; a liver finding implies the liver outline) | A tag without the tag it implies shows a slip in one of the two | inside one task: 9, 11, 14, 35, 49, 52; on the same sample across projects: 2 with 7, 9, 11 | R34-R37, R49-R50 |
+| B4 | C4 Double conformance | Repeat labeling: one sample labeled more than once inside one project (not planned; Section 6) | The labelings should be the same (same choice tags, similar polygon areas); a difference shows a slip or a doubtful judgment | 2, 7, 15, 19, 20-24, 27, 28 | R64 |
+
+Notes (analyst):
+
+1. Section 3 already counted some A8 conflicts ("Options that exclude each other, chosen
+   together"), and Table 8 (Section 6) is the B4 agreement.
+2. A9 is the only A measure that can also link two projects (R49, R50: a finding in project
+   7 against the liver outline of project 2 on the same sample). All other A measures work
+   inside one task; B measures work between projects.
+3. With Amendment 2, category C4 holds A1, A5, A8, A9, B3 and B4.
 
