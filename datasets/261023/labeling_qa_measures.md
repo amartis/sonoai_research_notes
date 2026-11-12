@@ -16,6 +16,9 @@ count changed. See [Amendments](#amendments).
 **Amended 2026-11-12** (Amendment 2): measures A8 (exclusive options), A9 (implied tag)
 and B4 (repeat labeling inside one project) are added to category C4. No count changed.
 
+**Amended 2026-11-12** (Amendment 3): the scope of skip reasons (C1), and projects 11 and
+52 read as incomplete (Table 12). No count changed.
+
 **Quality-assurance (QA) measure** here means: something built into a labeling project
 so that a human labeling error can be noticed.
 
@@ -545,4 +548,23 @@ Notes (analyst):
    7 against the liver outline of project 2 on the same sample). All other A measures work
    inside one task; B measures work between projects.
 3. With Amendment 2, category C4 holds A1, A5, A8, A9, B3 and B4.
+
+## Amendment 3 (2026-11-12): scope of skip reasons; projects 11 and 52 incomplete
+
+From the user's decisions on 2026-11-12, made while listing the data interpretation rules
+([interpretation_rules.md](interpretation_rules.md), rules R18, R19, R38, R40). It changes
+no count.
+
+- **Scope of skip reasons (C1).** A skip reason that describes the image (role `quality`,
+  `skip_notultrasound`, `skip_anatomyunclear`) leaves the sample out of every project. The
+  8 exclusion skips that name the project's own question (`skip_no_organ_found`,
+  `skip_notliver`, `skip_smallliver`, `skip_notabdomen`, `skip_otherdisease`,
+  `skip_othercase`, `skip_toofat`, `skip_liver_c`) leave out only their own labeling task.
+  Their measure code stays A3; by Table 9 they act like C2 skip-part (analyst's note).
+- **Projects 11 and 52 are incomplete.** Their tasks without any mark were never worked on.
+  In Table 12 their derived visited check (C3) changes to "Yes" (project 11 was "No",
+  project 52 "Unclear"): a task with any mark was visited and its missing labels are
+  negatives; a task without any mark was not visited and is filtered out. Neither project
+  has an "absent" answer, so a visited task with nothing to mark is filtered out too
+  (analyst's note).
 
