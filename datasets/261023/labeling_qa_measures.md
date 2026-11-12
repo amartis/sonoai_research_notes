@@ -64,7 +64,7 @@ so that a human labeling error can be noticed.
 
 ## Data and method
 
-Tables read on machine01 on 2026-11-11, in memory, read only (user's ok, DEC-052):
+Tables read on machine01 on 2026-11-11, in memory, read only (user's ok, [DEC-052](../../decisions/DEC-052-privacy-covers-images-tables-readable-after-asking.md)):
 `flags_df` (5,559,898 rows: one row per task and offered option, with a count),
 `polygons_df` (984,908 points of 129,815 polygons) and `taskcrops_df` (143,152 crop
 rows) of `261023_plain`, and the project-labels sheet (`project_labels_df`, plain copy;
