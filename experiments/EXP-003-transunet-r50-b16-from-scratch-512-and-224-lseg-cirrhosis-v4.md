@@ -86,14 +86,14 @@ Table 2. Cirrhosis measures of the checkpoint selected on val, per run and split
 CIs (cluster bootstrap over datasource groups). Val n = 2,068 samples (97 positive, 1,971
 negative); test n = 1,378 (64 positive, 1,314 negative).
 
-| Run | Split | Cirrhosis DSC (95% CI) | Cirrhosis IoU (95% CI) | Accuracy (95% CI) | Positives found, n (proportion, 95% CI) | Positives with any cirrhosis predicted, n | Negatives correct, n (proportion) |
+| Run | Split | Cirrhosis DSC (95% CI) | Cirrhosis IoU (95% CI) | Accuracy (95% CI) | Positives found, n (proportion, 95% CI) | Positives with any cirrhosis predicted, n (proportion, 95% CI) | Negatives correct, n (proportion, 95% CI) |
 |---|---|---|---|---|---|---|---|
-| cirr-v4-tu-e30-r5 | val | 0.696 (0.529–0.741) | 0.534 (0.359–0.588) | 0.954 (0.907–0.979) | 82/97 (0.845, 0.558–0.924) | 92/97 | 1,891/1,971 (0.959) |
-| cirr-v4-r50b16-s224-r1 | val | 0.611 (0.411–0.672) | 0.440 (0.259–0.507) | 0.924 (0.855–0.962) | 80/97 (0.825, 0.464–0.936) | 90/97 | 1,830/1,971 (0.928) |
-| cirr-v4-r50b16-s512-r1 | val | 0.586 (0.424–0.631) | 0.414 (0.269–0.460) | 0.894 (0.793–0.951) | 77/97 (0.794, 0.433–0.896) | 91/97 | 1,771/1,971 (0.899) |
-| cirr-v4-tu-e30-r5 | test | 0.047 (0.005–0.143) | 0.024 (0.002–0.077) | 0.890 (0.829–0.942) | 2/64 (0.031, 0.000–0.150) | 10/64 | 1,224/1,314 (0.932) |
-| cirr-v4-r50b16-s224-r1 | test | 0.026 (0.000–0.041) | 0.013 (0.000–0.021) | 0.759 (0.671–0.839) | 1/64 (0.016, 0.000–0.036) | 16/64 | 1,045/1,314 (0.795) |
-| cirr-v4-r50b16-s512-r1 | test | 0.025 (0.001–0.056) | 0.012 (0.000–0.029) | 0.734 (0.637–0.799) | 1/64 (0.016, 0.000–0.034) | 25/64 | 1,011/1,314 (0.769) |
+| cirr-v4-tu-e30-r5 | val | 0.696 (0.529–0.741) | 0.534 (0.359–0.588) | 0.954 (0.907–0.979) | 82/97 (0.845, 0.558–0.924) | 92/97 (0.948, 0.781–1.000) | 1,891/1,971 (0.959, 0.912–0.982) |
+| cirr-v4-r50b16-s224-r1 | val | 0.611 (0.411–0.672) | 0.440 (0.259–0.507) | 0.924 (0.855–0.962) | 80/97 (0.825, 0.464–0.936) | 90/97 (0.928, 0.733–0.984) | 1,830/1,971 (0.928, 0.857–0.965) |
+| cirr-v4-r50b16-s512-r1 | val | 0.586 (0.424–0.631) | 0.414 (0.269–0.460) | 0.894 (0.793–0.951) | 77/97 (0.794, 0.433–0.896) | 91/97 (0.938, 0.750–0.988) | 1,771/1,971 (0.899, 0.792–0.955) |
+| cirr-v4-tu-e30-r5 | test | 0.047 (0.005–0.143) | 0.024 (0.002–0.077) | 0.890 (0.829–0.942) | 2/64 (0.031, 0.000–0.150) | 10/64 (0.156, 0.030–0.450) | 1,224/1,314 (0.932, 0.899–0.968) |
+| cirr-v4-r50b16-s224-r1 | test | 0.026 (0.000–0.041) | 0.013 (0.000–0.021) | 0.759 (0.671–0.839) | 1/64 (0.016, 0.000–0.036) | 16/64 (0.250, 0.100–0.361) | 1,045/1,314 (0.795, 0.723–0.861) |
+| cirr-v4-r50b16-s512-r1 | test | 0.025 (0.001–0.056) | 0.012 (0.000–0.029) | 0.734 (0.637–0.799) | 1/64 (0.016, 0.000–0.034) | 25/64 (0.391, 0.212–0.600) | 1,011/1,314 (0.769, 0.686–0.834) |
 
 Table 3. Paired differences in the cirrhosis measures (first run minus second), with 95% CIs
 from the same cluster bootstrap over datasource groups. Same samples in both runs.
@@ -126,25 +126,27 @@ accuracy −0.030 (−0.061 to −0.013). Both CIs exclude 0. The positives foun
 (80 against 82 of 97); most of the accuracy loss is in negatives (141 against 80 of 1,971
 negatives with a false cirrhosis prediction). This comparison changes two things at once,
 the weights at start and the model code (DIS-023 Table 1), so it cannot say how much of the
-gap is pretraining. Pretraining is the larger change of the two (unverified: no run here
-has the official model with pretrained weights).
+gap is pretraining. The gap is compatible with a pretraining effect, but the model code was
+not separated: no run here has the official model with pretrained weights.
 
 **Input size (s512 against s224, from scratch).** On val, 512 px did not do better than
 224 px: DSC −0.025 (−0.044 to +0.014), CI includes 0; accuracy −0.030 (−0.067 to −0.009),
 again from more false positives on negatives. This is not a fair test of input size yet:
 
 - The 512 run was probably undertrained. Its selected epoch was the last one (30), its val
-  DSC was still rising over the last five epochs (0.538 to 0.586), and its train DSC at epoch
-  30 was 0.738 against 0.931 for the 224 run. Val DSC was 0.000 at epoch 5. With the same
-  12,900 optimiser steps, the 512 model sees 5.2 times more pixels per sample and learns
-  more slowly per step.
+  DSC was higher at epoch 30 than at epochs 20 and 25 (Table 4; the 5-epoch values are
+  noisy: 0.563, 0.522, 0.546, 0.586 at epochs 15 to 30), and its train DSC at epoch 30 was
+  0.738 against 0.931 for the 224 run. Over epochs 26 to 30 val DSC was 0.538, 0.563, 0.568,
+  0.571 and 0.586 (the run's `eval/val_e026.json` to `val_e030.json`). Val DSC was 0.000 at
+  epoch 5. With the same 12,900 optimiser steps, the 512 model sees 5.2 times more pixels per
+  sample and may learn more slowly per step.
 - The decoder BatchNorm saw micro-batches of 4 samples at 512 px against 8 at 224 px
   (the encoder uses GroupNorm, which does not depend on batch size). Accumulation kept the
   global batch at 24 for the optimiser, but BatchNorm statistics come from each micro-batch.
   This is a second difference besides input size.
 
-So the gaps point to pretraining (with the model change) as the clear effect at 224 px,
-and say nothing firm about input size: the 512 result is limited by training length and
+So at 224 px the gap is clear and compatible with a pretraining effect, with the model code
+not separated from it; the gaps say nothing firm about input size: the 512 result is limited by training length and
 possibly by the BatchNorm micro-batch.
 
 **Val-to-test gap (observation only, not investigated).** On test, all three runs scored a
@@ -169,15 +171,16 @@ positives. On test, nearly all positives were missed by every run.
 - s512 against s224 changes input size, the BatchNorm micro-batch, and the effective training
   progress (undertrained at 30 epochs).
 - No patient ids in the sample file, so the bootstrap is over datasource groups, not patients.
-- Exploratory: the comparisons were set before the runs (DEC-050), but no test or threshold
-  was fixed in advance, and Table 3 holds 24 differences with no correction for multiple
-  comparisons.
+- Exploratory: the three comparisons (s224 against r5, s512 against s224, s512 against r5)
+  were planned before the runs (DEC-050), but no hypothesis test was pre-specified. Table 3
+  holds 24 differences with no correction for multiple comparisons.
 
 ## Conclusion and next steps
 
 - At 224 px, the from-scratch official R50-ViT-B/16 was worse on val than the pretrained
   timm-based TransUNet (DSC −0.085, 95% CI −0.147 to −0.057), mostly through false positives
-  on negatives. Pretraining (with the model change) is the effect the gap points to.
+  on negatives. The gap is compatible with a pretraining effect; the model code was not
+  separated from it.
 - From scratch, 512 px did not beat 224 px within 30 epochs (DSC −0.025, CI −0.044 to
   +0.014). The 512 run was likely undertrained, so this is not evidence against 512 px.
 - All three runs failed on test (DSC ≤ 0.047); the val-to-test gap dominates and is left for
