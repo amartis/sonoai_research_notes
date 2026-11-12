@@ -1,12 +1,12 @@
 ---
 id: DEC-056
 title: One glossary fixes the names of the labeling product; older docs keep their words and the glossary maps them
-status: proposed
+status: superseded
 area: [labeling, datasets]
 created: 2026-11-12
 from: []
 related: [DEC-002, DEC-021, DEC-044, DEC-045]
-superseded_by:
+superseded_by: DEC-057
 ---
 # DEC-056: One glossary fixes the names of the labeling product; older docs keep their words and the glossary maps them
 
