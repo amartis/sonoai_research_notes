@@ -9,8 +9,9 @@ Exploratory. Aggregates only; no images, file names or identifiers; counts 1-4 a
 shown as "<5". Not committed and not reviewed yet.
 
 **Amended 2026-11-11** after the user's review: the measures are grouped into five
-categories (skip-sample, skip-part, visited check, double conformance, other), and some
-options move between A1-A5. No count changed. See [Amendments](#amendments).
+categories with their own codes (C1 skip-sample, C2 skip-part, C3 visited check,
+C4 double conformance, C5 other), and some options move between measures A1-A5. No
+count changed. See [Amendments](#amendments).
 
 **Quality-assurance (QA) measure** here means: something built into a labeling project
 so that a human labeling error can be noticed.
@@ -104,8 +105,8 @@ Table 1. Checks between the four sheets of 261023 (computed 2026-11-11).
 
 Table 2. QA measures built into the 38 labeling projects of 261023, with their use and
 what the comparison of the sheets showed. Tasks = tasks with at least one such mark, of
-151,017 tasks with any mark (201,273 tasks in all). The grouping and rows A1-A5 were
-revised in Amendment 1 (Table 11).
+151,017 tasks with any mark (201,273 tasks in all). Amendment 1 groups these measures into
+categories C1-C5 (Table 9) and revises rows A1-A5 (Table 11).
 
 | # | Measure | How it can reveal an error | Projects that offer it | Tasks that used it | What the sheets show |
 |---|---|---|---|---:|---|
@@ -394,7 +395,7 @@ in either copy, 6 have it in both.
 
 # Amendments
 
-## Amendment 1 (2026-11-11): five categories of QA measure, reassigned options
+## Amendment 1 (2026-11-11; category codes added 2026-11-12): five categories of QA measure, reassigned options
 
 From the user's review of Table 2 on 2026-11-11. It changes how the measures are
 grouped and where some options belong. It changes no count: Tables 1-8 and the text
@@ -403,48 +404,54 @@ user's decisions.
 
 - **Sample**: the user's term for one labelled image crop, the unit of the planned
   per-sample label table `sample_label_df` (not in the repo yet).
+- **Codes**: categories have the codes C1-C5, new in this amendment. Measures keep their
+  codes from Table 2: A1-A7 (inside one task) and B1-B3 (between projects). A C code
+  always names a category; an A or B code always names a measure.
 
 ### Categories
 
-Table 9. The five categories of quality-assurance (QA) measure in the labeling projects of
-261023 (user's definitions, 2026-11-11), with the measures of Table 2 in each.
+Table 9. The five categories (C1-C5) of quality-assurance (QA) measure in the labeling
+projects of 261023 (user's definitions, 2026-11-11), with the measures of Table 2 that
+belong to each (measure code and short name).
 
-| Category | What it does | Measures |
-|---|---|---|
-| Skip-sample | Leaves the sample out as a whole | A3 |
-| Skip-part | Leaves some labelings of the sample out; the rest of the sample stays | A4 |
-| Visited check | The labeler leaves at least one positive mark as a trace of the visit, so that a missing label is a real negative | A2 |
-| Double conformance | Compares two or more labelings of the same aspect of a sample, to avoid the subjectivity of a single assessment; the labelings may differ in style (choice, polygon) | A1, A5, B3 |
-| Other | Not one of the above | A6, A7, B1, B2 |
+| Category code | Category | What it does | Measures in the category |
+|---|---|---|---|
+| C1 | Skip-sample | Leaves the sample out as a whole | A3 skip reason (image quality or case exclusion) |
+| C2 | Skip-part | Leaves some labelings of the sample out; the rest of the sample stays | A4 "cannot decide" for one part of the labeling |
+| C3 | Visited check | The labeler leaves at least one positive mark as a trace of the visit, so that a missing label is a real negative | A2 "checked" mark; or derived from the project design (Table 12) |
+| C4 | Double conformance | Compares two or more labelings of the same aspect of a sample, to avoid the subjectivity of a single assessment; the labelings may differ in style (choice, polygon) | A1 explicit "absent" answer; A5 same fact entered twice in one task; B3 second pass by another project |
+| C5 | Other | Not one of the above | A6 AI draft with a human verdict; A7 free-text note; B1 one finding per project; B2 staged routing |
 
-A6 (AI draft with a human verdict) and A7 (free-text note) are not important and are
-ignored when `sample_label_df` is built.
+Measures A6 and A7 (both in C5) are not important and are ignored when `sample_label_df`
+is built.
 
-### Changes to A1-A5
+### Changes to measures A1-A5
 
 Table 10. Options of 261023 that move between QA measures, or whose reading changes, in
 Amendment 1. Projects and crops from [labels-261023.md](../../../docs/labels-261023.md)
 (crops = crops with the option); project-14 task counts from Table 3.
 
-| Option | Kind | Projects | Crops or tasks, n | Before | Now | Reason (user) |
+| Option | Kind | Projects | Crops or tasks, n | Measure before | Measure now | Reason (user) |
 |---|---|---|---:|---|---|---|
 | `hepatic_steatosis__unknown` | per-image choice | 1, 7 | 2,602 crops | A4 | Not used at all | Its use is not consistent: in project 7 it was chosen together with a grade in 1,322 of 5,914 tasks (22.4%) |
 | `cannotdiag` | per-image choice, group `tumor_check` | 7 | 1,239 crops | A4 | A4 | It skips one labeling job, not the image: the disease polygons of group `tumor_regions` are not labelled |
 | `skip_anatomyunclear` | per-image choice | 2, 9, 11, 33 | 3,124 crops | A4 | A3 | With unclear anatomy neither anatomy nor diagnostic labels make sense, so the sample has no place in training |
 | `hepatic_steatosis__ignore` | polygon, group `fat_regions` | 7, 14 | 73 crops | A4 | A4 | Marks an area of the image whose steatosis is not graded. Always note that it is a polygon, not a choice |
-| "Checked" group marks of project 14 (`anatomy_checked`, `hepatic_steatosis_checked`, `signs_checked`, `signal_regions_checked`) | per-image choice | 14 | 14,541 tasks | A2 and A5 | A2 | A mark per group that the group was looked at is a visited check |
+| "Checked" group marks of project 14 (`anatomy_checked`, `hepatic_steatosis_checked`, `signs_checked`, `signal_regions_checked`) | per-image choice | 14 | 14,541 tasks | A2 and A5 | A2 | A mark per group that the group was looked at is a visited check (C3) |
 | "Absent" group marks of project 14 (`anatomy_absent`, `heaptic_steatosis_absent`, `signs_absent`) | per-image choice | 14 | 8 tasks | A1 and A5 | A1 | An "absent" mark per group is an absent answer |
 
-Table 11. Rows A1-A5 of Table 2 after Amendment 1 (rows A6-B3 unchanged). Task counts
-stay as in Table 2.
+Table 11. Measures A1-A5 of Table 2 after Amendment 1, with the category of each
+(measures A6-B3 unchanged; their categories are in Table 9). A category can hold
+several measures, so a category code can appear on more than one row: A1 and A5 are
+both in C4, as is B3 (not shown). Task counts stay as in Table 2.
 
-| # | Category | Measure | How it can reveal an error | Projects that offer it |
+| Measure code | Category | Measure | How it can reveal an error | Projects that offer it |
 |---|---|---|---|---|
-| A1 | Double conformance | Explicit "absent" answer, including the project-14 group marks (`anatomy_absent`, ...) | An empty task no longer looks like a negative; the answer can be compared with the polygons of the same group | 24 (unchanged) |
-| A2 | Visited check | "Checked" mark, including the project-14 group marks (`anatomy_checked`, ...) | The labeler states that a group of labels was looked at, so missing polygons are meant | 15 (unchanged) |
-| A3 | Skip-sample | Skip reason: image quality or case exclusion, now with `skip_anatomyunclear` | Unusable or out-of-scope samples are named and left out as a whole | 36 (unchanged; 2, 9, 11 and 33 already offered other skip reasons) |
-| A4 | Skip-part | "Cannot decide" for one part of the labeling: `cannotdiag` (choice), `hepatic_steatosis__ignore` (polygon) | Doubt is recorded instead of a forced guess. Unlike A3, A4 states that one aspect of labeling the sample is uncertain; it does not say the whole sample should be left out | 2 (7, 14); was 8 |
-| A5 | Double conformance | Same fact entered twice in one task, project 7 only: grade choice and graded polygons; `tumor_check` and tumor polygons | A slip in one of the two entries shows as a contradiction | 1 (7); was 2 |
+| A1 | C4 Double conformance | Explicit "absent" answer, including the project-14 group marks (`anatomy_absent`, ...) | An empty task no longer looks like a negative; the answer can be compared with the polygons of the same group | 24 (unchanged) |
+| A2 | C3 Visited check | "Checked" mark, including the project-14 group marks (`anatomy_checked`, ...) | The labeler states that a group of labels was looked at, so missing polygons are meant | 15 (unchanged) |
+| A3 | C1 Skip-sample | Skip reason: image quality or case exclusion, now with `skip_anatomyunclear` | Unusable or out-of-scope samples are named and left out as a whole | 36 (unchanged; 2, 9, 11 and 33 already offered other skip reasons) |
+| A4 | C2 Skip-part | "Cannot decide" for one part of the labeling: `cannotdiag` (choice), `hepatic_steatosis__ignore` (polygon) | Doubt is recorded instead of a forced guess. Unlike A3, A4 states that one aspect of labeling the sample is uncertain; it does not say the whole sample should be left out | 2 (7, 14); was 8 |
+| A5 | C4 Double conformance | Same fact entered twice in one task, project 7 only: grade choice and graded polygons; `tumor_check` and tumor polygons | A slip in one of the two entries shows as a contradiction | 1 (7); was 2 |
 
 Notes (analyst):
 
@@ -454,7 +461,8 @@ Notes (analyst):
    one-off script was not re-run to confirm this.
 2. **`cannotdiag` mostly coincides with `skip_anatomyunclear`.** On the regions of
    projects 2 and 7 the two coincide on 1,216 regions (kappa 0.966, Section 5). So most
-   `cannotdiag` samples leave as whole samples through A3, and A4 `cannotdiag` acts alone
+   `cannotdiag` samples leave as whole samples through measure A3 (C1 skip-sample), and
+   `cannotdiag` as measure A4 (C2 skip-part) acts alone
    on about 23 regions (1,239 - 1,216; assumes one labelled task per region in project 7,
    as Section 3 found).
 3. **Dropping `hepatic_steatosis__unknown`** is read here as: the steatosis grade of
@@ -462,18 +470,18 @@ Notes (analyst):
    has no steatosis label (missing, not grade 0). In project 7 that is 1,150 of the
    2,472 tasks with `unknown` (2,472 - 1,322). The polygon of the same name (project 3)
    was never used.
-4. **A1 also works as a visited check.** An "absent" answer is a positive mark that shows
-   the visit and makes the negative real, which is the goal of a visited check. It is
-   also a double conformance (the answer can be compared with the polygons of its
-   group: 28 conflicts in 71,058, Section 3). Table 12 therefore shows both.
+4. **Measure A1 also works as a visited check (C3).** An "absent" answer is a positive
+   mark that shows the visit and makes the negative real, which is the goal of C3. It
+   stays in C4 (double conformance) as well: the answer can be compared with the polygons
+   of its group (28 conflicts in 71,058, Section 3). Table 12 therefore shows both.
 
-### Projects without a visited check
+### Projects without a visited check (C3)
 
-**23 of the 38 projects offer no explicit visited check (A2)**: 1, 2, 3, 4, 11, 15,
-19-24, 26-33, 35, 49, 52. Of these, 15 offer an "absent" answer (A1) instead; 8 offer
-neither: 1, 2, 3, 4, 11, 33, 35, 52.
+**23 of the 38 projects offer no "checked" mark (measure A2, the explicit visited
+check)**: 1, 2, 3, 4, 11, 15, 19-24, 26-33, 35, 49, 52. Of these, 15 offer an "absent"
+answer (measure A1) instead; 8 offer neither: 1, 2, 3, 4, 11, 33, 35, 52.
 
-**Derived visited check** (user, 2026-11-11): a project without an explicit mark can be
+**Derived visited check (C3)** (user, 2026-11-11): a project without an explicit mark can be
 considered to have a visited check if the labeler should make at least one positive
 labeling on every task they visit (for example a grade, an organ, an "absent" answer, an
 AI verdict or a skip reason). Then a task with any mark was visited, and its missing
@@ -483,11 +491,12 @@ Table 12 judges it from the options offered and their use in Table 3 (analyst). 
 reading **20 of the 23 projects have a derived visited check**; project 11 has none,
 project 3 was never labelled, and project 52 is unclear.
 
-Table 12. Labeling projects of 261023 without a "checked" mark (A2): polygon use,
-"absent" answer (A1) and derived visited check of each. Tasks with polygons and marked
-tasks from Table 3; the derived check and its reason are the analyst's reading.
+Table 12. Labeling projects of 261023 without a "checked" mark (measure A2): polygon
+use, "absent" answer (measure A1) and derived visited check (C3) of each. Tasks with
+polygons and marked tasks from Table 3; the derived check and its reason are the
+analyst's reading.
 
-| Project | Tasks with polygons, n (of marked tasks) | "Absent" answer (A1) offered | Derived visited check | Reason |
+| Project | Tasks with polygons, n (of marked tasks) | "Absent" answer (measure A1) offered | Derived visited check (C3) | Reason |
 |---|---|---|---|---|
 | 1 Score Liver Fat Levels | 0 (5,913) | No | Yes | Every visited task needs a grade (grade 0 included) or a skip reason |
 | 2 Liver Ultrasound Anatomy | 5,511 (5,913) | No | Yes | Every image shows some anatomy to outline; if not, a skip reason (`skip_anatomyunclear`, ...) is due |
@@ -496,12 +505,12 @@ tasks from Table 3; the derived check and its reason are the analyst's reading.
 | 11 Additional Fatty Liver Signs | 947 (1,517) | No | No | An image may show no sign, and there is no "absent" option: "no sign" and "not visited" both leave no mark |
 | 15, 19, 20-24, 26-28 (gallbladder and kidney, one finding each) | 11-1,859 per project | Yes | Yes | The "absent" answer closes every task without a polygon |
 | 29-32 (breast, lung, thyroid, abdominal) | 15-2,649 per project | Yes | Yes | The "absent" answer closes every task without a polygon |
-| 33 Liver Ultrasound Anatomy (AI drafts) | 3,942 (4,239) | No | Yes | Every task with an AI draft needs a verdict (3,933 tasks), else a skip reason; A6 itself stays in "Other" |
+| 33 Liver Ultrasound Anatomy (AI drafts) | 3,942 (4,239) | No | Yes | Every task with an AI draft needs a verdict (3,933 tasks), else a skip reason; measure A6 itself stays in C5 (other) |
 | 35 Anatomy and Disease Check | 0 (4,239) | No | Yes | Every image shows at least one organ to choose, else a skip reason is due |
 | 49 CheckAnatDisease (Books) | 0 (10,948) | Yes (494 tasks) | Yes | The "absent" answer closes every task without a choice |
 | 52 DiagAnatDisease (book images) | 733 (1,271) | No | Unclear | No skip reason or "absent" option, only a text note, so a book image with nothing to outline leaves no mark. The marked tasks are the first 1,271 in order (Section 5), which fits "labelled in order, then stopped" |
 
-Where A2 is offered it is partial (Section 3): in project 7 the `checked` mark covers
+Where measure A2 is offered it is partial (Section 3): in project 7 the `checked` mark covers
 only group `tumor_check`; in project 14 the marks are optional; in project 38, 307
 marked tasks carry only a size choice. Tasks submitted without any mark (1,914, of which
 1,866 in project 14; Table 3) break both rules: they were submitted, yet left no trace.
