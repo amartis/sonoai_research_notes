@@ -16,8 +16,9 @@ count changed. See [Amendments](#amendments).
 **Amended 2026-11-12** (Amendment 2): measures A8 (exclusive options), A9 (implied tag)
 and B4 (repeat labeling inside one project) are added to category C4. No count changed.
 
-**Amended 2026-11-12** (Amendment 3): the scope of skip reasons (C1), and projects 11 and
-52 read as incomplete (Table 12). No count changed.
+**Amended 2026-11-12** (Amendment 3): new category C6 skip-task with measure A10 for the 8
+skip reasons that leave out only their own task (A3 narrows to the skips that describe the
+image), and projects 11 and 52 read as incomplete (Table 12). No count changed.
 
 **Quality-assurance (QA) measure** here means: something built into a labeling project
 so that a human labeling error can be noticed.
@@ -549,18 +550,31 @@ Notes (analyst):
    inside one task; B measures work between projects.
 3. With Amendment 2, category C4 holds A1, A5, A8, A9, B3 and B4.
 
-## Amendment 3 (2026-11-12): scope of skip reasons; projects 11 and 52 incomplete
+## Amendment 3 (2026-11-12): category C6 skip-task and measure A10; projects 11 and 52 incomplete
 
 From the user's decisions on 2026-11-12, made while listing the data interpretation rules
 ([interpretation_rules.md](interpretation_rules.md), rules R18, R19, R38, R40). It changes
 no count.
 
-- **Scope of skip reasons (C1).** A skip reason that describes the image (role `quality`,
-  `skip_notultrasound`, `skip_anatomyunclear`) leaves the sample out of every project. The
-  8 exclusion skips that name the project's own question (`skip_no_organ_found`,
-  `skip_notliver`, `skip_smallliver`, `skip_notabdomen`, `skip_otherdisease`,
-  `skip_othercase`, `skip_toofat`, `skip_liver_c`) leave out only their own labeling task.
-  Their measure code stays A3; by Table 9 they act like C2 skip-part (analyst's note).
+- **Scope of skip reasons.** A skip reason that describes the image (role `quality`,
+  `skip_notultrasound`, `skip_anatomyunclear`) leaves the sample out of every project: it
+  stays measure A3 in category C1 skip-sample. The 8 exclusion skips that name the
+  project's own question leave out only their own labeling task: they move to the new
+  measure A10 in the new category C6 skip-task (Table 14). C5 keeps its meaning ("Other"),
+  so no earlier code changes.
+
+Table 14. Category and measures of 261023 added or changed in Amendment 3: what each does,
+its tags and the labeling projects that offer it (from `label_projects.yaml`).
+
+| Code | Kind | Name | What it does | Tags | Projects that offer it |
+|---|---|---|---|---|---|
+| C6 | Category | Skip-task | Leaves one labeling task of the sample out; the sample's labeling tasks in other projects stay | measure A10 | - |
+| A10 | Measure, category C6 (new) | Task-scope skip reason | The labeler states that the project's own question cannot be asked on this sample (organ not found, not liver, other case, ...) | `skip_no_organ_found`, `skip_notliver`, `skip_smallliver`, `skip_notabdomen`, `skip_otherdisease`, `skip_othercase`, `skip_toofat`, `skip_liver_c` | 19 (1, 7, 9, 11, 14, 35, 36-39, 41-47, 49, 50) |
+| A3 | Measure, category C1 (narrowed) | Skip reason that describes the image | Unusable samples are named and left out of every project | role `quality` tags, `skip_notultrasound`, `skip_anatomyunclear` | 36 (unchanged) |
+
+The task counts of Table 2 for A3 (8,358 quality, 11,193 exclusion) were not split again:
+the exclusion count holds the A10 tags together with `skip_notultrasound` and
+`skip_anatomyunclear` (analyst's note; not re-run).
 - **Projects 11 and 52 are incomplete.** Their tasks without any mark were never worked on.
   In Table 12 their derived visited check (C3) changes to "Yes" (project 11 was "No",
   project 52 "Unclear"): a task with any mark was visited and its missing labels are

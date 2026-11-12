@@ -2,7 +2,7 @@
 
 Asked by the user on 2026-11-12 (no board task). Builds on
 [labeling_qa_measures.md](labeling_qa_measures.md) (the QA report: measure codes A1-A7 and
-B1-B3, categories C1-C5 of its Amendment 1). Names follow the
+B1-B3, categories C1-C5 of its Amendment 1, C6 and A8-A10 of Amendments 2-3). Names follow the
 [glossary](../../../docs/glossary.md) (DEC-056: labeling project, tag group, tag, sample,
 labeling task, given labeling). Tag lists:
 [label_projects.yaml](../../../configs/data/label_projects.yaml); roles of choice tags:
@@ -35,8 +35,9 @@ Not reviewed. The user answered the open points on 2026-11-12 (see Decisions).
    on 6 tags, 8 comparisons), so its tags get rules inside the task only. P3 was never labeled.
 5. **Cross-project rules exist only inside a family**, so the rules table stays short:
    P1, P29, P30, P31 and P32 have rules inside the task only.
-6. **Three measure codes were added** (user, 2026-11-12; QA report Amendment 2): A8 exclusive
-   options, A9 implied tag, B4 repeat labeling inside one project.
+6. **Four measure codes and one category were added** (user, 2026-11-12; QA report
+   Amendments 2 and 3): A8 exclusive options, A9 implied tag, B4 repeat labeling inside one
+   project, and A10 task-scope skip reason in the new category C6 skip-task.
 
 ## Decisions (user, 2026-11-12)
 
@@ -49,11 +50,12 @@ Not reviewed. The user answered the open points on 2026-11-12 (see Decisions).
   visited.
 - **R19**: a skip reason that describes the image (role `quality`, `skip_notultrasound`,
   `skip_anatomyunclear`) leaves the sample out of every project. The 8 exclusion skips that
-  name the project's own question leave out only their own labeling task (R18).
+  name the project's own question leave out only their own labeling task (R18). They form
+  measure A10 in the new category C6 skip-task; C5 stays "Other" (QA report Amendment 3).
 - **R64**: repeat labelings of one sample in one project are expected to be the same: the
   same choice tags and similar polygon areas.
 - **Codes**: A8, A9 and B4 are QA measures now (QA report Amendment 2); "proposed" is
-  removed from them.
+  removed from them. A10 and category C6 follow from R19 (Amendment 3).
 - **Role map**: `choice_labels.yaml` will be replaced by a fuller lookup table, so where the
   two differ (R10) the rules here count.
 - **P11, P52**: incomplete projects. Their unvisited tasks were never worked on and are
@@ -70,8 +72,8 @@ Not reviewed. The user answered the open points on 2026-11-12 (see Decisions).
 - **Subject**: the tag whose given labeling triggers the rule (labeling project, tag group,
   tag name), or a state of the labeling task (for example "no given labeling").
 - **Measure code**: the QA measure the rule comes from: A1-A7, B1-B3 of the QA report, or
-  A8, A9, B4 (added in the QA report's Amendment 2, 2026-11-12). The category (C1-C5) follows in
-  brackets.
+  A8, A9, B4 (QA report Amendment 2) or A10 (Amendment 3), both 2026-11-12. The category
+  (C1-C6) follows in brackets.
 - **Target**: what the rule changes: a tag, a tag group, the labeling task (all its tags),
   or the sample (the labeling tasks of other labeling projects on the same sample).
 - **Scope**: where the target is looked for: the same labeling task, the same labeling
@@ -217,16 +219,16 @@ a given target tag also carries the mark (the mark was set every time).
 | R16 | P14 `anatomy_checked`, `signs_checked`, `hepatic_steatosis_checked`, `signal_regions_checked` | A2 (C3) | each mark's own tag group: `anatomy_liver`, `liver_signs`, `fat_regions`, `signal_regions` (same labeling group) | the visit is per labeling group, not per task; `hepatic_steatosis_checked` covers all 12 tags of `fat_regions`, disease tags included (user, 2026-11-12) |
 | R17 | P14 `imagequality_checked` (group `image_quality`) | A2 (C3) (added, analyst; role `other` in the map) | the skip tags of group `image_quality` (same task): none given = quality accepted | expected also: never given with a skip tag of the group |
 
-### 2.3 Skip reason (A3) and "cannot decide" (A4)
+### 2.3 Skip reasons (A3, A10) and "cannot decide" (A4)
 
-Table 4. Rules from skip reasons (measure A3, category C1 skip-sample) and "cannot
-decide" answers (measure A4, category C2 skip-part). The skip tags of each project are
+Table 4. Rules from skip reasons (measure A3, category C1 skip-sample; measure A10, category
+C6 skip-task) and "cannot decide" answers (measure A4, category C2 skip-part). The skip tags of each project are
 listed in Table 5.
 
 | Rule | Subject (labeling project: tag) | Measure code | Target (scope) | Reading | Expected in the data |
 |---|---|---|---|---|---|
-| R18 | every skip tag of Table 5 (roles `quality` and `exclusion`, with `skip_anatomyunclear`) | A3 (C1) | the labeling task: all its other tags (same task) | left out: the task gives no label; its tags are missing, not negative | no other given labeling in the task, except other skip tags and text notes |
-| R19 | the skip tags that describe the image (marked * in Table 5): role `quality`, `skip_notultrasound`, `skip_anatomyunclear` | A3 (C1) | the sample: every labeling task of the other projects on the same sample (Table 1 shows which projects share samples; for P4, P9, P11 through their task-order link) | left out of every project's labels (user, 2026-11-12) | the other projects' tasks on the same sample also carry a skip tag, or have no given labeling |
+| R18 | every skip tag of Table 5 | A3 (C1), A10 (C6) | the labeling task: all its other tags (same task) | left out: the task gives no label; its tags are missing, not negative | no other given labeling in the task, except other skip tags and text notes |
+| R19 | the A3 skip tags, which describe the image (marked * in Table 5): role `quality`, `skip_notultrasound`, `skip_anatomyunclear` | A3 (C1) | the sample: every labeling task of the other projects on the same sample (Table 1 shows which projects share samples; for P4, P9, P11 through their task-order link) | left out of every project's labels (user, 2026-11-12) | the other projects' tasks on the same sample also carry a skip tag, or have no given labeling |
 | R20 | P7 `cannotdiag` (group `tumor_check`) | A4 (C2) | tag group `tumor_regions` (same task) | missing, not negative; the rest of the task stays | no `tumor_regions` polygon in the task |
 | R21 | P7, P14 polygon `hepatic_steatosis__ignore` (group `fat_regions`) | A4 (C2) | the grade polygon tags `hepatic_steatosis__0`-`__3` inside its outline (same task, pixel level) | the outlined area has no grade (not grade 0) | it does not overlap a grade polygon of the task (label-guide Q1: drawn beside graded areas) |
 
@@ -235,15 +237,16 @@ sample out of every project. The 8 exclusion skips that name the project's own q
 (`skip_no_organ_found`, `skip_notliver`, `skip_smallliver`, `skip_notabdomen`,
 `skip_otherdisease`, `skip_othercase`, `skip_toofat`, `skip_liver_c`) leave out only their
 own labeling task (R18; user, 2026-11-12): "the stomach is not in view" does not make the
-sample useless for the liver. By the QA report's definitions these 8 then act like C2
-skip-part (the rest of the sample stays); their code stays A3 (analyst's note). R18 is also
+sample useless for the liver. These 8 are measure A10 in category C6 skip-task (QA report
+Amendment 3, user 2026-11-12). R18 is also
 the test inside the task for every skip tag: after a skip, the labeler is expected to give
 nothing else. Where the task-order link is used (P4, P9, P11),
 R19 is not an independent test: the link itself was found with skip tags.
 
 Table 5. Skip tags (subjects of R18 and R19) per labeling project of 261023, with their
-role in the map. Q = role `quality`, E = role `exclusion`; * = also a subject of R19 (describes
-the image: the sample is left out of every project). Every tag listed is a subject of R18.
+role in the map. Q = role `quality`, E = role `exclusion`. * = measure A3 (C1 skip-sample,
+also a subject of R19: the sample is left out of every project); no mark = measure A10 (C6
+skip-task: only the labeling task is left out). Every tag listed is a subject of R18.
 
 | Labeling project | Skip tags |
 |---|---|
