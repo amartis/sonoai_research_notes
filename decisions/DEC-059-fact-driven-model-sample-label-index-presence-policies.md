@@ -1,7 +1,7 @@
 ---
 id: DEC-059
 title: Fact-driven model of labels - fact items by target level and fact kind, the sample-label index, and presence tables from named presence policies
-status: proposed
+status: accepted
 area: [labeling, datasets]
 created: 2026-11-12
 from: [DIS-027]

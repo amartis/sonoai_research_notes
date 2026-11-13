@@ -1,7 +1,7 @@
 ---
 id: DEC-058
 title: Milestone refine-data1023 - sample-label index and presence tables of dataset 261023 in four steps, repeatable on later versions
-status: proposed
+status: accepted
 area: [datasets, labeling, workflow]
 created: 2026-11-12
 from: [DIS-027]
