@@ -5,7 +5,7 @@ images, file names or identifiers.
 
 Built on 2026-11-13 on `261023_plain` ([DEC-018](../../decisions/DEC-018-plain-style-for-local-research.md)) with
 `sonoai-data sample-label-index 261023_plain --relations configs/data/fact_relations_261023.yaml --version v1`
-from the code repo at commit 4b670b8 (code: TASK-119, last change to the module 37178a2; config: TASK-118,
+from the code repo at commit 4b670b8 (code: [TASK-119](../../../backlog/tasks/task-119%20-%20Fact-items-and-the-sample-label-index-library-code-sonoai-data-sample-label-index-tests-on-synthetic-tables-DEC-059.md), last change to the module 37178a2; config: [TASK-118](../../../backlog/tasks/task-118%20-%20Fact-relations-config-of-261023-tag-to-content-label-QA-tags-to-fact-kind-and-closed-tags-visit-unit-exclusive-sets-implied-tags-second-pass-pairs-DEC-059.md),
 sha256 prefix 03fa1dd97269a29c). Inputs: `images/taskcrops_df.pkl` and `labels/flags_df.pkl`. Written, inside
 the dataset only: `derived/sample_label_index_v1_df.pkl` (sha256
 `b08b9e011689073872de4ee6e16b18d61802761a18a99c85dd72764bb79acf49`) and its `.xlsx` copy (2 row sheets).
@@ -19,7 +19,7 @@ an estimate from a sample.
 - **Labeling task**: one task of a labeling project (`task_id`); 201,273 in `flags_df`, 143,152 of them with
   a crop row in `taskcrops_df`.
 - **Visited**: the labeling task has at least one labeling with a count above 0 (any tag, also an ignored one).
-- **Sample**: image hash + crop box (DEC-044 rule 1). **Content label**: the label of a content tag (config
+- **Sample**: image hash + crop box ([DEC-044](../../decisions/DEC-044-cirrhosis-sample-set-quality-filter-and-split.md) rule 1). **Content label**: the label of a content tag (config
   `labels` merges synonyms). **Fact item**: one fact about a labeling task (kinds in the
   [model doc](../../../docs/fact-driven-model.md)); the index puts it on the rows of the labels it concerns.
 - A (sample, label) pair not in the index is unknown (not "absent").
