@@ -11,12 +11,12 @@ Reporting checklists (CLAIM, STARD): not applicable. This is a count of how labe
 ## Summary
 
 1. **59 of the 64 rules were measured; 5 cannot be tested from the tables** (R39, R40, R41, R43, R54; Table 2). Of the 59, R21 and R64 report overlap values instead of a respected share (Tables 12 to 14), and R26 has no case (its subject tag is never given). R08, R09, R16 (signs checked tag) and R36 (P11) have fewer than 5 cases, and R10 has 6 cases with fewer than 5 respected.
-2. **Most within-task rules hold in 96% to 100% of the cases where their subject is given** (R01 to R07, R11 to R13, R15, R16 anatomy and fat checked tags, R20, R22 to R24, R27 to R32, R34, R36, R37 and R38; Tables 3, 4, 7, 8, 9). The values that differ most: R14 29.4% (1,177 of 3,999 P9 labeling tasks with a sign polygon carry `checked`), R17 92.3% (12,156 of 13,169), R25 0 of 195, R33 91.3% to 100.0% (weak rule), R35 71.0% (299 of 421), R42 0.0% in the strict reading.
+2. **Most within-task rules hold in 96% to 100% of the cases where their subject is given** (R01 to R07, R11 to R13, R15, R16 anatomy and fat checked tags, R20, R22 to R24, R27 to R32, R34, R36, R37 and R38; Tables 3, 4, 7, 8, 9). The values that differ most: R14 29.4% (1,177 of 3,999 P9 labeling tasks with a sign polygon carry `checked`), R17 92.3% (12,156 of 13,169), R25 0 of 195, R33 above 85.7% to 100.0% (weak rule), R35 71.0% (299 of 421), R42 0.0% in the strict reading.
 3. **R18 (after a skip, nothing else is given) depends on the labeling project**: 100% in most single-finding projects, 0.0% in P1, P7, P9, P14 and P50 (strict reading), 24.3% in P2. Allowing ignored tags raises P1 to 12.8% and P14 to 34.5% and leaves P7, P9 and P50 at about 0% (Table 5, two readings).
 4. **R19 (a skip that describes the image leaves the sample out of every labeling project)**: the other labeling projects' labeling tasks carry a skip or have no given labeling in 0.0% to 97.7% of the labeling tasks, depending on the target project (Table 6). It is below 20% for the one-finding labeling projects P19 to P24, P28, P35, P50.
-5. **Between-project rules**: routing rules R44 to R47 hold in at least 99.0% of the samples (Table 10). R48 (a "no organ found" skip with no routing source tag) holds in 0 to 3.4% of the labeling tasks. Second-pass rules R55 to R63 agree on 82% to 99% of all sample-label pairs in most pair sets (n from 36 to 62,976; exceptions: R61 P11 against P14 13.9% of 36, R62 66.8% of 1,256; R56 P41 and R60 all-pairs rows are withheld). Counting only sample-label pairs with at least one side given, both sides give the label in 31% to 94% of the pairs (n from 15 to 8,919), except R61 (P11 against P14) 0 of 31, R62 0 of 417, R60 fewer than 5 of 11, and R56 P44, withheld (Table 11).
+5. **Rules between labeling projects**: routing rules R44 to R47 hold in at least 99.0% of the samples (Table 10). R48 (a "no organ found" skip with no routing source tag) holds in up to 3.4% of the labeling tasks (below 6.1% for P38). Second-pass rules R55 to R63 agree on 79% to 99% of all sample-label pairs in most sets of sample-label pairs (n from 36 to 62,976; exceptions: R56 P43 79.5% of 44, R61 P11 against P14 13.9% of 36, R62 66.8% of 1,256; R56 P41 and R60 all-pairs rows are withheld). Counting only sample-label pairs with at least one side given, both sides give the label in 31% to 94% of the pairs (n from 15 to 8,919), except R61 (P11 against P14) 0 of 31, R62 0 of 417, R60 fewer than 5 of 11, and R56 P44, withheld (Table 11).
 6. **R21** (ignore polygon against grade polygons): no ignore polygon has more than 0.012 of its area inside grade polygons (P14); 5 of 18 (P7) and 12 of 57 (P14) have any overlap (Table 12). **R64** (repeat labeling): identical choice tags in 43 of 53 labeling-task pairs (P7) and 47 of 52 (P2), at least 107 of 111 in P20 to P24 (110 of 110 in P24); median polygon area ratio 0.858 and median IoU 0.742 (P2), 0.729 (P7) (Tables 13, 14).
-7. **Not independent tests**: R19 and R50 on P4, P9 and P11, whose samples come from a labeling-labeling-task order link that was found with skip tags ([interpretation_rules.md](interpretation_rules.md), Section 5).
+7. **Not independent tests**: R19 and R50 on P4, P9 and P11, whose samples come from a labeling-task order link that was found with skip tags ([interpretation_rules.md](interpretation_rules.md), Section 5).
 
 ## Method
 
@@ -24,8 +24,8 @@ Reporting checklists (CLAIM, STARD): not applicable. This is a count of how labe
 
 **Definitions.**
 
-- **Given**: a labeling with count above 0 in `flags_df`, for one labeling task (`project_id`, `task_id`), tag group and tag. **Visited** (labeling task): at least one given labeling of any tag. For P7 and P14, whose visit unit is the tag group ([DEC-059](../../decisions/DEC-059-fact-driven-model-sample-label-index-presence-policies.md)), the cross-project rules (R55 to R63) count a tag group as worked on when one of its tags, or its checked tag, is given.
-- **Sample**: image hash plus crop box from `taskcrops_df` ([DEC-044](../../decisions/DEC-044-cirrhosis-sample-set-quality-filter-and-split.md) rule 1). Labeling projects whose labeling tasks have no crop (P1, P3, P30, P49, P52, and P4, P9, P11) cannot be placed on samples. For P4, P9 and P11 the labeling task at position i in labeling-task-id order takes the sample of the P2 labeling task at position i (5,913 tasks each; the inferred labeling-labeling-task order link of interpretation_rules.md Section 1, not re-verified here). P49 and P52 are matched by order: the 10,948 visited P49 labeling tasks in labeling-task-id order against the 10,948 P52 labeling tasks in labeling-task-id order. P1 and P30 have no link, so only rules inside the labeling task apply to them (R03, R18, R27).
+- **Given**: a labeling with count above 0 in `flags_df`, for one labeling task (`project_id`, `task_id`), tag group and tag. **Visited** (labeling task): at least one given labeling of any tag. For P7 and P14, whose visit unit is the tag group ([DEC-059](../../decisions/DEC-059-fact-driven-model-sample-label-index-presence-policies.md)), the rules across labeling projects (R55 to R63) count a tag group as worked on when one of its tags, or its checked tag, is given.
+- **Sample**: image hash plus crop box from `taskcrops_df` ([DEC-044](../../decisions/DEC-044-cirrhosis-sample-set-quality-filter-and-split.md) rule 1). Labeling projects whose labeling tasks have no crop (P1, P3, P30, P49, P52, and P4, P9, P11) cannot be placed on samples. For P4, P9 and P11 the labeling task at position i in labeling-task-id order takes the sample of the P2 labeling task at position i (5,913 labeling tasks each; the inferred labeling-task order link of interpretation_rules.md Section 1, not re-verified here). P49 and P52 are matched by order: the 10,948 visited P49 labeling tasks in labeling-task-id order against the 10,948 P52 labeling tasks in labeling-task-id order. P1 and P30 have no link, so only rules inside the labeling task apply to them (R03, R18, R27).
 - **Sample-label pair**: one sample and one tag or content label (R55 to R63). **Labeling-task pair**: two visited labeling tasks of one labeling project on one sample (R64).
 - **Skip tags** are the `quality` and `task_skip` kinds of `fact_relations_261023.yaml` (interpretation_rules.md Table 5, plus P14 `skip_untouched` for R42).
 - **Tested, respected** (every row of Tables 3 to 11): the unit is named in the "Test" column. A unit is *tested* when the rule's subject is given (or, for "if and only if" and agreement rules, when at least one of the two sides is given, as stated in the row). It is *respected* when the rule's "expected in the data" statement holds. Share = respected / tested, with a 95% Wilson interval. Where the share would let a reader recover a count of 1 to 4 (a count shown as `<5`, or 1 to 4 tested units not respected), the share is shown as a bound (`>99.9` means above 99.9%; `<83.4` means below 83.4%, which is 5 units out of 6; a `<` bound is 5 over n, as a percentage rounded up), with no interval, and `withheld` when fewer than 5 units were tested. In those rows the respected cell shows a bound as well.
@@ -109,7 +109,7 @@ Table 3. R01 to R12, "absent" answers: the share of labeling tasks with the answ
 | R12 | P47 | `bursa_nodisease` given: target polygon tag(s) not given | 22 | 22 | 100.0 (85.1-100.0) |
 | R12 | P52 | `bursa_nodisease` given: target polygon tag(s) not given | 0 | 0 | – |
 
-Table 4. R13 to R17, "checked" marks: the share of labeling tasks with a target polygon given (R13 to R16) that also carry the checked tag, and, for R17, the share of labeling tasks with `imagequality_checked` that carry no skip tag of the group. P41's group `diseases` includes the organ polygon `lung` (read literally; P41 has 11 labeling tasks). n = labeling tasks.
+Table 4. R13 to R17, "checked" tags: the share of labeling tasks with a target polygon given (R13 to R16) that also carry the checked tag, and, for R17, the share of labeling tasks with `imagequality_checked` that carry no skip tag of the group. P41's group `diseases` includes the organ polygon `lung` (read literally; P41 has 11 labeling tasks). n = labeling tasks.
 
 | Rule | Labeling project | Test (unit; tested = subject given) | n tested | n respected | Respected, % (95% CI) |
 |---|---|---|---:|---:|---|
@@ -177,38 +177,38 @@ Table 5. R18 and R42, after a skip nothing else is given. R18: labeling tasks wi
 | R18 | P50 | skip tag of interpretation_rules.md Table 5 given: no other given labeling (not skip, not text) given | 73 | 0 | 0.0 (0.0-5.0) | 0 | 0.0 (0.0-5.0) |
 | R42 | P14 | `skip_untouched` given: no other given labeling (not text) given | 223 | 0 | 0.0 (0.0-1.7) | >218 | >97.7 |
 
-Table 6. R19, a skip that describes the image (a `quality` skip tag, starred in interpretation_rules.md Table 5) leaves the sample out of every labeling project. Unit: a labeling task of project B on a sample where another labeling project has a `quality` skip given. Respected when that labeling task carries any skip tag or has no given labeling. The second block of columns restricts to labeling tasks with a given labeling, where "no given labeling" cannot make the labeling task respect the rule. "Labeling projects with samples" = sources with samples; "linked by labeling-labeling-task order" = sources P4, P9 or P11, whose sample is inferred (not independent tests; Section 5 of interpretation_rules.md). For P4, P9 and P11 as target, all other labeling projects are sources. Where the two blocks would differ by fewer than 5 labeling tasks, the second block is withheld. n = labeling tasks.
+Table 6. R19, a skip that describes the image (a `quality` skip tag, starred in interpretation_rules.md Table 5) leaves the sample out of every labeling project. Unit: a labeling task of project B on a sample where another labeling project has a `quality` skip given. Respected when that labeling task carries any skip tag or has no given labeling. The second block of columns restricts to labeling tasks with a given labeling, where "no given labeling" cannot make the labeling task respect the rule. "Labeling projects with samples" = sources with samples; "linked by labeling-task order" = sources P4, P9 or P11, whose sample is inferred (not independent tests; Section 5 of interpretation_rules.md). For P4, P9 and P11 as target, all other labeling projects are sources. Where the two blocks would differ by fewer than 5 labeling tasks, the second block is withheld. n = labeling tasks.
 
 | Rule | Labeling project (B) | Skip source | n labeling tasks of B on flagged samples | n respected | % (95% CI) | of these, labeling tasks with a given labeling | n respected | % (95% CI) |
 |---|---|---|---:|---:|---|---:|---:|---|
 | R19 | P2 | labeling projects with samples | 1,630 | 1,372 | 84.2 (82.3-85.9) | 1,630 | 1,372 | 84.2 (82.3-85.9) |
-| R19 | P2 | labeling projects linked by labeling-labeling-task order (P4, P9, P11) | 3,286 | 1,502 | 45.7 (44.0-47.4) | 3,286 | 1,502 | 45.7 (44.0-47.4) |
+| R19 | P2 | labeling projects linked by labeling-task order (P4, P9, P11) | 3,286 | 1,502 | 45.7 (44.0-47.4) | 3,286 | 1,502 | 45.7 (44.0-47.4) |
 | R19 | P4 | all other labeling projects | 3,581 | 7 | 0.2 (0.1-0.4) | 3,581 | 7 | 0.2 (0.1-0.4) |
 | R19 | P7 | labeling projects with samples | 7,616 | 7,442 | 97.7 (97.4-98.0) | 1,905 | 1,731 | 90.9 (89.5-92.1) |
-| R19 | P7 | labeling projects linked by labeling-labeling-task order (P4, P9, P11) | 13,144 | 11,703 | 89.0 (88.5-89.6) | 3,287 | 1,846 | 56.2 (54.5-57.8) |
+| R19 | P7 | labeling projects linked by labeling-task order (P4, P9, P11) | 13,144 | 11,703 | 89.0 (88.5-89.6) | 3,287 | 1,846 | 56.2 (54.5-57.8) |
 | R19 | P9 | all other labeling projects | 2,053 | 1,845 | 89.9 (88.5-91.1) | 2,053 | 1,845 | 89.9 (88.5-91.1) |
 | R19 | P11 | all other labeling projects | 3,518 | 3,168 | 90.1 (89.0-91.0) | 857 | 507 | 59.2 (55.8-62.4) |
 | R19 | P14 | labeling projects with samples | 754 | 15 | 2.0 (1.2-3.3) | 754 | 15 | 2.0 (1.2-3.3) |
-| R19 | P14 | labeling projects linked by labeling-labeling-task order (P4, P9, P11) | <5 | 0 | withheld | <5 | 0 | withheld |
+| R19 | P14 | labeling projects linked by labeling-task order (P4, P9, P11) | <5 | 0 | withheld | <5 | 0 | withheld |
 | R19 | P15 | labeling projects with samples | 548 | 235 | 42.9 (38.8-47.1) | 369 | 56 | 15.2 (11.9-19.2) |
-| R19 | P15 | labeling projects linked by labeling-labeling-task order (P4, P9, P11) | 472 | 45 | 9.5 (7.2-12.5) | 472 | 45 | 9.5 (7.2-12.5) |
+| R19 | P15 | labeling projects linked by labeling-task order (P4, P9, P11) | 472 | 45 | 9.5 (7.2-12.5) | 472 | 45 | 9.5 (7.2-12.5) |
 | R19 | P19 | labeling projects with samples | 282 | 0 | 0.0 (0.0-1.3) | 282 | 0 | 0.0 (0.0-1.3) |
-| R19 | P19 | labeling projects linked by labeling-labeling-task order (P4, P9, P11) | 472 | <5 | <1.1 | withheld | withheld | withheld |
+| R19 | P19 | labeling projects linked by labeling-task order (P4, P9, P11) | 472 | <5 | <1.1 | withheld | withheld | withheld |
 | R19 | P20 | labeling projects with samples | 1,037 | 0 | 0.0 (0.0-0.4) | 1,037 | 0 | 0.0 (0.0-0.4) |
-| R19 | P20 | labeling projects linked by labeling-labeling-task order (P4, P9, P11) | 605 | 0 | 0.0 (0.0-0.6) | 605 | 0 | 0.0 (0.0-0.6) |
+| R19 | P20 | labeling projects linked by labeling-task order (P4, P9, P11) | 605 | 0 | 0.0 (0.0-0.6) | 605 | 0 | 0.0 (0.0-0.6) |
 | R19 | P21 | labeling projects with samples | 263 | 45 | 17.1 (13.0-22.1) | withheld | withheld | withheld |
-| R19 | P21 | labeling projects linked by labeling-labeling-task order (P4, P9, P11) | 605 | 68 | 11.2 (9.0-14.0) | withheld | withheld | withheld |
+| R19 | P21 | labeling projects linked by labeling-task order (P4, P9, P11) | 605 | 68 | 11.2 (9.0-14.0) | withheld | withheld | withheld |
 | R19 | P22 | labeling projects with samples | 1,034 | 7 | 0.7 (0.3-1.4) | withheld | withheld | withheld |
-| R19 | P22 | labeling projects linked by labeling-labeling-task order (P4, P9, P11) | 605 | <5 | <0.9 | 605 | <5 | <0.9 |
+| R19 | P22 | labeling projects linked by labeling-task order (P4, P9, P11) | 605 | <5 | <0.9 | 605 | <5 | <0.9 |
 | R19 | P23 | labeling projects with samples | 1,038 | <5 | <0.5 | withheld | withheld | withheld |
-| R19 | P23 | labeling projects linked by labeling-labeling-task order (P4, P9, P11) | 605 | <5 | <0.9 | withheld | withheld | withheld |
+| R19 | P23 | labeling projects linked by labeling-task order (P4, P9, P11) | 605 | <5 | <0.9 | withheld | withheld | withheld |
 | R19 | P24 | labeling projects with samples | 1,035 | <5 | <0.5 | 1,035 | <5 | <0.5 |
-| R19 | P24 | labeling projects linked by labeling-labeling-task order (P4, P9, P11) | 605 | <5 | <0.9 | withheld | withheld | withheld |
+| R19 | P24 | labeling projects linked by labeling-task order (P4, P9, P11) | 605 | <5 | <0.9 | withheld | withheld | withheld |
 | R19 | P26 | labeling projects with samples | 31 | <5 | <16.2 | 31 | <5 | <16.2 |
 | R19 | P27 | labeling projects with samples | 124 | 41 | 33.1 (25.4-41.7) | 124 | 41 | 33.1 (25.4-41.7) |
-| R19 | P27 | labeling projects linked by labeling-labeling-task order (P4, P9, P11) | 311 | 20 | 6.4 (4.2-9.7) | 311 | 20 | 6.4 (4.2-9.7) |
+| R19 | P27 | labeling projects linked by labeling-task order (P4, P9, P11) | 311 | 20 | 6.4 (4.2-9.7) | 311 | 20 | 6.4 (4.2-9.7) |
 | R19 | P28 | labeling projects with samples | 179 | 10 | 5.6 (3.1-10.0) | 179 | 10 | 5.6 (3.1-10.0) |
-| R19 | P28 | labeling projects linked by labeling-labeling-task order (P4, P9, P11) | 311 | 6 | 1.9 (0.9-4.1) | 311 | 6 | 1.9 (0.9-4.1) |
+| R19 | P28 | labeling projects linked by labeling-task order (P4, P9, P11) | 311 | 6 | 1.9 (0.9-4.1) | 311 | 6 | 1.9 (0.9-4.1) |
 | R19 | P33 | labeling projects with samples | 69 | 23 | 33.3 (23.4-45.1) | 69 | 23 | 33.3 (23.4-45.1) |
 | R19 | P35 | labeling projects with samples | 345 | 21 | 6.1 (4.0-9.1) | 345 | 21 | 6.1 (4.0-9.1) |
 | R19 | P36 | labeling projects with samples | 29 | 16 | 55.2 (37.5-71.6) | 29 | 16 | 55.2 (37.5-71.6) |
@@ -221,11 +221,11 @@ Table 6. R19, a skip that describes the image (a `quality` skip tag, starred in 
 | R19 | P46 | labeling projects with samples | 27 | <5 | <18.6 | 27 | <5 | <18.6 |
 | R19 | P47 | labeling projects with samples | 20 | 11 | 55.0 (34.2-74.2) | 20 | 11 | 55.0 (34.2-74.2) |
 | R19 | P50 | labeling projects with samples | 719 | 7 | 1.0 (0.5-2.0) | 719 | 7 | 1.0 (0.5-2.0) |
-| R19 | P50 | labeling projects linked by labeling-labeling-task order (P4, P9, P11) | 1,764 | 10 | 0.6 (0.3-1.0) | 1,764 | 10 | 0.6 (0.3-1.0) |
+| R19 | P50 | labeling projects linked by labeling-task order (P4, P9, P11) | 1,764 | 10 | 0.6 (0.3-1.0) | 1,764 | 10 | 0.6 (0.3-1.0) |
 
 ### 2.3 Same fact twice, exclusive options, implied tags (R20, R22 to R37)
 
-Table 7. R20 and R22 to R26. R22: labeling tasks with exactly one grade choice and at least one grade polygon; respected when the choice equals the highest grade drawn. R23 to R25 ("if and only if"): tested = at least one of the two sides given; respected = both given. R26: P14 `liver_ascites` polygon given; respected when both `sign_liver_ascites` and `sign_liquid_near_liver` are given. n = labeling tasks, except R23 (task and tag pairs).
+Table 7. R20 and R22 to R26. R22: labeling tasks with exactly one grade choice and at least one grade polygon; respected when the choice equals the highest grade drawn. R23 to R25 ("if and only if"): tested = at least one of the two sides given; respected = both given. R26: P14 `liver_ascites` polygon given; respected when both `sign_liver_ascites` and `sign_liquid_near_liver` are given. n = labeling tasks, except R23 ((labeling task, tag) pairs).
 
 | Rule | Labeling project | Test (unit; tested = subject given) | n tested | n respected | Respected, % (95% CI) |
 |---|---|---|---:|---:|---|
@@ -361,8 +361,8 @@ Table 10. R44 to R53. R44 to R47 (routing): the sample-level share of samples of
 | R49 | P7 | P7 `gallbladder_stone` given: `gallbladder` in P2 | <5 | <5 | withheld |
 | R49 | P7 | P7 `gastric_tumor` given: `stomach` in P2 | 41 | 41 | 100.0 (91.4-100.0) |
 | R50 | P7 | `skip_notliver` given, P2 labeling task visited: no `liver` polygon in P2 on the sample | 287 | >282 | >98.2 |
-| R50 | P9 | `skip_notliver` given, P2 labeling task visited: no `liver` polygon in P2 on the sample (labeling-labeling-task order link) | 298 | 279 | 93.6 (90.3-95.9) |
-| R50 | P11 | `skip_notliver` given, P2 labeling task visited: no `liver` polygon in P2 on the sample (labeling-labeling-task order link) | 47 | >42 | >89.3 |
+| R50 | P9 | `skip_notliver` given, P2 labeling task visited: no `liver` polygon in P2 on the sample (labeling-task order link) | 298 | 279 | 93.6 (90.3-95.9) |
+| R50 | P11 | `skip_notliver` given, P2 labeling task visited: no `liver` polygon in P2 on the sample (labeling-task order link) | 47 | >42 | >89.3 |
 | R51 | P20-24 | sample of any of P20-24: visited in all five labeling projects | 10,340 | 10,304 | 99.7 (99.5-99.7) |
 | R51 | P20 | sample of the labeling project: visited in the labeling project | 10,340 | 10,334 | 99.9 (99.9-100.0) |
 | R51 | P21 | sample of the labeling project: visited in the labeling project | 10,340 | 10,334 | 99.9 (99.9-100.0) |
@@ -372,7 +372,7 @@ Table 10. R44 to R53. R44 to R47 (routing): the sample-level share of samples of
 | R52 | P27, 28 | sample of P27 or P28: visited in both | 1,570 | 1,565 | 99.7 (99.3-99.9) |
 | R53 | P15, 26 | sample visited in P15 or P26: not visited in both | 3,011 | 3,011 | 100.0 (99.9-100.0) |
 
-Table 11. R55 to R63, second pass by another labeling project on the same sample (labeling-task order for R59, R61 with P4 or P9, R62, R63). Samples visited and not skipped in both labeling projects only; for P7 and P14 the pair's tag group must be worked on. Two counts per pair set: **all pairs** (respected = both given or both not given; most pairs are "both not given", so this share is high by construction) and **pairs with at least one side given** (respected = both given). The "Labeling project" column shows the two projects. R58 and the nodisease parts of R59, R60 are one-sided tests as stated in the row. R61 has seven parts; the P9 against P14 `liver_signs` and P4 against P14 `signal_regions` parts have no sample where both sides were worked on. n = sample-label pairs, except where stated.
+Table 11. R55 to R63, second pass by another labeling project on the same sample (labeling-task order for R59, R61 with P4 or P9, R62, R63). Samples visited and not skipped in both labeling projects only; for P7 and P14 the sample-label pair's tag group must be worked on. Two counts per pair set: **all pairs** (respected = both given or both not given; most pairs are "both not given", so this share is high by construction) and **pairs with at least one side given** (respected = both given). The "Labeling project" column shows the two labeling projects. R58 and the nodisease parts of R59, R60 are one-sided tests as stated in the row. R61 has seven parts; the P9 against P14 `liver_signs` and P4 against P14 `signal_regions` parts have no sample where both sides were worked on. n = sample-label pairs, except where stated.
 
 | Rule | Labeling project | Test (unit; tested = subject given) | n tested | n respected | Respected, % (95% CI) |
 |---|---|---|---:|---:|---|
@@ -419,24 +419,24 @@ Table 11. R55 to R63, second pass by another labeling project on the same sample
 | R61 | P7 / 14 | sample-label pairs, P7 polygons against P14 `fat_regions` polygons (pairs with at least one side given: both given) | 126 | 81 | 64.3 (55.6-72.1) |
 | R61 | P7 / 14 | sample-label pairs, P7 choices against P14 `fat_regions` polygons (all pairs: both given or both not given) | 855 | 811 | 94.9 (93.2-96.1) |
 | R61 | P7 / 14 | sample-label pairs, P7 choices against P14 `fat_regions` polygons (pairs with at least one side given: both given) | 124 | 80 | 64.5 (55.8-72.4) |
-| R61 | P9 / 14 | sample-label pairs, P9 sign polygons against P14 `liver_signs` (labeling-labeling-task order link) (all pairs: both given or both not given) | 0 | 0 | – |
-| R61 | P9 / 14 | sample-label pairs, P9 sign polygons against P14 `liver_signs` (labeling-labeling-task order link) (pairs with at least one side given: both given) | 0 | 0 | – |
-| R61 | P4 / 14 | sample-label pairs, P4 areas against P14 `signal_regions` (labeling-labeling-task order link) (all pairs: both given or both not given) | 0 | 0 | – |
-| R61 | P4 / 14 | sample-label pairs, P4 areas against P14 `signal_regions` (labeling-labeling-task order link) (pairs with at least one side given: both given) | 0 | 0 | – |
-| R61 | P9 / 14 | sample-label pairs, P9 contrast choices against P14 (labeling-labeling-task order link) (all pairs: both given or both not given) | 188 | 178 | 94.7 (90.5-97.1) |
-| R61 | P9 / 14 | sample-label pairs, P9 contrast choices against P14 (labeling-labeling-task order link) (pairs with at least one side given: both given) | 170 | 160 | 94.1 (89.5-96.8) |
-| R61 | P11 / 14 | sample-label pairs, P11 contrast choices against P14 (labeling-labeling-task order link) (all pairs: both given or both not given) | 36 | 5 | 13.9 (6.1-28.7) |
-| R61 | P11 / 14 | sample-label pairs, P11 contrast choices against P14 (labeling-labeling-task order link) (pairs with at least one side given: both given) | 31 | 0 | 0.0 (0.0-11.0) |
-| R62 | P9 / 11 | sample-label pairs, P9 against P11 contrast choices (both labeling-labeling-task order links) (all pairs: both given or both not given) | 1,256 | 839 | 66.8 (64.1-69.3) |
-| R62 | P9 / 11 | sample-label pairs, P9 against P11 contrast choices (both labeling-labeling-task order links) (pairs with at least one side given: both given) | 417 | 0 | 0.0 (0.0-0.9) |
-| R63 | P2 / 9 | samples, P2 `liver_ascites` against P9 `sign_liver_ascites` or `sign_liquid_near_liver` (labeling-labeling-task order link) (all pairs: both given or both not given) | 2,477 | 2,420 | 97.7 (97.0-98.2) |
-| R63 | P2 / 9 | samples, P2 `liver_ascites` against P9 `sign_liver_ascites` or `sign_liquid_near_liver` (labeling-labeling-task order link) (pairs with at least one side given: both given) | 168 | 111 | 66.1 (58.6-72.8) |
+| R61 | P9 / 14 | sample-label pairs, P9 sign polygons against P14 `liver_signs` (labeling-task order link) (all pairs: both given or both not given) | 0 | 0 | – |
+| R61 | P9 / 14 | sample-label pairs, P9 sign polygons against P14 `liver_signs` (labeling-task order link) (pairs with at least one side given: both given) | 0 | 0 | – |
+| R61 | P4 / 14 | sample-label pairs, P4 areas against P14 `signal_regions` (labeling-task order link) (all pairs: both given or both not given) | 0 | 0 | – |
+| R61 | P4 / 14 | sample-label pairs, P4 areas against P14 `signal_regions` (labeling-task order link) (pairs with at least one side given: both given) | 0 | 0 | – |
+| R61 | P9 / 14 | sample-label pairs, P9 contrast choices against P14 (labeling-task order link) (all pairs: both given or both not given) | 188 | 178 | 94.7 (90.5-97.1) |
+| R61 | P9 / 14 | sample-label pairs, P9 contrast choices against P14 (labeling-task order link) (pairs with at least one side given: both given) | 170 | 160 | 94.1 (89.5-96.8) |
+| R61 | P11 / 14 | sample-label pairs, P11 contrast choices against P14 (labeling-task order link) (all pairs: both given or both not given) | 36 | 5 | 13.9 (6.1-28.7) |
+| R61 | P11 / 14 | sample-label pairs, P11 contrast choices against P14 (labeling-task order link) (pairs with at least one side given: both given) | 31 | 0 | 0.0 (0.0-11.0) |
+| R62 | P9 / 11 | sample-label pairs, P9 against P11 contrast choices (both labeling-task order links) (all pairs: both given or both not given) | 1,256 | 839 | 66.8 (64.1-69.3) |
+| R62 | P9 / 11 | sample-label pairs, P9 against P11 contrast choices (both labeling-task order links) (pairs with at least one side given: both given) | 417 | 0 | 0.0 (0.0-0.9) |
+| R63 | P2 / 9 | samples, P2 `liver_ascites` against P9 `sign_liver_ascites` or `sign_liquid_near_liver` (labeling-task order link) (all pairs: both given or both not given) | 2,477 | 2,420 | 97.7 (97.0-98.2) |
+| R63 | P2 / 9 | samples, P2 `liver_ascites` against P9 `sign_liver_ascites` or `sign_liquid_near_liver` (labeling-task order link) (pairs with at least one side given: both given) | 168 | 111 | 66.1 (58.6-72.8) |
 
 ## 4. Overlap values (R21, R64)
 
-Table 12. R21, overlap of the P7 and P14 `hepatic_steatosis__ignore` polygons with the grade polygons of the same labeling task. Measure: share of the ignore polygon's own area inside the union of the grade polygons (fraction, 0 = no overlap; 500 by 500 grid, so a share below about 0.005 is within rasterization at shared borders). Tasks without a grade polygon count as share 0. Shares above 0.01, 0.05, 0.10 and 0.50 are reference points for reading only. No threshold is set. Descriptive distribution (no confidence interval).
+Table 12. R21, overlap of the P7 and P14 `hepatic_steatosis__ignore` polygons with the grade polygons of the same labeling task. Measure: share of the ignore polygon's own area inside the union of the grade polygons (fraction, 0 = no overlap; 500 by 500 grid, so a share below about 0.005 is within rasterization at shared borders). Labeling tasks without a grade polygon count as share 0. Shares above 0.01, 0.05, 0.10 and 0.50 are reference points for reading only. No threshold is set. Descriptive distribution (no confidence interval).
 
-| Labeling project | Tasks with an ignore polygon | of these, also a grade polygon | Ignore polygons (n) | Share of ignore area inside grade polygons: min / P25 / median / P75 / P90 / max (fraction) | Polygons with share above 0 / 0.01 / 0.05 / 0.10 / 0.50, n | Task-level IoU, union of ignore against union of grade polygons: min / median / max (n tasks) |
+| Labeling project | Labeling tasks with an ignore polygon | of these, also a grade polygon | Ignore polygons (n) | Share of ignore area inside grade polygons: min / P25 / median / P75 / P90 / max (fraction) | Polygons with share above 0 / 0.01 / 0.05 / 0.10 / 0.50, n | Task-level IoU, union of ignore against union of grade polygons: min / median / max (n labeling tasks) |
 |---|---|---|---:|---|---|---|
 | P7 | at least 13 | at least 13 | 18 | 0.000 / 0.000 / 0.000 / 0.000 / 0.002 / 0.004 | 5 / 0 / 0 / 0 / 0 | 0.000 / 0.000 / 0.003 (at least 13) |
 | P14 | 57 | at least 50 | 57 | 0.000 / 0.000 / 0.000 / 0.000 / 0.001 / 0.012 | 12 / <5 / 0 / 0 / 0 | 0.000 / 0.000 / 0.007 (at least 50) |
@@ -466,7 +466,7 @@ Table 14. R64, polygon similarity of repeated labeling tasks on one sample: for 
 ## Limitations
 
 - **Exploratory, one analyst, no second check of the code.** The analysis was run in memory and the code is not kept in the repo (task rule: no scripts). The values cannot be regenerated without it; if reproducibility is wanted it is a new task (a `sonoai-data` command). Cross-checks against numbers recorded earlier: the 10,340 kidney samples of R44, the P50 samples with a liver polygon (R46, above 99.9%), the P15 samples (R45, above 99.9%) and the samples visited in both P15 and P26 (R53, none) agree with Table 1 of interpretation_rules.md within the bounds shown.
-- **Counting readings.** Where a rule's statement allows two counts, the choice is stated here. R18 and R42: both readings of "other given labeling" are shown (Table 5). R55 to R63: both the "all pairs" and the "at least one side given" counts are shown (Table 11). R23 to R25 ("if and only if"): the tested set is the labeling tasks where either side is given; counting all visited labeling tasks would give higher shares. R22: 5 P7 labeling tasks with two or more grade choices are left out. R13: the organ polygon `lung` in P41's group `diseases` is read as a disease tag (literally). R48: the expected statement is read as "the routing source tag is not given on the sample"; the 0 to 3.4% in Table 10 shows that nearly every labeling task with `skip_no_organ_found` sits on a sample that has the routing source tag.
+- **Counting readings.** Where a rule's statement allows two counts, the choice is stated here. R18 and R42: both readings of "other given labeling" are shown (Table 5). R55 to R63: both the "all pairs" and the "at least one side given" counts are shown (Table 11). R23 to R25 ("if and only if"): the tested set is the labeling tasks where either side is given; counting all visited labeling tasks would give higher shares. R22: 5 P7 labeling tasks with two or more grade choices are left out. R13: the organ polygon `lung` in P41's group `diseases` is read as a disease tag (literally). R48: the expected statement is read as "the routing source tag is not given on the sample"; the up to 3.4% in Table 10 (below 6.1% for P38) shows that nearly every labeling task with `skip_no_organ_found` sits on a sample that has the routing source tag.
 - **Samples of P4, P9, P11 are inferred** from labeling-task order; the P2 position link was not re-verified. R19 and R50 on these labeling projects are not independent tests.
 - **No clustered intervals.** Intervals treat units as independent; labeling tasks of one sample, samples of one datasource and the five kidney labeling projects on the same samples are not, so the intervals are too narrow.
 - **The rules are candidates.** A low share can mean the rule is wrong, or that the labelers worked differently (for example a QA tag set only sometimes), or that the table cannot show it. This record does not tell which.
