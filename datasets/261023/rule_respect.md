@@ -470,6 +470,7 @@ Table 14. R64, polygon similarity of repeated labeling tasks on one sample: for 
 - **Samples of P4, P9, P11 are inferred** from labeling-task order; the P2 position link was not re-verified. R19 and R50 on these labeling projects are not independent tests.
 - **No clustered intervals.** Intervals treat units as independent; labeling tasks of one sample, samples of one datasource and the five kidney labeling projects on the same samples are not, so the intervals are too narrow.
 - **The rules are candidates.** A low share can mean the rule is wrong, or that the labelers worked differently (for example a QA tag set only sometimes), or that the table cannot show it. This record does not tell which.
+- **Masking scope.** Masking of counts 1 to 4 applies within each table; differences between cells of different tables (for example R18 against R48 per labeling project) can narrow a count below 5 (user, 2026-11-13).
 - **Tag lists** are taken from the configs; tags named differently but meaning the same are not paired (interpretation_rules.md Section 5).
 - Rasterization (R21, R64) is approximate to 0.2 percent of the image side; tiny overlap values are within that.
 
