@@ -18,13 +18,19 @@ an estimate from a sample.
 
 - **Labeling task**: one task of a labeling project (`task_id`); 201,273 in `flags_df`, 143,152 of them with
   a crop row in `taskcrops_df`.
-- **Visited**: the labeling task has at least one labeling with a count above 0 (any tag, also an ignored one).
+- **Visited**, **visit unit** and **ignored tag**: defined in the [fact-driven model doc](../../../docs/fact-driven-model.md), section 2
+  (visited and visit unit, bullet "Visited") and section 3 (ignored tag). The visit unit is the labeling task,
+  except the tag group for labeling projects P7 and P14.
 - **Sample**: image hash + crop box ([DEC-044](../../decisions/DEC-044-cirrhosis-sample-set-quality-filter-and-split.md) rule 1). **Content label**: the label of a content tag (config
-  `labels` merges synonyms). **Fact item**: one fact about a labeling task (kinds in the
-  [model doc](../../../docs/fact-driven-model.md)); the index puts it on the rows of the labels it concerns.
+  `labels` merges synonyms). **Fact item**: one fact about a target (labeling task, labeling group or labeling; kinds in the
+  [fact-driven model doc](../../../docs/fact-driven-model.md), [glossary](../../../docs/glossary.md)); the index puts it on the rows of the labels it concerns.
 - A (sample, label) pair not in the index is unknown (not "absent").
 
 ## Headline
+
+Table 1. Size of the index and the scopes of the counts: index rows, samples and labels describe the index;
+the labeling-task figure counts the 118,935 visited labeling tasks with a crop row; the labelings row counts all
+labelings in `flags_df` (every labeling task, with or without a crop row).
 
 | Quantity | n |
 |---|---|
@@ -32,23 +38,31 @@ an estimate from a sample.
 | Samples in the index | 29,233 of 31,104 in `taskcrops_df` (1,871 samples have no visited task with a crop row) |
 | Content labels | 100 |
 | Rows per label (min, median, max) | 56, 14,573, 25,395 |
-| Labeling tasks with a crop row, visited (give fact items) | 118,935 |
-| Labelings in `flags_df` (task, tag group, tag; counts summed) | 5,456,390 (from 5,559,898 rows) |
-| Labelings of a tag not in its project's schema | 0 |
+| Labeling tasks with a crop row, visited (give fact items; index scope) | 118,935 |
+| Labelings in `flags_df`, all labeling tasks (labeling task, tag group, tag; counts summed) | 5,456,390 (from 5,559,898 rows) |
+| Labelings of a tag not in its labeling project's schema | 0 |
 
 ## Fact items per fact kind and value
 
-Items are counted once per labeling-task fact, before the index copies an item onto the rows of each
+Items are counted once per fact item, before the index copies an item onto the rows of each
 label it concerns.
 
-Table 1. Fact items by kind and value (n = 1,742,924 items; all 118,935 visited labeling tasks with a crop row).
+Fact kinds, one line each: **value**: a content tag was given (count above 0) or not (count 0) in a
+labeling. **visited**: the labeling task (or, with the tag-group visit unit, the tag group) was worked on, or
+not. **closure**: the labeler closed a set of content tags as `absent` (not there), `checked` (looked at) or
+`undecided`. **quality**: a skip tag says the image is unusable (the sample is left out). **task_skip**: a skip
+tag says the labeling project's own question cannot be asked on the sample. Full table: [fact-driven model doc](../../../docs/fact-driven-model.md), section 2.
+
+Table 2. Fact items by kind and value (n = 1,742,924 items; all 118,935 visited labeling tasks with a crop row).
+`not_visited` arises only where the visit unit is the tag group (labeling projects P7 and P14): the labeling task
+was worked on, but one of its tag groups was not.
 
 | Kind | Value | Items |
 |---|---|---|
 | value | given (count above 0) | 119,890 |
 | value | not_given (count 0) | 1,305,577 |
 | visited | visited | 150,795 |
-| visited | not_visited (tag-group visit unit: P7, P14) | 41,528 |
+| visited | not_visited (tag group not worked on; P7, P14) | 41,528 |
 | closure | absent | 70,863 |
 | closure | checked | 44,321 |
 | closure | undecided | 1,312 |
@@ -59,11 +73,11 @@ Value items sum to 1,425,467; their `flags_df` count sums to 140,790 (8.4% of va
 
 ## Rows and items per labeling project
 
-Table 2. Per labeling project (P): items, labeling tasks with items, index rows and samples with an item
-of that project. A row has items of several projects, so rows do not add up to 1,227,979. Items by kind:
-quality / visited / task_skip / closure / value.
+Table 3. Per labeling project (P = labeling project, `project_id`): items, labeling tasks with items, index rows and samples with an item
+of that labeling project. A row has items of several labeling projects, so rows do not add up to 1,227,979. The
+last column splits the items by kind in the order quality / visited / task_skip / closure / value.
 
-| P | Items | Tasks | Rows | Samples | q / vis / skip / clo / val |
+| P (labeling project) | Items | Labeling tasks | Rows | Samples | Items: quality / visited / task_skip / closure / value |
 |---|---|---|---|---|---|
 | 2 | 67,970 | 5,913 | 76,849 | 5,861 | 2,927 / 5,913 / 0 / 0 / 59,130 |
 | 7 | 144,469 | 5,914 | 78,403 | 5,861 | 1,377 / 17,742 / 1,161 / 5,909 / 118,280 |
@@ -96,47 +110,53 @@ quality / visited / task_skip / closure / value.
 | 47 | 562 | 180 | 180 | 180 | 0 / 180 / 25 / 177 / 180 |
 | 50 | 55,440 | 13,920 | 15,123 | 13,920 | 26 / 13,920 / 48 / 27,526 / 13,920 |
 
-Tasks and items in Table 2 sum to the totals above (118,935 visited tasks with a crop row; the per-project
-task counts add up to it).
+Labeling tasks and items in Table 3 sum to the totals above (118,935 visited labeling tasks with a crop row, the
+scope of the fact items; the headline `flags_df` labelings cover all labeling tasks).
 
 ## Labeling tasks left out
 
-Table 3. All 201,273 labeling tasks by reason for being in or out of the index (each task in one row).
+Table 4. All 201,273 labeling tasks by reason for being in or out of the index (each labeling task in one row).
 
-| Reason | Tasks |
+| Reason | Labeling tasks |
 |---|---|
 | In the index (crop row, visited) | 118,935 |
 | Left out: no crop row | 58,121 (32,082 visited, 26,039 not visited) |
 | Left out: crop row, not visited | 24,217 |
 
-- **No crop row**, per project (tasks, of which visited): P1 5,913 (5,913); P4 5,913 (5,913); P9 5,913
+- **No crop row**, per labeling project (labeling tasks, of which visited): P1 5,913 (5,913); P4 5,913 (5,913); P9 5,913
   (5,913); P11 5,913 (1,517); P30 3,949 (607); P49 13,659 (10,948); P52 10,948 (1,271); P3 5,913 (0). P1,
-  P4, P9, P11, P30, P49 and P52 are the projects the model doc names as out of v1 scope (52,208 tasks); every
-  one of them has no crop row. **P3 is not named there**: it also has no crop row (5,913 tasks, none visited).
-  The projects out of v1 scope have crop rows for none of their tasks, so no task is left out for the scope
-  alone beyond the no-crop count.
-- **Crop row, not visited** (no labeling above 0), per project: P7 17,738; P15 4,557; P14 1,872; P22 8;
+  P4, P9, P11, P30, P49 and P52 are the labeling projects the [fact-driven model doc](../../../docs/fact-driven-model.md) names as out of v1 scope (52,208 labeling tasks); every
+  one of them has no crop row. **P3 is not named there**: it also has no crop row (5,913 labeling tasks, none visited).
+  The labeling projects out of v1 scope have crop rows for none of their labeling tasks, so no labeling task is
+  left out for the scope alone beyond the no-crop count.
+- **Crop row, not visited** (no labeling above 0), per labeling project: P7 17,738; P15 4,557; P14 1,872; P22 8;
   P23 7; P20 6; P21 6; P28 5; P50 4; P24 10; P19, P26, P37, P38 1 each. No labeling task with a crop row
-  lacks rows in `flags_df`. P7 and P14 count visits by tag group (visit unit), so a visited task of those
-  projects can still carry `not_visited` items (Table 1).
+  lacks rows in `flags_df`. P7 and P14 count visits by tag group (visit unit), so a visited labeling task of those
+  labeling projects can still carry `not_visited` items (Table 2).
 
 ## Checks
 
-1. **Every visited labeling task with a crop row gives at least one item.** Passed: 118,935 of 118,935 tasks
+1. **Every visited labeling task with a crop row gives at least one item.** Passed: 118,935 of 118,935 labeling tasks
    have at least one fact item; 0 without. Checked twice: on the items rebuilt in memory with
-   `fact_items` and on the facts of the written index (118,935 distinct tasks appear in it). No item belongs to
-   a task that is not visited with a crop row (0).
-2. **Value items equal the content-tag labelings of those tasks in `flags_df`.** Passed: 1,425,467 value
-   items against 1,425,467 content-tag labelings (task, tag group, tag) of the same tasks, computed from the
+   `fact_items` and on the facts of the written index (118,935 distinct labeling tasks appear in it). No item belongs to
+   a labeling task that is not visited with a crop row (0).
+2. **Value items equal the content-tag labelings of those labeling tasks in `flags_df`.** Passed: 1,425,467 value
+   items against 1,425,467 content-tag labelings (labeling task, tag group, tag) of the same labeling tasks, computed from the
    raw `flags_df` rows (1,512,408 rows, summed per labeling): 0 labelings only in `flags_df`, 0 only in the
    items, 0 counts that differ; count sums 140,790 on both sides; given labelings 119,890 on both sides.
-   The other labelings of those tasks (744,827 raw rows, 145,130 with a count above 0) are QA, ignored or
-   text tags and have no value item, as intended.
+   The other labelings of those labeling tasks (744,827 raw rows, 145,130 with a count above 0) are QA, ignored or
+   text tags and have no value item, as intended. This check tests completeness and counts (no labeling lost or double
+   counted), not the correctness of the tag-to-label map of the [TASK-118](../../../backlog/tasks/task-118%20-%20Fact-relations-config-of-261023-tag-to-content-label-QA-tags-to-fact-kind-and-closed-tags-visit-unit-exclusive-sets-implied-tags-second-pass-pairs-DEC-059.md) config, because both sides use that map.
 3. **Build counters** (printed by the command): labelings of tags not in the schema 0; content tags offered
-   by a visited task without a labeling 0.
+   by a visited labeling task without a labeling 0.
 
 ## Open points
 
-- None from the checks. One for the user: P3 has no crop rows and is not in the doc's list of projects out
-  of v1 scope (Table 3). The doc section 4 list may need P3 added; I did not change it.
-- The `.xlsx` copy was written but not opened (the file is a table; sheet count only from the build message).
+- None from the checks. One for the user: labeling project P3 has no crop rows and is not in the [fact-driven model doc](../../../docs/fact-driven-model.md)'s list of labeling projects out
+  of v1 scope (Table 4). Its section 4 list may need P3 added; I did not change it.
+- The `.xlsx` copy was not opened; its 2 sheets are taken from the build message.
+- Check 2 does not test the tag-to-label map itself (see Checks, item 2).
+
+## Limitations
+
+- The index says nothing about (sample, label) pairs it lacks: those are unknown, not absent.
