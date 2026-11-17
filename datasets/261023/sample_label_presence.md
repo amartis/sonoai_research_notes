@@ -4,16 +4,17 @@
 
 **Status: descriptive counts, first build.** This record counts sample-label pairs per content label and presence state under the three policies chosen in DEC-060. It chooses no policy for training and sets no threshold. Aggregates only: no images, file names, folder names or identifiers; counts of 1 to 4 are shown as `<5`. Built on 2026-11-17 on `261023_plain` ([DEC-018](../../decisions/DEC-018-plain-style-for-local-research.md)). Not reviewed.
 
-Key: sample-label pair = one sample and one content label; n = number of sample-label pairs unless a row says samples; with polygon = the basis task gives the label in a polygon tag group (a pixel target exists); choice only = the basis tasks give it only as a choice tag. `given_contested` (posrich_v1 only) = given by one task while another task answers `closed` or `open`.
+Key: sample-label pair = one sample and one content label; n = number of sample-label pairs unless a row says samples; pair in the presence table = a pair in a kept state (positive, positive_grade_mismatch or negative; [derived.md](../../../docs/datasets/styles/derived.md#derivedsample_label_presence_policytag_dfpkl-sample-label-presence-table-dec-059-dec-060)); with polygon = a labeling task that gives the label gives it in a polygon tag group, so a pixel target exists (column [`has_polygon`](../../../docs/datasets/styles/derived.md#derivedsample_label_presence_policytag_dfpkl-sample-label-presence-table-dec-059-dec-060) of the presence table); choice only = the labeling tasks give it only as a choice tag (`has_polygon` false). `given_contested` (posrich_v1 only) = given by one task while another task answers `closed` or `open`.
 
 Reporting checklists (CLAIM, STARD): not applicable. These are counts of how labels are read into presence states; no model is trained or evaluated and no split is made. No confidence intervals: the numbers are complete counts of the dataset version, not estimates from a sample.
 
 ## Summary
 
-1. **Three presence tables were written**, one per policy, each as `.pkl` and `.xlsx` in `derived/` of `261023_plain` (Table 1). The sample-label index v1 has 1,227,979 pairs on 29,233 samples; the presence tables keep only positive, positive_grade_mismatch and negative pairs. Unknown pairs are left out and counted here (Table 2).
+1. **Three presence tables were written**, one per policy, each as `.pkl` and `.xlsx` in `derived/` of `261023_plain` (Table 1). The sample-label index v1 has 1,227,979 pairs on 29,233 samples; the presence tables keep only positive, positive_grade_mismatch and negative pairs. Unknown pairs are left out and counted here (Table 2); the unknown reasons (`conflict`, `no_closure` and the others) are defined in the [presence table section of derived.md](../../../docs/datasets/styles/derived.md#derivedsample_label_presence_policytag_dfpkl-sample-label-presence-table-dec-059-dec-060).
 2. **Positives barely differ in strict_v1 and loose_v1** (87,615 and 87,646, a difference of 31) and are 5,877 more in posrich_v1 (93,523: 5,877 `given_contested` pairs, the pairs strict_v1 and loose_v1 call unknown `conflict`). positive_grade_mismatch is 810 in all three.
 3. **Negatives and unknowns differ the most.** strict_v1 has 406,016 negatives (closed only); loose_v1 and posrich_v1 have 674,416, which adds 268,400 `open` pairs that strict_v1 calls unknown (`no_closure`). Unknown pairs: 733,538 (strict_v1), 465,107 (loose_v1), 459,230 (posrich_v1). In all three policies, 329,348 `no_answer` and 129,662 `sample_quality_skip` pairs are unknown in all.
-4. **Samples with at least one kept pair**: 25,127 (strict_v1), 25,216 (loose_v1, posrich_v1) of 29,233 (Table 3).
+4. **The gains are uneven across labels** (Table 8): five labels hold 14% of the open negatives and five hold 47% of the contested positives. Open means no closure was checked; contested means another task answer conflicts.
+5. **Samples with at least one pair in the presence table**: 25,127 (strict_v1), 25,216 (loose_v1, posrich_v1) of 29,233 (Table 3).
 
 ## Method
 
@@ -29,11 +30,11 @@ The policy rules are in `sonoai-data presence-policies` and DEC-060 section 4. T
 
 Table 1. The written presence tables (pairs in the table = positive, positive_grade_mismatch, negative).
 
-| Policy | File in `derived/` (`.pkl` and `.xlsx`) | Pairs in the table | sha256 of the `.pkl` |
+| Policy | Presence table (`.pkl` and `.xlsx` in `derived/`) | Pairs in the table | sha256 of the `.pkl` |
 |---|---|---|---|
-| strict_v1 | `sample_label_presence_strictv1_df` | 494,441 | `05b3f4230c46e2319683d1caf7410c148a925e3b453afb0b9183d89adc91fa77` |
-| loose_v1 | `sample_label_presence_loosev1_df` | 762,872 | `4fc02a64d7f13ea792972441c81f875bbce15166a038a5f7ef16ebf0081d9659` |
-| posrich_v1 | `sample_label_presence_posrichv1_df` | 768,749 | `e261bc38b04575c5648c2128a1e41102d163f6c251c9ad1bb27fb6dec4ae3a27` |
+| strict_v1 | presence table of strict_v1 | 494,441 | `05b3f4230c46e2319683d1caf7410c148a925e3b453afb0b9183d89adc91fa77` |
+| loose_v1 | presence table of loose_v1 | 762,872 | `4fc02a64d7f13ea792972441c81f875bbce15166a038a5f7ef16ebf0081d9659` |
+| posrich_v1 | presence table of posrich_v1 | 768,749 | `e261bc38b04575c5648c2128a1e41102d163f6c251c9ad1bb27fb6dec4ae3a27` |
 
 ## 1. Comparison of the policies
 
@@ -64,11 +65,11 @@ Table 3. Samples per policy (n = samples of the sample-label index; one sample c
 | Samples | strict_v1 | loose_v1 | posrich_v1 |
 |---|---|---|---|
 | In the sample-label index | 29,233 | 29,233 | 29,233 |
-| With at least one kept pair (presence table) | 25,127 | 25,216 | 25,216 |
+| With at least one pair in the presence table | 25,127 | 25,216 | 25,216 |
 | With at least one positive pair | 23,959 | 23,961 | 24,135 |
 | With at least one positive_grade_mismatch pair | 406 | 406 | 406 |
 | With at least one negative pair | 22,034 | 25,200 | 25,200 |
-| With no kept pair (all pairs unknown) | 4,106 | 4,017 | 4,017 |
+| With no pair in the presence table (all pairs unknown) | 4,106 | 4,017 | 4,017 |
 
 How far the policies differ, from Table 2: strict_v1 against loose_v1 differ in 268,400 pairs (negative `open` against unknown `no_closure`) and 31 pairs (positive against unknown `conformance`); loose_v1 against posrich_v1 differ in 5,877 pairs (positive `given_contested` against unknown `conflict`).
 
@@ -499,13 +500,26 @@ Table 7. posrich_v1: sample-label pairs per content label, state and reason.
 | `weak_signal_area` | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 14,133 | 1,257 |
 | **All labels** | 79,677 | 7,969 | 5,877 | 810 | 406,016 | 268,400 | 220 | 329,348 | 129,662 |
 
+Per-label trade-off. The gains of loose_v1 and posrich_v1 over strict_v1 are concentrated in a few labels. Under loose_v1 and posrich_v1 the five labels with the most added open negatives take 38,552 of the 268,400 open pairs (14%). Under posrich_v1 the five labels with the most `given_contested` positives take 2,746 of the 5,877 (47%), and they add the most to hepatitis (336 to 777 positives) and `hepatic_cirrhosis` (673 to 1,115). Strength: an open negative means no closure was checked (the labeler did not close the label's set), so it is a weaker negative than a closed one; a `given_contested` positive means another labeling task answers `closed` or `open` for the same pair, so it is a positive that another task disputes.
+
+Table 8. The labels with the largest gains over strict_v1 (n = sample-label pairs; no count here is from 1 to 4). Left: open negatives added by loose_v1 and posrich_v1 (strict_v1 has none, Table 5). Right: `given_contested` positives added by posrich_v1 (strict_v1 and loose_v1 have none, Table 6).
+
+| Content label (open negatives) | Negatives strict_v1 | Negatives loose_v1, posrich_v1 | Open added | Content label (contested positives) | Positives strict_v1 | Positives posrich_v1 | Contested added |
+|---|---|---|---|---|---|---|---|
+| `hepatorenal_contrast_liverbrighter` | 0 | 10,057 | 10,057 | `hepatic_duct` | 8,000 | 9,116 | 1,116 |
+| `hepatorenal_contrast_possible` | 0 | 7,776 | 7,776 | `hepatic_cirrhosis` | 673 | 1,115 | 442 |
+| `spleen` | 12,712 | 20,409 | 7,697 | `hepatitis` | 336 | 777 | 441 |
+| `intestine` | 12,013 | 18,622 | 6,609 | `stomach` | 3,562 | 3,990 | 428 |
+| `portal_vein` | 12,712 | 19,125 | 6,413 | `nephritis` | 1,498 | 1,817 | 319 |
+
 ## Limitations
 
-- Counts of 1 to 4 are shown as `<5` in every row. The all-labels totals are exact, so a single `<5` cell in a column could in principle be inferred by subtraction; this record does not protect against that.
+- Counts of 1 to 4 are shown as `<5` in every row. This is a display convention, not protection: a `<5` cell can be recovered exactly by subtraction from other numbers of this record, namely Table 4 against Tables 5 to 7 (the positive, negative and unknown sums of a label), the row sums of a label whose pair total is known from the other cells, and the all-labels totals. The reason this is acceptable: the cells are pair counts per content label, aggregates with no rows, file names or identifiers, and the images and tables stay on machine01 ([DEC-052](../../decisions/DEC-052-privacy-covers-images-tables-readable-after-asking.md)). The display is kept so that a small count is not read as a precise one at a glance.
+- The sample-label index was built with an earlier fact relations config than the one the policies now read. The policies use only their policy entries (`exclusive_sets`, `implied_tags`, `dropped_rule_items`), and the index is taken as built.
 - Counts are pairs, not patients or independent samples: the samples of one datasource or one patient are correlated, and no split is applied here. The per-label counts of different policies describe the same samples and are not independent.
 - The `.xlsx` copies are for browsing; the `.pkl` is the source.
 - The code that made the per-label counts of this record is a one-off in-memory run of the registered policies; it is not in the repo. The tables themselves come from `sonoai-data sample-label-presence`.
 
 ## Conclusion and next steps
 
-The policies are close in their positives (87,615 to 93,523 pairs) and differ in their negatives (406,016 against 674,416) and unknowns (733,538 to 459,230). The trade-off is between the 268,400 open negatives (no closure checked) and the 5,877 contested positives. Which table training reads is a decision for the user.
+The policies are close in their positives (87,615 to 93,523 pairs) and differ in their negatives (406,016 against 674,416) and unknowns (733,538 to 459,230). The trade-off is between the 268,400 open negatives (no closure checked) and the 5,877 contested positives (another task disputes them). Per label (Table 8) the gain is uneven: for example `hepatorenal_contrast_liverbrighter` and `hepatorenal_contrast_possible` have no negative at all under strict_v1 and get 10,057 and 7,776 open ones, and hepatitis more than doubles its positives (336 to 777) with contested ones. Both gains are weaker evidence than the strict_v1 pairs. Which table training reads is a decision for the user.
