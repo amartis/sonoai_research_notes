@@ -55,6 +55,11 @@ together: [`docs/workflow.md`](../../../docs/workflow.md) in the code repo.
   `derived/cirrhosis_v4_dec047_samples_df.pkl`, replaces the [TASK-087](../../../backlog/tasks/task-087%20-%20Fix-the-cirrhosis-sample-file-and-its-train-val-test-split-dataset-record-with-counts-per-split-DEC-044.md) file): [cirrhosis_v4_samples.md](cirrhosis_v4_samples.md): 13,777 samples (639
   positive, 4.6%), 53 groups; train 10,331 / val 2,068 / test 1,378 (75/15/10%); group 52+49 empty; no Qwen3-VL step.
 
+- `261023_plain` bmode_det v1 sample file ([DEC-062](../../decisions/DEC-062-bmode-box-detector-bmode-det-v1.md), [TASK-136](../../../backlog/tasks/task-136%20-%20bmode_det-v1-on-261023-build-the-sample-file-train-on-the-GPU-box-metrics-with-95-CI-against-modality.py-cropper-v1-and-Qwen3-VL-shortcut-check-EXP-record-DEC-062.md),
+  `derived/bmode_det_samples_v1_261023_plain_df.pkl`): [bmode_det_samples.md](bmode_det_samples.md): 100,877 rows
+  (28,529 own from 6,221 images, 72,348 public); train 75,651 / val 15,139 / test 10,087; test 51 datasource groups,
+  reviewed images only; 16,818 unreviewed images of test groups dropped; no enc1 copy yet.
+
 ## Label definitions
 
 - `label_projects.xlsx`: the labeling-project tag table of this version
