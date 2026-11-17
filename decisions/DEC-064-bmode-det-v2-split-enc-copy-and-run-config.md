@@ -45,8 +45,8 @@ was built.
    its 2-point tolerance on the share of rows with a box) no longer applies to bmode_det.
    Instead, test groups are chosen so that as few images as possible are dropped while test
    holds at least `min_test_reviewed` reviewed images (a config value). The method agent picks
-   and documents the choice rule. Train and val take every image of the other groups, split by
-   datasource group as before. Public sets keep the random per-class split.
+   and documents the choice rule. Train and val take every image of the other groups, split at random by
+   image as before (DEC-044 rule 10, no datasource rule; corrected 2026-11-17). Public sets keep the random per-class split.
 2. **The minimum is set after seeing values.** Before v2 is built, the exp agent reports, on
    261023, a table of possible `min_test_reviewed` values against test groups, test images and
    dropped images (counts only). The user sets the value from it. The test will be smaller than
