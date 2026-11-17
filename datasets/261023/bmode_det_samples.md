@@ -1,8 +1,37 @@
-# bmode_det v1 sample file and train/val/test split on 261023_plain
+# bmode_det sample files (v1, v2) and train/val/test split on 261023_plain
 
 [TASK-136](../../../backlog/tasks/task-136%20-%20bmode_det-v1-on-261023-build-the-sample-file-train-on-the-GPU-box-metrics-with-95-CI-against-modality.py-cropper-v1-and-Qwen3-VL-shortcut-check-EXP-record-DEC-062.md), [DEC-062](../../decisions/DEC-062-bmode-box-detector-bmode-det-v1.md), [DEC-044](../../decisions/DEC-044-cirrhosis-sample-set-quality-filter-and-split.md), [DEC-063](../../decisions/DEC-063-public-non-patient-datasets-root.md). Aggregates only; no images, file names or identifiers. Counts and a fixed split, no model. Reporting checklists (CLAIM, STARD): not applicable.
 
 Made on 2026-11-17 on `261023_plain` ([DEC-018](../../decisions/DEC-018-plain-style-for-local-research.md)) with `sonoai-data bmode-det-samples 261023_plain` (default config `configs/data/bmode_det.yaml`, `version: 1`, seed 0; code at master 98b02e6, builder of [TASK-134](../../../backlog/tasks/task-134%20-%20B-mode-detector-sample-builder-sonoai.data.bmode_det-and-sonoai-data-bmode-det-samples-the-sample-kinds-of-DEC-062-whole-share-split-synthetic-tests-DEC-062.md)). Column meanings and the split rule: [derived.md](../../../docs/datasets/styles/derived.md) (section `bmode_det_samples`). Task kind `det_bmode_v1`.
+
+## Version 2 (replaces v1 for training, DEC-064)
+
+v2 is the sample file for training and testing bmode_det ([DEC-064](../../decisions/DEC-064-bmode-det-v2-split-enc-copy-and-run-config.md)); v1 below stays as built ([DEC-053](../../decisions/DEC-053-table-naming-and-preservation.md)). Made on 2026-11-17 with `sonoai-data bmode-det-samples 261023_plain`, config `configs/data/bmode_det.yaml` `version: 2`, seed 0, branch `claude/exp-t136-bmode-det` commit 76583a0 (builder v2 of [TASK-137](../../../backlog/tasks/task-137%20-%20bmode_det-sample-file-on-the-GPU-box-enc1-copy-of-derived-bmode_det_samples_v1_-version-_plain_df.pkl-for-the-TASK-135-reader-DEC-062.md)). Values set by the user from the count tables of TASK-136: `min_test_reviewed` 400, MedNIST `max_per_class` 2,000, Imagenette-320 uncapped.
+
+- Sample file: `derived/bmode_det_samples_v2_261023_plain_df.pkl`, sha256 `450209afd84d3a5686a05c9a1751eb7c76ce1845c1c455139223d27b30699ca4` (checked again on the written file; v1's sha256 unchanged). Enc1 copy in `261023_enc1` at the same path: pending (needs the data passphrase, typed by the user).
+- Reader check: `BmodeDetReader` accepted the table (train 103,422, val 19,026, test 4,334 rows; config version 2). Build time about 40 s on machine01.
+- Test rule (DEC-064 option A): whole datasource groups, fewest dropped images with at least 400 reviewed images. Test: 35 datasource groups, 400 images, all reviewed. Dropped (not reviewed, in test groups): 1,716 of 23,039 kept images (7.4 %; v1: 16,818, 73.0 %), 7,821 of 109,209 own rows.
+- Train: 35 groups (37 datasources), 17,721 images (v1: 4,688); val: the same 35 groups, 3,202 images; no image is in more than one split. Shares of the 101,388 own rows kept: train 83.2 %, val 15.0 %, test 1.8 %. Share of rows with a target box in test minus that of the rows kept: +6.9 points (no longer a check under DEC-064; test holds reviewed images, which nearly all have a box).
+- Box source of the images: test 400 reviewed; val 68 reviewed, 3,134 cropper (97.9 %); train 337 reviewed, 17,384 cropper (98.1 %).
+- Images with 2 boxes: test 17 of 400, val 49 of 3,202, train 274 of 17,721; none with more than 2.
+- Public rows 25,394 of 126,782 (20.0 %; v1 71.7 %). Train rows that get a new random input window each read: 48,665.
+
+Table 0. v2 rows per sample kind and split (kinds as in Table 2 below).
+
+| kind | train | val | test | all |
+|---|---|---|---|---|
+| frame | 17,721 | 3,202 | 400 | 21,323 |
+| box | 17,995 | 3,251 | 417 | 21,663 |
+| box_sub | 17,995 | 3,251 | 417 | 21,663 |
+| frame_part | 17,995 | 3,251 | 417 | 21,663 |
+| own_neg | 12,675 | 2,257 | 144 | 15,076 |
+| mednist | 9,000 | 1,800 | 1,200 | 12,000 |
+| natural | 10,041 | 2,014 | 1,339 | 13,394 |
+| all | 103,422 | 19,026 | 4,334 | 126,782 |
+
+The test set is smaller than v1's (400 against 598 images), so its 95 % CIs will be wider (DEC-064 item 2). The smallest own test kind is `own_neg` (144 rows).
+
+## Version 1 (as built; not used for training)
 
 ## Result
 

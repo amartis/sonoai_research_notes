@@ -59,6 +59,10 @@ together: [`docs/workflow.md`](../../../docs/workflow.md) in the code repo.
   `derived/bmode_det_samples_v1_261023_plain_df.pkl`): [bmode_det_samples.md](bmode_det_samples.md): 100,877 rows
   (28,529 own rows from 6,221 images of 261023, 72,348 public rows from MedNIST and Imagenette-320; own and public as in [DEC-062](../../decisions/DEC-062-bmode-box-detector-bmode-det-v1.md) items 3, 6 and 8 and [DEC-063](../../decisions/DEC-063-public-non-patient-datasets-root.md)); train 75,651 / val 15,139 / test 10,087; test 51 datasource groups,
   reviewed images only; 16,818 unreviewed images of test groups dropped; no enc1 copy yet.
+- `261023_plain` bmode_det v2 sample file, used for training ([DEC-064](../../decisions/DEC-064-bmode-det-v2-split-enc-copy-and-run-config.md), TASK-136,
+  `derived/bmode_det_samples_v2_261023_plain_df.pkl`): [bmode_det_samples.md](bmode_det_samples.md): 126,782 rows
+  (101,388 own rows from 21,323 images, 25,394 public rows; MedNIST capped at 2,000 per class); train 103,422 / val 19,026 / test 4,334;
+  test 35 datasource groups, 400 reviewed images; 1,716 unreviewed images of test groups dropped; enc1 copy pending.
 
 ## Label definitions
 
