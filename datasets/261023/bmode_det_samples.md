@@ -7,9 +7,9 @@ Made on 2026-11-17 on `261023_plain` ([DEC-018](../../decisions/DEC-018-plain-st
 ## Result
 
 - Sample file: `derived/bmode_det_samples_v1_261023_plain_df.pkl` in `261023_plain` (plain, machine01 only). **No enc1 copy yet**: the command writes the plain file only and `make-enc` skips `derived/`, so the GPU box cannot read it yet ([TASK-137](../../../backlog/tasks/task-137%20-%20bmode_det-sample-file-on-the-GPU-box-enc1-copy-of-derived-bmode_det_samples_v1_-version-_plain_df.pkl-for-the-TASK-135-reader-DEC-062.md), open).
-- Table sha256: `bae1dc33333170007124364f263a3366678159f4d50c27b3898578233352b633` (checked again on the written file). A changed table is a new file name (DEC-053).
+- Table sha256: `bae1dc33333170007124364f263a3366678159f4d50c27b3898578233352b633` (checked again on the written file). A changed table is a new file name ([DEC-053](../../decisions/DEC-053-table-naming-and-preservation.md)).
 - Box source: cropper v1 (`cropper_version` 1) with the user's reviewed boxes where they exist.
-- Reader check: the detector's sample reader (`BmodeDetReader`, TASK-135) accepted the table (train 75,651, val 15,139, test 10,087 rows).
+- Reader check: the detector's sample reader (`BmodeDetReader`, [TASK-135](../../../backlog/tasks/task-135%20-%20Detection-trainer-and-task-bmode_det-FCOS-ResNet-50-FPN-with-a-whole-output-per-box-in-memory-crop-reader-with-the-same-input-form-for-every-kind-metrics-and-baseline-scorers-synthetic-tests-DEC-062.md)) accepted the table (train 75,651, val 15,139, test 10,087 rows).
 - Build time about 60 s on machine01.
 
 ## Images
