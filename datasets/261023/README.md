@@ -57,7 +57,7 @@ together: [`docs/workflow.md`](../../../docs/workflow.md) in the code repo.
 
 - `261023_plain` bmode_det v1 sample file ([DEC-062](../../decisions/DEC-062-bmode-box-detector-bmode-det-v1.md), [TASK-136](../../../backlog/tasks/task-136%20-%20bmode_det-v1-on-261023-build-the-sample-file-train-on-the-GPU-box-metrics-with-95-CI-against-modality.py-cropper-v1-and-Qwen3-VL-shortcut-check-EXP-record-DEC-062.md),
   `derived/bmode_det_samples_v1_261023_plain_df.pkl`): [bmode_det_samples.md](bmode_det_samples.md): 100,877 rows
-  (28,529 own from 6,221 images, 72,348 public); train 75,651 / val 15,139 / test 10,087; test 51 datasource groups,
+  (28,529 own rows from 6,221 images of 261023, 72,348 public rows from MedNIST and Imagenette-320; own and public as in [DEC-062](../../decisions/DEC-062-bmode-box-detector-bmode-det-v1.md) items 3, 6 and 8 and [DEC-063](../../decisions/DEC-063-public-non-patient-datasets-root.md)); train 75,651 / val 15,139 / test 10,087; test 51 datasource groups,
   reviewed images only; 16,818 unreviewed images of test groups dropped; no enc1 copy yet.
 
 ## Label definitions

@@ -2,7 +2,7 @@
 
 [TASK-136](../../../backlog/tasks/task-136%20-%20bmode_det-v1-on-261023-build-the-sample-file-train-on-the-GPU-box-metrics-with-95-CI-against-modality.py-cropper-v1-and-Qwen3-VL-shortcut-check-EXP-record-DEC-062.md), [DEC-062](../../decisions/DEC-062-bmode-box-detector-bmode-det-v1.md), [DEC-044](../../decisions/DEC-044-cirrhosis-sample-set-quality-filter-and-split.md), [DEC-063](../../decisions/DEC-063-public-non-patient-datasets-root.md). Aggregates only; no images, file names or identifiers. Counts and a fixed split, no model. Reporting checklists (CLAIM, STARD): not applicable.
 
-Made on 2026-11-17 on `261023_plain` ([DEC-018](../../decisions/DEC-018-plain-style-for-local-research.md)) with `sonoai-data bmode-det-samples 261023_plain` (default config `configs/data/bmode_det.yaml`, `version: 1`, seed 0; code at master 98b02e6, builder of [TASK-134](../../../backlog/tasks/task-134%20-%20B-mode-detector-sample-builder-sonoai.data.bmode_det-and-sonoai-data-bmode-det-samples-the-sample-kinds-of-DEC-062-whole-share-split-synthetic-tests-DEC-062.md)). Column meanings and the split rule: [derived.md](../../../docs/datasets/styles/derived.md) (section `bmode_det_samples`). Task `det_bmode_v1`.
+Made on 2026-11-17 on `261023_plain` ([DEC-018](../../decisions/DEC-018-plain-style-for-local-research.md)) with `sonoai-data bmode-det-samples 261023_plain` (default config `configs/data/bmode_det.yaml`, `version: 1`, seed 0; code at master 98b02e6, builder of [TASK-134](../../../backlog/tasks/task-134%20-%20B-mode-detector-sample-builder-sonoai.data.bmode_det-and-sonoai-data-bmode-det-samples-the-sample-kinds-of-DEC-062-whole-share-split-synthetic-tests-DEC-062.md)). Column meanings and the split rule: [derived.md](../../../docs/datasets/styles/derived.md) (section `bmode_det_samples`). Task kind `det_bmode_v1`.
 
 ## Result
 
@@ -14,7 +14,7 @@ Made on 2026-11-17 on `261023_plain` ([DEC-018](../../decisions/DEC-018-plain-st
 
 ## Images
 
-Table 1. Own images from the box table to the sample file. Counts are images (one image = one file of the labeling crop table, after merging second paths of the same image).
+Table 1. Own images from the box table to the sample file. Counts are images: an image is one row's `filepath2` in `taskcrops_df`, and two paths with the same image hash count as one image.
 
 | Step | Images |
 |---|---|
@@ -31,12 +31,12 @@ Table 1. Own images from the box table to the sample file. Counts are images (on
 
 - Test: 51 datasource groups (51 datasources), chosen by the DEC-044 rule 9 counts on the rows that stay in test. Only reviewed images of a test group are test rows.
 - Train: 19 datasource groups (21 datasources); val: 18 groups (20 datasources). No image is in more than one split.
-- Shares of the 28,529 own rows kept: train 75.0% (21,394), val 15.0% (4,282), test 10.0% (2,853); share of rows with a target box in test minus that of the rows kept: +1.8 points (limit 2).
+- Shares of the 28,529 own rows kept (own rows: rows from 261023 images, [DEC-062](../../decisions/DEC-062-bmode-box-detector-bmode-det-v1.md) items 3 and 6; public rows: rows from MedNIST and Imagenette-320 images, DEC-062 item 8 and [DEC-063](../../decisions/DEC-063-public-non-patient-datasets-root.md)): train 75.0% (21,394), val 15.0% (4,282), test 10.0% (2,853); share of rows with a target box in test minus that of the rows kept: +1.8 points (limit 2).
 - Box source of the images in the file: test 598 reviewed; val 32 reviewed, 903 cropper; train 175 reviewed, 4,513 cropper.
 - Images with 2 boxes: test 56 of 598, val 3 of 935, train 12 of 4,688.
 - Public rows (MedNIST 6 classes, Imagenette-320 10 classes): seeded random split per dataset and class, 75/15/10%.
 
-Table 2. Rows per kind and split. Own kinds (`frame` to `own_neg`) come from 261023 images; `mednist` and `natural` are public images (DEC-063). `frame` rows = images, `box`, `box_sub` and `frame_part` rows = boxes. Train rows of `box_sub`, `frame_part` and `own_neg` (12,006) get a new random input window each time they are read; val and test windows are fixed.
+Table 2. Rows per sample kind and split (sample kind: the type of input the detector sees, [DEC-062](../../decisions/DEC-062-bmode-box-detector-bmode-det-v1.md) item 3, Table 1). `frame`: a whole 261023 image with its B-mode boxes. `box`: exactly one B-mode box, cut out. `box_sub`: a random part of one box (at least 30 % of its area). `frame_part`: a random window of an image that cuts through a box, so the box is partly visible. `own_neg`: a window of a 261023 image that overlaps no box (no B-mode). `mednist`: a MedNIST image of another modality (no B-mode). `natural`: an Imagenette-320 photo (no B-mode). The first five are own kinds, the last two public kinds ([DEC-063](../../decisions/DEC-063-public-non-patient-datasets-root.md)). `frame` rows = images; `box`, `box_sub` and `frame_part` rows = boxes. Train rows of `box_sub`, `frame_part` and `own_neg` (12,006) get a new random input window each time they are read; val and test windows are fixed.
 
 | kind | train | val | test | all |
 |---|---|---|---|---|
