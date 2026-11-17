@@ -3,10 +3,10 @@
 Asked by the user on 2026-11-12 (no board task). Builds on
 [labeling_qa_measures.md](labeling_qa_measures.md) (the QA report: measure codes A1-A7 and
 B1-B3, categories C1-C5 of its Amendment 1, C6 and A8-A10 of Amendments 2-3). Names follow the
-[glossary](../../../docs/glossary.md) (DEC-056: labeling project, tag group, tag, sample,
+[glossary](../../../docs/glossary.md) ([DEC-056](../../decisions/DEC-056-labeling-terminology-single-glossary.md): labeling project, tag group, tag, sample,
 labeling task, given labeling). Tag lists:
 [label_projects.yaml](../../../configs/data/label_projects.yaml); roles of choice tags:
-[choice_labels.yaml](../../../configs/data/choice_labels.yaml) (DEC-036).
+[choice_labels.yaml](../../../configs/data/choice_labels.yaml) ([DEC-036](../../decisions/DEC-036-choice-polygon-relation-table.md)).
 
 **Status: draft, exploratory.** Every rule here is a candidate. How far each rule is
 respected in the labeled data is the next step and is not measured here; rules that are
@@ -83,7 +83,7 @@ Not reviewed. The user answered the open points on 2026-11-12 (see Decisions).
   (two entries of one fact).
 - **Expected in the data**: the statement that the respect statistics will test.
 - **Pn**: labeling project n (`project_id` n). "Same task" = the same labeling task.
-- **Sample**: one image hash plus one crop box (DEC-044 rule 1, `CROP_KEY`). **Image**: the
+- **Sample**: one image hash plus one crop box ([DEC-044](../../decisions/DEC-044-cirrhosis-sample-set-quality-filter-and-split.md) rule 1, `CROP_KEY`). **Image**: the
   image hash alone; one image can hold several samples (several regions of one frame).
 - **Visited**: the labeling task has at least one given labeling (any tag with a count above 0).
 - **Family**: labeling projects that share their samples (Section 1).
@@ -92,7 +92,7 @@ Not reviewed. The user answered the open points on 2026-11-12 (see Decisions).
 
 ## Data and method
 
-Tables read on machine01 on 2026-11-12, in memory, read only (user's ok, DEC-052):
+Tables read on machine01 on 2026-11-12, in memory, read only (user's ok, [DEC-052](../../decisions/DEC-052-privacy-covers-images-tables-readable-after-asking.md)):
 `taskcrops_df` (143,152 crop rows) and `flags_df` (5,559,898 labelings) of `261023_plain`.
 The configs above were read for the tags. Nothing was written apart from this note.
 
@@ -301,7 +301,7 @@ A9 rows: a subject without its target is a conflict.
 | R34 | P35, P49 every tag of group `check_disease__<Organ>` (disease, "no disease" and size tags) for an organ with an anatomy tag | A9 (C4) | the organ choice of group `check_anatomy`: `bladder`, `gallbladder`, `kidney`, `knee`, `liver`, `lung`, `prostate` (P35) or `prostate_gland` (P49), `spine`, `stomach`, `thyroid`, `uterus` (same task) | the organ is chosen whenever a tag of its disease group is |
 | R35 | P52 disease polygons of group `check_disease__<Organ>` | A9 (C4) | the organ polygon of group `check_anatomy` (same task) | the organ is drawn; weak, drawing the organ may not have been asked |
 | R36 | P9, P11, P14 `hepatorenal_contrast_liverbrighter` | A9 (C4) | `hepatorenal_contrast_possible` (same task) | "liver brighter" only where the contrast could be judged |
-| R37 | P14 polygon tags of `fat_regions` and `liver_signs` | A9 (C4) | the organ polygon of the finding in group `anatomy_liver`: `liver`; `gallbladder` for `gallbladder_stone`; `stomach` for `gastric_tumor` (same task) | the organ is drawn whenever its finding is (organ layer, DEC-034) |
+| R37 | P14 polygon tags of `fat_regions` and `liver_signs` | A9 (C4) | the organ polygon of the finding in group `anatomy_liver`: `liver`; `gallbladder` for `gallbladder_stone`; `stomach` for `gastric_tumor` (same task) | the organ is drawn whenever its finding is (organ layer, [DEC-034](../../decisions/DEC-034-organ-layer-from-organ-polygons-only.md)) |
 
 ### 2.6 Visit of a labeling task (C3, derived)
 
