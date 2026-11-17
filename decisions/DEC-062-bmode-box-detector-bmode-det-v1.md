@@ -5,7 +5,7 @@ status: accepted
 area: [training, datasets]
 created: 2026-11-17
 from: [DIS-029]
-related: [DEC-017, DEC-035, DEC-037, DEC-044, DEC-045, DEC-063]
+related: [DEC-017, DEC-035, DEC-037, DEC-044, DEC-045, DEC-063, DEC-064]
 superseded_by:
 ---
 # DEC-062: B-mode box detector bmode_det v1 - FCOS ResNet-50 with one class and a wholeness value per box, own and public negatives, datasource-held-out test
