@@ -1,7 +1,7 @@
 ---
 id: DEC-065
 title: Mission of the first research epic - a working upper-abdomen anatomy segmentation model on 261023, trained from the strict_v1 presence table
-status: proposed
+status: accepted
 area: [training, datasets]
 created: 2026-11-17
 from: [DIS-030]

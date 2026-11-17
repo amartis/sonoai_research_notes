@@ -1,7 +1,7 @@
 ---
 id: DIS-030
 title: Mission of research epic 1 - a first working upper-abdomen anatomy segmentation model from the strict_v1 presence table
-status: open
+status: concluded
 created: 2026-11-17
 outcomes: [DEC-065]
 related: [EXP-003, DEC-044, DEC-059, DEC-060, DEC-061]
