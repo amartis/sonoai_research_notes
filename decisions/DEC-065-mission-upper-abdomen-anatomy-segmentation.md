@@ -150,7 +150,7 @@ already known and the lean each session starts from. A lean is not a decision.
 
 - The six point sessions start from this DEC and do not reopen sections 1, 4 and 5 without a
   new DEC.
-- One Parked board task per point (`needs-decision`, milestone m-1) tracks the open sessions.
+- The points are taken one at a time: each point's board tasks are created in its own session, after its DEC is accepted. (Changed by the user on 2026-11-17: the six Parked point tasks first made, [TASK-147](../../backlog/tasks/task-147%20-%20Epic-1-point-1-model-task-definition-classes-target-form-and-how-positive-negative-and-unknown-pairs-become-loss-and-score-DEC-065.md) to [TASK-152](../../backlog/tasks/task-152%20-%20Epic-1-point-6-optimisation-strategy-loss-optimiser-schedule-augmentation-epochs-and-sanity-steps-for-the-anatomy-model-DEC-065.md), were archived.)
 - Build and training tasks are created only after their point DECs are accepted.
 - If the bar of section 2 is not met, the EXP record says which criterion failed, and the
   next step is chosen in a consult session, not by tuning on test.
