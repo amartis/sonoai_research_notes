@@ -1,12 +1,12 @@
 ---
 id: EXP-004
-title: Qwen3-VL box prompt (DEC-035, unchanged) on public datasets that have no ultrasound image, MedNIST and Imagenette-320
+title: Qwen3-VL B-mode detection prompt (DEC-035, unchanged) on public datasets that have no ultrasound image, MedNIST and Imagenette-320
 status: done
 created: 2026-11-18
 from: [DIS-031]
 related: [DEC-035, DEC-062, DEC-063]
 ---
-# EXP-004: Qwen3-VL box prompt on public datasets that have no ultrasound image (MedNIST, Imagenette-320)
+# EXP-004: Qwen3-VL B-mode detection prompt (DEC-035, unchanged) on public datasets that have no ultrasound image (MedNIST, Imagenette-320)
 
 Board task: [TASK-154](../../backlog/tasks/task-154%20-%20Run-the-Qwen3-VL-box-prompt-on-100-MedNIST-and-Imagenette-320-images-per-class-on-the-GPU-box-EXP-record-with-the-share-of-wrong-boxes-per-class-DIS-031.md) (this run and record); command from [TASK-153](../../backlog/tasks/task-153%20-%20Qwen3-VL-box-prompt-on-public-negatives-sonoai-label-command-that-prompts-a-seeded-sample-of-MedNIST-and-Imagenette-320-and-writes-per-class-aggregates-with-Wilson-95-intervals-synthetic-tests-DIS-031.md). Discussion: [DIS-031](../discussions/DIS-031-qwen-box-prompt-on-public-negatives.md).
 Writing standard: [docs/writing.md](../../docs/writing.md).
@@ -15,18 +15,18 @@ Writing standard: [docs/writing.md](../../docs/writing.md).
 - Run name: `exp-t154-qwen-negatives-r2` on the GPU box (an earlier start, `exp-t154-qwen-negatives`, failed at once: the `sonoai-label` entry point is not installed on the box; no image was read; r2 calls the same code through `python -c`). Common-box run folder `20261118-014225`.
 - Code: master `78e68c8` plus the TASK-153 command; the box copy has no `.git`, so the table holds `code-unknown`.
 - Model: Qwen3-VL-8B-Instruct (https://huggingface.co/Qwen/Qwen3-VL-8B-Instruct, Apache-2.0, commit `0c351dd01ed87e9c1b53cbc748cba10e6187ff3b`, from the local download record), revision `0c351dd01ed8`, 4-bit nf4, greedy, max 256 new tokens.
-- Prompt hash (sha256): `7ead0c7ac18686cb97e5b85be26d8c736c27f6b0b473cde76c01612de0f78970` (the [DEC-035](../decisions/DEC-035-qwen3-vl-second-annotator-on-gpu-box.md) box prompt, unchanged; the digest of the drawn files is `625175fe...`).
+- Prompt hash (sha256): `7ead0c7ac18686cb97e5b85be26d8c736c27f6b0b473cde76c01612de0f78970` (the [DEC-035](../decisions/DEC-035-qwen3-vl-second-annotator-on-gpu-box.md) B-mode detection prompt, unchanged; the digest of the drawn files is `625175fe...`).
 - Data: public only ([DEC-063](../decisions/DEC-063-public-non-patient-datasets-root.md)). Two public sets (records in `docs/datasets/public/`, read there, not from memory): MedNIST (6 classes; MONAI archive release 0.8.1, https://github.com/Project-MONAI/MONAI-extra-test-data/releases/download/0.8.1/MedNIST.tar.gz; CC BY-SA 4.0 per the archive's README; archive sha256 `f2f4881f...e7f916`) and Imagenette-320 val (10 classes; https://s3.amazonaws.com/fast-ai-imageclas/imagenette2-320.tgz, linked from https://github.com/fastai/imagenette; no version tag, so version unverified; archive sha256 `569b4497...e158c`; Apache 2.0 repository licence, images from ImageNet). Both downloaded 2026-11-17. Sample: 100 images per class drawn with seed 0, RGB as stored: n = 1,600. No shortfall.
 
 ## Question
 
-Exploratory check, no tuning. [DEC-062](../decisions/DEC-062-bmode-box-detector-bmode-det-v1.md) expects images with no B-mode image (here: public datasets that have no ultrasound image, "public sets" below) to get no box, so the model should answer "No B-mode image". Does the unchanged prompt do that? No threshold was set by the agent.
+Exploratory check, no tuning. [DEC-062](../decisions/DEC-062-bmode-box-detector-bmode-det-v1.md) expects images with no B-mode image (here: public datasets that have no ultrasound image, "public sets" below) to get no box, so the model should answer "No B-mode image". Does the unchanged B-mode detection prompt do that? No threshold was set by the agent.
 
 ## Results
 
-Table 1. Replies of the unchanged box prompt on public sets (datasets that have no ultrasound image). n = images; boxes = reply with at least one box; no_bmode = reply "No B-mode image"; unparsed = reply not understood; wrong = boxes + unparsed; share wrong with 95% Wilson interval; time = model seconds per image (one run, so no interval on time).
+Table 1. Replies of the unchanged B-mode detection prompt on public sets (datasets that have no ultrasound image). n = images; boxes = reply with at least one box (a wrong box, since these images have no B-mode image); no_bmode = reply "No B-mode image"; unparsed = reply not understood; false-box rate = share of images that get a box or an unparsed reply, (boxes + unparsed) / n, with 95% Wilson interval; time = model seconds per image (one run, so no interval on time).
 
-| Public set | Class | n | boxes | no_bmode | unparsed | Share wrong [95% CI] | s/image |
+| Public set | Class | n | boxes | no_bmode | unparsed | False-box rate [95% CI] | s/image |
 |---|---|---|---|---|---|---|---|
 | MedNIST | AbdomenCT | 100 | 7 | 93 | 0 | 0.070 [0.034, 0.137] | 0.59 |
 | MedNIST | BreastMRI | 100 | 55 | 45 | 0 | 0.550 [0.452, 0.644] | 1.29 |
