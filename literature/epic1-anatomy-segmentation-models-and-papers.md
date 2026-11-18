@@ -6,6 +6,12 @@
 - How: web search, then each source opened at arXiv, Europe PMC, the publisher, GitHub or
   Hugging Face on 2026-11-18. Numbers are as the sources state them; none were reproduced.
   Most full texts were not read; Section 7 says what was not checked.
+- Licences: the user decided on 2026-11-18 that licences of weights and code do not matter
+  for this project; non-commercial weights are acceptable. Licence is therefore not a
+  selection criterion below. Attribution still applies when publishing (for example, the
+  DINOv3 licence asks for an acknowledgement).
+- Updated 2026-11-18 (same day): licence removed as a criterion; USFM pretraining mix and
+  OpenUS install needs added (Section 3.2); PDF copies saved (References).
 
 ## 1. Question
 
@@ -43,8 +49,7 @@ OOD: out of distribution. SE: standard error.
    ultrasound-specific models. Its weights are already in the pinned timm 1.0.30
    (`convnext_base.dinov3_lvd1689m`: 87.6 M parameters, 224 px, four feature maps at strides
    4 to 32), so it needs no new package. The decoder can be the SegFormer-style MLP head [7]
-   that [1] used for such encoders. Licence: DINOv3 License (custom; use and change allowed;
-   publications must acknowledge it) [2].
+   that [1] used for such encoders. Publications that use it must acknowledge DINOv3 [2].
 3. **Optional control: `resenc_unet` from scratch** (the nnU-Net residual-encoder U-Net [4],
    [5]). Well-configured CNN U-Nets remain hard to beat in 3D CT and MRI [5]. But in the one
    abdominal ultrasound study that trained both kinds, nnU-Net scored lower on spleen, the organ
@@ -52,9 +57,20 @@ OOD: out of distribution. SE: standard error.
    foundation model) and 0.82 for EVIT U-Net; on kidney 0.85 against 0.91 to 0.93 [8]. Its
    role is to show what pretraining adds, not to be the main line.
 4. **Ultrasound-specific encoders only later**, and only if W3 fails with the above. The best
-   of them (SAMUS, OpenUS, URFM-L) did not beat DINOv3 ConvNeXt by more than the noise in [1],
-   and each has a cost: a non-commercial licence (USFM, OpenUS), custom CUDA kernels (OpenUS),
-   no weights link found (URFM), or a prompt-based design (SAMUS, UltraSam). See Table 3.
+   of them (SAMUS, OpenUS, URFM-L) did not beat DINOv3 ConvNeXt by more than the noise in [1].
+   With licences out of the picture, the order among them rests on organ match and stack cost
+   (Table 3):
+   - **URFM** first, if its weights can be found: its pretraining lists liver, kidney and
+     gallbladder among its 15 organs (1,003,465 images) [22], the clearest abdominal coverage
+     among the encoders checked here, and URFM-L ranked 3rd of 16 in [1]. [1] evaluated "both
+     released sizes", but no download link was found.
+   - **OpenUS** next: 2nd of 16 in [1], weights public. It needs `mamba_ssm`; the repository
+     ships a wheel for torch 2.2 and Python 3.10 only (Linux or WSL2), so a build for our
+     torch 2.11 and Python 3.12 is an infra task first.
+   - **SAMUS**: 1st of 16 in [1], weights public, but its own architecture code, and its
+     pretraining has no abdominal organ (thyroid, breast, heart).
+   - **USFM** is now allowed, but its pretraining was mostly breast: 91.74% breast and 0.43%
+     abdomen, by the paper's text [21]. It ranked 9th of 16 in [1].
 5. **For unseen datasources, the training recipe matters at least as much as the
    architecture** (point 6; my reading of the papers, not a result of any one of them): train
    the decoder with the encoder frozen first, then the encoder
@@ -65,12 +81,12 @@ OOD: out of distribution. SE: standard error.
 
 Table 1. Models recommended for point 5, in the order to run them.
 
-| Order | Model | Pretrained weights | Evidence | Licence of weights | Work to add | Role |
-|---|---|---|---|---|---|---|
-| 1 | `transunet` (ResNet-50 + ViT-B/16 hybrid encoder, TransUNet [6]) | ImageNet-21k, through timm | EXP-003: trained at 224 px on 261023 (cirrhosis); no external benchmark | not checked | none | first run (DEC-065 lean) |
-| 2 | DINOv3 ConvNeXt-B encoder + MLP decoder | `convnext_base.dinov3_lvd1689m` in timm 1.0.30 | [1]: anatomical mean DSC 0.820 (ConvNeXt-L 0.822), top tier of 16 | DINOv3 License | a registered model (timm `features_only` encoder, decoder, the weights' own input normalisation); weights downloaded on machine01 and copied to the GPU box | main candidate |
-| 3 | `resenc_unet` | none (from scratch) | [4], [5]; [8] | none needed | none | optional control |
-| 4 | an ultrasound-specific encoder (SAMUS, USF-MAE or URFM) | see Table 3 | [1]: 0.826, 0.813, 0.822 | see Table 3 | own loader and decoder | later, only if W3 fails |
+| Order | Model | Pretrained weights | Evidence | Work to add | Role |
+|---|---|---|---|---|---|
+| 1 | `transunet` (ResNet-50 + ViT-B/16 hybrid encoder, TransUNet [6]) | ImageNet-21k, through timm | EXP-003: trained at 224 px on 261023 (cirrhosis); no external benchmark | none | first run (DEC-065 lean) |
+| 2 | DINOv3 ConvNeXt-B encoder + MLP decoder | `convnext_base.dinov3_lvd1689m` in timm 1.0.30 | [1]: anatomical mean DSC 0.820 (ConvNeXt-L 0.822), top tier of 16 | a registered model (timm `features_only` encoder, decoder, the weights' own input normalisation); weights downloaded on machine01 and copied to the GPU box | main candidate |
+| 3 | `resenc_unet` | none (from scratch) | [4], [5]; [8] | none | optional control |
+| 4 | an ultrasound-specific encoder: URFM if its weights are found, else OpenUS or SAMUS | see Table 3 | [1]: URFM-L 0.822, OpenUS 0.822, SAMUS 0.826 | URFM: find the weights; OpenUS: build `mamba_ssm` for our stack; SAMUS: port its encoder; then a decoder | later, only if W3 fails |
 
 ## 3. Evidence
 
@@ -98,7 +114,7 @@ arXiv version 2.
 | 6 | DINOv3 ConvNeXt-B | 1.689 billion web images | 0.820 (0.007) | 0.908 | 0.829 |
 | 7 | DINOv3 ViT-L | 1.689 billion web images | 0.815 (0.007) | 0.912 | 0.822 |
 | 8 | USF-MAE (ViT) | about 370,000 images, 46 public datasets | 0.813 (0.007) | 0.901 | 0.813 |
-| 9 | USFM (ViT-B) | about 2 M ultrasound images | 0.813 (0.007) | 0.899 | 0.804 |
+| 9 | USFM (ViT-B) | about 2.2 M ultrasound images, mostly breast | 0.813 (0.007) | 0.899 | 0.804 |
 | 10 | DINOv3 ViT-B | 1.689 billion web images | 0.811 (0.007) | 0.906 | 0.829 |
 | 13 | UltraSam (SAM ViT-B) | US-43d, over 280,000 image-mask pairs | 0.809 (0.007) | 0.890 | 0.804 |
 | 16 | EchoCare (Swin) | 4.5 M ultrasound images | 0.801 (0.008) | 0.894 | 0.795 |
@@ -124,26 +140,30 @@ image pretraining does not translate to ultrasound performance". If a later vers
 more, self-supervised pretraining on our own unlabelled crops (train groups only) is the
 route that worked in [29]; not for this epic.
 
-### 3.2 Ultrasound-specific encoders: weights, licence and fit
+### 3.2 Ultrasound-specific encoders: weights and fit
 
 Table 3. Ultrasound-specific pretrained encoders, as found on their repositories and papers
-on 2026-11-18.
+on 2026-11-18, in the order to try them (Section 2, item 4).
 
-| Encoder, reference | Architecture | Pretraining data | Weights | Licence | Fit with our stack |
-|---|---|---|---|---|---|
-| SAMUS [23] (MICCAI 2024) | SAM ViT-B + CNN branch | US30K: thyroid, breast, heart; no abdominal organ | Google Drive | MIT (code) | own code; image encoder usable with our decoder, as in [1] |
-| USF-MAE [26] | ViT, masked autoencoder | about 370,000 images, 46 public datasets, 224 px | Google Drive | MIT (code); weights not stated | simplest to load; authors show no segmentation |
-| URFM [22] (iScience 2025) | ViT-B, ViT-L | 1,003,465 images, 15 organs incl. liver, kidney, gallbladder; about half private (54% by our sum of its Table 1) | the paper says GitHub, without a link; none found | not stated | cannot fetch yet |
-| USFM [21] (Med Image Anal 2024) | ViT | about 2 M images, many devices | Google Drive | CC BY-NC 4.0 | non-commercial only |
-| OpenUS [25] | VMamba-S | about 309,000 images, 38 to 42 public datasets | Google Drive | CC BY-NC 4.0 (badge) | needs a `mamba_ssm` 2.2.4 wheel built for torch 2.2 and Python 3.10; clashes with our pins |
-| UltraSam [24] (IJCARS 2025) | SAM ViT-B | US-43d, 43 public datasets | public S3 | not stated | OpenMMLab stack; its install example pins torch 2.0 and mmcv 2.1; point or box prompts |
-| EchoCare [27] | Swin | 4.5 M images, over 23 countries | said to be released; link not checked | not checked | lowest tier in [1] |
-| UltraFedFM [28] (npj Digit Med 2025) | ViT-B | 1,015,754 images, federated | not found | – | – |
+| Encoder, reference | Architecture | Pretraining data | Weights | Fit with our stack |
+|---|---|---|---|---|
+| URFM [22] (iScience 2025) | ViT-B, ViT-L | 1,003,465 images, 15 organs incl. liver, kidney, gallbladder; about half private (54% by our sum of its Table 1) | released ([1] evaluated "both released sizes"); the paper says GitHub, without a link; no link found | blocked until the weights are found; then a plain ViT and our decoder |
+| OpenUS [25] | VMamba-S | about 309,000 images, 38 to 42 public datasets | Google Drive | needs `mamba_ssm`; the repository ships a wheel for torch 2.2 and Python 3.10 only, on Linux or WSL2; a build for torch 2.11 and Python 3.12 comes first |
+| SAMUS [23] (MICCAI 2024) | SAM ViT-B + CNN branch, feature and position adapters | about 30,000 images and 69,000 masks: thyroid, breast, heart; no abdominal organ | Google Drive | own architecture code; its image encoder usable with our decoder, as in [1]; the AutoSAMUS variant replaces manual prompts with an automatic prompt generator |
+| USF-MAE [26] | ViT, masked autoencoder | about 370,000 images, 46 public datasets, 224 px | Google Drive | simple to load; the authors show no segmentation |
+| USFM [21] (Med Image Anal 2024) | ViT-B; pretrained at 224 px, fine-tuned at 256 px | 2,187,915 images from six centres plus public sets; by the text, 91.74% breast, 3.29% thyroid, 0.43% abdomen | Google Drive | simple to load; little abdominal data |
+| UltraSam [24] (IJCARS 2025) | SAM ViT-B | US-43d, 43 public datasets | public S3 | OpenMMLab stack; its install example pins torch 2.0 and mmcv 2.1; point or box prompts |
+| EchoCare [27] | Swin | 4.5 M images, over 23 countries | said to be released; link not checked | lowest tier in [1] |
+| UltraFedFM [28] (npj Digit Med 2025) | ViT-B | 1,015,754 images, federated | not found | – |
 
-CC BY-NC: Creative Commons Attribution-NonCommercial. A medical alternative pretrained on CT,
-MRI and ultrasound (RadImageNet [38], 1.35 M images, ResNet and other CNNs) beat ImageNet
-weights on small ultrasound classification tasks in its own paper; its weights and access
-were not checked.
+USFM organ shares: the paper does not say whether they refer to all images or to a subset.
+USFM's own segmentation results (in-distribution test sets; no ultrasound-pretrained or
+ImageNet baseline) beat SimMIM natural-image pretraining by 1.2 to 3.4 points DSC on four
+tasks (nerve, thyroid, breast, fetal abdomen) [21].
+
+A medical alternative pretrained on CT, MRI and ultrasound (RadImageNet [38], 1.35 M images,
+CNN encoders) beat ImageNet weights on small ultrasound classification tasks in its own
+paper; its weights and access were not checked.
 
 ### 3.3 Strong from-scratch baselines
 
@@ -218,17 +238,19 @@ point-4 session; their content beyond the abstracts was not re-read.
   UltraSAM3 lists no weights.
 - `transunet_r50_b16` from scratch lost to the pretrained `transunet` on val in EXP-003.
   `swin_unet` has no run here and no new evidence for it.
-- OpenUS and USFM as the main line: licence and stack (Table 3).
+- OpenUS as the main line: it needs a `mamba_ssm` build first (Table 3).
+- USFM as the main line: its pretraining is mostly breast images (Table 3).
 - 3D and video models: out of scope (DEC-065 section 5).
 
 ## 5. Open questions for the consult sessions
 
-1. Point 5: are non-commercial weights acceptable for this project (USFM, OpenUS: CC BY-NC)?
-   Until decided, Table 1 uses none.
-2. Point 6: [1] and [12] fine-tune pretrained encoders with AdamW, a frozen start and a lower
+Settled on 2026-11-18 by the user: licences do not matter; non-commercial weights are
+acceptable.
+
+1. Point 6: [1] and [12] fine-tune pretrained encoders with AdamW, a frozen start and a lower
    encoder learning rate; the [DEC-006](../decisions/DEC-006-losses-optim-tracking.md) defaults are SGD with momentum and one learning rate
    (EXP-003). Which applies to a pretrained encoder is a point-6 choice.
-3. Point 4: public liver and kidney masks (AUL, Open Kidney; listed in the journal note
+2. Point 4: public liver and kidney masks (AUL, Open Kidney; listed in the journal note
    [2026-11-18-public-datasets-claude.md](../journal/2026/2026-11-18-public-datasets-claude.md))
    could serve as one extra unseen datasource for W3, through the public data root of [DEC-063](../decisions/DEC-063-public-non-patient-datasets-root.md).
    Their outline rules differ from ours; worth it only as a side check.
@@ -236,7 +258,7 @@ point-4 session; their content beyond the abstracts was not re-read.
 ## 6. How the evidence was weighed
 
 The ranking in Table 1 rests on three things: evidence on ultrasound segmentation (Table 2),
-cost in our stack (Table 3: pinned packages, licence, weights reachable on machine01), and
+cost in our stack (Table 3: pinned packages, weights reachable on machine01), and
 DEC-065 rule 4.6 (simplest working choice first; prefer what is in the repo). No paper tests
 any of these encoders on unseen ultrasound datasources, so the choice between rows 1 and 2 of
 Table 1 can only be settled by our own runs.
@@ -248,14 +270,19 @@ Table 1 can only be settled by our own runs.
   [31].
 - The search was not systematic (no PRISMA protocol); English sources only; paywalled papers
   were read only through their abstracts.
-- Not checked: licence of the `transunet` ImageNet-21k weights; the weights licences of
-  SAMUS, USF-MAE and UltraSam; the EchoCare weights link; the RadImageNet weights.
+- Not checked or not found: the URFM weights link; the EchoCare weights link; the RadImageNet
+  weights; whether USFM's organ shares cover all its images.
 - Preprints not yet peer reviewed: [8], [18], [25], [26], [27], [37].
 
 ## References
 
 Checked on 2026-11-18 at the source named. arXiv: e-print server; Europe PMC: literature
 database with publisher metadata.
+
+PDF copies: 35 of the 38 references are saved on machine01 in
+[epic1-anatomy-segmentation-papers/](epic1-anatomy-segmentation-papers/README.md) (file names start
+with the reference number; the PDFs are not in git). Not saved: [6] journal version and [10]
+(paywalled); [22] and [38] (open access, but scripted downloads were refused).
 
 1. Radhachandran A, Tupper A, Gagné C, Speier W. UltraBench 2: towards robust evaluation of
    vision foundation models on ultrasound. ML4H 2026 (PMLR 346). arXiv:2609.28610 (v2).
