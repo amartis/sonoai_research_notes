@@ -16,7 +16,7 @@ Writing standard: [docs/writing.md](../../docs/writing.md).
 - Code: master `78e68c8` plus the TASK-153 command; the box copy has no `.git`, so the table holds `code-unknown`.
 - Model: Qwen3-VL-8B-Instruct (https://huggingface.co/Qwen/Qwen3-VL-8B-Instruct, Apache-2.0, commit `0c351dd01ed87e9c1b53cbc748cba10e6187ff3b`, from the local download record), revision `0c351dd01ed8`, 4-bit nf4, greedy, max 256 new tokens.
 - Prompt hash (sha256): `7ead0c7ac18686cb97e5b85be26d8c736c27f6b0b473cde76c01612de0f78970` (the [DEC-035](../decisions/DEC-035-qwen3-vl-second-annotator-on-gpu-box.md) box prompt, unchanged; the digest of the drawn files is `625175fe...`).
-- Data: public only ([DEC-063](../decisions/DEC-063-public-non-patient-datasets-root.md)). MedNIST (6 classes) and Imagenette-320 val (10 classes), 100 images per class drawn with seed 0, RGB as stored: n = 1,600. No shortfall.
+- Data: public only ([DEC-063](../decisions/DEC-063-public-non-patient-datasets-root.md)). Two public sets (records in `docs/datasets/public/`, read there, not from memory): MedNIST (6 classes; MONAI archive release 0.8.1, https://github.com/Project-MONAI/MONAI-extra-test-data/releases/download/0.8.1/MedNIST.tar.gz; CC BY-SA 4.0 per the archive's README; archive sha256 `f2f4881f...e7f916`) and Imagenette-320 val (10 classes; https://s3.amazonaws.com/fast-ai-imageclas/imagenette2-320.tgz, linked from https://github.com/fastai/imagenette; no version tag, so version unverified; archive sha256 `569b4497...e158c`; Apache 2.0 repository licence, images from ImageNet). Both downloaded 2026-11-17. Sample: 100 images per class drawn with seed 0, RGB as stored: n = 1,600. No shortfall.
 
 ## Question
 
@@ -26,7 +26,7 @@ Exploratory check, no tuning. [DEC-062](../decisions/DEC-062-bmode-box-detector-
 
 Table 1. Replies of the unchanged box prompt on public negatives. n = images; boxes = reply with at least one box; no_bmode = reply "No B-mode image"; unparsed = reply not understood; wrong = boxes + unparsed; share wrong with 95% Wilson interval; time = model seconds per image (one run, so no interval on time).
 
-| Dataset | Class | n | boxes | no_bmode | unparsed | Share wrong [95% CI] | s/image |
+| Public set | Class | n | boxes | no_bmode | unparsed | Share wrong [95% CI] | s/image |
 |---|---|---|---|---|---|---|---|
 | MedNIST | AbdomenCT | 100 | 7 | 93 | 0 | 0.070 [0.034, 0.137] | 0.59 |
 | MedNIST | BreastMRI | 100 | 55 | 45 | 0 | 0.550 [0.452, 0.644] | 1.29 |
@@ -40,7 +40,7 @@ Table 1. Replies of the unchanged box prompt on public negatives. n = images; bo
 | Imagenette-320 | all | 1,000 | 1 | 999 | 0 | 0.001 [0.000, 0.006] | 0.61 |
 | Both | all | 1,600 | 144 | 1,456 | 0 | 0.090 [0.077, 0.105] | not computed |
 
-The intervals treat images as independent. Images of one class share a source, so the intervals are likely too narrow for the dataset-level rows. The both-datasets row is my computation from the table's counts (Wilson formula); the rest is the run's own output.
+The intervals treat images as independent. Images of one class share a source, so the intervals are likely too narrow for the set-level rows. The both-sets row is my computation from the table's counts (Wilson formula); the rest is the run's own output.
 
 ## Analysis
 
