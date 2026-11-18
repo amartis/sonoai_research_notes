@@ -44,8 +44,8 @@ The intervals treat images as independent. Images of one class share a source, s
 
 ## Analysis
 
-- Imagenette-320 (photographs): 1 box in 1,000 images; no unparsed replies. This meets the DEC-062 expectation.
-- MedNIST: 143 boxes in 600 images (0.238). The expectation does not hold for medical images of other modalities. Boxes by class, in counts: ChestCT 60, BreastMRI 55, HeadCT 20, AbdomenCT 7, Hand 1, CXR 0 (each of 100). Of the 144 boxes in total, 142 are in four MedNIST classes: ChestCT, BreastMRI, HeadCT, AbdomenCT.
+- Imagenette-320 (photographs): 1 box in 1,000 images (false-box rate 0.001); no unparsed replies. This meets the DEC-062 expectation.
+- MedNIST: 143 boxes in 600 images (false-box rate 0.238). The expectation does not hold for medical images of other modalities. Boxes by class, in counts: ChestCT 60, BreastMRI 55, HeadCT 20, AbdomenCT 7, Hand 1, CXR 0 (each of 100). Of the 144 boxes in total, 142 are in four MedNIST classes: ChestCT, BreastMRI, HeadCT, AbdomenCT.
 - Unparsed replies: 0 of 1,600.
 - Time: 0.5 to 0.65 s per image for "no box" classes; 0.8 to 1.4 s per image where boxes are frequent (longer replies). Whole run about 23 minutes.
 - Exploratory, one seed, one draw. Whether a box on a CT or MRI slice is wrong for the detector's purpose is the user's decision; I looked at no image. Any prompt change is a new decision.
@@ -56,6 +56,6 @@ One draw (seed 0); public sets only, not images of the B-mode project that hold 
 
 ## Conclusion and next steps
 
-The expectation (images with no ultrasound get no box) holds for the Imagenette-320 photographs (1 box in 1,000 images) and fails for MedNIST CT and MRI slices (ChestCT 60, BreastMRI 55, HeadCT 20 boxes per 100). The prompt was not tuned and no threshold was set. Whether to change the prompt, or to use these classes as images with no B-mode image for the detector, is a new decision for the user, not made here.
+The expectation (images with no ultrasound get no box) holds for the Imagenette-320 photographs (false-box rate 0.001) and fails for MedNIST CT and MRI slices (ChestCT 60, BreastMRI 55, HeadCT 20 boxes per 100). The prompt was not tuned and no threshold was set. Whether to change the prompt, or to use these classes as images with no B-mode image for the detector, is a new decision for the user, not made here.
 
-Reporting checklist: CLAIM 2024 (medical imaging AI) not applicable: exploratory check of a prompt on public images, no diagnostic model, no patient data. Done instead: n, 95% Wilson intervals, run name, prompt hash, model revision, seed and sources are given above.
+Reporting checklist: CLAIM 2024 (medical imaging AI) not applicable: exploratory check of a prompt on public images, no diagnostic model, no patient data. Done instead: n, false-box rate with 95% Wilson intervals, run name, prompt hash, model revision, seed and sources are given above.
