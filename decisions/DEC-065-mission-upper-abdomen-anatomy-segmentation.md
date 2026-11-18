@@ -80,7 +80,7 @@ model-task-definition session; this section bounds it.
 | `kidney` | mid abdomen | 9,982 | 5,610 | 9,803 | first set |
 | `stomach` | upper abdomen | 3,562 | 11,032 | 10,801 | first set |
 | `gallbladder` | upper abdomen | 2,212 | 12,765 | 10,418 | first set |
-| `spleen` | upper abdomen | 961 | 12,712 | 11,722 | first set |
+| `spleen` | upper abdomen | 961 | 12,712 | 11,722 | first set; moved to pool by DEC-066 |
 | `hepatic_duct` | upper abdomen | 8,000 | 8,408 | 8,987 | pool (thin structure; meaning to confirm) |
 | `intestine` | mid abdomen | 2,507 | 12,013 | 10,875 | pool |
 | `portal_vein` | upper abdomen | 2,278 | 12,712 | 10,405 | pool (thin structure) |
@@ -150,7 +150,8 @@ already known and the lean each session starts from. A lean is not a decision.
 
 - The six point sessions start from this DEC and do not reopen sections 1, 4 and 5 without a
   new DEC.
-- The points are taken one at a time: each point's board tasks are created in its own session, after its DEC is accepted. (Changed by the user on 2026-11-17: the six Parked point tasks first made, [TASK-147](../../backlog/tasks/task-147%20-%20Epic-1-point-1-model-task-definition-classes-target-form-and-how-positive-negative-and-unknown-pairs-become-loss-and-score-DEC-065.md) to [TASK-152](../../backlog/tasks/task-152%20-%20Epic-1-point-6-optimisation-strategy-loss-optimiser-schedule-augmentation-epochs-and-sanity-steps-for-the-anatomy-model-DEC-065.md), were archived.)
+- The points are taken one at a time: each point's board tasks are created in its own session, after its DEC is accepted. (Changed by the user on 2026-11-17: the six Parked point tasks first made, [TASK-147](../../backlog/archive/tasks/task-147%20-%20Epic-1-point-1-model-task-definition-classes-target-form-and-how-positive-negative-and-unknown-pairs-become-loss-and-score-DEC-065.md) to [TASK-152](../../backlog/archive/tasks/task-152%20-%20Epic-1-point-6-optimisation-strategy-loss-optimiser-schedule-augmentation-epochs-and-sanity-steps-for-the-anatomy-model-DEC-065.md), were archived.)
 - Build and training tasks are created only after their point DECs are accepted.
+- Point 1 is settled by [DEC-066](DEC-066-epic1-model-task-label-set-softmax.md) (label-set softmax): first set liver, kidney, stomach, gallbladder; spleen moved to the pool (the user's choice, 2026-11-17).
 - If the bar of section 2 is not met, the EXP record says which criterion failed, and the
   next step is chosen in a consult session, not by tuning on test.
