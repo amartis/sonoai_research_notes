@@ -20,7 +20,7 @@ Writing standard: [docs/writing.md](../../docs/writing.md).
 
 ## Question
 
-Exploratory check, no tuning. [DEC-062](../decisions/DEC-062-bmode-detector-training-box-source-and-negatives.md) expects negatives (images with no B-mode image) to get no box, so the model should answer "No B-mode image". Does the unchanged prompt do that? No threshold was set by the agent.
+Exploratory check, no tuning. [DEC-062](../decisions/DEC-062-bmode-box-detector-bmode-det-v1.md) expects negatives (images with no B-mode image) to get no box, so the model should answer "No B-mode image". Does the unchanged prompt do that? No threshold was set by the agent.
 
 ## Results
 
