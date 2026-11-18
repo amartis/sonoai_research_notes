@@ -14,7 +14,7 @@ Writing standard: [docs/writing.md](../../docs/writing.md).
 - Date: 2026-11-18 (run 09:40 to 10:03 local time of the GPU box)
 - Run name: `exp-t154-qwen-negatives-r2` on the GPU box (an earlier start, `exp-t154-qwen-negatives`, failed at once: the `sonoai-label` entry point is not installed on the box; no image was read; r2 calls the same code through `python -c`). Common-box run folder `20261118-014225`.
 - Code: master `78e68c8` plus the TASK-153 command; the box copy has no `.git`, so the table holds `code-unknown`.
-- Model: Qwen3-VL-8B-Instruct, revision `0c351dd01ed8`, 4-bit nf4, greedy, max 256 new tokens.
+- Model: Qwen3-VL-8B-Instruct (https://huggingface.co/Qwen/Qwen3-VL-8B-Instruct, Apache-2.0, commit `0c351dd01ed87e9c1b53cbc748cba10e6187ff3b`, from the local download record), revision `0c351dd01ed8`, 4-bit nf4, greedy, max 256 new tokens.
 - Prompt hash (sha256): `7ead0c7ac18686cb97e5b85be26d8c736c27f6b0b473cde76c01612de0f78970` (the [DEC-035](../decisions/DEC-035-qwen3-vl-second-annotator-on-gpu-box.md) box prompt, unchanged; the digest of the drawn files is `625175fe...`).
 - Data: public only ([DEC-063](../decisions/DEC-063-public-non-patient-datasets-root.md)). MedNIST (6 classes) and Imagenette-320 val (10 classes), 100 images per class drawn with seed 0, RGB as stored: n = 1,600. No shortfall.
 
@@ -50,6 +50,12 @@ The intervals treat images as independent. Images of one class share a source, s
 - Time: 0.5 to 0.65 s per image for "no box" classes; 0.8 to 1.4 s per image where boxes are frequent (longer replies). Whole run about 23 minutes.
 - Exploratory, one seed, one draw. Whether a box on a CT or MRI slice is wrong for the detector's purpose is the user's decision; I looked at no image. Any prompt change is a new decision.
 
-## Limits
+## Limitations
 
-One draw (seed 0); public datasets only, not the real negatives of the B-mode project; time per image is from one run on one GPU (RTX 3060 shared box).
+One draw (seed 0); public sets only, not the real negatives of the B-mode project; time per image is from one run on one GPU (RTX 3060 shared box).
+
+## Conclusion and next steps
+
+The expectation (negatives get no box) holds for the Imagenette-320 photographs (1 box in 1,000 images) and fails for MedNIST CT and MRI slices (ChestCT 60, BreastMRI 55, HeadCT 20 boxes per 100). The prompt was not tuned and no threshold was set. Whether to change the prompt, or to treat these classes as needed negatives for the detector, is a new decision for the user, not made here.
+
+Reporting checklist: CLAIM 2024 (medical imaging AI) not applicable: exploratory check of a prompt on public images, no diagnostic model, no patient data. Done instead: n, 95% Wilson intervals, run name, prompt hash, model revision, seed and sources are given above.
