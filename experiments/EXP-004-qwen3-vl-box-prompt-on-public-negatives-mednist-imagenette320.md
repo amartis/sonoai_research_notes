@@ -1,12 +1,12 @@
 ---
 id: EXP-004
-title: Qwen3-VL box prompt (DEC-035, unchanged) on public negatives, MedNIST and Imagenette-320
+title: Qwen3-VL box prompt (DEC-035, unchanged) on public datasets that have no ultrasound image, MedNIST and Imagenette-320
 status: done
 created: 2026-11-18
 from: [DIS-031]
 related: [DEC-035, DEC-062, DEC-063]
 ---
-# EXP-004: Qwen3-VL box prompt on public negatives (MedNIST, Imagenette-320)
+# EXP-004: Qwen3-VL box prompt on public datasets that have no ultrasound image (MedNIST, Imagenette-320)
 
 Board task: [TASK-154](../../backlog/tasks/task-154%20-%20Run-the-Qwen3-VL-box-prompt-on-100-MedNIST-and-Imagenette-320-images-per-class-on-the-GPU-box-EXP-record-with-the-share-of-wrong-boxes-per-class-DIS-031.md) (this run and record); command from [TASK-153](../../backlog/tasks/task-153%20-%20Qwen3-VL-box-prompt-on-public-negatives-sonoai-label-command-that-prompts-a-seeded-sample-of-MedNIST-and-Imagenette-320-and-writes-per-class-aggregates-with-Wilson-95-intervals-synthetic-tests-DIS-031.md). Discussion: [DIS-031](../discussions/DIS-031-qwen-box-prompt-on-public-negatives.md).
 Writing standard: [docs/writing.md](../../docs/writing.md).
@@ -20,11 +20,11 @@ Writing standard: [docs/writing.md](../../docs/writing.md).
 
 ## Question
 
-Exploratory check, no tuning. [DEC-062](../decisions/DEC-062-bmode-box-detector-bmode-det-v1.md) expects negatives (images with no B-mode image) to get no box, so the model should answer "No B-mode image". Does the unchanged prompt do that? No threshold was set by the agent.
+Exploratory check, no tuning. [DEC-062](../decisions/DEC-062-bmode-box-detector-bmode-det-v1.md) expects images with no B-mode image (here: public datasets that have no ultrasound image, "public sets" below) to get no box, so the model should answer "No B-mode image". Does the unchanged prompt do that? No threshold was set by the agent.
 
 ## Results
 
-Table 1. Replies of the unchanged box prompt on public negatives. n = images; boxes = reply with at least one box; no_bmode = reply "No B-mode image"; unparsed = reply not understood; wrong = boxes + unparsed; share wrong with 95% Wilson interval; time = model seconds per image (one run, so no interval on time).
+Table 1. Replies of the unchanged box prompt on public sets (datasets that have no ultrasound image). n = images; boxes = reply with at least one box; no_bmode = reply "No B-mode image"; unparsed = reply not understood; wrong = boxes + unparsed; share wrong with 95% Wilson interval; time = model seconds per image (one run, so no interval on time).
 
 | Public set | Class | n | boxes | no_bmode | unparsed | Share wrong [95% CI] | s/image |
 |---|---|---|---|---|---|---|---|
@@ -52,10 +52,10 @@ The intervals treat images as independent. Images of one class share a source, s
 
 ## Limitations
 
-One draw (seed 0); public sets only, not the real negatives of the B-mode project; time per image is from one run on one GPU (RTX 3060 shared box).
+One draw (seed 0); public sets only, not images of the B-mode project that hold no B-mode image; time per image is from one run on one GPU (RTX 3060 shared box).
 
 ## Conclusion and next steps
 
-The expectation (negatives get no box) holds for the Imagenette-320 photographs (1 box in 1,000 images) and fails for MedNIST CT and MRI slices (ChestCT 60, BreastMRI 55, HeadCT 20 boxes per 100). The prompt was not tuned and no threshold was set. Whether to change the prompt, or to treat these classes as needed negatives for the detector, is a new decision for the user, not made here.
+The expectation (images with no ultrasound get no box) holds for the Imagenette-320 photographs (1 box in 1,000 images) and fails for MedNIST CT and MRI slices (ChestCT 60, BreastMRI 55, HeadCT 20 boxes per 100). The prompt was not tuned and no threshold was set. Whether to change the prompt, or to use these classes as images with no B-mode image for the detector, is a new decision for the user, not made here.
 
 Reporting checklist: CLAIM 2024 (medical imaging AI) not applicable: exploratory check of a prompt on public images, no diagnostic model, no patient data. Done instead: n, 95% Wilson intervals, run name, prompt hash, model revision, seed and sources are given above.
