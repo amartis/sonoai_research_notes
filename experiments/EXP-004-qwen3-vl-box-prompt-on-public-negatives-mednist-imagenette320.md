@@ -8,15 +8,15 @@ related: [DEC-035, DEC-062, DEC-063]
 ---
 # EXP-004: Qwen3-VL box prompt on public negatives (MedNIST, Imagenette-320)
 
-Board task: TASK-154 (this run and record); command from TASK-153. Discussion: [DIS-031](../discussions/DIS-031-qwen-box-prompt-on-public-negatives.md).
+Board task: [TASK-154](../../backlog/tasks/task-154%20-%20Run-the-Qwen3-VL-box-prompt-on-100-MedNIST-and-Imagenette-320-images-per-class-on-the-GPU-box-EXP-record-with-the-share-of-wrong-boxes-per-class-DIS-031.md) (this run and record); command from [TASK-153](../../backlog/tasks/task-153%20-%20Qwen3-VL-box-prompt-on-public-negatives-sonoai-label-command-that-prompts-a-seeded-sample-of-MedNIST-and-Imagenette-320-and-writes-per-class-aggregates-with-Wilson-95-intervals-synthetic-tests-DIS-031.md). Discussion: [DIS-031](../discussions/DIS-031-qwen-box-prompt-on-public-negatives.md).
 Writing standard: [docs/writing.md](../../docs/writing.md).
 
 - Date: 2026-11-18 (run 09:40 to 10:03 local time of the GPU box)
 - Run name: `exp-t154-qwen-negatives-r2` on the GPU box (an earlier start, `exp-t154-qwen-negatives`, failed at once: the `sonoai-label` entry point is not installed on the box; no image was read; r2 calls the same code through `python -c`). Common-box run folder `20261118-014225`.
 - Code: master `78e68c8` plus the TASK-153 command; the box copy has no `.git`, so the table holds `code-unknown`.
 - Model: Qwen3-VL-8B-Instruct, revision `0c351dd01ed8`, 4-bit nf4, greedy, max 256 new tokens.
-- Prompt hash (sha256): `7ead0c7ac18686cb97e5b85be26d8c736c27f6b0b473cde76c01612de0f78970` (the DEC-035 box prompt, unchanged; the digest of the drawn files is `625175fe...`).
-- Data: public only (DEC-063). MedNIST (6 classes) and Imagenette-320 val (10 classes), 100 images per class drawn with seed 0, RGB as stored: n = 1,600. No shortfall.
+- Prompt hash (sha256): `7ead0c7ac18686cb97e5b85be26d8c736c27f6b0b473cde76c01612de0f78970` (the [DEC-035](../decisions/DEC-035-qwen3-vl-second-annotator-on-gpu-box.md) box prompt, unchanged; the digest of the drawn files is `625175fe...`).
+- Data: public only ([DEC-063](../decisions/DEC-063-public-non-patient-datasets-root.md)). MedNIST (6 classes) and Imagenette-320 val (10 classes), 100 images per class drawn with seed 0, RGB as stored: n = 1,600. No shortfall.
 
 ## Question
 
