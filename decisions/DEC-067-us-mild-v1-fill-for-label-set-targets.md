@@ -1,12 +1,12 @@
 ---
 id: DEC-067
 title: us_mild_v1 fill for label-set targets - filled target pixels are {background}
-status: accepted
+status: superseded
 area: [training]
 created: 2026-11-18
 from: []
 related: [DEC-049, DEC-066]
-superseded_by:
+superseded_by: DEC-068
 ---
 # DEC-067: us_mild_v1 fill for label-set targets - filled target pixels are {background}
 
