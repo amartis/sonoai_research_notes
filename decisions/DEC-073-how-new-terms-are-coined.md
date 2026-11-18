@@ -1,7 +1,7 @@
 ---
 id: DEC-073
 title: How new terms are coined - descriptive words first, a three-part screen before a new term, and names that are descriptive and specific
-status: proposed
+status: accepted
 area: [workflow]
 created: 2026-11-18
 from: [DIS-035]

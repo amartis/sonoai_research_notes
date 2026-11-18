@@ -1,7 +1,7 @@
 ---
 id: DIS-035
 title: Term scope (global or research epic) and how new terms are coined
-status: open
+status: concluded
 created: 2026-11-18
 outcomes: [DEC-072, DEC-073]
 related: [DEC-057, DEC-056, DEC-065, DEC-069, DEC-071]
@@ -47,11 +47,11 @@ concept should be introduced only when it has unique value over descriptive word
 - [DEC-072](../decisions/DEC-072-term-scopes-global-glossary-and-epic-terms-files.md)
   (accepted, the user said yes to B and chose B2): global glossary at
   `docs/glossary/global-glossary.md`, one terms file per research epic in the same folder.
-- [DEC-073](../decisions/DEC-073-how-new-terms-are-coined.md) (proposed): the screen and the
+- [DEC-073](../decisions/DEC-073-how-new-terms-are-coined.md) (accepted 2026-11-18): the screen and the
   naming rules for new terms.
 - Harvesting the terms of the open glossary tasks is deferred by the user until the policy is
   settled; it becomes one Parked board task.
 
 ## Open questions
 
-- None open in this discussion; DEC-073 waits for the user's yes.
+- None. The user accepted DEC-073 on 2026-11-18.
