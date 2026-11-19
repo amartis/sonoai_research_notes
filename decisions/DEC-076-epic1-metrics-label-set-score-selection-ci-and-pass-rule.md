@@ -38,7 +38,7 @@ For each sample and each first-set organ c, by the organ's `strict_v1` state in 
 | unknown | none | not scored, adds to no count |
 
 Table 1. The score of one sample and one organ. Pixels with the ignore value are left out of P
-and G; pixels outside the original crop count as background (target fill, DEC-068).
+and G; pixels outside the original crop count as background (target fill, [DEC-068](DEC-068-us-mild-v2-zero-image-and-background-outside-the-crop.md)).
 
 Measures per split and organ c (all unweighted means over samples):
 
@@ -57,14 +57,14 @@ the values are seen.
 
 ### 3. Checkpoint selection (val only)
 
-Criteria, in order, tolerance 1e-4 (DEC-006 rule, `Selection` in `sonoai.training.loop`):
+Criteria, in order, tolerance 1e-4 ([DEC-006](DEC-006-losses-optim-tracking.md) rule, `Selection` in `sonoai.training.loop`):
 1. val **mean of W1<sub>c</sub> over the four organs**, max (matches the bar; each organ counts
    the same);
 2. val **mean of W2<sub>c</sub> over the four organs**, max;
 3. val loss, min.
 
 Pixel-pooled DSC is not used for selection (it weights large organs and large crops more).
-The test split is never read for selection (DEC-043 rule 7, DEC-045 rule 3).
+The test split is never read for selection ([DEC-043](DEC-043-cirrhosis-task-gt-organ-layer-predicted-cirrhosis-only.md) rule 7, [DEC-045](DEC-045-per-sample-confusion-matrices-in-runs.md) rule 3).
 
 ### 4. Confidence intervals
 
@@ -90,7 +90,7 @@ Table 1).
    overlap pixel counts) go into `seg_anatomy_v2`'s evaluation; the label-set refusal of
    DEC-070 rule 4 is removed.
 2. **Metrics are added to `seg_anatomy_v2` itself, not to a new v3** (the user's choice: leaving
-   them out was deliberate). DEC-004's rule (a changed fingerprint is a new version) is
+   them out was deliberate). [DEC-004](DEC-004-training-tasks.md)'s rule (a changed fingerprint is a new version) is
    waived for this one change because no recipe, script or run of this repository uses the
    task yet (grep of `configs/` and `scripts/`; run folders not checked). If a run already
    used v2, the task of rule 6.1 stops and returns the question.
@@ -99,10 +99,10 @@ Table 1).
 
 ## Consequences
 
-- DEC-070 rule 4 is replaced by rule 6.1; TASK-171 (new task version?) is closed by rule 6.2.
+- DEC-070 rule 4 is replaced by rule 6.1; [TASK-171](../../backlog/tasks/task-171%20-%20Decide-whether-adding-metrics-to-seg_anatomy_v2-in-epic-1-point-4-makes-a-new-task-version-v3-since-metrics-are-in-the-task-fingerprint.md) (new task version?) is closed by rule 6.2.
 - Board tasks (created after this DEC is accepted): a method task for rules 1 to 3 and 6.1 to
   6.2; a method task for the report (rule 4, 5, 6.3). The method task touches the segmentation
-  trainer, as TASK-169 (trainer refuses a label-set task at setup) does; TASK-169 is
+  trainer, as [TASK-169](../../backlog/tasks/task-169%20-%20Segmentation-trainer-refuses-a-label-set-task-at-setup-before-training-starts-today-evaluate-refuses-only-at-the-first-evaluation.md) (trainer refuses a label-set task at setup) does; TASK-169 is
   superseded by it and is closed there.
 - Reversal: all rules apply before the first run; a later change means a new DEC and
   re-scoring saved per-sample records (cheap), not retraining.
