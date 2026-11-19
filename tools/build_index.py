@@ -2,7 +2,7 @@
 """Build INDEX.md from the front matter of DIS / DEC / EXP notes, and link IDs in note bodies.
 
     python tools/build_index.py           # link IDs in note bodies, write INDEX.md
-    python tools/build_index.py --check   # exit 1 if anything is stale, unlinked or broken
+    python tools/build_index.py --check   # exit 1 if anything is stale, unlinked, moved or broken
 
 Standard library only. Front matter is the block between the first two `---`
 lines; values are plain strings or `[A, B]` lists, `#` starts a comment.
@@ -12,6 +12,12 @@ bare mention of each DIS / DEC / EXP / TASK ID becomes a relative markdown
 link; TASK IDs point at the Backlog.md task file in `../backlog/`. Front
 matter, fenced code, code spans, existing links, URLs, HTML comments and the
 note's own ID are left alone, so a second run changes nothing.
+
+The backlog CLI moves task files later (to `completed/` or `archive/tasks/`). A link
+whose target is a board task file that no longer exists is matched by its task ID
+against the current task files (TASK_FOLDERS) and rewritten to the current path;
+`--check` only reports it ("run tools/build_index.py"). A task ID found in no
+folder stays a broken-link error.
 """
 
 from __future__ import annotations
@@ -33,6 +39,7 @@ KINDS = {  # prefix -> (folder, heading)
 BODY_FOLDERS = ("journal", "datasets", "literature")  # other notes whose bodies get links
 BACKLOG = ROOT.parent / "backlog"
 TASK_FOLDERS = ("tasks", "completed", "archive/tasks")  # where the backlog CLI keeps task files
+TASK_FILE_RE = re.compile(r"^(task-\d+(?:\.\d+)?) .*\.md$", re.I)  # board task file name
 AREAS = ("data-security", "datasets", "labeling", "training", "workflow", "infra", "aws")  # DEC-040
 LINK_FIELDS = ("from", "outcomes", "related", "superseded_by")
 ID_RE = re.compile(r"^(DIS|DEC|EXP)-\d{3}$")
@@ -175,12 +182,26 @@ def relative(target: Path, here: Path) -> str:
     return quote(Path(os.path.relpath(target, here)).as_posix())
 
 
-def link_body(path: Path, own_id: str | None, targets: dict[str, Path]) -> tuple[str, list[str], list[str]]:
-    """Return (text, IDs newly linked, errors) for one note: the first bare mention of each ID gets a link."""
+def moved_task(local: str, targets: dict[str, Path]) -> str | None:
+    """Task ID of a link to a board task file that has moved (matched by ID in `targets`), else None."""
+    m = TASK_FILE_RE.match(Path(local).name)
+    if not m:
+        return None
+    nid = m.group(1).upper()
+    return nid if nid in targets and targets[nid].is_relative_to(BACKLOG) else None
+
+
+def link_body(
+    path: Path, own_id: str | None, targets: dict[str, Path]
+) -> tuple[str, list[str], list[str], list[str]]:
+    """Return (text, IDs newly linked, errors, task IDs re-pointed) for one note.
+
+    The first bare mention of each ID gets a link; a link to a moved board task file is re-pointed.
+    """
     front, body = split_front_matter(path.read_text(encoding="utf-8"))
     parts = list(chunks(body))
     linked = {own_id} | {nid for kind, text, _ in parts if kind == "link" for nid in MENTION_RE.findall(text)}
-    added, errors, out = [], [], []
+    added, errors, out, moved = [], [], [], []
     name = path.relative_to(ROOT).as_posix()
 
     def link(m: re.Match) -> str:
@@ -201,9 +222,22 @@ def link_body(path: Path, own_id: str | None, targets: dict[str, Path]) -> tuple
             target = (m.group("target") or m.group("reftarget") or "").strip("<>")
             local = unquote(target.split("#", 1)[0])
             if local and not re.match(r"[A-Za-z][A-Za-z0-9+.-]*:", local) and not (path.parent / local).exists():
-                errors.append(f"{name}: broken link {target}")
+                nid = moved_task(local, targets)
+                if nid is None:
+                    errors.append(f"{name}: broken link {target}")
+                else:
+                    group = "target" if m.group("target") is not None else "reftarget"
+                    raw, fragment = m.group(group), ""
+                    inner = raw.strip("<>")
+                    if "#" in inner:
+                        fragment = "#" + inner.split("#", 1)[1]
+                    new = relative(targets[nid], path.parent) + fragment
+                    new = f"<{new}>" if raw.startswith("<") else new
+                    a = m.start(group) - m.start()
+                    text = text[:a] + new + text[a + len(raw):]
+                    moved.append(nid)
         out.append(text)
-    return front + "".join(out), added, errors
+    return front + "".join(out), added, errors, moved
 
 
 def render(notes: dict[str, dict]) -> str:
@@ -281,13 +315,17 @@ def main() -> int:
     own_ids = {ROOT / m["path"]: nid for nid, m in notes.items()}
     relinked = 0
     for path in body_files(notes):
-        new, added, errs = link_body(path, own_ids.get(path), targets)
+        new, added, errs, moved = link_body(path, own_ids.get(path), targets)
         errors += errs
-        if not added:
+        if not added and not moved:
             continue
         relinked += 1
         if args.check:
-            errors.append(f"{path.relative_to(ROOT)}: unlinked {', '.join(added)}; run tools/build_index.py")
+            name = path.relative_to(ROOT)
+            if added:
+                errors.append(f"{name}: unlinked {', '.join(added)}; run tools/build_index.py")
+            if moved:
+                errors.append(f"{name}: moved task file link {', '.join(moved)}; run tools/build_index.py")
         else:
             path.write_text(new, encoding="utf-8")
     text = render(notes)
@@ -297,7 +335,7 @@ def main() -> int:
             errors.append("INDEX.md is stale; run tools/build_index.py")
     else:
         INDEX.write_text(text, encoding="utf-8")
-        print(f"wrote {INDEX.relative_to(ROOT)} ({len(notes)} notes); linked IDs in {relinked} notes")
+        print(f"wrote {INDEX.relative_to(ROOT)} ({len(notes)} notes); linked or re-pointed IDs in {relinked} notes")
     for e in errors:
         print(f"error: {e}", file=sys.stderr)
     return 1 if errors else 0

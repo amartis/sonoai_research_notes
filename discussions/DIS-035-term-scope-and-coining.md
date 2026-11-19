@@ -10,14 +10,14 @@ related: [DEC-057, DEC-056, DEC-065, DEC-069, DEC-071]
 
 ## Question
 
-Raised by the user on [TASK-165](../../backlog/tasks/task-165%20-%20Glossary-rows-for-the-Epic-1-candidate-terms-pair-kind-first-set-candidate-exclusion-flag-DEC-069-DEC-057.md) (glossary rows for the Epic 1 candidate terms): most new
+Raised by the user on [TASK-165](../../backlog/archive/tasks/task-165%20-%20Glossary-rows-for-the-Epic-1-candidate-terms-pair-kind-first-set-candidate-exclusion-flag-DEC-069-DEC-057.md) (glossary rows for the Epic 1 candidate terms): most new
 terms belong to one board task or one research epic. Putting every one of them into the
 project glossary is not efficient and confuses readers. Do terms have a scope?
 
 Finding: they did not. [DEC-057](../decisions/DEC-057-glossary-for-the-whole-research-project.md)
 has one scope (the whole project), and the reviewer's terms check makes every new term
 without a glossary row a should-fix finding. On 2026-11-18 the board held 12 glossary tasks,
-10 of them open, and `docs/glossary.md` had 423 lines. The six terms of TASK-165 and [TASK-172](../../backlog/tasks/task-172%20-%20Glossary-rows-for-first-set-and-organ-state-DEC-066-DEC-070-from-the-TASK-159-terms-review.md)
+10 of them open, and `docs/glossary.md` had 423 lines. The six terms of TASK-165 and [TASK-172](../../backlog/archive/tasks/task-172%20-%20Glossary-rows-for-first-set-and-organ-state-DEC-066-DEC-070-from-the-TASK-159-terms-review.md)
 (pair kind, first set, candidate, exclusion flag, organ state) were already defined in
 [DEC-066](../decisions/DEC-066-epic1-model-task-label-set-softmax.md), [DEC-069](../decisions/DEC-069-epic1-data-preparation.md), [DEC-070](../decisions/DEC-070-anatomy-label-set-task-states-in-sample-file.md) or `docs/datasets/styles/derived.md`.
 
