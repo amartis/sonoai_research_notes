@@ -100,7 +100,7 @@ Table 1).
 ## Consequences
 
 - DEC-070 rule 4 is replaced by rule 6.1; [TASK-171](../../backlog/tasks/task-171%20-%20Decide-whether-adding-metrics-to-seg_anatomy_v2-in-epic-1-point-4-makes-a-new-task-version-v3-since-metrics-are-in-the-task-fingerprint.md) (new task version?) is closed by rule 6.2.
-- Board tasks (created after this DEC is accepted): a method task for rules 1 to 3 and 6.1 to
+- Board tasks: TASK-180 (label-set evaluation for seg_anatomy_v2) and TASK-181 (metrics report with CIs), both method; TASK-169 and TASK-171 archived. Plan: a method task for rules 1 to 3 and 6.1 to
   6.2; a method task for the report (rule 4, 5, 6.3). The method task touches the segmentation
   trainer, as [TASK-169](../../backlog/tasks/task-169%20-%20Segmentation-trainer-refuses-a-label-set-task-at-setup-before-training-starts-today-evaluate-refuses-only-at-the-first-evaluation.md) (trainer refuses a label-set task at setup) does; TASK-169 is
   superseded by it and is closed there.
