@@ -3,7 +3,7 @@ id: DIS-034
 title: Epic 1 point 3 - splitting - keep the DEC-044 principles, balance every class's positive rate, one parameterised split method for later projects
 status: concluded
 created: 2026-11-18
-outcomes: [DEC-071]
+outcomes: [DEC-071, DEC-075]
 related: [DEC-065, DEC-044, DEC-069, DEC-070, DEC-053, DIS-030]
 ---
 # DIS-034: Epic 1 point 3 - splitting
@@ -73,8 +73,16 @@ parameterised split method and its use for epic 1. Board: [TASK-166](../../backl
 [TASK-167](../../backlog/tasks/task-167%20-%20Epic-1-split-feasibility-report-on-261023-run-the-TASK-166-report-on-the-anatomy-candidate-table-at-tolerances-1-2-3-and-5-points-dataset-record-for-the-user-to-set-tolerances-and-minimum-counts-DEC-071.md) (feasibility report on 261023, data), [TASK-168](../../backlog/tasks/task-168%20-%20Freeze-the-epic-1-sample-file-on-261023-with-the-users-tolerances-and-minimum-counts-split-state-columns-enc1-copy-dataset-record-with-counts-per-split-and-class-DEC-071-DEC-070.md) (freeze of the epic 1 sample file, data,
 Parked until the user sets the tolerances); links in DEC-071 Consequences.
 
+## Follow-up 2026-11-18: values after the feasibility report
+
+After the TASK-167 report ([anatomy_e1_split.md](../datasets/261023/anatomy_e1_split.md)) the
+user chose, on the analyst's recommendation: a 2-point tolerance for every organ; at least 200
+positives and 300 negatives per organ in test and val; and to keep point 2 (positive rate over
+all samples) although the unknown share differs between test and train + val, because W1 and W2
+are computed on one state each. Record: [DEC-075](../decisions/DEC-075-epic1-split-values-tolerance-and-minimum-counts.md).
+
 ## Open questions
 
-- Tolerance per class and the minimum test counts: set by the user after the feasibility report.
+- ~~Tolerance per class and the minimum test counts~~: set in DEC-075.
 - Whether the cirrhosis and B-mode detector sample builders move to the new method: not now;
   a later task if wanted.
