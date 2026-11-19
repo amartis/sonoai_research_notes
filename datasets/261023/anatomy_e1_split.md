@@ -2,9 +2,9 @@
 
 [TASK-167 (epic 1 split feasibility report)](../../../backlog/tasks/task-167%20-%20Epic-1-split-feasibility-report-on-261023-run-the-TASK-166-report-on-the-anatomy-candidate-table-at-tolerances-1-2-3-and-5-points-dataset-record-for-the-user-to-set-tolerances-and-minimum-counts-DEC-071.md), [DEC-071 (parameterised split method)](../../decisions/DEC-071-epic1-splitting-parameterised-split-method.md), [DIS-034 (epic 1 splitting)](../../discussions/DIS-034-epic1-splitting.md), [TASK-166 (split method and report mode)](../../../backlog/tasks/task-166%20-%20Parameterised-split-method-test-by-datasource-groups-with-every-classs-positive-rate-balanced-val-by-image-stratified-by-positive-pattern-feasibility-report-sonoai-data-command-synthetic-tests-DEC-071.md), [TASK-164 (table of eligible samples)](../../../backlog/tasks/task-164%20-%20Epic-1-anatomy-candidate-table-on-261023_plain-run-the-TASK-163-builder-at-224-px-dataset-record-with-counts-per-flag-organ-state-and-datasource-group-polygon-overlap-and-in-crop-area-DEC-069.md), [anatomy_e1_candidates.md](anatomy_e1_candidates.md), [TASK-168 (freeze, waits for the tolerances)](../../../backlog/tasks/task-168%20-%20Freeze-the-epic-1-sample-file-on-261023-with-the-users-tolerances-and-minimum-counts-split-state-columns-enc1-copy-dataset-record-with-counts-per-split-and-class-DEC-071-DEC-070.md). Aggregates only: no images, file names, folder names or identifiers; datasource groups are given as counts.
 
-**Status: the sections up to "Next step" are the TASK-167 feasibility report (descriptive, sets no rule); the section "Frozen split (TASK-168)" at the end records the sample file frozen with the user's values ([DEC-075](../../decisions/DEC-075-epic1-split-values-tolerance-and-minimum-counts.md)).** The user sets the gap tolerances and the minimum counts in a later consult session ([DEC-071](../../decisions/DEC-071-epic1-splitting-parameterised-split-method.md) item 9). Made on 2026-11-18 on `261023_plain` ([DEC-018](../../decisions/DEC-018-plain-style-for-local-research.md)). Not reviewed. Reporting checklists (CLAIM, the Checklist for Artificial Intelligence in Medical Imaging, and STARD, the Standards for Reporting of Diagnostic Accuracy): not applicable (no model; a split is searched and described, none is frozen).
+**Status: the sections up to "Next step" are the TASK-167 feasibility report (descriptive, sets no rule); the section "Frozen split (TASK-168)" at the end records the sample file frozen with the user's values ([DEC-075](../../decisions/DEC-075-epic1-split-values-tolerance-and-minimum-counts.md)).** In the report sections the gap tolerances and the minimum counts were still open: the user set them afterwards in a consult session ([DEC-071](../../decisions/DEC-071-epic1-splitting-parameterised-split-method.md) item 9; [DEC-075](../../decisions/DEC-075-epic1-split-values-tolerance-and-minimum-counts.md)), and the frozen section uses those values. Made on 2026-11-18 on `261023_plain` ([DEC-018](../../decisions/DEC-018-plain-style-for-local-research.md)). Not reviewed. Reporting checklists (CLAIM, the Checklist for Artificial Intelligence in Medical Imaging, and STARD, the Standards for Reporting of Diagnostic Accuracy): not applicable (no model; the report sections search and describe a split, the frozen section records one).
 
-**Terms used.** *Point* = percentage point. *CI* = confidence interval; the 95% CIs here are Wilson intervals on the samples of a split, and samples of one datasource group are not independent, so they are too narrow. *Datasource group* = datasources joined because an image occurs under both; the unit of the test split. *Eligible sample* = a sample of the [table of eligible samples](anatomy_e1_candidates.md) that passes the exclusion flags (its `candidate` column is true). *Positive rate* = positives over all samples of a split, unknown included ([DIS-034](../../discussions/DIS-034-epic1-splitting.md) point 2). *Positive-rate gap* (short form "gap") = positive rate of test minus that of train + val (val: minus train), in points. *Gap tolerance* (short form "tolerance") = the largest allowed absolute gap. *Unknown* = the state of the organ is neither positive nor negative. *Organ* = one of the four balanced state columns (liver, kidney, stomach, gallbladder).
+**Terms used.** *Point* = percentage point. *CI* = confidence interval; the 95% CIs here are Wilson intervals on the samples of a split, and samples of one datasource group are not independent, so they are too narrow. *Datasource group* = datasources joined because an image occurs under both; the unit of the test split. *Eligible sample* = a sample of the [table of eligible samples](anatomy_e1_candidates.md) that passes the exclusion flags (its `candidate` column is true). *Positive rate* = positives over all samples of a split, unknown included ([DIS-034](../../discussions/DIS-034-epic1-splitting.md) point 2). *Positive-rate gap* (short form "gap") = positive rate of test minus that of train + val (val: minus train), in points. *Gap tolerance* (short form "tolerance") = the largest allowed absolute gap. *Unknown* = the state of the organ is neither positive nor negative. *Organ* = one of the four balanced state columns (liver, kidney, stomach, gallbladder). Terms of the section "Frozen split (TASK-168)": *sample file* = the table that lists every eligible sample with its `split` (train, val or test) and the four state columns. *Freeze* = the command `sonoai-data split freeze`: it searches the split once, then writes the sample file and its enc1 copy, and writes nothing when no split meets the spec. *Enc1 copy* = the encrypted copy of the sample file in the `261023_enc1` store. *sha256* = a 64-character fingerprint of a file's bytes; equal fingerprints mean equal files. *Labeled sample* (for one organ) = a sample whose state for the organ is positive or negative (not unknown); it is not a sample that has a labeling. *Positive share* (among labeled samples) = positives over positives + negatives; it is not the positive rate, which is over all samples with unknown included.
 
 **Precision.** Rates, gaps, CIs and shares of samples are given with 2 decimals, as the report prints them, because the gaps are compared with tolerances as small as 1 point. A share of a tolerance is given in whole percent.
 
@@ -132,6 +132,8 @@ Command (writes a new file and its enc1 copy; changes no existing table, [DEC-05
 sonoai-data split freeze 261023_plain --spec configs/data/splits/anatomy_e1.yaml
 ```
 
+Table 5. The frozen sample file and how it was made: name pattern, fingerprints, spec version, seed, size and code. n = 20,011 samples. The two sha256 values equal the ones the freeze printed.
+
 | Item | Value |
 |---|---|
 | Sample file, name pattern | `derived/anatomy_e1_samples_v2_261023_plain_df.pkl` in `261023_plain`; encrypted copy at the same path in the `261023_enc1` store |
@@ -143,19 +145,21 @@ sonoai-data split freeze 261023_plain --spec configs/data/splits/anatomy_e1.yaml
 | Code | `sonoai.data.splitting` (TASK-166); this task changed no code or spec |
 | Enc1 copy | the manifest and one new blob of the store were written at the same second as the plain file; the blob is 32 bytes larger than the plain file (the enc1 overhead). Not decrypted or compared by the agent (no passphrase); the freeze printed that it wrote the copy |
 
-**Re-check on the written file (AC2).** Done by the agent on the file as read back from disk, not on the freeze's memory:
+**Re-check on the written file.** This is the freeze re-check: the agent repeated every check of the spec (shares, groups, gaps, minimum counts) on the file read back from disk, not on the freeze's memory.
+
+Table 6. The freeze re-check: each check of the spec, with the result on the written file. n = 20,011 samples (train 14,836, val 3,007, test 2,168); shares and their ranges are percentages of samples.
 
 | Check | Result |
 |---|---|
-| Share of samples in range | train 74.14% (0.70-0.85), val 15.03% (0.15-0.23), test 10.83% (0.08-0.13): met |
+| Share of samples in range | train 74.14% (range 70-85%), val 15.03% (range 15-23%), test 10.83% (range 8-13%): met |
 | Datasource groups in test also in train or val | 0 (test and train 0, test and val 0): met |
 | Images in more than one split | 0 (train and val 0, test and the rest 0): met |
-| Every organ's gap within 2 points | largest absolute gap 1.72 (gallbladder, 86% of the tolerance): met (Table 5) |
+| Every organ's gap within 2 points | largest absolute gap 1.72 (gallbladder, 86% of the tolerance): met (Table 7) |
 | Minimum counts, test | smallest positives 268 (gallbladder; minimum 200), smallest negatives 543 (liver; minimum 300): met |
 | Minimum counts, val | smallest positives 316 (gallbladder; minimum 200), smallest negatives 630 (liver; minimum 300): met |
 | Same result as the in-memory run before the freeze | yes (every count equal) |
 
-Table 5. The frozen split, per organ and split: samples, positives, negatives, unknown, positive rate over all samples with 95% Wilson CI, and gap in points (test against train + val, val against train). n = 20,011 samples: train 14,836, val 3,007, test 2,168. Samples of one datasource group are not independent, so the CIs are too narrow. Percentages with 2 decimals, as in Tables 2 and 4.
+Table 7. The frozen split, per organ and split: samples, positives, negatives, unknown, positive rate over all samples with 95% Wilson CI, and gap in points (test against train + val, val against train). n = 20,011 samples: train 14,836, val 3,007, test 2,168. Samples of one datasource group are not independent, so the CIs are too narrow. Percentages with 2 decimals, as in Tables 2 and 4.
 
 | Organ | Split | Samples | Positives | Negatives | Unknown | Positive rate, % (95% CI) | Gap, points |
 |---|---|---|---|---|---|---|---|
@@ -172,7 +176,7 @@ Table 5. The frozen split, per organ and split: samples, positives, negatives, u
 | gallbladder | val | 3,007 | 316 | 1,916 | 775 | 10.51 (9.46-11.66) | -0.16 |
 | gallbladder | test | 2,168 | 268 | 1,495 | 405 | 12.36 (11.04-13.81) | +1.72 |
 
-Table 6. Datasource groups per split, of 56. Test is by group; val is by image hash inside the groups, so a group can be in both train and val. Counts of groups.
+Table 8. Datasource groups per split, of 56. Test is by group; val is by image hash inside the groups, so a group can be in both train and val. Counts of groups.
 
 | Split | Datasource groups | Samples |
 |---|---|---|
@@ -181,7 +185,7 @@ Table 6. Datasource groups per split, of 56. Test is by group; val is by image h
 | test | 11 | 2,168 |
 | in test and (train or val) | 0 | - |
 
-Table 7. Known limit ([DEC-075](../../decisions/DEC-075-epic1-split-values-tolerance-and-minimum-counts.md) Consequences): the unknown share per organ differs between test and train + val, and so does the positive share among labeled samples. Test n = 2,168; train + val n = 17,843. Unknown share in %; positive share among labeled samples in % (95% Wilson CI for test; train + val without CI); difference in points. The differences are descriptive and carry no CI (see the note under Table 5).
+Table 9. Known limit ([DEC-075](../../decisions/DEC-075-epic1-split-values-tolerance-and-minimum-counts.md) Consequences): the unknown share per organ differs between test and train + val, and so does the positive share among labeled samples. Test n = 2,168; train + val n = 17,843. Unknown share in %; positive share among labeled samples in % (95% Wilson CI for test; train + val without CI); difference in points. The differences are descriptive and carry no CI (see the note under Table 7).
 
 | Organ | Unknown share, test, % | Unknown share, train + val, % | Test: labeled n | Test: positive share among labeled, % (95% CI) | Train + val: labeled n | Train + val: positive share among labeled, % | Difference, points |
 |---|---|---|---|---|---|---|---|
@@ -190,7 +194,7 @@ Table 7. Known limit ([DEC-075](../../decisions/DEC-075-epic1-split-values-toler
 | stomach | 13.33 | 29.24 | 1,879 | 19.53 (17.80-21.39) | 12,626 | 25.23 | -5.69 |
 | gallbladder | 18.68 | 26.40 | 1,763 | 15.20 (13.60-16.95) | 13,132 | 14.46 | +0.74 |
 
-**Known limit.** The positive rate over all samples is balanced within 2 points, but the unknown share in test is lower than in train + val for every organ (by 2.62 points for liver, 5.53 for kidney, 15.91 for stomach, 7.72 for gallbladder). Among labeled samples the positive share is therefore lower in test than in train + val for liver, kidney and stomach (by 3.54 to 5.69 points) and about the same for gallbladder (+0.74). A metric on positives (W1) and one on closed negatives (W2) each use one state, so this changes their counts and CI widths, not their definition; a metric pooled over states would see the difference. This is the consequence DEC-075 accepted (one rate over all samples). Not checked: why the unknown share differs (for example, which datasources carry which states).
+**Known limit.** The positive rate over all samples is balanced within 2 points, but the unknown share in test is lower than in train + val for every organ (by 2.62 points for liver, 5.53 for kidney, 15.91 for stomach, 7.72 for gallbladder). Among labeled samples the positive share is therefore lower in test than in train + val for liver, kidney and stomach (by 3.54 to 5.69 points) and about the same for gallbladder (+0.74). Two of the mission's checks ([DEC-065](../../decisions/DEC-065-mission-upper-abdomen-anatomy-segmentation.md)) each read one state: W1, how well the organ is outlined, is measured on test samples where the organ is positive; W2, no phantom organs, is measured on test samples where the organ is a closed negative (a negative state that carries a closure: the label set of the sample is closed for that organ; [DIS-034](../../discussions/DIS-034-epic1-splitting.md) point 2). So the unknown-share difference changes their counts and CI widths, not their definition; a metric pooled over states would see the difference. This is the consequence DEC-075 accepted (one rate over all samples). Not checked: why the unknown share differs (for example, which datasources carry which states).
 
 **Not checked.** Whether the enc1 copy decrypts to the same bytes (no passphrase for the agent); the check is the user's `sonoai-data` run that printed the copy as written. Reporting checklists (CLAIM, STARD): not applicable (no model).
 
