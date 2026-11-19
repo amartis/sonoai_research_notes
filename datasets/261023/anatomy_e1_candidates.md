@@ -19,7 +19,7 @@ Key: sample = one crop of the sample-label index v1 (n = 29,233); candidate = a 
 
 ## Method
 
-**Tables read** (plain style via `sonoai.paths.dataset_dir`, [DEC-052](../../decisions/DEC-052-privacy-covers-images-tables-readable-after-asking.md); the list was approved with TASK-164): `derived/sample_label_index_v1_df.pkl`, `derived/sample_label_presence_strictv1_df.pkl`, `images/taskcrops_df.pkl`, `labels/polygons_df.pkl`. **Written** (a new file; no table was changed, [DEC-053](../../decisions/DEC-053-table-naming-and-preservation.md)): `derived/anatomy_e1_candidates_v1_261023_plain_df.pkl` (29,233 rows, 19 columns: sample number, crop box and sides, `short_side`, `group`, the four flags `flag_G`, `flag_Q`, `flag_C`, `flag_S`, `candidate`, and `state_liver`, `state_kidney`, `state_stomach`, `state_gallbladder`). No split is in the table (DEC-069 item 7).
+**Tables read** (plain style via `sonoai.paths.dataset_dir`, [DEC-052](../../decisions/DEC-052-privacy-covers-images-tables-readable-after-asking.md); the list was approved with TASK-164): `derived/sample_label_index_v1_df.pkl`, `derived/sample_label_presence_strictv1_df.pkl`, `images/taskcrops_df.pkl`, `labels/polygons_df.pkl`. **Written** (a new file; no table was changed, [DEC-053](../../decisions/DEC-053-table-naming-and-preservation.md)): `derived/anatomy_e1_candidates_v1_261023_plain_df.pkl` (29,233 rows, 19 columns: sample number, crop box and sides, `short_side`, `group`, the four flags `flag_G`, `flag_Q`, `flag_C`, `flag_S`, `candidate`, and `state_liver`, `state_kidney`, `state_stomach`, `state_gallbladder`). No split is in the table (DEC-069 item 7). Version 2 of the table, with two more columns, is described in the section "Version 2 of the table (TASK-179)"; version 1 now lies in `derived/obsolete/`.
 
 Command (writes the one new file under `derived/`; refuses when it exists; run first with `--report-only`, which wrote nothing, and the two runs printed identical reports):
 
@@ -163,6 +163,33 @@ No rule is proposed here (DEC-069: a rule is added only by a new DEC, if the cou
 1. **Datasource groups with little or nothing left.** 11 datasource groups (3,061 samples) have no candidate; datasource groups 5, 6, 115 and 201 keep 186, 278, 26 and 840 of 756, 1,261, 542 and 2,474. This matters for the split by datasource group (point 3): 56 datasource groups remain.
 2. **Gallbladder.** It has the fewest positives (2,167 in candidates) and the largest relative loss of positive pairs (2.0%); 58.9% of its candidate positive pairs overlap another organ's mask (Table 6), though the overlap is 2.1% of its mask pixels pooled and a median of 3.2% of the pair's mask per overlapping pair. The overlap is mostly small slivers; the maximum is 100.0% for some pairs (the whole mask lies inside another organ's mask).
 3. **Tiny areas.** In candidates, pairs whose mask is under 0.1% of the crop: liver 3, stomach 1, gallbladder 8 (kidney 0); 3 liver pairs have no pixel in the crop (a polygon that falls outside or collapses after clipping). Under 1% of the crop: stomach 606, gallbladder 210, liver 11, kidney 2. Whether to drop, keep or cap them is the user's decision.
+
+## Version 2 of the table (TASK-179)
+
+[TASK-179 (sample file v3 on 261023)](../../../backlog/tasks/task-179%20-%20Epic-1-sample-file-v3-on-261023-build-candidate-table-v2-sample-taskcrops_ids-re-freeze-with-split-spec-v3-check-the-split-equals-v2-for-every-sample-move-v1-candidates-and-v2-samples-to-derived-obsolete-TASK-173-DEC-071.md) rebuilt the table so the training sample reader can use the sample file made from it ([TASK-173 (sample reader columns)](../../../backlog/tasks/task-173%20-%20Epic-1-sample-file-readable-by-the-sample-reader-sample-and-taskcrops_ids-columns-found-in-TASK-166.md)). It is a new file; the counts above (all of this record) are those of version 1 and still hold, because version 2 holds the same rows and the same 19 columns.
+
+Command (writes the one new file under `derived/`; run on 2026-11-19 from a worktree of master with the TASK-173 code; changes no existing table, [DEC-053](../../decisions/DEC-053-table-naming-and-preservation.md)):
+
+```bash
+sonoai-data anatomy-e1-candidates 261023_plain --config configs/data/anatomy_e1.yaml
+```
+
+Table 9. Candidate table version 2 and how it differs from version 1. n = 29,233 samples (20,011 candidates). Both sha256 values are computed on the written files.
+
+| Item | Version 1 | Version 2 |
+|---|---|---|
+| Name pattern | `derived/anatomy_e1_candidates_v1_261023_plain_df.pkl` | `derived/anatomy_e1_candidates_v2_261023_plain_df.pkl` |
+| Config | `configs/data/anatomy_e1.yaml`, `version: 1` | the same file, `version: 2`; the other values (`index: v1`, `policy: strict_v1`, `min_side: 224`) are unchanged |
+| sha256 | `1448ca703ed84d2839539f242c550bb7259d701d4dbbde37b3b23daf5323eb0d` | `41a6ccdc2088890a6b52ac1f67935fc11eca01d780900275501fa6aaabd80f64` |
+| Rows, columns | 29,233, 19 | 29,233, 21 |
+| Added columns | | `sample` (equal to `sample_no`, the sample number of the index) and `taskcrops_ids` (the sorted list of the integer `taskcrops_df` ids of the sample), the two columns the sample reader needs |
+| Location | `derived/obsolete/` in `261023_plain` (moved on 2026-11-19, sha256 unchanged) | `derived/` in `261023_plain` |
+
+**Checks** (pandas on the two written files, plus `sonoai.data.sample_sets.build_samples` on `taskcrops_df`):
+
+- Each of the 19 version 1 columns equals its version 2 column row for row: values, dtype and column order; 0 of 19 differ. So every count in this record is unchanged (candidates 20,011, excluded 9,222).
+- `sample` equals `sample_no` in 29,233 of 29,233 rows.
+- `taskcrops_ids` equals the ids that `build_samples` gives for the same sample in 29,233 of 29,233 rows (0 differ; none empty; all sorted).
 
 ## Limitations
 

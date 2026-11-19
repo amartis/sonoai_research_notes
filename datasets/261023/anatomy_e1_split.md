@@ -124,6 +124,8 @@ Observations only; no rule, gap tolerance or minimum is proposed here (the user 
 
 ## Frozen split (TASK-168)
 
+**Superseded by version 3 (TASK-179, section "Sample file version 3")**: same split, two more columns. The plain file of version 2 is in `derived/obsolete/`; its enc1 copy stays in the store. The counts in this section and the next tables are those of both versions.
+
 Frozen on 2026-11-18 with [DEC-075 (epic 1 split values)](../../decisions/DEC-075-epic1-split-values-tolerance-and-minimum-counts.md): 2-point gap tolerance for every organ, at least 200 positives and 300 negatives per organ in test and in val, positive rate over all samples. Task: [TASK-168 (freeze)](../../../backlog/tasks/task-168%20-%20Freeze-the-epic-1-sample-file-on-261023-with-the-users-tolerances-and-minimum-counts-split-state-columns-enc1-copy-dataset-record-with-counts-per-split-and-class-DEC-071-DEC-070.md). Aggregates only; groups are given as counts. The freeze command was run by the user (the agent has no access to the data passphrase); the agent computed the sha256 and re-checked the written file.
 
 Command (writes a new file and its enc1 copy; changes no existing table, [DEC-053](../../decisions/DEC-053-table-naming-and-preservation.md)):
@@ -198,6 +200,45 @@ Table 9. Known limit ([DEC-075](../../decisions/DEC-075-epic1-split-values-toler
 
 **Not checked.** Whether the enc1 copy decrypts to the same bytes (no passphrase for the agent); the check is the user's `sonoai-data` run that printed the copy as written. Reporting checklists (CLAIM, STARD): not applicable (no model).
 
+## Sample file version 3 (TASK-179)
+
+[TASK-179 (sample file v3 on 261023)](../../../backlog/tasks/task-179%20-%20Epic-1-sample-file-v3-on-261023-build-candidate-table-v2-sample-taskcrops_ids-re-freeze-with-split-spec-v3-check-the-split-equals-v2-for-every-sample-move-v1-candidates-and-v2-samples-to-derived-obsolete-TASK-173-DEC-071.md) froze the split again so that the sample file has the two columns the training sample reader needs: `sample` and `taskcrops_ids` ([TASK-173 (sample reader columns)](../../../backlog/tasks/task-173%20-%20Epic-1-sample-file-readable-by-the-sample-reader-sample-and-taskcrops_ids-columns-found-in-TASK-166.md)). The freeze used candidate table version 2 ([anatomy_e1_candidates.md](anatomy_e1_candidates.md)), spec version 3 and the same seed, tolerances and minimum counts as version 2 ([DEC-075](../../decisions/DEC-075-epic1-split-values-tolerance-and-minimum-counts.md)). **Every sample is in the same split as in sample file version 2, so every count in this record (Tables 6 to 9, the known limit) is those of version 2 and is not repeated.** The freeze command was run by the user (the agent has no access to the data passphrase); the agent computed the sha256 and ran the checks on the written file.
+
+Command (writes a new file and its enc1 copy; changes no existing table, [DEC-053](../../decisions/DEC-053-table-naming-and-preservation.md)):
+
+```bash
+sonoai-data split freeze 261023_plain --spec configs/data/splits/anatomy_e1.yaml
+```
+
+Table 10. Sample file version 3 and version 2: name pattern, fingerprints, spec version, seed, size and location. n = 20,011 samples in both. The sha256 values of version 3 are computed on the written file and equal the ones the user reported from the freeze.
+
+| Item | Version 2 (TASK-168) | Version 3 (TASK-179) |
+|---|---|---|
+| Sample file, name pattern | `derived/anatomy_e1_samples_v2_261023_plain_df.pkl` | `derived/anatomy_e1_samples_v3_261023_plain_df.pkl` in `261023_plain`; encrypted copy at the same path in the `261023_enc1` store |
+| Sample file sha256 | `db2f2429152c889de31d520c55b14d518ca7ebc5220f70df3a2a302ff35f8ab9` | `fdf85557fa5c825f0c85f1b71522476bb73c82b2c88fa33889b56dd07000fa32` |
+| Split spec | `configs/data/splits/anatomy_e1.yaml`, version 2, sha256 `2d7674332de464bbb95e6d93ca5730cf43fe5fb775652ce00717e6b01be7aec7` | the same file, version 3, sha256 `8477795f63eef27f2b56c4b4841367546e74a7a50bce2ba75038bc1eafed90a4` (equal to the `spec_sha256` stored in the file) |
+| Seed | 0 | 0 (random greedy test search, 20,000 tries; 56 groups are above `exhaustive_max` 16) |
+| Input | candidate table version 1, sha256 `1448ca703ed84d2839539f242c550bb7259d701d4dbbde37b3b23daf5323eb0d` | candidate table version 2, sha256 `41a6ccdc2088890a6b52ac1f67935fc11eca01d780900275501fa6aaabd80f64` (equal to the `input_sha256` stored in the file) |
+| Columns | 12 | 14: the 12 of version 2 plus `sample` and `taskcrops_ids` (`sample`, `taskcrops_ids`, `sample_no`, image hash, crop box (4), datasource group, the four `state_*` columns, `split`) |
+| Location | `derived/obsolete/` in `261023_plain` (moved on 2026-11-19, sha256 unchanged); **the encrypted copy of version 2 stays in the `261023_enc1` store, untouched** | `derived/` in `261023_plain` and in the enc1 store |
+
+What changed in the split spec between version 2 and version 3: the input name (candidate table version 2), and the columns `sample` and `taskcrops_ids` added to the columns copied into the sample file. No share, tolerance, minimum count, seed or search setting changed.
+
+Table 11. The checks on sample file version 3, run on the file read back from disk. n = 20,011 samples.
+
+| Check | Result |
+|---|---|
+| Spec checks again (shares, datasource groups, images, gaps, minimum counts; the same function as the freeze) | 0 failures; train 74.14%, val 15.03%, test 10.83% of samples |
+| Split of each sample against sample file version 2, joined on `sample_no` | 20,011 matched, 0 only in one of the files; **0 samples differ** |
+| Samples per split against version 2 | equal: train 14,836, val 3,007, test 2,168 |
+| Test datasource groups against version 2 | the same list of 11 groups |
+| The 12 columns of version 2 | equal to version 2, row for row (all columns except `split`, which is checked above) |
+| `sample` equals `sample_no` | 20,011 of 20,011 rows; sample numbers unique |
+| `check_sample_file` of the sample reader (`sonoai.training.samples`) | accepts the file |
+| `taskcrops_ids` against `build_samples` on `taskcrops_df` | 0 of 20,011 samples differ; none empty |
+
+**Not checked.** Whether the enc1 copy of version 3 decrypts to the same bytes (no passphrase for the agent); the user's `sonoai-data` run printed the copy as written. Reporting checklists (CLAIM, STARD): not applicable (no model).
+
 ## Next step
 
-The user set the gap tolerances and the minimum counts ([DEC-075](../../decisions/DEC-075-epic1-split-values-tolerance-and-minimum-counts.md)); the spec (version 2) and the freeze ([TASK-168](../../../backlog/tasks/task-168%20-%20Freeze-the-epic-1-sample-file-on-261023-with-the-users-tolerances-and-minimum-counts-split-state-columns-enc1-copy-dataset-record-with-counts-per-split-and-class-DEC-071-DEC-070.md)) is done (section "Frozen split"). Next: training uses the sample file.
+The user set the gap tolerances and the minimum counts ([DEC-075](../../decisions/DEC-075-epic1-split-values-tolerance-and-minimum-counts.md)); the spec (version 2) and the freeze ([TASK-168](../../../backlog/tasks/task-168%20-%20Freeze-the-epic-1-sample-file-on-261023-with-the-users-tolerances-and-minimum-counts-split-state-columns-enc1-copy-dataset-record-with-counts-per-split-and-class-DEC-071-DEC-070.md)) is done (section "Frozen split"). The sample file was frozen again as version 3 with the two reader columns and the same split (section "Sample file version 3 (TASK-179)"). Next: training uses sample file version 3.
