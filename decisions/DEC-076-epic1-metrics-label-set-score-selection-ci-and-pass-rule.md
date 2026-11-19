@@ -99,10 +99,10 @@ Table 1).
 
 ## Consequences
 
-- DEC-070 rule 4 is replaced by rule 6.1; [TASK-171](../../backlog/tasks/task-171%20-%20Decide-whether-adding-metrics-to-seg_anatomy_v2-in-epic-1-point-4-makes-a-new-task-version-v3-since-metrics-are-in-the-task-fingerprint.md) (new task version?) is closed by rule 6.2.
-- Board tasks: TASK-180 (label-set evaluation for seg_anatomy_v2) and TASK-181 (metrics report with CIs), both method; TASK-169 and TASK-171 archived. Plan: a method task for rules 1 to 3 and 6.1 to
+- DEC-070 rule 4 is replaced by rule 6.1; [TASK-171](../../backlog/archive/tasks/task-171%20-%20Decide-whether-adding-metrics-to-seg_anatomy_v2-in-epic-1-point-4-makes-a-new-task-version-v3-since-metrics-are-in-the-task-fingerprint.md) (new task version?) is closed by rule 6.2.
+- Board tasks: [TASK-180](../../backlog/tasks/task-180%20-%20Label-set-evaluation-for-seg_anatomy_v2-per-sample-W1-Dice-and-W2-clean-score-per-organ-by-state-per-sample-records-selection-keys-metrics-registered-on-the-task-evaluation-refusal-removed-synthetic-tests-DEC-076.md) (label-set evaluation for seg_anatomy_v2) and [TASK-181](../../backlog/tasks/task-181%20-%20Epic-1-metrics-report-W1-W2-W3-table-with-cluster-bootstrap-95-CIs-test-by-datasource-group-val-by-image-per-group-table-and-the-DEC-076-verdict-wording-from-per-sample-records-and-the-sample-file-synthetic-tests-DEC-076.md) (metrics report with CIs), both method; TASK-169 and TASK-171 archived. Plan: a method task for rules 1 to 3 and 6.1 to
   6.2; a method task for the report (rule 4, 5, 6.3). The method task touches the segmentation
-  trainer, as [TASK-169](../../backlog/tasks/task-169%20-%20Segmentation-trainer-refuses-a-label-set-task-at-setup-before-training-starts-today-evaluate-refuses-only-at-the-first-evaluation.md) (trainer refuses a label-set task at setup) does; TASK-169 is
+  trainer, as [TASK-169](../../backlog/archive/tasks/task-169%20-%20Segmentation-trainer-refuses-a-label-set-task-at-setup-before-training-starts-today-evaluate-refuses-only-at-the-first-evaluation.md) (trainer refuses a label-set task at setup) does; TASK-169 is
   superseded by it and is closed there.
 - Reversal: all rules apply before the first run; a later change means a new DEC and
   re-scoring saved per-sample records (cheap), not retraining.

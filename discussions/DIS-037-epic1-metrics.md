@@ -12,7 +12,7 @@ related: [DEC-065, DEC-066, DEC-070, DEC-071, DEC-075, DEC-006, DEC-004]
 
 [DEC-065](../decisions/DEC-065-mission-upper-abdomen-anatomy-segmentation.md) point 4 asks
 for the final bar, the checkpoint selection rule and the CI method for the first anatomy model.
-[TASK-171](../../backlog/tasks/task-171%20-%20Decide-whether-adding-metrics-to-seg_anatomy_v2-in-epic-1-point-4-makes-a-new-task-version-v3-since-metrics-are-in-the-task-fingerprint.md)
+[TASK-171](../../backlog/archive/tasks/task-171%20-%20Decide-whether-adding-metrics-to-seg_anatomy_v2-in-epic-1-point-4-makes-a-new-task-version-v3-since-metrics-are-in-the-task-fingerprint.md)
 (new task version?) waits on the same session.
 
 ## Options considered
