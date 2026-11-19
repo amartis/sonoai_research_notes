@@ -2,7 +2,7 @@
 
 [TASK-164 (epic 1 anatomy candidate table on 261023_plain)](../../../backlog/tasks/task-164%20-%20Epic-1-anatomy-candidate-table-on-261023_plain-run-the-TASK-163-builder-at-224-px-dataset-record-with-counts-per-flag-organ-state-and-datasource-group-polygon-overlap-and-in-crop-area-DEC-069.md), [DEC-069 (epic 1 data preparation)](../../decisions/DEC-069-epic1-data-preparation.md), [DIS-033 (epic 1 data preparation)](../../discussions/DIS-033-epic1-data-preparation.md). Inputs: [sample_label_index.md](sample_label_index.md), [sample_label_presence.md](sample_label_presence.md). Table format: [derived.md](../../../docs/datasets/styles/derived.md). Names follow the [glossary](../../../docs/glossary.md).
 
-**Status: descriptive counts, first build; for the user to read before point 3 (splitting).** The record counts which samples of 261023 are candidates for the epic 1 anatomy task under the filters DEC-069 fixed. It sets no rule and no threshold; the three points in the section "For the user" wait for the user. Aggregates only: no images, file names, folder names or identifiers. Datasource group numbers are the integer `datasource_id` groups used in the dataset records. Built on 2026-11-18 on `261023_plain` ([DEC-018](../../decisions/DEC-018-plain-style-for-local-research.md)). Not reviewed.
+**Status: descriptive counts, first build (version 1 of the table); for the user to read before point 3 (splitting). Version 2 of the table (two more columns, same rows and counts; TASK-179, 2026-11-19) is described in the section "Version 2 of the table (TASK-179)".** The record counts which samples of 261023 are candidates for the epic 1 anatomy task under the filters DEC-069 fixed. It sets no rule and no threshold; the three points in the section "For the user" wait for the user. Aggregates only: no images, file names, folder names or identifiers. Datasource group numbers are the integer `datasource_id` groups used in the dataset records. Built on 2026-11-18 on `261023_plain` ([DEC-018](../../decisions/DEC-018-plain-style-for-local-research.md)). Not reviewed.
 
 Reporting checklists (CLAIM, STARD): not applicable. These are counts of a filter; no model is trained or evaluated and no split is made. No confidence intervals: every number is a complete count of the dataset version, not an estimate from a sample.
 
@@ -166,15 +166,15 @@ No rule is proposed here (DEC-069: a rule is added only by a new DEC, if the cou
 
 ## Version 2 of the table (TASK-179)
 
-[TASK-179 (sample file v3 on 261023)](../../../backlog/tasks/task-179%20-%20Epic-1-sample-file-v3-on-261023-build-candidate-table-v2-sample-taskcrops_ids-re-freeze-with-split-spec-v3-check-the-split-equals-v2-for-every-sample-move-v1-candidates-and-v2-samples-to-derived-obsolete-TASK-173-DEC-071.md) rebuilt the table so the training sample reader can use the sample file made from it ([TASK-173 (sample reader columns)](../../../backlog/tasks/task-173%20-%20Epic-1-sample-file-readable-by-the-sample-reader-sample-and-taskcrops_ids-columns-found-in-TASK-166.md)). It is a new file; the counts above (all of this record) are those of version 1 and still hold, because version 2 holds the same rows and the same 19 columns.
+[TASK-179 (sample file v3 on 261023)](../../../backlog/tasks/task-179%20-%20Epic-1-sample-file-v3-on-261023-build-candidate-table-v2-sample-taskcrops_ids-re-freeze-with-split-spec-v3-check-the-split-equals-v2-for-every-sample-move-v1-candidates-and-v2-samples-to-derived-obsolete-TASK-173-DEC-071.md) rebuilt the table of eligible samples (the file called the candidate table; name pattern `anatomy_e1_candidates_v<version>_261023_plain_df.pkl`) so the training sample reader can use the sample file made from it ([TASK-173 (sample reader columns)](../../../backlog/tasks/task-173%20-%20Epic-1-sample-file-readable-by-the-sample-reader-sample-and-taskcrops_ids-columns-found-in-TASK-166.md)). It is a new file; the counts above (all of this record) are those of version 1 and still hold, because version 2 holds the same rows and the same 19 columns plus two.
 
-Command (writes the one new file under `derived/`; run on 2026-11-19 from a worktree of master with the TASK-173 code; changes no existing table, [DEC-053](../../decisions/DEC-053-table-naming-and-preservation.md)):
+Command (writes the one new file under `derived/`; run on 2026-11-19 from a worktree of master at commit `4b67bd523efa2020d8b9817b90ecd394c646a398` (TASK-173 code; this task changed no code); changes no existing table, [DEC-053](../../decisions/DEC-053-table-naming-and-preservation.md)):
 
 ```bash
 sonoai-data anatomy-e1-candidates 261023_plain --config configs/data/anatomy_e1.yaml
 ```
 
-Table 9. Candidate table version 2 and how it differs from version 1. n = 29,233 samples (20,011 candidates). Both sha256 values are computed on the written files.
+Table 9. Table of eligible samples, version 2, and how it differs from version 1. n = 29,233 samples (20,011 eligible samples). Both sha256 values are computed on the written files.
 
 | Item | Version 1 | Version 2 |
 |---|---|---|
@@ -183,11 +183,11 @@ Table 9. Candidate table version 2 and how it differs from version 1. n = 29,233
 | sha256 | `1448ca703ed84d2839539f242c550bb7259d701d4dbbde37b3b23daf5323eb0d` | `41a6ccdc2088890a6b52ac1f67935fc11eca01d780900275501fa6aaabd80f64` |
 | Rows, columns | 29,233, 19 | 29,233, 21 |
 | Added columns | | `sample` (equal to `sample_no`, the sample number of the index) and `taskcrops_ids` (the sorted list of the integer `taskcrops_df` ids of the sample), the two columns the sample reader needs |
-| Location | `derived/obsolete/` in `261023_plain` (moved on 2026-11-19, sha256 unchanged) | `derived/` in `261023_plain` |
+| Location | `derived/obsolete/` in `261023_plain` (moved on 2026-11-19; the sha256 was recomputed after the move and equals the one above; the code reviewer recomputed it independently with the same result) | `derived/` in `261023_plain` |
 
 **Checks** (pandas on the two written files, plus `sonoai.data.sample_sets.build_samples` on `taskcrops_df`):
 
-- Each of the 19 version 1 columns equals its version 2 column row for row: values, dtype and column order; 0 of 19 differ. So every count in this record is unchanged (candidates 20,011, excluded 9,222).
+- Each of the 19 version 1 columns equals its version 2 column row for row: values, dtype and column order; 0 of 19 differ. So every count in this record is unchanged (eligible samples 20,011, excluded 9,222).
 - `sample` equals `sample_no` in 29,233 of 29,233 rows.
 - `taskcrops_ids` equals the ids that `build_samples` gives for the same sample in 29,233 of 29,233 rows (0 differ; none empty; all sorted).
 
