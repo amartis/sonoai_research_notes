@@ -1,6 +1,6 @@
 ---
 id: DIS-038
-title: Epic 1 point 5 - model choice - which models, which run is judged, which decoder for DINOv3
+title: Epic 1 point 5 - model choice - which models and weights, which run is judged, which decoder for DINOv3
 status: concluded
 created: 2026-11-19
 outcomes: [DEC-077]
@@ -20,8 +20,8 @@ for the architecture and pretraining of the first anatomy model. Points 1 to 4 a
 
 | Question | Analyst's recommendation | Chosen (the user) | When the recommendation would have won |
 |---|---|---|---|
-| Which models | `transunet` and DINOv3 ConvNeXt-B, chosen on val | both, plus `resenc_unet` from scratch as control | GPU time is short; the control is not needed for the mission |
-| Which run is judged | the run picked by the DEC-076 selection keys on val; only its test verdict counts | a verdict for each run; the mission is met if any run passes | a single claim must not depend on test (several runs give several chances at the bar) |
+| Which models | `transunet` and DINOv3 ConvNeXt-B, chosen on val | both, plus `resenc_unet` from scratch as control; in a second round, `transunet` both with its default ImageNet-21k weights and from scratch | GPU time is short; the controls are not needed for the mission |
+| Which run is judged | the run picked by the DEC-076 selection keys on val; only its test verdict counts | every recipe listed is run and gets a verdict; the epic succeeds if any recipe meets all the bars | a single claim must not depend on test (several recipes give several chances at the bar) |
 | Decoder on DINOv3 | SegFormer-style MLP head, as UltraBench 2 used (the note's [1]) | all three: MLP, U-Net-style, UPerNet | the decoder difference in [1] is within the noise, so two runs could be saved |
 
 Table 1. The three questions of point 5, the analyst's recommendation, the user's choice and
@@ -32,22 +32,21 @@ Decided by the analyst and told to the user:
 - DINOv3 encoder size ConvNeXt-B, not L: L scored 0.822 against 0.820 for B in [1] (SE 0.007)
   at a larger size, on a 12 GB GPU; ConvNeXt variants ranked above the ViT ones in [1].
 - The new model normalises its input with its weights' mean and std inside `forward`.
-- `transunet` keeps the input it had in [EXP-003](../experiments/EXP-003-transunet-r50-b16-from-scratch-512-and-224-lseg-cirrhosis-v4.md) ([0, 1], while its weights' config says
-  mean = std = 0.5); this mismatch becomes a Triage task, not a change here, so M1 stays the
-  model already shown to train.
-- All five runs are trained whatever earlier runs score; the EXP record names the run val
-  would pick and says that five runs gave five chances at the bar.
+- First round: `transunet` kept the input it had in [EXP-003](../experiments/EXP-003-transunet-r50-b16-from-scratch-512-and-224-lseg-cirrhosis-v4.md) ([0, 1], while its weights' config
+  says mean = std = 0.5). Second round, the user: normalise `transunet` for epic 1 (the best
+  option for it), for both its recipes; comparison with the cirrhosis runs does not matter.
+- First round: the analyst proposed that the EXP record name the run val would pick and say
+  how many chances at the bar there were. Second round, the user: not needed; every recipe
+  listed is run, and the epic succeeds if any recipe passes all the bars. Dropped.
 
-The analyst said once, plainly, that a verdict for each run makes a pass more likely by
-chance than a single pre-picked run; the user kept that choice.
+The analyst said once, plainly, that a verdict for each recipe makes a pass more likely by
+chance than a single pre-picked one; the user kept that choice.
 
 ## Conclusion
 
-[DEC-077](../decisions/DEC-077-epic1-model-choice-five-runs.md) (five runs, a verdict for each).
+[DEC-077](../decisions/DEC-077-epic1-model-choice-six-recipes.md) (six recipes; the epic succeeds if any meets the bar), accepted 2026-11-19.
 Board tasks: listed in DEC-077 Consequences; the training task comes with point 6.
 
 ## Open questions
 
-- Should `transunet` normalise its input to its weights' mean and std (0.5, 0.5)? Changing it
-  makes new runs not comparable with EXP-003. Triage task.
 - Point 6: the recipe for pretrained encoders (frozen start, encoder learning rate) and seeds.
