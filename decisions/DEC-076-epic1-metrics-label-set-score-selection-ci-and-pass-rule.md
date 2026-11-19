@@ -1,7 +1,7 @@
 ---
 id: DEC-076
 title: Epic 1 point 4 - metrics - the label-set score (W1, W2, W3), checkpoint selection on val, cluster bootstrap CIs, pass rule, metrics added to seg_anatomy_v2
-status: proposed
+status: accepted
 area: [training]
 created: 2026-11-19
 from: [DIS-037]
