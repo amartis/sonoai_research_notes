@@ -124,7 +124,7 @@ Observations only; no rule, gap tolerance or minimum is proposed here (the user 
 
 ## Frozen split (TASK-168)
 
-**Superseded by version 3 (TASK-179, section "Sample file version 3")**: same split, two more columns. The plain file of version 2 is in `derived/obsolete/`; its enc1 copy stays in the store. The counts in this section and the next tables are those of both versions.
+**Superseded by version 3 (TASK-179, section "Sample file version 3")**: same split, two more columns. The plain file of version 2 is in `derived/obsolete/`; no command of this task removes or edits its enc1 copy in the store (not re-checked after the freeze). The counts in this section and the next tables are those of both versions.
 
 Frozen on 2026-11-18 with [DEC-075 (epic 1 split values)](../../decisions/DEC-075-epic1-split-values-tolerance-and-minimum-counts.md): 2-point gap tolerance for every organ, at least 200 positives and 300 negatives per organ in test and in val, positive rate over all samples. Task: [TASK-168 (freeze)](../../../backlog/tasks/task-168%20-%20Freeze-the-epic-1-sample-file-on-261023-with-the-users-tolerances-and-minimum-counts-split-state-columns-enc1-copy-dataset-record-with-counts-per-split-and-class-DEC-071-DEC-070.md). Aggregates only; groups are given as counts. The freeze command was run by the user (the agent has no access to the data passphrase); the agent computed the sha256 and re-checked the written file.
 
