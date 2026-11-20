@@ -95,3 +95,6 @@ rate, as the note suggests), they apply alike to R1 and R4 to R6. Seeds: point 6
 - GPU time: six runs or more (seeds: point 6). EXP-003 took about 5 h per 30-epoch run at
   224 px on the cirrhosis set; the anatomy set's time per run is not known yet.
 - Reversal: all rules apply before the first run; adding or dropping a recipe is cheap.
+- [DEC-079](DEC-079-epic1-brightness-robustness-augmentation-percentile-norm-shift-test.md) (brightness robustness, 2026-11-20): all six recipes train with
+  `us_bright_v1`, and rule 3 is preceded by the per-image percentile normalisation of DEC-079
+  rule 2.

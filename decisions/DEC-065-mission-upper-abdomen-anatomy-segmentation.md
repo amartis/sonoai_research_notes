@@ -156,3 +156,7 @@ already known and the lean each session starts from. A lean is not a decision.
 - Point 5 is settled by [DEC-077](DEC-077-epic1-model-choice-six-recipes.md) (six recipes: `transunet` pretrained and from scratch, `resenc_unet` from scratch, DINOv3 ConvNeXt-B with three decoders); the epic succeeds if any recipe meets the bar (the user's choice, 2026-11-19).
 - If the bar of section 2 is not met, the EXP record says which criterion failed, and the
   next step is chosen in a consult session, not by tuning on test.
+- Brightness robustness is settled by [DEC-079](DEC-079-epic1-brightness-robustness-augmentation-percentile-norm-shift-test.md) (augmentation `us_bright_v1`,
+  per-image percentile normalisation inside the model, a brightness shift test reported but not
+  in the bar; the user's choice, 2026-11-20); for the augmentation it replaces the `us_mild_v1`
+  lean of Table 3 row 6.
