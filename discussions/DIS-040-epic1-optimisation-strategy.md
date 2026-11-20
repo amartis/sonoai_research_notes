@@ -107,7 +107,7 @@ and the hourly price come from the readiness task's timing run, before any full 
 
 ## Conclusion
 
-[DEC-080](../decisions/DEC-080-epic1-optimisation-strategy.md) (proposed): the settings of the
+[DEC-080](../decisions/DEC-080-epic1-optimisation-strategy.md) (accepted by the user, 2026-11-20): the settings of the
 six recipes, the move of the percentile normalisation into the reader (it replaces DEC-079
 rule 2.4), the run plan on RunPod and what is left for later. Board tasks: listed in DEC-080
 Consequences.

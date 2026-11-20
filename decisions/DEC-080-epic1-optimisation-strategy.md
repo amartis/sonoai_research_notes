@@ -1,7 +1,7 @@
 ---
 id: DEC-080
 title: Epic 1 point 6 - optimisation strategy - EXP-003 SGD for transunet and resenc_unet, UltraBench 2 AdamW with a frozen-encoder start for DINOv3, leaf-Dice label-set loss, us_bright_v1 with percentile normalisation in the reader, batch 32 for 30 epochs in fp32 on RunPod
-status: proposed
+status: accepted
 area: [training]
 created: 2026-11-20
 from: [DIS-040]

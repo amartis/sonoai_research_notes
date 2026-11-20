@@ -98,3 +98,7 @@ rate, as the note suggests), they apply alike to R1 and R4 to R6. Seeds: point 6
 - [DEC-079](DEC-079-epic1-brightness-robustness-augmentation-percentile-norm-shift-test.md) (brightness robustness, 2026-11-20): all six recipes train with
   `us_bright_v1`, and rule 3 is preceded by the per-image percentile normalisation of DEC-079
   rule 2.
+- [DEC-080](DEC-080-epic1-optimisation-strategy.md) (point 6, optimisation, 2026-11-20): rule 4 is
+  replaced by DEC-080 rule 1 (an optimiser by model lineage: SGD for `transunet` and
+  `resenc_unet`, AdamW with a frozen-encoder start for DINOv3), so R1 against R4 to R6 differs in
+  model and optimiser; seeds: DEC-080 rule 5.

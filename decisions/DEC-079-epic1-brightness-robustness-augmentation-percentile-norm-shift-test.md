@@ -120,3 +120,8 @@ seeds), and its training task runs the shift test on every run.
 - GPU: the shift test adds 11 evaluations of val and test per run (no training).
 - Reversal: all rules apply before the first epic 1 run and are cheap to change now; after runs,
   a change of rule 1 or 2 means retraining, a change of rule 3 only re-evaluation.
+- [DEC-080](DEC-080-epic1-optimisation-strategy.md) (point 6, optimisation, 2026-11-20): rule 2.4
+  is replaced by DEC-080 rule 3. The percentile normalisation is a reader step (`percentile_v1`
+  in the recipe's `Data`), not a model argument, with its percentiles over the pixels of the
+  original crop box; in training it runs after the brightness steps and before the flip, the
+  affine and the fill; the shift test applies its level first. Rules 2.1 to 2.3 are unchanged.
