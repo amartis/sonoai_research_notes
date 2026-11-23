@@ -1,12 +1,12 @@
 ---
 id: DEC-086
 title: RunPod presigned URLs and POST policy are signed with a 12 h signing role assumed on machine01, so they last 12 h (amends DEC-083 rules 1 and 5)
-status: accepted
+status: superseded
 area: [data-security, aws, infra]
 created: 2026-11-23
 from: [DIS-044]
 related: [DEC-083, DEC-024, DEC-026]
-superseded_by:
+superseded_by: DEC-088
 ---
 # DEC-086: A 12 h signing role for the RunPod presigned access
 

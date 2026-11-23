@@ -62,7 +62,7 @@ still add epic rows themselves.
 - The lead and consult skills, the reviewer and writer agents, `docs/workflow.md`,
   `docs/agents.md`, `docs/glossary/README.md` and `CLAUDE.md` are changed to follow this
   ([TASK-229](../../backlog/tasks/task-229%20-%20Glossary-proposals-file-DEC-087-docs-glossary-proposals.md-with-union-merge-and-an-ID-and-Status-check-lead-consult-reviewer-and-writer-agents-and-workflow-docs-send-glossary-gaps-there-instead-of-tasks-seed-rows-from-TASK-215-and-TASK-184.md)).
-- The open glossary tasks [TASK-215](../../backlog/tasks/task-215%20-%20Global-glossary-row-for-input-normalisation-Data.normalize-term-choice-in-consult-DEC-073-point-4-found-in-TASK-192.md) and [TASK-184](../../backlog/tasks/task-184%20-%20Glossary-row-for-W3-generalisation-gap-val-W1-minus-test-W1-per-organ-in-the-epic-1-glossary.md) become rows and are archived. [TASK-222](../../backlog/tasks/task-222%20-%20Glossary-the-S3-bucket-row-also-covers-encrypted-checkpoint-backups-under-runs-DEC-083.md) stays
+- The open glossary tasks [TASK-215](../../backlog/archive/tasks/task-215%20-%20Global-glossary-row-for-input-normalisation-Data.normalize-term-choice-in-consult-DEC-073-point-4-found-in-TASK-192.md) and [TASK-184](../../backlog/archive/tasks/task-184%20-%20Glossary-row-for-W3-generalisation-gap-val-W1-minus-test-W1-per-organ-in-the-epic-1-glossary.md) become rows and are archived. [TASK-222](../../backlog/tasks/task-222%20-%20Glossary-the-S3-bucket-row-also-covers-encrypted-checkpoint-backups-under-runs-DEC-083.md) stays
   a task, because its wording was already decided (DEC-085).
 - A global term may appear in merged docs before the user chooses it. If the user picks
   another name, the rename follows the row's "Where used" cell.
