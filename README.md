@@ -12,7 +12,8 @@ journal/       daily notes: journal/2026/2026-10-22.md
 datasets/      dataset/label versions, cleaning decisions, statistics (aggregates only)
 literature/    paper notes
 templates/     copy these to start a note
-tools/         build_index.py (regenerates INDEX.md, links IDs in note text)
+tools/         build_index.py (regenerates INDEX.md, links IDs in note text);
+               setup_merge.py + post_merge_index.sh (INDEX.md merge setup)
 ```
 
 ## Workflow: discussion → decision → task
@@ -67,6 +68,20 @@ Rules:
   finds them.
 - TSK records are replaced by Backlog.md tasks; no TSK was ever created.
 - The journal stays the free-form daily log; it refers to IDs.
+
+## After a merge (INDEX.md)
+
+`INDEX.md` is generated, so it never needs a hand-resolved conflict. Once per clone, run
+`python3 tools/setup_merge.py` (a merge driver and a post-merge hook live in each clone's own
+git config, so a new clone must run it; it is in `docs/onboarding.md` step 3). `.gitattributes`
+sends `INDEX.md` to the driver `index`, which keeps our copy without a conflict; the hook then runs
+`tools/build_index.py` and puts the regenerated `INDEX.md` into the merge commit.
+
+- Conflicts in note files themselves are still resolved by hand. Then run
+  `python3 tools/build_index.py` and commit `INDEX.md` with the resolution (a merge you finish with
+  `git commit` after fixing conflicts also runs the hook).
+- After a fast-forward or `--squash` merge, or without the setup: run `python3 tools/build_index.py`
+  and commit `INDEX.md`. Never edit `INDEX.md` by hand; `--check` tells you if it is stale.
 
 ## Links in note text
 
