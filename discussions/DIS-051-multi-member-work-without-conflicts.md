@@ -24,7 +24,7 @@ and task numbers (DIS, DEC, EXP, TASK) when each member, and each worktree sessi
 - Two modules use a fixed `logs/` path: the aws action-log writer (`sonoai.cloud.labelstud`) and the
   exp run-log reader (`sonoai.tracking.pending`).
 - [DEC-089](../decisions/DEC-089-logs-folder-own-git-repo.md) (logs/ as its own git repo, one file
-  per workstation) was never carried out: its task, [TASK-231](../../backlog/tasks/task-231%20-%20logs-as-its-own-git-repo-DEC-089-one-log-file-per-workstation-a-setup-script-and-the-logs-repos-own-privacy-hook.md), is still To Do.
+  per workstation) was never carried out: its task, [TASK-231](../../backlog/archive/tasks/task-231%20-%20logs-as-its-own-git-repo-DEC-089-one-log-file-per-workstation-a-setup-script-and-the-logs-repos-own-privacy-hook.md), is still To Do.
 - `SONOAI_MACHINE` already exists: it names a machine profile for training (`ws`, `gpubox`,
   `runpod_a100`), not a person. `SONOAI_ACTOR` names an agent. Neither identifies a team member.
 - DIS, DEC and EXP records are committed on `main` of `research_notes/` directly, not on worktree
@@ -118,16 +118,17 @@ The user agreed to:
 - the handle in branch and agent names
   ([DEC-094](../decisions/DEC-094-member-handle-in-branch-and-agent-names.md)).
 
-Six board tasks carry the decisions; TASK-231 (DEC-089) is archived once DEC-092 is accepted. Three side
-points became small tasks without a DEC: a GPU box folder per handle with a one-run lock,
-table writers that refuse an existing file under `derived/` ([DEC-053](../decisions/DEC-053-table-naming-and-preservation.md)), and `INDEX.md` merges that
-regenerate the file instead of resolving it by hand.
+Board tasks carry the decisions: [TASK-237](../../backlog/tasks/task-237%20-%20Member-handle-SONOAI_MEMBER-in-.env-one-checked-helper-and-the-members-table-in-team.md-DEC-091.md) (DEC-091), [TASK-238](../../backlog/tasks/task-238%20-%20logs-handle-and-runs-handle-on-the-shares-roots-from-.env-and-a-one-time-move-script-DEC-092.md) (DEC-092), [TASK-239](../../backlog/tasks/task-239%20-%20ID-ledger-script-scripts-reserve_id.py-reserves-record-and-task-numbers-claims-tasks-stocks-numbers-and-handles-the-offline-modes-DEC-093.md), [TASK-240](../../backlog/tasks/task-240%20-%20ID-checks-a-hook-that-denies-unreserved-record-numbers-a-duplicate-ID-check-a-pre-push-check-for-provisional-numbers-and-the-command-policy-entry-for-ledger-pushes-DEC-093.md) and
+[TASK-241](../../backlog/tasks/task-241%20-%20consult-and-lead-use-the-ID-ledger-reserve-numbers-before-writing-records-and-tasks-claim-before-spawning-ready_tasks.py-leaves-claimed-tasks-out-DEC-093.md) (DEC-093), [TASK-242](../../backlog/tasks/task-242%20-%20Member-handle-in-branch-and-agent-names-claude-handle-topic-SONOAI_ACTOR-and-note-prefix-handle-name-DEC-094.md) (DEC-094). TASK-231 (DEC-089) is archived. Three side
+points became small tasks without a DEC: a GPU box folder per handle with a one-run lock ([TASK-243](../../backlog/tasks/task-243%20-%20GPU-box-one-box-folder-per-member-handle-and-a-one-run-lock-so-members-do-not-overwrite-each-others-code-or-share-the-GPU-at-once.md)),
+table writers that refuse an existing file under `derived/` ([TASK-244](../../backlog/tasks/task-244%20-%20Table-writers-refuse-to-overwrite-an-existing-table-under-derived-DEC-053-now-that-members-write-to-the-shared-data-root.md), [DEC-053](../decisions/DEC-053-table-naming-and-preservation.md)), and `INDEX.md` merges that
+regenerate the file instead of resolving it by hand ([TASK-245](../../backlog/tasks/task-245%20-%20research_notes-a-merge-never-needs-a-hand-resolved-INDEX.md-regenerate-it-with-build_index.py-instead.md)).
 
 ## Open questions
 
 - Whether the board CLI, with `remote_operations: true`, takes remote branches into account when it
-  picks the next task number: checked in the ID ledger task.
+  picks the next task number: checked in TASK-239.
 - Until the ledger runs, numbers are still taken from the local checkout; this discussion's own
   numbers were taken that way. While this discussion ran, another consult session
-  cited three task numbers in its records before creating the tasks; this session's tasks wait
-  until those exist, so the board CLI does not hand out the same numbers.
+  cited three task numbers in its records before creating the tasks; this session's tasks waited
+  until those existed, so the board CLI did not hand out the same numbers.

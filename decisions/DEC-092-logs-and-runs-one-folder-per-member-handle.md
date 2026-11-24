@@ -37,7 +37,7 @@ workstation; it was never carried out, and the user dropped it
    again in this sense: local to machine01's shares.
 6. **Existing files.** The current flat logs and run folders move once into the team lead's folder
    (`dev01`), with a script that shows what it will move and moves only on the user's go-ahead.
-7. **Supersedes DEC-089.** Its task, [TASK-231](../../backlog/tasks/task-231%20-%20logs-as-its-own-git-repo-DEC-089-one-log-file-per-workstation-a-setup-script-and-the-logs-repos-own-privacy-hook.md), is archived.
+7. **Supersedes DEC-089.** Its task, [TASK-231](../../backlog/archive/tasks/task-231%20-%20logs-as-its-own-git-repo-DEC-089-one-log-file-per-workstation-a-setup-script-and-the-logs-repos-own-privacy-hook.md), is archived.
 
 ## Consequences
 
