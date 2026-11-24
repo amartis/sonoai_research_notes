@@ -15,7 +15,7 @@ superseded_by:
 Epic 2 ([DEC-081](DEC-081-epic2-mission-roboflow-universe-ultrasound-scraper.md)) needs to know
 what Roboflow Universe gives per image: listings, image URLs, labels, Roboflow's embedding
 vector, similar-project suggestions, and above all the **original, unaugmented images** of a
-project instead of a version export that may hold only augmented copies. One task (TASK-200) held
+project instead of a version export that may hold only augmented copies. One task ([TASK-200](../../backlog/tasks/task-200%20-%20Roboflow-API-check-for-epic-2-per-image-listing-with-image-ids-and-URLs-per-image-embedding-vectors-similar-project-suggestions-client-methods-README-findings-synthetic-tests-DEC-081.md)) held
 all of this and the client code. The user asked for the know-how to be rediscovered, written down
 as docs, and split into smaller pieces ([DIS-050](../discussions/DIS-050-epic2-roboflow-know-how-sub-epic.md)).
 
@@ -76,8 +76,8 @@ The user accepted this on 2026-11-24 (consult session, DIS-050: "ok" to the thre
 
 ## Consequences
 
-- Board (milestone m-4): parent TASK-234 with TASK-234.01 to TASK-234.07; Parked TASK-235
-  (decide the retrieval path, depends on TASK-234.07) and TASK-236 (HAR follow-up); TASK-200
+- Board (milestone m-4): parent [TASK-234](../../backlog/tasks/task-234%20-%20Epic-2-know-how-sub-epic-how-Roboflow-Universe-serves-images-per-image-metadata-embedding-labels-and-the-original-unaugmented-images-in-docs-scraping-roboflow-parent-of-TASK-234.01-to-TASK-234.07-DEC-090.md) with [TASK-234.01](../../backlog/tasks/task-234.01%20-%20Epic-2-know-how-1-Roboflow-REST-API-from-its-docs-project-version-image-search-image-details-exports-similar-projects-DEC-090.md) to [TASK-234.07](../../backlog/tasks/task-234.07%20-%20Epic-2-know-how-7-summary-README-with-the-recommended-route-per-need-a-scraping-row-in-the-context-map-open-choices-for-TASK-235-DEC-090.md); Parked [TASK-235](../../backlog/tasks/task-235%20-%20Decide-epic-2-retrieval-path-routes-for-image-listing-per-image-metadata-and-embedding-labels-original-unaugmented-images-and-similar-projects-any-undocumented-route-at-all-DEC-090-point-5.md)
+  (decide the retrieval path, depends on TASK-234.07) and [TASK-236](../../backlog/tasks/task-236%20-%20HAR-follow-up-for-the-Universe-web-app-map-only-if-TASK-234.03-leaves-gaps-user-recorded-HAR-cut-down-by-a-reducer-before-it-reaches-Claude-DEC-090-point-6.md) (HAR follow-up); TASK-200
   depends on TASK-235, and its description points at the docs.
 - `src/sonoai/scraping/roboflow/README.md` keeps describing the code; TASK-200 links it to the
   know-how docs.

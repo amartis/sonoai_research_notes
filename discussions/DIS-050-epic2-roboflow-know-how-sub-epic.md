@@ -86,8 +86,8 @@ autonomously with many agents in parallel.
 - [DEC-090](../decisions/DEC-090-epic2-roboflow-know-how-sub-epic.md) (accepted): the sub-epic,
   its docs place, how the web app is studied, the probe rules, TASK-200 as the code step, and the
   run order.
-- Board: parent TASK-234 with subtasks TASK-234.01 to TASK-234.07; Parked
-  TASK-235 (decide the retrieval path) and TASK-236 (HAR follow-up, only if needed); TASK-200 now
+- Board: parent [TASK-234](../../backlog/tasks/task-234%20-%20Epic-2-know-how-sub-epic-how-Roboflow-Universe-serves-images-per-image-metadata-embedding-labels-and-the-original-unaugmented-images-in-docs-scraping-roboflow-parent-of-TASK-234.01-to-TASK-234.07-DEC-090.md) with subtasks [TASK-234.01](../../backlog/tasks/task-234.01%20-%20Epic-2-know-how-1-Roboflow-REST-API-from-its-docs-project-version-image-search-image-details-exports-similar-projects-DEC-090.md) to [TASK-234.07](../../backlog/tasks/task-234.07%20-%20Epic-2-know-how-7-summary-README-with-the-recommended-route-per-need-a-scraping-row-in-the-context-map-open-choices-for-TASK-235-DEC-090.md); Parked
+  [TASK-235](../../backlog/tasks/task-235%20-%20Decide-epic-2-retrieval-path-routes-for-image-listing-per-image-metadata-and-embedding-labels-original-unaugmented-images-and-similar-projects-any-undocumented-route-at-all-DEC-090-point-5.md) (decide the retrieval path) and [TASK-236](../../backlog/tasks/task-236%20-%20HAR-follow-up-for-the-Universe-web-app-map-only-if-TASK-234.03-leaves-gaps-user-recorded-HAR-cut-down-by-a-reducer-before-it-reaches-Claude-DEC-090-point-6.md) (HAR follow-up, only if needed); TASK-200 now
   depends on TASK-235.
 
 ## Open questions
