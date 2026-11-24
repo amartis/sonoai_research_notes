@@ -7,8 +7,14 @@ top=$(git rev-parse --show-toplevel) || exit 0
 cd "$top" || exit 0
 python3 tools/build_index.py || { echo "post-merge: build_index.py failed; run it and commit INDEX.md" >&2; exit 0; }
 git diff --quiet -- INDEX.md && exit 0
-parents=$(git rev-parse -q --verify HEAD^2 >/dev/null && git rev-list --parents -n 1 HEAD | cut -d' ' -f2-)
-if [ -z "$parents" ]; then  # fast-forward or squash: no merge commit to fix
+# Rewrite only a merge commit this `git merge` just made: its reflog subject says "Merge made by".
+# A fast-forward onto an upstream merge commit ("Fast-forward") must stay as it is.
+subject=$(git reflog -1 --format=%gs HEAD 2>/dev/null)
+case $subject in
+    *"Merge made by"*) parents=$(git rev-list --parents -n 1 HEAD | cut -d' ' -f2-) ;;
+    *) parents="" ;;
+esac
+if [ -z "$parents" ]; then  # fast-forward or squash: no merge commit of ours to fix
     echo "post-merge: INDEX.md regenerated; commit it" >&2
     exit 0
 fi
