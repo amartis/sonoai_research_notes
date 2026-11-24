@@ -1,7 +1,7 @@
 ---
 id: DEC-091
 title: Every team member has a member handle, set as SONOAI_MEMBER in .env and listed in a team table in docs/team.md that the team lead or a senior edits (amends DEC-078)
-status: proposed
+status: accepted
 area: [workflow, infra]
 created: 2026-11-24
 from: [DIS-051]

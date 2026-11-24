@@ -1,7 +1,7 @@
 ---
 id: DEC-093
 title: An ID ledger on Gogs reserves every record and task number and holds task claims - a script fetches, appends and pushes it; hooks only check; the member chooses what happens offline (ask, stock, local, tmp, stop)
-status: proposed
+status: accepted
 area: [workflow, infra]
 created: 2026-11-24
 from: [DIS-051]

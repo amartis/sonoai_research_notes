@@ -1,7 +1,7 @@
 ---
 id: DEC-092
 title: logs/ and runs/ stay on machine01-host's shares with one folder per member handle - write only your own folder, read all, no shared folder, roots from .env (supersedes DEC-089)
-status: proposed
+status: accepted
 area: [workflow, infra, data-security]
 created: 2026-11-24
 from: [DIS-051]

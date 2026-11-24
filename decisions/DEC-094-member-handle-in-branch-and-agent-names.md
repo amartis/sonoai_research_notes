@@ -1,7 +1,7 @@
 ---
 id: DEC-094
 title: The member handle goes into branch names (claude/<handle>/<topic>) and wherever an agent name leaves the workstation (SONOAI_ACTOR, board note prefix, report line) (amends DEC-028 and DEC-032)
-status: proposed
+status: accepted
 area: [workflow]
 created: 2026-11-24
 from: [DIS-051]
