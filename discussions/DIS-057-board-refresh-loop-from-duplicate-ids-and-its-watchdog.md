@@ -80,7 +80,7 @@ client, 4 s after the change:
 | false, duplicate decision ID added | decision added | 0 |
 
 Table 2. What starts the loop. With false, two clients and six task edits over 60 s gave 6
-announcements each. The renumbered row first showed 36 because the test reused TASK-268, a real
+announcements each. The renumbered row first showed 36 because the test reused [TASK-268](../../backlog/tasks/task-268%20-%20Board-stop-reading-other-branches-check_active_branches-off-the-trigger-of-the-endless-refresh.md), a real
 number; with a free number it is 0.
 
 - Trigger: a task file renamed here (how it got the new name does not matter; in 1.55.3 a CLI title edit kept the file name) while a branch of the last 30 days
