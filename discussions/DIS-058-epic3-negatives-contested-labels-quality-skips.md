@@ -103,7 +103,7 @@ Not chosen:
 Accepted by the user on 2026-11-25:
 [DEC-102](../decisions/DEC-102-quality-skips-other-organ-projects-index-v2.md) (quality skips, index v2) and
 [DEC-103](../decisions/DEC-103-epic3-negatives-and-contested-labels.md) (negatives and contested labels).
-Board: TASK-269 (config edit), then [TASK-264](../../backlog/tasks/task-264%20-%20Build-the-261023-sample-label-index-v2-labeling-group-skip-and-the-strict_v1-and-loose_v1-presence-tables-on-it-dataset-record-with-counts-per-class-and-state-against-v1-DEC-101.md) (index v2 and presence tables); TASK-270 (point 7, the split) is the next decision.
+Board: [TASK-269](../../backlog/tasks/task-269%20-%20Second-fact-relations-config-of-261023-quality-skips-of-the-23-labeling-projects-of-other-organs-become-task-skips-test-and-docs-DEC-102.md) (config edit), then [TASK-264](../../backlog/tasks/task-264%20-%20Build-the-261023-sample-label-index-v2-labeling-group-skip-and-the-strict_v1-and-loose_v1-presence-tables-on-it-dataset-record-with-counts-per-class-and-state-against-v1-DEC-101.md) (index v2 and presence tables); [TASK-270](../../backlog/tasks/task-270%20-%20Decide-epic-3-point-7-one-datasource-group-split-for-every-policy-with-enough-cirrhosis-negatives-in-test-DIS-056.md) (point 7, the split) is the next decision.
 
 Said once by the analyst: the test holds only cases readers agree on, so its scores are optimistic
 for hard cases; with about 60 cirrhosis negatives in test (a guess) a measured 0.80 has a 95% Wilson interval of
