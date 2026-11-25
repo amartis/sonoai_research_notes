@@ -40,7 +40,7 @@ values of their own.
    on `source.roboflow.com`, with no key and no cookie. The image format is read from the first
    bytes, not from `content-type`; the body MD5 is checked against the `ETag` or the
    `x-goog-hash` MD5. Roboflow version exports are not used for images. So the fingerprint step no
-   longer picks a Roboflow version ([TASK-249](../../backlog/tasks/task-249%20-%20Epic-2-Roboflow-version-pick-use-the-Roboflow-versions-augmentation-field-empty-means-unaugmented-and-record-its-resize-step-instead-of-the-closest-image-count-live-finding-of-TASK-234.04.md) is dropped); R4 Roboflow versions with their
+   longer picks a Roboflow version ([TASK-249](../../backlog/archive/tasks/task-249%20-%20Epic-2-Roboflow-version-pick-use-the-Roboflow-versions-augmentation-field-empty-means-unaugmented-and-record-its-resize-step-instead-of-the-closest-image-count-live-finding-of-TASK-234.04.md) is dropped); R4 Roboflow versions with their
    preprocessing and augmentation stay as datasource metadata ([DEC-081](DEC-081-epic2-mission-roboflow-universe-ultrasound-scraper.md) Table 2).
 4. **Fingerprints (C1; amends DEC-081 Table 2).** `np_md5_c3` and dHash of the image as stored,
    plus a dHash of the image with its EXIF orientation applied ([TASK-252](../../backlog/tasks/task-252%20-%20Roboflow-fingerprint-step-dHash-also-on-the-EXIF-orientation-applied-image-image-format-from-the-first-bytes-TASK-234.05-finding.md)).
@@ -57,7 +57,7 @@ values of their own.
 8. **Auth and back-off (C5).** The key goes only as an `Authorization: Bearer` header, and only
    to `api.roboflow.com`; never to the image host or to export links. On HTTP 429 the client waits
    at least `Retry-After` when present, else its doubling back-off; R8 gets a read timeout and a
-   retry. [TASK-246](../../backlog/tasks/task-246%20-%20Roboflow-client-send-the-API-key-in-the-Authorization-Bearer-header-not-the-api_key-query-parameter-and-wait-Retry-After-on-HTTP-429-official-api.md-findings-F1-F2.md) folds into TASK-200.
+   retry. [TASK-246](../../backlog/archive/tasks/task-246%20-%20Roboflow-client-send-the-API-key-in-the-Authorization-Bearer-header-not-the-api_key-query-parameter-and-wait-Retry-After-on-HTTP-429-official-api.md-findings-F1-F2.md) folds into TASK-200.
 9. **Terms (C6): the user's reading, recorded instead of asking Roboflow.** It is the user's
    reading, not legal advice.
    1. **Q1 and Q4.** Calls to the documented API on `api.roboflow.com` with our own key are
