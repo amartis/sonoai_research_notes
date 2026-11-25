@@ -12,7 +12,8 @@ journal/       daily notes: journal/2026/2026-10-22.md
 datasets/      dataset/label versions, cleaning decisions, statistics (aggregates only)
 literature/    paper notes
 templates/     copy these to start a note
-tools/         build_index.py (regenerates INDEX.md, links IDs in note text)
+tools/         build_index.py (regenerates INDEX.md, links IDs in note text);
+               setup_merge.py + post_merge_index.sh (INDEX.md merge setup)
 ```
 
 ## Workflow: discussion → decision → task
@@ -67,6 +68,24 @@ Rules:
   finds them.
 - TSK records are replaced by Backlog.md tasks; no TSK was ever created.
 - The journal stays the free-form daily log; it refers to IDs.
+
+## After a merge (INDEX.md)
+
+`INDEX.md` is generated, so it never needs a hand-resolved conflict. Once per clone, run
+`python3 tools/setup_merge.py` (a merge driver and a post-merge hook live in each clone's own
+git config, so a new clone must run it; it is in `docs/onboarding.md` step 3). `.gitattributes`
+sends `INDEX.md` to the driver `index`, which keeps our copy without a conflict; the hook then runs
+`tools/build_index.py` and puts the regenerated `INDEX.md` into the merge commit.
+
+- Conflicts in note files themselves are still resolved by hand. `git commit` does not run the hook
+  (git runs post-merge only from `git merge`), so after resolving run `python3 tools/build_index.py`,
+  stage `INDEX.md` with the resolution before committing (or `git commit --amend --no-edit` after),
+  and confirm with `python3 tools/build_index.py --check`.
+- After a fast-forward (`git pull`) or `--squash` merge, without the setup, or after a rebase,
+  cherry-pick or stash pop (the driver silently keeps our `INDEX.md` there and no hook runs): run
+  `python3 tools/build_index.py` and commit `INDEX.md`. Never edit `INDEX.md` by hand.
+- If `core.hooksPath` points to a tracked folder, setup adds an untracked `post-merge` file there;
+  do not commit it, or call `tools/post_merge_index.sh` from your own hook.
 
 ## Links in note text
 

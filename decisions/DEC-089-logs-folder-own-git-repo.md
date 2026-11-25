@@ -1,12 +1,12 @@
 ---
 id: DEC-089
 title: logs/ becomes its own git repository on Gogs, with one log file per workstation, reports in and scripts out, and its own privacy hook (amends the "local only" logs of DEC-026 and DEC-032)
-status: accepted
+status: superseded
 area: [workflow, infra, data-security]
 created: 2026-11-23
 from: [DIS-047]
 related: [DEC-014, DEC-026, DEC-032, DEC-054, DEC-078]
-superseded_by:
+superseded_by: DEC-092
 ---
 # DEC-089: logs/ becomes its own git repository
 
