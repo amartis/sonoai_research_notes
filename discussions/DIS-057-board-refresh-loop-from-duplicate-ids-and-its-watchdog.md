@@ -83,7 +83,7 @@ Table 2. What starts the loop. With false, two clients and six task edits over 6
 announcements each. The renumbered row first showed 36 because the test reused TASK-268, a real
 number; with a free number it is 0.
 
-- Trigger: a task file renamed here (a title edit renames it) while a branch of the last 30 days
+- Trigger: a task file renamed here (how it got the new name does not matter; in 1.55.3 a CLI title edit kept the file name) while a branch of the last 30 days
   still has the old name, then any task change while the server runs. A restart clears it until the
   next change. [TASK-022](../../backlog/tasks/task-022%20-%20Gogs-server-docs-docs-infra-gogs.md-and-the-README-setup-for-the-gogs-remote-of-both-repos-DEC-014.md) (renamed) on the kept branches was that trigger.
 - Why the code does it (reading only): the visible list keeps one entry per ID and is compared with
