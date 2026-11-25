@@ -51,7 +51,7 @@ Table 1. Refresh announcements of one board server with one client, one run per 
 
 ## Conclusion
 
-Board TASK-267 (board watchdog) carries the work: `scripts/board_watchdog.py`, the Claude Code hook
+Board [TASK-267](../../backlog/tasks/task-267%20-%20Board-watchdog-stop-a-Backlog.md-board-that-refreshes-itself-without-end.md) (board watchdog) carries the work: `scripts/board_watchdog.py`, the Claude Code hook
 `ensure_board_watchdog.py` (session start, after Bash calls), the git `post-merge` hook and
 `scripts/servers.sh` start it. It stops only `backlog browser` processes working in this repo or
 its worktrees, and Label Studio keeps running. Duplicates of decisions and discussions are found and
