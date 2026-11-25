@@ -60,6 +60,40 @@ the test on real Backlog.md and to the merge after it.
 
 No DEC: it is tooling that changes no rule.
 
+## Correction, 2026-11-25 (later the same day)
+
+The likely cause above was incomplete, and Table 1 missed the trigger because no task was changed
+while its servers ran. A client against the live board (no duplicate ID in the checkout) got 145
+announcements in 15 s, each answered with a 3.6 MB search. The watchdog then stopped that board.
+
+Measured on clones of this repo, Backlog.md 1.55.3, a fresh server per row, one run each, one
+client, 4 s after the change:
+
+| Setting and branches | Change while the server runs | Announcements in 4 s |
+|---|---|---|
+| `check_active_branches: true`, this repo's branches | note, status, title, file renamed, renumbered, deleted, added, archived, merged, commit on a branch (10 rows) | 24 to 31 in every row, 28 to 32 after the commit; 0 after a restart |
+| true, `master` only | note; added | 0 |
+| true, one branch identical to `master`, or with an older text of one task, or with one task `master` lacks | note | 0 |
+| true, one branch with the old file name of one renamed task | note | 31 |
+| `check_active_branches: false`, this repo's branches | the same 10 changes | 0 in every row, also after the commit |
+| false, one duplicate ID in the checkout | duplicate added; then another task edited; then the duplicate removed | 0; 34; 0 |
+| false, duplicate decision ID added | decision added | 0 |
+
+Table 2. What starts the loop. With false, two clients and six task edits over 60 s gave 6
+announcements each. The renumbered row first showed 36 because the test reused TASK-268, a real
+number; with a free number it is 0.
+
+- Trigger: a task file renamed here (a title edit renames it) while a branch of the last 30 days
+  still has the old name, then any task change while the server runs. A restart clears it until the
+  next change. [TASK-022](../../backlog/tasks/task-022%20-%20Gogs-server-docs-docs-infra-gogs.md-and-the-README-setup-for-the-gogs-remote-of-both-repos-DEC-014.md) (renamed) on the kept branches was that trigger.
+- Why the code does it (reading only): the visible list keeps one entry per ID and is compared with
+  a list that holds both file names.
+- Fix: `check_active_branches: false` in `backlog/config.yml`, board TASK-268 (board setting). Cost: edits in a
+  worktree show on the board after the merge; the CLI does not count tasks on other branches
+  (`reserve_id.py task-create` finds a taken number in the ledger and tries again).
+- Remaining case: a real duplicate ID in the checkout. The commit check ([DEC-093](../decisions/DEC-093-id-ledger-number-reservations-task-claims-offline-modes.md)) reports it and
+  the watchdog stops the board.
+
 ## Open questions
 
 - A board started by hand, with no Claude session or merge afterwards, is not watched.
