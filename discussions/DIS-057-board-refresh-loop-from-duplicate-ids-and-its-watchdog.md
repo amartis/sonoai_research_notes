@@ -94,6 +94,30 @@ number; with a free number it is 0.
 - Remaining case: a real duplicate ID in the checkout. The commit check ([DEC-093](../decisions/DEC-093-id-ledger-number-reservations-task-claims-offline-modes.md)) reports it and
   the watchdog stops the board.
 
+## Choice, 2026-11-25: relay instead of the setting
+
+The user asked whether `check_active_branches: false` drops utility, and chose a relay that keeps it on,
+plus a warning for each number (task, DEC, DIS, EXP) with several names. `scripts/board_relay.py`
+sits in front of the unchanged board and drops "tasks-updated" messages when no file under
+`backlog/` and no local branch changed.
+
+| Clone of this repo, one renamed task, one branch with its old name; client behind the board for 20 s, one run per row | Announcements | in the last 10 s |
+|---|---:|---:|
+| No relay, note appended | 88 | 54 |
+| No relay, real duplicate ID and an edit | 65 | 46 |
+| Relay, no change | 0 | 0 |
+| Relay, note, status, title, file renamed, renumbered, deleted, added, archived, merged (9 rows) | 4 or 5 | 0 |
+| Relay, real duplicate ID and an edit | 7 | 0 |
+| Relay or no relay, commit on a branch that touches a task | 0 | 0 |
+
+Table 3. Behind the relay each change reached the client (last row excepted: no announcement with or
+without the relay). Two clients, 60 s of edits: 20 announcements each, none in the last 10 s.
+
+Correction of the cost named above: the board always shows the working copy's version of a task,
+so notes or a Review status from a worktree do not show before the merge with the setting on either
+(checked: status Review on another branch, the board kept Triage). What the setting gives is tasks
+that exist only on other branches and their numbers.
+
 ## Open questions
 
 - A board started by hand, with no Claude session or merge afterwards, is not watched.
