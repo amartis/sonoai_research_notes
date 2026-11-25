@@ -132,4 +132,4 @@ Discussion closed by the user on 2026-10-28; what is left is on the board:
 
 - Off-machine copy target: [TASK-027](../../backlog/tasks/task-027%20-%20Choose-and-set-up-the-off-machine-copy-repos-runs-models.md) (Parked, `needs-decision`).
 - Encrypted datasets in the common box: [TASK-030](../../backlog/tasks/task-030%20-%20Decide-whether-encrypted-datasets-go-into-the-common-box-DEC-015.md) (Parked, `needs-decision`).
-- Workflow docs and `CLAUDE.md` still say the repo has no remote: [TASK-022](../../backlog/tasks/task-022%20-%20Document-the-gogs-remote-in-the-workflow-docs-DEC-014.md).
+- Workflow docs and `CLAUDE.md` still say the repo has no remote: [TASK-022](../../backlog/tasks/task-022%20-%20Gogs-server-docs-docs-infra-gogs.md-and-the-README-setup-for-the-gogs-remote-of-both-repos-DEC-014.md).
