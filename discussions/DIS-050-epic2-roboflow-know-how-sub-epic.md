@@ -87,7 +87,7 @@ autonomously with many agents in parallel.
   its docs place, how the web app is studied, the probe rules, TASK-200 as the code step, and the
   run order.
 - Board: parent [TASK-234](../../backlog/tasks/task-234%20-%20Epic-2-know-how-sub-epic-how-Roboflow-Universe-serves-images-per-image-metadata-embedding-labels-and-the-original-unaugmented-images-in-docs-scraping-roboflow-parent-of-TASK-234.01-to-TASK-234.07-DEC-090.md) with subtasks [TASK-234.01](../../backlog/tasks/task-234.01%20-%20Epic-2-know-how-1-Roboflow-REST-API-from-its-docs-project-version-image-search-image-details-exports-similar-projects-DEC-090.md) to [TASK-234.07](../../backlog/tasks/task-234.07%20-%20Epic-2-know-how-7-summary-README-with-the-recommended-route-per-need-a-scraping-row-in-the-context-map-open-choices-for-TASK-235-DEC-090.md); Parked
-  [TASK-235](../../backlog/tasks/task-235%20-%20Decide-epic-2-retrieval-path-routes-for-image-listing-per-image-metadata-and-embedding-labels-original-unaugmented-images-and-similar-projects-any-undocumented-route-at-all-DEC-090-point-5.md) (decide the retrieval path) and [TASK-236](../../backlog/tasks/task-236%20-%20HAR-follow-up-for-the-Universe-web-app-map-only-if-TASK-234.03-leaves-gaps-user-recorded-HAR-cut-down-by-a-reducer-before-it-reaches-Claude-DEC-090-point-6.md) (HAR follow-up, only if needed); TASK-200 now
+  [TASK-235](../../backlog/tasks/task-235%20-%20Decide-epic-2-retrieval-path-routes-for-image-listing-per-image-metadata-and-embedding-labels-original-unaugmented-images-and-similar-projects-any-undocumented-route-at-all-DEC-090-point-5.md) (decide the retrieval path) and [TASK-236](../../backlog/archive/tasks/task-236%20-%20HAR-follow-up-for-the-Universe-web-app-map-only-if-TASK-234.03-leaves-gaps-user-recorded-HAR-cut-down-by-a-reducer-before-it-reaches-Claude-DEC-090-point-6.md) (HAR follow-up, only if needed); TASK-200 now
   depends on TASK-235.
 
 ## Open questions
@@ -95,3 +95,20 @@ autonomously with many agents in parallel.
 1. The retrieval path the scraper uses for listing, metadata, embeddings, labels and originals
    (TASK-235, after the summary piece).
 2. Whether a HAR is needed (TASK-236, only if the static reading leaves gaps).
+
+## Later (2026-11-25)
+
+The seven pieces were written and reviewed (TASK-234.01 to TASK-234.07, branches waiting for the
+user's merge). The user then decided:
+
+1. **No HAR.** Open question 2 is closed: TASK-236 is archived. The documented API covers every
+   need except similar-project suggestions, the Terms of Use exclude reverse engineering of the
+   web app (section 4(a)), and `robots.txt` disallows the pages a HAR would record. [TASK-234.03](../../backlog/tasks/task-234.03%20-%20Epic-2-know-how-3-Universe-web-app-map-from-its-public-HTML-and-JavaScript-backend-routes-behind-each-view-auth-no-browser-no-images-DEC-090.md)
+   keeps its criteria 1 and 2 unmet; the web app routes stay unread.
+2. **Deviations accepted.** [TASK-234.04](../../backlog/tasks/task-234.04%20-%20Epic-2-know-how-4-live-check-of-per-image-metadata-on-up-to-5-public-projects-listing-image-details-labels-embedding-similar-projects-no-image-bytes-DEC-090.md) contacted a sixth Universe project with 2 read calls,
+   against the cap of 5 in DEC-090 point 4.5; its results are not used. [TASK-234.05](../../backlog/tasks/task-234.05%20-%20Epic-2-know-how-5-original-unaugmented-images-spot-augmented-versions-fetch-a-projects-source-images-compare-in-memory-with-a-version-export-DEC-090.md) kept the
+   Universe refs of its three check projects in a scratchpad file during its runs and deleted
+   it, read against DEC-090 point 4.1 as covering image bytes and exports only. Both are recorded
+   in the task notes.
+3. **The retrieval path** (open question 1) stays with TASK-235, to be decided in a later consult
+   session from the choices C1 to C8 of the summary README.
