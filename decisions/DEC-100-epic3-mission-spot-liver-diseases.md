@@ -1,18 +1,22 @@
 ---
-id: DEC-091
+id: DEC-100
 title: Mission of the third research epic - outlining and flagging spot liver diseases on 261023 (hepatoma, hemangioma, cyst, stone; ascites as a side class)
 status: accepted
 area: [training, datasets]
 created: 2026-11-25
-from: [DIS-050]
-related: [DEC-045, DEC-059, DEC-065, DEC-075, DEC-076, DEC-092]
+from: [DIS-056]
+related: [DEC-045, DEC-059, DEC-065, DEC-075, DEC-076, DEC-101]
 superseded_by:
 ---
-# DEC-091: Mission of Epic 3 - spot liver diseases
+# DEC-100: Mission of Epic 3 - spot liver diseases
+
+> Number: this record was `DEC-091` until 2026-11-25. Two records had that number, made in two
+> clones at once; this one, not yet shared, took a new number ([DEC-093](DEC-093-id-ledger-number-reservations-task-claims-offline-modes.md)). Commits up to then
+> cite it as `DEC-091`.
 
 ## Context
 
-Counts and the reasons are in [DIS-050](../discussions/DIS-050-epic3-spot-liver-disease-mission.md).
+Counts and the reasons are in [DIS-056](../discussions/DIS-056-epic3-spot-liver-disease-mission.md).
 Labels record no pathology or CT/MRI confirmation, so a model can only be shown to agree with
 readers of B-mode images. The cirrhosis model fell from 0.696 DSC on val to 0.047 on test
 ([EXP-003](../experiments/EXP-003-transunet-r50-b16-from-scratch-512-and-224-lseg-cirrhosis-v4.md)).
@@ -25,7 +29,7 @@ readers of B-mode images. The cirrhosis model fell from 0.696 DSC on val to 0.04
 2. **Classes.** `hepatoma`, `hemangioma`, `hepatic_cyst`, `hepatic_stone` are the four spot
    classes. `ascites` is trained with low importance and left out of class balancing. Out: abscess
    and the generic `tumor`, `cyst`, `parasite`.
-3. **Labels.** Sample-label index v2 of [DEC-092](DEC-092-group-skip-and-sample-label-index-v2.md),
+3. **Labels.** Sample-label index v2 of [DEC-101](DEC-101-group-skip-and-sample-label-index-v2.md),
    read by the existing presence policies. Policies are compared by training, in this order (the
    user's, 2026-11-25): strict_v1 (top priority), loose_v1 (second), posrich_v1 (low priority, its
    extra positives are contested labels). Epic 3 focuses on the first two. Only the train labels

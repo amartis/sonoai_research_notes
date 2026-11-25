@@ -1,5 +1,5 @@
 ---
-id: DEC-090
+id: DEC-099
 title: Gogs listens on machine01's VMware LAN address instead of localhost, and runs without a login (amends DEC-014)
 status: accepted
 area: [infra]
@@ -8,7 +8,11 @@ from: []
 related: [DEC-014, DEC-078]
 superseded_by:
 ---
-# DEC-090: Gogs listens on the VMware LAN address
+# DEC-099: Gogs listens on the VMware LAN address
+
+> Number: this record was `DEC-090` until 2026-11-25. Two records had that number, made in two
+> clones at once; this one, not yet shared, took a new number ([DEC-093](DEC-093-id-ledger-number-reservations-task-claims-offline-modes.md)). Commits up to then
+> cite it as `DEC-090`.
 
 ## Context
 

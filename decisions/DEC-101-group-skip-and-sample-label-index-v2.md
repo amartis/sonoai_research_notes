@@ -1,14 +1,18 @@
 ---
-id: DEC-092
+id: DEC-101
 title: Labeling group skip - P7 skip_otherdisease sets aside only the steatosis answers, read through a second fact relations config and sample-label index v2; presence policies keep their versions
 status: accepted
 area: [datasets, labeling]
 created: 2026-11-25
-from: [DIS-050]
-related: [DEC-053, DEC-059, DEC-060, DEC-061, DEC-091]
+from: [DIS-056]
+related: [DEC-053, DEC-059, DEC-060, DEC-061, DEC-100]
 superseded_by:
 ---
-# DEC-092: Labeling group skip and sample-label index v2
+# DEC-101: Labeling group skip and sample-label index v2
+
+> Number: this record was `DEC-092` until 2026-11-25. Two records had that number, made in two
+> clones at once; this one, not yet shared, took a new number ([DEC-093](DEC-093-id-ledger-number-reservations-task-claims-offline-modes.md)). Commits up to then
+> cite it as `DEC-092`.
 
 ## Context
 
@@ -39,7 +43,7 @@ interpretation, not by new policy versions. 719 of the 729 tagged samples carry 
    group skip, as without a task skip. On index v1, which has no group skip, the tables must
    come out identical; a test checks it. This amends [DEC-059](DEC-059-fact-driven-model-sample-label-index-presence-policies.md) section 2 and DEC-060 Table 2.
 5. Other skips are not changed here. Quality skips of kidney and gallbladder projects on liver
-   samples are a later point of [DIS-050](../discussions/DIS-050-epic3-spot-liver-disease-mission.md); index v2 is built after it, so that one rebuild covers both.
+   samples are a later point of [DIS-056](../discussions/DIS-056-epic3-spot-liver-disease-mission.md); index v2 is built after it, so that one rebuild covers both.
 
 ## Consequences
 

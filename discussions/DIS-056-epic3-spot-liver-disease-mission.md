@@ -1,12 +1,16 @@
 ---
-id: DIS-050
+id: DIS-056
 title: Epic 3 - diagnosing spot liver diseases - mission, classes, bar, and the reading of P7 skip_otherdisease
 status: open
 created: 2026-11-25
-outcomes: [DEC-091, DEC-092]
+outcomes: [DEC-100, DEC-101]
 related: [DEC-059, DEC-060, DEC-065, DEC-076, DIS-048, DIS-049, EXP-003]
 ---
-# DIS-050: Epic 3 - diagnosing spot liver diseases
+# DIS-056: Epic 3 - diagnosing spot liver diseases
+
+> Number: this record was `DIS-050` until 2026-11-25. Two records had that number, made in two
+> clones at once; this one, not yet shared, took a new number ([DEC-093](../decisions/DEC-093-id-ledger-number-reservations-task-claims-offline-modes.md)). Commits up to then
+> cite it as `DIS-050`.
 
 ## Question
 
@@ -58,7 +62,7 @@ for the first four and 1,428 positive for at least one.
 | 3 | More than 430 hepatoma samples under P7 `skip_otherdisease` | Count them, by a new presence policy | Yes, later by a new data interpretation instead of a policy. The tag means P7 skips the steatosis judgement because another disease makes the image hard to grade |
 
 Table 2. Points 1 to 3 as put and answered. The analyst had described question 1 as a hepatoma
-bar; the user's reading is a disease-agnostic presence bar. DEC-091 proposes both.
+bar; the user's reading is a disease-agnostic presence bar. DEC-100 proposes both.
 
 ## Does Epic 1 already read the tag this way?
 
@@ -66,21 +70,21 @@ No. `strict_v1` sets the whole P7 task aside (R18), so its tumour labels are unk
 sample stays for other projects. Epic 1 is unaffected, because P7 gives none of its organ labels.
 
 The same holds for loose_v1 and posrich_v1: all three share the step that sets the task aside. The
-user (2026-11-25) asked to try several policies, posrich_v1 included; DEC-091 rule 3 and DEC-092 take
+user (2026-11-25) asked to try several policies, posrich_v1 included; DEC-100 rule 3 and DEC-101 take
 this up. The user then (2026-11-25) declined new policy versions and asked for a new data
-interpretation that reads `skip_otherdisease` as a labeling group skip; DEC-092 was rewritten.
+interpretation that reads `skip_otherdisease` as a labeling group skip; DEC-101 was rewritten.
 
 ## Conclusion
 
-Accepted by the user on 2026-11-25: [DEC-091](../decisions/DEC-091-epic3-mission-spot-liver-diseases.md)
-(mission) and [DEC-092](../decisions/DEC-092-group-skip-and-sample-label-index-v2.md) (labeling group
+Accepted by the user on 2026-11-25: [DEC-100](../decisions/DEC-100-epic3-mission-spot-liver-diseases.md)
+(mission) and [DEC-101](../decisions/DEC-101-group-skip-and-sample-label-index-v2.md) (labeling group
 skip, index v2). Policy order: strict_v1, then loose_v1, posrich_v1 low priority; the user agreed that
 posrich lowers label quality.
 
 Said once by the analyst: no pathology is recorded for any label, so the claim is agreement with
 readers; hemangioma and cyst are too few for a per-class bar (Epic 1 asked at least 200 test
 positives per organ, [DEC-075](../decisions/DEC-075-epic1-split-values-tolerance-and-minimum-counts.md)); counting the P7 hepatomas raises the cirrhosis share of hepatoma
-positives (DEC-092), so the shortcut test matters more. loose_v1 adds almost no positives
+positives (DEC-101), so the shortcut test matters more. loose_v1 adds almost no positives
 and about 1,700 hepatoma negatives from tasks that never closed the label.
 
 Term decided (global): **labeling-group skip** (`group_skip`). Phrase it replaces: "a skip tag that
@@ -105,8 +109,8 @@ and no existing fact kind says it. Other name considered: `part_skip`.
    pseudonymous patient and study IDs, hospital and machine model, how each diagnosis was confirmed;
    if refused, which committee handles requests, or evaluation of our model at their site.
 4. **Points 9 to 12.** Task form (overlapping classes: hepatoma and stone on 42 samples), metrics
-   (DEC-091 rule 5), model, input size, optimisation with balancing, organisation.
+   (DEC-100 rule 5), model, input size, optimisation with balancing, organisation.
 
 ## Open questions
 
-The points above; none block the code task of DEC-092.
+The points above; none block the code task of DEC-101.
