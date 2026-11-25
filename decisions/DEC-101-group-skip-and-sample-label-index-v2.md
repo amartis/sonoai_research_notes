@@ -5,7 +5,7 @@ status: accepted
 area: [datasets, labeling]
 created: 2026-11-25
 from: [DIS-056]
-related: [DEC-053, DEC-059, DEC-060, DEC-061, DEC-100]
+related: [DEC-053, DEC-059, DEC-060, DEC-061, DEC-100, DEC-102]
 superseded_by:
 ---
 # DEC-101: Labeling group skip and sample-label index v2
@@ -42,7 +42,7 @@ interpretation, not by new policy versions. 719 of the 729 tagged samples carry 
    task has a task skip, or a group skip on the label. Grading tasks (section 3) are read without a
    group skip, as without a task skip. On index v1, which has no group skip, the tables must
    come out identical; a test checks it. This amends [DEC-059](DEC-059-fact-driven-model-sample-label-index-presence-policies.md) section 2 and DEC-060 Table 2.
-5. Other skips are not changed here. Quality skips of kidney and gallbladder projects on liver
+5. Other skips are not changed here (done for quality skips in [DEC-102](DEC-102-quality-skips-other-organ-projects-index-v2.md)). Quality skips of kidney and gallbladder projects on liver
    samples are a later point of [DIS-056](../discussions/DIS-056-epic3-spot-liver-disease-mission.md); index v2 is built after it, so that one rebuild covers both.
 
 ## Consequences

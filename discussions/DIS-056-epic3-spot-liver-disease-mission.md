@@ -4,7 +4,7 @@ title: Epic 3 - diagnosing spot liver diseases - mission, classes, bar, and the 
 status: open
 created: 2026-11-25
 outcomes: [DEC-100, DEC-101]
-related: [DEC-059, DEC-060, DEC-065, DEC-076, DIS-048, DIS-049, EXP-003]
+related: [DEC-059, DEC-060, DEC-065, DEC-076, DIS-048, DIS-049, DIS-058, EXP-003]
 ---
 # DIS-056: Epic 3 - diagnosing spot liver diseases
 
@@ -93,7 +93,7 @@ and no existing fact kind says it. Other name considered: `part_skip`.
 
 ## Next session (handoff)
 
-1. **Points 5 and 6, negatives and label conflicts.** To settle: which negatives count
+1. **Points 5 and 6, negatives and label conflicts.** Done 2026-11-25: [DIS-058](DIS-058-epic3-negatives-contested-labels-quality-skips.md). It had to settle: which negatives count
    (diffuse disease or none, reported separately); the contested labels (hepatoma 252, hemangioma 65,
    cyst 25 under strict_v1, all projects 35 and 36); and whether quality skips of other organs'
    projects apply to the liver: 67 hepatoma samples with a given label are unknown for a quality
