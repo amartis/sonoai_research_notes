@@ -21,9 +21,9 @@ made, no threshold is chosen. No CIs: every number is a count of the full table,
    classes negative 13,656. No difference to explain. The four parts of the negatives (418, 8,299, 4,512, 427) and the cirrhosis
    share of hepatoma positives (828 of 1,298 where known) equal DEC-103 and DEC-102 too (Tables 5 and 6).
 3. **Every changed pair is explained by the two decisions; this was checked.** 50,055 pairs on 1,616 samples change between index
-   v1 and v2. Each is on a sample freed from a quality skip (43,632 pairs), on a sample with a group skip of P7 and no freed
-   quality skip (4,243), or on both (2,180). Pairs on neither kind of sample: 0 (Table 10). The 1,002 freed samples lie in 41
-   datasource groups.
+   v1 and v2. Each is on a sample that is no longer set aside by a quality skip (43,632 pairs; "such samples" below), on a sample with a
+   labeling-group skip of P7 (a "group skip" below) that is not such a sample (4,243), or on both (2,180). Pairs on neither kind of
+   sample: 0 (Table 10). The 1,002 such samples lie in 41 datasource groups.
 4. **Contested pairs are unchanged**: hepatoma 252, hemangioma 65, hepatic cyst 25, hepatic stone 0, the same 304 samples as in
    DEC-103, in `<5` datasource groups, under both policies; ascites has 56 more, of another kind (Table 8).
 
@@ -59,9 +59,9 @@ not read: their size and modification time (`stat`) are the same before and afte
 | index v1 (unchanged) | | `b08b9e011689073872de4ee6e16b18d61802761a18a99c85dd72764bb79acf49` before and after |
 | strict_v1 on index v1 (unchanged) | | `05b3f4230c46e2319683d1caf7410c148a925e3b453afb0b9183d89adc91fa77` before and after |
 
-**Checks.** (1) `n_group_skip` is not 0: 730 group-skip fact items (2,920 copies on index rows, all of P7), so the v2 config was
+**Checks.** (1) `n_group_skip` (the count of labeling-group skip items) is not 0: 730 labeling-group skip fact items (2,920 copies on index rows, all of P7), so the v2 config was
 used. (2) No quality item of index v2 comes from one of the 23 projects of DEC-102 rule 1: quality items come from 7 projects, all
-of the list in rule 2 (P2, P7, P14, P33, P35, P36, P50; the others of the list have no crop rows). (3) The presence tables rebuilt in
+of the list in rule 2 (P2, P7, P14, P33, P35, P36, P50; the others of the list have no quality item in index v2). (3) The presence tables rebuilt in
 memory from the index with the registered policies equal the stored ones on sample, label, state and reason: strict_v1 on v1,
 strict_v1 on v2 and loose_v1 on v2. (4) The sample numbers of index v2 equal those of
 `sample_sets.build_samples`, which gives the datasource groups used below (67 groups, as in v1).
@@ -69,8 +69,10 @@ strict_v1 on v2 and loose_v1 on v2. (4) The sample numbers of index v2 equal tho
 **Masking check.** A script over the tables of this record compared every pair of cells in a row and in a column, every cell with
 the sum of 2 to 4 other cells of its row or column, and every pair of numbers of 100 or more anywhere in the record. After the
 merges and omissions noted in Tables 3, 6, 7 and 9 and the omission of a table of gross gains, every pair 1 to 4 apart that is left
-is between unrelated numbers (different classes, labels or kinds), not a version, a policy, or a total and its parts. The check
-ran on the numbers as written; it does not see the other records (the v1 numbers of the presence record are public there).
+inside a table is between unrelated numbers (different classes, labels or kinds), not a version, a policy, or a total and its parts.
+Differences of label totals over all labels can still be worked out from the file row counts of Table 1 and from the v1 record
+(for example the positive_grade_mismatch count); these are totals over all labels, not small cells of a class, and nothing more is
+masked for them. The check ran on this record only.
 
 **First index run.** The first run of the index command was started in the foreground with its output piped to `tail -40`; the
 shell tool moved it to the background after 180 s. It printed nothing and wrote no file: `derived/` held no index v2 afterwards, and
@@ -96,7 +98,7 @@ not change.
 | group_skip | 0 | 730 | +730 (P7 `skip_otherdisease`, tag group `fat_regions` and the four steatosis grade tags) |
 | visited, closure, value | 192,323, 116,496, 1,425,467 | the same | 0 |
 
-Samples with a quality item: 3,518 in v1, 2,516 in v2; 1,002 freed (in 41 datasource groups), none new. The sum of the changes
+Samples with a quality item: 3,518 in v1, 2,516 in v2; 1,002 no longer set aside by a quality skip (in 41 datasource groups), none new. The sum of the changes
 in Table 2 checks: 2,321 + 1,108 - 730 = 2,699.
 
 ## 2. Counts per spot class and state, v1 against v2
@@ -133,10 +135,10 @@ simulation with the group skip and today's quality skips (DEC-102 Table 1, middl
 
 Reading of Table 4. The group skip alone (v1 to the middle column) moves only the tumour labels, as DEC-101 says: hepatoma,
 hemangioma and cyst gain positives; `hepatic_stone` and `ascites` do not change. The quality-skip change (middle to last column) adds
-to every class, ascites most in share (103 to 136), because 1,002 samples are freed for every label. The v1 column's all-four
+to every class; ascites gains the most in share (103 to 136, 32%). The 1,002 samples are no longer set aside by a quality skip for any of their labels. The v1 column's all-four
 negative figure (12,879) is computed here from index v1 in memory; the simulated 13,020 of [DIS-058](../../discussions/DIS-058-epic3-negatives-contested-labels-quality-skips.md) is the middle column. The
 datasource groups: no class gains a positive group (18, 13, 12, 38 and 10 groups before and after). The negatives gain <5 groups in each class (Table 3);
-for hepatoma and for ascites it is the same group, which holds <5 samples, every one of them freed from a quality skip of P27 (trace
+for hepatoma and for ascites it is the same group, which holds <5 samples, every one of them no longer set aside by a quality skip of P27 (trace
 in Section 7; the other classes' new group was not compared).
 
 The hepatoma positives' largest datasource group rises from 15% to 35% of them with the group skip (DEC-101: 34% before the
@@ -164,7 +166,7 @@ then each class's negatives. The overall row and the hepatoma row equal DEC-103 
 Same parts, index v1, overall row (all four negative, 12,879 samples): cirrhosis 241, other diffuse 7,897, none 4,319, not known 422.
 The cirrhosis negatives rise from 241 to 418. Trace (Section 7): 177 samples enter and none leave; 135 are samples with a P7 group
 skip whose v1 answers on cirrhosis and on three of the four spot classes were all "no answer" (the task skip covered every
-label), and 42 are freed quality-skip samples whose five answers were all "quality skip". The 241 + 135 = 376 equals the figure
+label), and 42 are such samples (no longer set aside by a quality skip) whose five answers were all "quality skip" in v1. The 241 + 135 = 376 equals the figure
 of DIS-058 for the group skip only.
 
 Hepatoma positives in the same parts (1,417 samples in 18 groups; for contrast with the negatives): cirrhosis 828 (15 groups),
@@ -177,7 +179,7 @@ DEC-103 says (2.9% before the quality change). The own bar for cirrhosis (DEC-10
 ## 4. Cirrhosis state of the positives and hepatoma by cirrhosis state
 
 Table 6. strict_v1, cirrhosis state of the positives of each class: samples with `hepatic_cirrhosis` positive / negative /
-not known (neither state in the presence table). Rows left out so that no masked count or difference under 5 can be worked out: index v1 of `hemangioma`, `hepatic_cyst` and
+not known (neither state in the presence table). Rows left out to avoid showing a small count or a small difference between versions or policies: index v1 of `hemangioma`, `hepatic_cyst` and
 `hepatic_stone`, and index v2 of `hepatic_stone`.
 
 | Class | Index | Positives | Cirrhosis positive | Cirrhosis negative | Not known | Groups with a cirrhosis-positive sample |
@@ -197,8 +199,7 @@ positives with no known cirrhosis state do not change. Ascites positives are alm
 ## 5. loose_v1 on index v2, five classes
 
 Table 7. loose_v1, pairs per class and state, index v1 (recomputed in memory) and v2 (written table); groups and top share as in Table 3.
-"X + <5" means the strict_v1 count of Table 3 plus fewer than 5 pairs (so that no small difference between the two policies can be
-worked out). DEC-101 Table 1 (loose column, group skip only, simulated) gives hepatoma 932 to 1,367 positive and 15,205 to 15,383
+"X + <5" means the strict_v1 count of Table 3 plus fewer than 5 pairs (a difference of under 5 between the two policies is not shown). DEC-101 Table 1 (loose column, group skip only, simulated) gives hepatoma 932 to 1,367 positive and 15,205 to 15,383
 negative and ascites 103; the v1 column below equals it. The v2 column adds the quality change (+50 hepatoma, +33 ascites, the same increments as
 strict_v1).
 
@@ -210,7 +211,7 @@ strict_v1).
 | `hemangioma` | negative | 16,156 (v2 - <5) | 17,445 (55, 17%) |
 | `hepatic_cyst` | positive | 92 + <5 (12) | 116 + <5 (12, 30%) |
 | `hepatic_cyst` | negative | 16,271 (v2 - <5) | 17,574 (55, 17%) |
-| `hepatic_stone` | positive | 296 (38) | 296 + <5 (38, 16%) |
+| `hepatic_stone` | positive | 296 (38) | 296 + <5 (38, 16%; loose_v1 equals strict_v1 here) |
 | `hepatic_stone` | negative | 15,068 + <5 (v2 - <5) | 15,776 + <5 (55, 19%) |
 | `ascites` | positive | 103 (10) | 136 (10, 40%) |
 | `ascites` | negative | 21,246 (v2 - <5) | 22,186 (58, 14%) |
@@ -244,8 +245,9 @@ more pairs are all on labels outside the five classes.
 
 Table 9. Pairs per state and reason over all 100 content labels (n = 1,227,979 pairs, the same index rows in both), index v1
 against v2, strict_v1 and loose_v1. The v1 columns equal Table 2 of the presence record. Two rows are merged (positive_grade_mismatch
-with unknown grade_ignored) and the presence-table row total is left out, so that no change under 5 can be worked out. The sum of
-the rows is 1,227,979 in each column.
+with unknown grade_ignored) and the presence-table row total is left out. Differences of label totals over all labels can still be
+worked out from the file row counts of Table 1 and from the v1 record (for example the positive_grade_mismatch count); they are
+totals over all labels, not small cells of one class. The sum of the rows is 1,227,979 in each column.
 
 | State, reason | strict_v1 v1 | strict_v1 v2 | loose_v1 v1 | loose_v1 v2 |
 |---|---|---|---|---|
@@ -263,47 +265,48 @@ Samples with at least one pair in the presence table: 25,127 (strict_v1 on v1) t
 26,190 (v2) of 29,233.
 
 **Cause of every changed pair.** A pair is changed when its state or reason differs between index v1 and v2 (the same pairs under
-both policies). Each changed pair was put in one class by its sample: **freed** (the sample had a quality item in v1 and has none
-in v2) and/or **group skip** (the sample has a P7 task with a group-skip item in v2; every one of these samples had a P7 task skip
+both policies). Each changed pair was put in one class by its sample: **no longer set aside** (the sample had a quality item in v1 and has none
+in v2; "such samples") and/or **group skip** (the sample has a P7 task with a group-skip item in v2; every one of these samples had a P7 task skip
 in v1, so the task lost its task skip).
 
 Table 10. Changed pairs (n = 50,055, on 1,616 samples, 97 of 100 labels) by cause of their sample.
 
 | Cause | Pairs | Samples |
 |---|---|---|
-| freed from a quality skip, no group skip | 43,632 | 920 |
-| group skip, not freed | 4,243 | 614 |
+| such sample (no longer set aside by a quality skip), no group skip | 43,632 | 920 |
+| group skip, not such a sample | 4,243 | 614 |
 | both | 2,180 | 82 |
 | neither | 0 | 0 |
 
-About 6,500 changed pairs are on the five classes above and about 43,600 on other labels (the cirrhosis, hepatitis, gastric and
-gallbladder-stone labels about 1,540 to 1,590 each; the steatosis grades and organ labels such as liver, kidney, spleen, stomach,
-intestine, gallbladder, portal vein and hepatic duct 974 each; the kidney-project labels 826 to 827 each). The net change per state is in Table 9; a
+About 6,500 changed pairs are on the five classes above and about 43,600 on other labels. These "about" figures are rounded; the
+ranges are per-label ranges: the cirrhosis, hepatitis, gastric and gallbladder-stone labels 1,540 to 1,590 pairs each (rounded); the steatosis
+grades and organ labels such as liver, kidney, spleen, stomach, intestine, gallbladder, portal vein and hepatic duct 974 each;
+the kidney-project labels 826 to 827 each (exact per-label counts). The net change per state is in Table 9; a
 table of gains by new state is not given, because gross gains next to the net changes would show small counts. The 45,812 pairs
-that leave the quality-skip state are exactly the pairs on freed samples (43,632 + 2,180): every pair on a freed sample was in
+that leave the quality-skip state are exactly the pairs on such samples (43,632 + 2,180): every pair on such a sample was in
 that state in v1, and no pair on a group-skip sample alone was.
 
 **Traces of the three open points** (aggregates from the facts of the rows):
 
 a. *The extra datasource group with negatives.* A group of <5 samples gains negatives in v2, the same group for hepatoma and for
-   ascites. Every one of its samples is freed from a quality skip, and the skip in v1 was P27's (a project
+   ascites. Every one of its samples is no longer set aside by a quality skip, and the skip in v1 was P27's (a project
    on another organ). Not a group-skip effect.
-b. *Cirrhosis negatives, 241 to 418.* 177 samples enter, 0 leave. 135 are samples with a P7 group skip that was not freed: in v1
+b. *Cirrhosis negatives, 241 to 418.* 177 samples enter, 0 leave. 135 are samples with a P7 group skip that are not such samples: in v1
    their P7 task skip set aside every label, so cirrhosis and three of the four spot classes (all but `hepatic_stone`) were "no
-   answer"; in v2 the tumour labels and the cirrhosis label are read, as negative or positive. 42 are freed samples whose cirrhosis
+   answer"; in v2 the tumour labels and the cirrhosis label are read, as negative or positive. 42 are such samples whose cirrhosis
    and four spot labels were all "quality skip" in v1. 0 enter through neither cause. The 135 are in 9 datasource groups and the 42 in 9.
-c. *Negative closed to conflict.* The hypothesis holds. The pairs (under 5; counted in the net change of "negative, closed" in Table 9) are on the
-   `hepatic_cirrhosis` label of a P7 sample with two tasks, which has a group skip and no freed quality skip. In v1 one task had
-   `skip_otherdisease` as a task skip, so its answer ("cirrhosis given") counted as none, and the other task's "not given" closed the
-   label: negative. In v2 that skip is a group skip of the steatosis tags only, so the first task's answer counts, and the two tasks
-   disagree: unknown, `conflict`. This is a P7 effect, not a quality effect.
+c. *Negative closed to conflict.* The hypothesis holds. The pairs (under 5; counted in the net change of "negative, closed" in
+   Table 9) are on the `hepatic_cirrhosis` label of P7 samples that have a group skip and are not such samples. In v1 a P7 task of each
+   had `skip_otherdisease` as a task skip, so its answer ("cirrhosis given") counted as none, and another task closed the label:
+   negative. In v2 that skip is a group skip of the steatosis tags only, so the first task's answer counts, and the tasks disagree:
+   unknown, `conflict`. This is a P7 effect, not a quality effect.
 
 ## Differences from the simulated numbers
 
 None in the strict_v1 counts. Every strict_v1 count of DEC-102 Table 1 (6 rows, 11 numbers and the `<5`), the four parts of DEC-103,
 the 828 of 1,298 and the 1,002 samples in 41 groups were reproduced exactly. That the build changes only what the two decisions say
-was shown by Table 10, not assumed: every changed pair is on a freed sample or a group-skip sample, and none is on neither.
-All 1,002 freed samples carry changed pairs (920 + 82).
+was shown by Table 10, not assumed: every changed pair is on such a sample or a group-skip sample, and none is on neither.
+All 1,002 such samples carry changed pairs (920 + 82).
 
 ## Limitations
 
