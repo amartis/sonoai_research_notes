@@ -52,6 +52,8 @@ Not reviewed. The user answered the open points on 2026-11-12 (see Decisions).
   `skip_anatomyunclear`) leaves the sample out of every project. The 8 exclusion skips that
   name the project's own question leave out only their own labeling task (R18). They form
   measure A10 in the new category C6 skip-task; C5 stays "Other" (QA report Amendment 3).
+  Index v2 only ([DEC-102](../../decisions/DEC-102-quality-skips-other-organ-projects-index-v2.md)): `skip_badimagequality` of the 23 projects that ask only about organs
+  other than the liver is read as a task skip (second fact relations config); index v1 reads R19 as written.
 - **R64**: repeat labelings of one sample in one project are expected to be the same: the
   same choice tags and similar polygon areas.
 - **Codes**: A8, A9 and B4 are QA measures now (QA report Amendment 2); "proposed" is
