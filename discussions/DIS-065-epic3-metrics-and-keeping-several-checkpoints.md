@@ -3,7 +3,7 @@ id: DIS-065
 title: Epic 3 metrics - image score, stone scoring, cirrhosis bar, and keeping several checkpoints by removing beaten ones
 status: concluded
 created: 2026-11-26
-outcomes: [DEC-112, DEC-113]
+outcomes: [DEC-112, DEC-113, DEC-114]
 related: [DIS-064, DEC-004, DEC-006, DEC-045, DEC-076, DEC-100, DEC-103, DEC-108, DEC-110]
 ---
 # DIS-065: Epic 3 metrics and keeping several checkpoints
@@ -145,7 +145,60 @@ metrics) and [DEC-113](../decisions/DEC-113-checkpoint-selection-by-removing-bea
 (keep several checkpoints, remove the beaten ones). Board: method tasks for the epic 3 evaluation,
 the epic 3 metrics report, and the selection mode (see DEC-112 and DEC-113).
 
+## Second thought: two groups, assessors and drawers (the user, 2026-11-26)
+
+The user's change to DEC-113: two parallel groups of survivors instead of one. One group keeps the
+checkpoints that draw well (best Dice: "drawers"); the other keeps the checkpoints that tell well,
+sample by sample, whether a class is present (best image-level AUC: "assessors"). As a product the
+two are combined: the assessor says whether there is a hepatoma, the drawer draws it.
+
+Review (the analyst's):
+
+- Sound for epic 3: the bar (DEC-112 rules 4 and 5) uses only the image-level score, never the
+  outline, so the assessor alone decides the bar and the drawer only adds outline quality. Cost:
+  nothing in training; two forward passes at serving when the pair differs.
+- Test must not choose: the pair is named on validation before any test result (as DEC-113 rule 8).
+- The two can disagree (assessor says "present", drawer draws no pixel of that class, or another
+  class there): the product needs a fixed rule, and the report counts the cases.
+- Both come from the same run, so the best-AUC and best-Dice epochs may be the same or within noise
+  (validation: hepatoma positives from fewer than 5 groups, 19 cyst and 22 hemangioma positives);
+  then the pair is one checkpoint.
+- Dice measures overlap, not a smooth edge; the user's "more beautiful outline" is likely but not
+  what Dice measures.
+- One checkpoint per class (e.g. a stone drawer) is left for later: it multiplies the choices made
+  on 19 to 31 positives per class.
+
+Related published ideas (checked 2026-11-26; none does exactly this):
+
+| Idea | Closeness | Source |
+|---|---|---|
+| Classification-guided module of UNet 3+: an image-level "organ present" head gates the segmentation output, tested on liver | gate plus drawer, but one network | Huang et al. 2020, [arXiv 2004.08790](https://arxiv.org/abs/2004.08790) |
+| Best epoch per task in multitask learning | closest to two groups | Harutyunyan et al., [arXiv 1703.07771](https://arxiv.org/abs/1703.07771); [arXiv 2610.41134](https://arxiv.org/abs/2610.41134) |
+| Checkpoint ensembles: keep the best few checkpoints of one run, average them | keeping several, no roles | Chen et al. 2017, [arXiv 1710.03282](https://arxiv.org/abs/1710.03282) |
+| Classifier blanks empty masks, segmenter draws (Kaggle pneumothorax challenge) | gate plus drawer, two models | unverified: no write-up confirming the gating was found |
+
+Table 4. Published ideas close to two checkpoints with split roles. Removing beaten checkpoints keeps
+those that no other checkpoint beats (a Pareto set, in the sense of multi-objective optimisation).
+
+The user accepted (2026-11-26) the three recommendations:
+
+1. Two groups replace the DEC-113 mixed group: assessors on image-level AUC per class, drawers on
+   Dice per class; the class weights doubled so each group sums to 1 (hepatoma 0.30; hemangioma,
+   cyst, stone 0.20 each; ascites 0.10, dropped as thin); floors, steps, veto and threshold as
+   DEC-113; at most 3 survivors per group.
+2. The bar uses the pair named on validation: the assessor's verdict is the bar; the drawer's Dice
+   and the Dice of the combined output are reported as information.
+3. When the assessor says a class is present and the drawer predicts no pixel of it, the product
+   shows the assessor's own outline, and the report counts these cases.
+
+Record: [DEC-114](../decisions/DEC-114-checkpoint-selection-in-two-groups-assessors-and-drawers.md)
+(checkpoint selection in two groups), which supersedes DEC-113. Board: [TASK-288](../../backlog/tasks/task-288%20-%20Checkpoint-selection-mode-that-keeps-several-checkpoints-and-removes-the-beaten-ones-weighted-criteria-floors-steps-removal-threshold-veto-near-copy-rule-cap-primary-by-weighted-sum-set-by-the-recipe-synthetic-tests-DEC-113.md) (selection mode) and
+[TASK-287](../../backlog/tasks/task-287%20-%20Epic-3-metrics-report-thresholds-fixed-on-validation-bar-and-cirrhosis-bar-verdicts-group-bootstrap-intervals-per-group-values-negatives-in-four-parts-contested-table-from-per-sample-records-synthetic-tests-DEC-112.md) (epic 3 metrics report) updated.
+
 ## Open questions
 
-- The steps, floors, veto and threshold of DEC-113 may be set again after the first run's
-  validation values (DEC-113 rule 9).
+- The steps, floors, veto, threshold and cap may be set again once, after the first run's
+  validation values (DEC-114 rule 10, carried over from DEC-113 rule 9).
+- A boundary measure for the drawers (e.g. the 95th-percentile Hausdorff distance) if outline
+  quality beyond overlap matters; not a criterion now.
+- One checkpoint per class (per-class drawers or assessors), once validation has more positives.
