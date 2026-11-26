@@ -12,7 +12,7 @@ superseded_by:
 
 ## Context
 
-In TASK-286 (epic 3 scoring for seg_spot_v1) the whole suite (135 s on machine01) ran
+In [TASK-286](../../backlog/tasks/task-286%20-%20Epic-3-evaluation-for-seg_spot_v1-top-50-image-score-pixel-scores-with-the-stone-counted-for-its-mass-per-sample-record-validation-AUC-and-Dice-measures-synthetic-tests-DEC-112.md) (epic 3 scoring for seg_spot_v1) the whole suite (135 s on machine01) ran
 several times: by the writer after a commit that changed only text, by the code reviewer
 on code the writer had already tested, and by the lead
 ([DIS-069](../discussions/DIS-069-faster-check-sh-and-test-runs.md), faster check.sh).
@@ -35,7 +35,7 @@ method, data, infra and reviewer agent definitions and the lead skill point to i
 
 ## Consequences
 
-- The Definition of Done stays "scripts/check.sh passes" (DEC-084).
+- The Definition of Done stays "scripts/check.sh passes" ([DEC-084](DEC-084-light-check-sh-slow-marker-auto-full-run.md)).
 - Once [DEC-119](DEC-119-check-sh-skips-pytest-on-unchanged-code.md) (check.sh skips
   pytest on unchanged code) is in the script, points 2 to 4 shrink to "run
-  `scripts/check.sh`; the script decides": TASK-299 cuts the text to that.
+  `scripts/check.sh`; the script decides": [TASK-299](../../backlog/tasks/task-299%20-%20check.sh-skips-pytest-when-the-code-files-are-unchanged-since-its-last-passing-run-of-the-same-or-a-stronger-mode-DEC-119.md) cuts the text to that.

@@ -13,7 +13,7 @@ superseded_by:
 ## Context
 
 `scripts/check.sh` chooses fast or full tests from the branch diff against master
-(DEC-084, light check.sh with automatic full run), so it reruns tests that cannot give a
+([DEC-084](DEC-084-light-check-sh-slow-marker-auto-full-run.md), light check.sh with automatic full run), so it reruns tests that cannot give a
 new answer: after text-only commits, and on text-only branches (74 s fast set, 135 s full
 suite on machine01, [DIS-069](../discussions/DIS-069-faster-check-sh-and-test-runs.md)).
 The user wants this logic in the script, not in instructions that agents interpret.
