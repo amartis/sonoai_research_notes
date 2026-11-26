@@ -1,7 +1,7 @@
 ---
 id: DEC-111
 title: Epic 3 more data - train and test on the 261023 sample file only; no book images; public liver sets postponed (possibly epic 4); the request to the Tiyarattanachai 2021 authors is sent
-status: proposed
+status: accepted
 area: [datasets]
 created: 2026-11-26
 from: [DIS-064]
@@ -19,6 +19,9 @@ Counts of the book images and the public sets:
 preparation, task form and more data), Facts checked.
 
 ## Decision
+
+Accepted by the user on 2026-11-26.
+
 
 1. **Epic 3 uses the epic 3 sample file of 261023 only**
    ([DEC-108](DEC-108-epic3-split-test-and-validation-by-whole-groups.md), epic 3 split, rule 5)

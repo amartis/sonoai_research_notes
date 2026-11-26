@@ -1,7 +1,7 @@
 ---
 id: DEC-110
 title: Epic 3 task form - one softmax over background, the four spot classes and ascites with the Epic 1 allowed-class sets; a stone takes its overlap with a mass; a sigmoid comparison run later
-status: proposed
+status: accepted
 area: [training]
 created: 2026-11-26
 from: [DIS-064]
@@ -21,6 +21,9 @@ sigmoid per class. Epic 1's form is [DEC-066](DEC-066-epic1-model-task-label-set
 
 ## Decision
 
+Accepted by the user on 2026-11-26.
+
+
 1. **Classes and output.** Six classes in this order: background, `hepatoma`, `hemangioma`,
    `hepatic_cyst`, `hepatic_stone`, `ascites`. One softmax per pixel; the prediction is the argmax.
 2. **Target: an allowed-class set per pixel**, by DEC-066 rule 3, with each class's strict_v1 state
@@ -36,6 +39,8 @@ sigmoid per class. Epic 1's form is [DEC-066](DEC-066-epic1-model-task-label-set
    an outline of a positive `hepatoma`, `hemangioma` or `hepatic_cyst`, the set is {`hepatic_stone`}
    alone. Every other overlap of positive classes keeps both (DEC-066 rule 3a). At scoring, a stone
    predicted inside a mass outline counts for that mass as well; the metrics point writes the scoring rule.
+   The rule is a parameter of the task, so the task fingerprint (DEC-004) records it, and it is applied
+   when the task builds the target: the outlines in the data are not changed (the user, 2026-11-26).
 4. **Positives without an outline** (3 pairs) follow DEC-066 rule 3b. They give no image-level target
    in training. This amends [DEC-100](DEC-100-epic3-mission-spot-liver-diseases.md) rule 3 ("a positive without a polygon has an image-level target
    only") for the softmax form. They are scored at image level in validation and test.
@@ -54,6 +59,6 @@ sigmoid per class. Epic 1's form is [DEC-066](DEC-066-epic1-model-task-label-set
 - The task is a new registered task kind; it reads the state and outline columns of the sample file.
   Its metrics come after the metrics point, so adding them changes its fingerprint ([DEC-004](DEC-004-training-tasks.md)): either a
   new version or a one-time waiver as in [DEC-076](DEC-076-epic1-metrics-label-set-score-selection-ci-and-pass-rule.md) rule 6.2, decided then.
-- Code: a `method` task for the task definition and target (synthetic tests); a Parked task for the
-  sigmoid comparison run.
+- Code: [TASK-281](../../backlog/tasks/task-281%20-%20Epic-3-task-seg_spot_v1-one-softmax-over-background-four-spot-classes-and-ascites-allowed-class-set-target-with-the-stone-taking-its-overlap-with-a-mass-synthetic-tests-DEC-110.md) (method: the task definition and target, synthetic tests); [TASK-283](../../backlog/tasks/task-283%20-%20Epic-3-sigmoid-comparison-run-after-the-first-softmax-results-one-sigmoid-per-class-with-an-unknown-class-masked-on-the-sample-on-the-chosen-recipe-DEC-110-rule-7.md) (the sigmoid
+  comparison run, Parked); scoring after [TASK-284](../../backlog/tasks/task-284%20-%20Decide-epic-3-metrics-image-level-score-from-the-pixel-probabilities-scoring-of-a-stone-inside-a-mass-outline-the-cirrhosis-specificity-bar-from-the-test-counts-interval-method-DEC-100-rules-4-and-5-DEC-103-rule-3-DEC-110.md) (decide the epic 3 metrics).
 - Reversal: before the task code, low; after training, new runs.

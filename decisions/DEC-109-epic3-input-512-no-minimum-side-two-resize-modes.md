@@ -1,7 +1,7 @@
 ---
 id: DEC-109
 title: Epic 3 data preparation - input 512 x 512, no minimum crop side, two resize modes (stretch and fit-scale with padding) compared by training
-status: proposed
+status: accepted
 area: [training, datasets]
 created: 2026-11-26
 from: [DIS-064]
@@ -22,6 +22,9 @@ quality-skipped samples have no known state there.
 
 ## Decision
 
+Accepted by the user on 2026-11-26.
+
+
 1. **Input 512 x 512** for every epic 3 recipe. A later recipe that departs from it needs a DEC.
 2. **No minimum crop side.** Every sample of the epic 3 sample file (DEC-108 rule 5) enters
    training, validation and test; a crop smaller than the input is enlarged.
@@ -39,6 +42,6 @@ quality-skipped samples have no known state there.
 
 - Per sample, 512 x 512 is 5.2 times the pixels of 224 x 224 (arithmetic, not a timing).
 - In fit-scale, a crop of aspect 1.33 gets about 384 px on its shorter axis instead of 512.
-- Code: a `method` task adds the fit-scale mode to the sample reader (a recipe field whose default,
+- Code: [TASK-282](../../backlog/tasks/task-282%20-%20Fit-scale-resize-mode-in-the-sample-reader-aspect-kept-longer-side-fills-the-input-centred-padding-with-image-0-and-the-target-fill-stretch-stays-the-default-synthetic-tests-DEC-109.md) (method) adds the fit-scale mode to the sample reader (a recipe field whose default,
   stretch, leaves every existing recipe and its `recipe.json` unchanged).
 - Reversal: before training, a recipe value; after training, new runs.

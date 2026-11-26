@@ -1,7 +1,7 @@
 ---
 id: DIS-064
 title: Epic 3 data preparation (input size, minimum crop side, resize), task form for overlapping outlines, and more data
-status: open
+status: concluded
 created: 2026-11-26
 outcomes: [DEC-109, DEC-110, DEC-111]
 related: [DEC-066, DEC-068, DEC-069, DEC-100, DEC-103, DEC-108, DIS-056]
@@ -31,7 +31,7 @@ Five tables of 261023_plain read with the user's ok of 2026-11-26 (strict_v1 pre
 v2, sample-label index v2, taskcrops table, polygon table, flag table; read only, in memory,
 aggregates; no table written). Spot classes: `hepatoma`, `hemangioma`, `hepatic_cyst`,
 `hepatic_stone` (DEC-100 rule 2). Universe: the 16,176 samples with a known strict_v1 state for at
-least one spot class, in 55 datasource groups (DEC-108 rule 1 counted 57 groups; not reconciled).
+least one spot class, in 55 datasource groups (DEC-108 rule 1 says 57; the split record of TASK-279, `datasets/261023/spot_e3_split.md`, also finds 55 and reads 57 as a slip).
 Polygons were drawn on a 256 x 256 grid of the crop (polygon points are in percent of the crop).
 
 | Class | Positives | Lesion share of the crop, median (P10) | Median width at input 224 / 384 / 512 px | Median width in source pixels |
@@ -107,8 +107,11 @@ was argued for the book images; without them, and with 3 positives without a pol
 
 [DEC-109](../decisions/DEC-109-epic3-input-512-no-minimum-side-two-resize-modes.md) (data
 preparation), [DEC-110](../decisions/DEC-110-epic3-task-form-allowed-class-sets-stone-takes-the-overlap.md)
-(task form) and [DEC-111](../decisions/DEC-111-epic3-more-data-261023-only.md) (more data), all
-`proposed` until the user confirms the text. Board tasks: see the DECs.
+(task form) and [DEC-111](../decisions/DEC-111-epic3-more-data-261023-only.md) (more data), accepted by the user on 2026-11-26. Board: [TASK-281](../../backlog/tasks/task-281%20-%20Epic-3-task-seg_spot_v1-one-softmax-over-background-four-spot-classes-and-ascites-allowed-class-set-target-with-the-stone-taking-its-overlap-with-a-mass-synthetic-tests-DEC-110.md) (the epic 3 task definition, method), [TASK-282](../../backlog/tasks/task-282%20-%20Fit-scale-resize-mode-in-the-sample-reader-aspect-kept-longer-side-fills-the-input-centred-padding-with-image-0-and-the-target-fill-stretch-stays-the-default-synthetic-tests-DEC-109.md) (fit-scale resize mode in the sample reader, method), [TASK-283](../../backlog/tasks/task-283%20-%20Epic-3-sigmoid-comparison-run-after-the-first-softmax-results-one-sigmoid-per-class-with-an-unknown-class-masked-on-the-sample-on-the-chosen-recipe-DEC-110-rule-7.md) (sigmoid comparison run, Parked until the first results) and [TASK-284](../../backlog/tasks/task-284%20-%20Decide-epic-3-metrics-image-level-score-from-the-pixel-probabilities-scoring-of-a-stone-inside-a-mass-outline-the-cirrhosis-specificity-bar-from-the-test-counts-interval-method-DEC-100-rules-4-and-5-DEC-103-rule-3-DEC-110.md) (decide the epic 3 metrics, Parked until the split record of TASK-279).
+
+The user asked (2026-11-26) whether the stone rule is data preprocessing rather than the task. It is
+a target-building step and stays in the task, as a task parameter: the polygon table keeps the outlines as
+drawn, scoring needs the full mass outline (DEC-110 rule 3), and the sigmoid comparison needs the overlap.
 
 No new term: "stretch" and "fit-scale" are said in words; the recipe field values are code names.
 
