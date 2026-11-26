@@ -13,3 +13,7 @@
 *.csv
 .DS_Store
 .ipynb_checkpoints/
+# Literature files (papers, books; DEC-107): the shared folder is reached through the link
+# literature/files on each machine; no paper file goes into git (copyright, repo size).
+literature/files
+literature/**/*.pdf
