@@ -44,7 +44,11 @@ Polygons were drawn on a 256 x 256 grid of the crop (polygon points are in perce
 Table 1. Lesion size. Width = square root of the lesion's pixel area after the crop is stretched to
 the input, capped at its source pixels (a stretched input holds no more detail than the source).
 At 224 px a tenth of the stones are 6 px wide or less. Ascites: 122 positives under the label
-`ascites` in this count; [DEC-102](../decisions/DEC-102-quality-skips-other-organ-projects-index-v2.md) (quality skips of other organs' projects) gives 136; not reconciled.
+`ascites` in this count; [DEC-102](../decisions/DEC-102-quality-skips-other-organ-projects-index-v2.md) (quality skips of other organs' projects) gives 136. Probable reason, not checked against the tables (2026-11-26, the user agreed to record it so): 136
+counts every ascites positive in index v2; 122 counts only those inside the 16,176 samples to split (a known state
+for at least one of the four spot classes, [DIS-063](DIS-063-epic3-split-by-datasource-groups.md), epic 3 split by
+datasource groups). The frozen split ([spot_e3_split](../datasets/261023/spot_e3_split.md)) is
+made from these samples, so epic 3 work uses 122.
 
 | Minimum crop side | Samples dropped | Positives dropped: hepatoma / hemangioma / cyst / stone | Datasource groups emptied |
 |---|---:|---|---:|
