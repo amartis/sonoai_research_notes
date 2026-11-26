@@ -64,3 +64,11 @@ DEC-120), the second after the first, because both change `scripts/check.sh`. [T
 ## Open questions
 
 - None now. TASK-300's numbers decide whether parallel runs are adopted.
+
+## Update 2026-11-26
+
+TASK-300 (parallel test measurement) found 6 workers ran out of memory once in 3 full runs; 3
+workers passed 3 of 3 and were 55% faster on the full suite. The user chose 3 workers with at
+least half the memory kept free:
+[DEC-121](../decisions/DEC-121-check-sh-runs-pytest-with-3-workers.md) (check.sh runs pytest
+with 3 workers, amends DEC-120).
