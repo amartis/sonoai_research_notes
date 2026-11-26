@@ -31,7 +31,8 @@ unchanged code), so the saving does not pay for the risk.
 
 ## Consequences
 
-- check.sh times go back to serial: about 78 s for the fast set and 144 s for the full suite on
-  machine01 (TASK-300 means, n = 3), except when the DEC-119 skip applies.
+- check.sh times go back to serial: about 78 s for the fast set (tests not marked slow) and
+  144 s for the full suite (all tests) on machine01 (TASK-300, parallel test measurement: means,
+  n = 3), except when the DEC-119 skip (check.sh skips pytest on unchanged code) applies.
 - A later DEC can pick a default per machine (e.g. from its memory) if parallel runs are wanted
   again.
