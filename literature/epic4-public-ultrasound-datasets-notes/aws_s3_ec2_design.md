@@ -16,7 +16,7 @@ KMS keys), NAT (network address translation), IMDSv2 (version 2 of the EC2 insta
 CA (certificate authority), CRL (certificate revocation list), CRC (cyclic redundancy check),
 SLR (service-linked role), OAC (CloudFront origin access control), WAF (web application firewall).
 Project terms: machine01 is the project's trusted workstation that holds the data root; enc1 is the
-project's encrypted store format; the aws agent is the project's subagent for AWS work (DEC-026, AWS
+project's encrypted store format; the aws agent is the project's subagent for AWS work ([DEC-026](../../decisions/DEC-026-cloud-agent-runs-cloud-services.md), AWS
 work goes to the aws agent); aws-labelstud is the project's Label Studio server on EC2; "the user"
 is the account administrator.
 
@@ -151,8 +151,8 @@ patient text is stored.
 - The README's "renewable for 90 days" could not be confirmed on the AWS page read.
 - Live AWS state was not checked (constraint: no AWS calls): whether the scrape bucket exists, whether
   the default VPC has an S3 gateway endpoint or IPv6, and the account-level Block Public Access.
-- DEC-025 (aws-labelstud public HTTPS), DEC-027 (SSH only through SSM), DEC-081 (epic 2 mission) and
-  DEC-083 (RunPod data from S3) were seen only through references in the files above.
+- [DEC-025](../../decisions/DEC-025-aws-labelstud-public-https.md) (aws-labelstud public HTTPS), [DEC-027](../../decisions/DEC-027-agent-ssh-to-aws-labelstud-through-ssm.md) (SSH only through SSM), [DEC-081](../../decisions/DEC-081-epic2-mission-roboflow-universe-ultrasound-scraper.md) (epic 2 mission) and
+  [DEC-083](../../decisions/DEC-083-runpod-enc1-images-from-s3-and-encrypted-checkpoint-backups.md) (RunPod data from S3) were seen only through references in the files above.
 
 ## 2. Should the public datasets go into the DEC-082 scrape bucket under a new prefix, or into a new bucket, and which key layout supports stage 2?
 
@@ -247,7 +247,7 @@ s3://claude-agent-sonoai-public/
 ```
 
 - Every prefix above is written once; a correction makes a new `v<k>` or `<version>`, never an
-  overwrite, which matches DEC-053 (a written table is never changed) and lets bucket-wide Object Lock
+  overwrite, which matches [DEC-053](../../decisions/DEC-053-table-naming-and-preservation.md) (a written table is never changed) and lets bucket-wide Object Lock
   retention apply.
 - Dedup against the project dataset (stage 2, on machine01, as DEC-082 rule 4 requires for Universe
   data): the EC2 side computes fingerprints of public images only; machine01 downloads the

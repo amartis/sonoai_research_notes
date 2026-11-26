@@ -3,7 +3,7 @@
 Scope: adult and paediatric echocardiography (echo), including transoesophageal echo (TEE, a probe in the
 oesophagus); lung and pleura; blood vessels (carotid, peripheral arteries and veins, deep vein thrombosis
 (DVT), aorta, intravascular ultrasound (IVUS), transcranial Doppler (TCD)). Fetal echo is out of scope
-(another researcher covers it). Roboflow Universe is out of scope (project epic 2, DEC-081 and DEC-096).
+(another researcher covers it). Roboflow Universe is out of scope (project epic 2, [DEC-081](../../decisions/DEC-081-epic2-mission-roboflow-universe-ultrasound-scraper.md) and [DEC-096](../../decisions/DEC-096-epic2-retrieval-path-official-routes-terms-reading-fetch-budget.md)).
 
 Method: dataset landing pages and their machine-readable metadata were read directly where possible:
 the CREATIS Girder REST API (CAMUS, TED, CETUS), the Kaggle Croissant metadata files, the Mendeley Data

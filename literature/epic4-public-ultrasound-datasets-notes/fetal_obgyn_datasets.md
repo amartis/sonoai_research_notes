@@ -677,7 +677,7 @@ Restricted or private, no open route:
 - PS-FH-AOP 2023 restricted copy ([Zenodo 10901776](https://zenodo.org/records/10901776)); FADA ([Zenodo 20381238](https://zenodo.org/records/20381238)); FUGC 2025 by signed agreement ([Zenodo 14305302](https://zenodo.org/records/14305302)).
 - Often-cited private first-trimester videos (PULSE, Oxford, 250 scans) appear only in papers ([ISBI 2022 paper](<https://pcwww.liv.ac.uk/~hezhao/papers-pp/2020after/[ISBI22] End-to-end First Trimester Fetal Ultrasound Video Automated CRL and NT Segmentation.pdf>); search summary). FetalCLIP's private training images and other private sets (FAMLI, iFIND, IOTA): unverified, not checked.
 
-Roboflow only (epic 2, the project's separate Roboflow scraper under DEC-081 and DEC-096):
+Roboflow only (epic 2, the project's separate Roboflow scraper under [DEC-081](../../decisions/DEC-081-epic2-mission-roboflow-universe-ultrasound-scraper.md) and [DEC-096](../../decisions/DEC-096-epic2-retrieval-path-official-routes-terms-reading-fetch-budget.md)):
 - Uterine fibroid projects, for example [siat-wklyw/uterine-fibroid](https://universe.roboflow.com/siat-wklyw/uterine-fibroid) and [capstone-project-tchuv/uterine-fibroid-detection](https://universe.roboflow.com/capstone-project-tchuv/uterine-fibroid-detection): Roboflow only (epic 2).
 - Fetus brain abnormalities: Roboflow project with a Hugging Face mirror [KBayoud/roboflow-fetus-brain-abnormalities](https://huggingface.co/datasets/KBayoud/roboflow-fetus-brain-abnormalities): Roboflow only (epic 2).
 

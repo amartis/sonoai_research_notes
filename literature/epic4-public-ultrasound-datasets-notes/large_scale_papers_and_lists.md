@@ -81,7 +81,7 @@ public. "Checked at" is the primary source read.
 - No paper I read says it drew on Roboflow Universe. Two rows of Alsharid et al. ("Liver
   ultrasound computer vision project", "Ultrasound normal kidney image computer vision dataset")
   and UltraSAM3's "Ultrasound_Normal_Kidney" have Roboflow-style names (unverified; not chased, out
-  of scope under DEC-081 and DEC-096, the epic 2 Roboflow scraper decisions).
+  of scope under [DEC-081](../../decisions/DEC-081-epic2-mission-roboflow-universe-ultrasound-scraper.md) and [DEC-096](../../decisions/DEC-096-epic2-retrieval-path-official-routes-terms-reading-fetch-budget.md), the epic 2 Roboflow scraper decisions).
 
 ### Inferences
 - The brief's names are all real papers; the private ones (UltraDINO, USFM, FetalCLIP, EchoCLIP,

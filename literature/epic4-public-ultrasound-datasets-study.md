@@ -6,7 +6,9 @@
   on EC2, and give scoped long-lived access to the bucket. Stage 2 (dedup against dataset 261023, a
   next dataset version built from public data, a "super-dataset" composed at runtime) is only
   prepared for here.
-- For: epic 4 has no mission record yet. It feeds epic 1
+- For: epic 4, whose mission is [DEC-117](../decisions/DEC-117-epic4-mission-public-ultrasound-datasets.md)
+  (accepted on 2026-11-26, after this study was written; the next sessions follow the
+  [epic 4 relay note](../journal/2026/2026-11-26-epic4-relay-claude.md)). It feeds epic 1
   ([DEC-065](../decisions/DEC-065-mission-upper-abdomen-anatomy-segmentation.md), upper-abdomen
   anatomy segmentation) and epic 3 ([DEC-100](../decisions/DEC-100-epic3-mission-spot-liver-diseases.md),
   spotting liver diseases). It sits beside epic 2
@@ -276,7 +278,7 @@ C manual step per dataset). Sizes are the hosts' stated sizes; my sums leave out
 |---|---|---|---|---|
 | 1 (tier A) | open sets whose licence allows a private research copy | abdomen: TCIA B-mode-and-CEUS-Liver (272 GB), Prostate-MRI-US-Biopsy (80 GB), M2-US, UIdataGB, Karim and Ball, SMC-LUD, AUL, Byra, LEPset, kidney stone, Regensburg, prostate sets (about 371 GB); breast and thyroid: BUS-CoT, BCMID, ThyUS2Path, TN5000, BUS-BRA, BrEaST, free-hand thyroid sweeps, Mendeley sets, TN3K (about 26 GB); heart, lung, vessels: CREATIS family (CAMUS, TED, CETUS and simulations), EV9V, CACTUS, ThrombUS+, OpenPOCUS, carotid and lung Mendeley sets, and the optional EchoXFlow (about 575 GB, 480 of it EchoXFlow); fetal and gynaecologic: FETAL_PLANES_DB, HC18, PSFHS, JNU-IFM, IUGC 2025, the intrapartum video set, DELTA, ACOUSLIC-AI, PFUS1 and others (about 66 GB); other: ReMIND, UltraBones100k, TUS-REC2024, AHU, U2-Bench, BITE, RESECT, ERDES, Oculo and others (about 208 GB) | about 1,246 GB (my sum); about 766 GB without EchoXFlow | the aws agent and the downloader, after the user's go-ahead |
 | 2 (tier B) | sets behind a token the user supplies once | Vitale AbdomenUS, LUS-7Seg (after an origin check), BUSI (Kaggle mirror, with the published duplicate list), DDTI, AUITD, ThyroidXL (HF click-through), CardiacUDA, EchoCP, CardiacNet, smaller Kaggle sets | under 50 GB (estimate from the stated sizes) | the user: Kaggle and HF tokens into Secrets Manager, HF click-throughs |
-| 3 (tier C) | sets behind an application or agreement | RadImageNet (abdomen, high priority), Saudi NAFLD (liver, high priority), Open Kidney (high priority), GBCU, GBUSV, SYSU-FLL-CEUS; Stanford AIMI on Redivis (EchoNet-Dynamic, -Pediatric, -LVH, TEE view, thyroid cine-clip, MRI-US prostate, CT2Echo); OpenThyroidDB; challenge sets (TN-SCUI 2020, TDSC-ABUS 2023, USenhance 2023, FUGC 2025, IUGC 2024, CuRIOUS); RVENet, HMC-QU, TMED-2, BEDLUS, MVSeg2023, Regional-US, UDIAT, ALN-Ultra, CUBDL, the Kaggle nerve competition | unknown (most hosts do not state sizes) | the user, and each team member for per-person agreements |
+| 3 (tier C) | sets behind an application or agreement | RadImageNet (abdomen, high priority), Saudi NAFLD (liver, high priority), Open Kidney (high priority), GBCU, GBUSV, SYSU-FLL-CEUS; Stanford AIMI on Redivis (EchoNet-Dynamic, -Pediatric, -LVH, TEE view, thyroid cine-clip, MRI-US prostate, CT2Echo); OpenThyroidDB; challenge sets (TN-SCUI 2020, TDSC-ABUS 2023, USenhance 2023, FUGC 2025, IUGC 2024, CuRIOUS, UUSIC 2025 and UUSIVC 2026); RVENet, HMC-QU, TMED-2, BEDLUS, MVSeg2023, Regional-US, UDIAT, ALN-Ultra, CUBDL, the Kaggle nerve competition | unknown (most hosts do not state sizes) | the user, and each team member for per-person agreements |
 
 Not planned: tier D and barred sets (teaching atlases, the Butterfly GrandHack set, CLUST while its
 access is paused, A-AFMA, UBPD, unreleased sets such as FLA-Net or ReMUD, Baidu-only sets); the
@@ -476,9 +478,10 @@ TB-scale raw RF archives are not downloaded.
 
 For a `/consult` session; these are not board tasks yet.
 
-1. **Records**: an epic 4 mission record (stage 1 now, stage 2 later), the storage decision of
-   question 1 in Section 7, and retrieval rules for epic 4 modelled on DEC-096 (the epic 2 retrieval
-   rules: official routes, terms reading, fetch budget).
+1. **Records**: the epic 4 mission now exists ([DEC-117](../decisions/DEC-117-epic4-mission-public-ultrasound-datasets.md),
+   accepted on 2026-11-26). Still needed: the storage decision of question 1 in Section 7, and
+   retrieval rules for epic 4 modelled on DEC-096 (the epic 2 retrieval rules: official routes, terms
+   reading, fetch budget).
 2. **Download plan file**: one machine-readable row per release (dataset, source URL, host, tier,
    tool, stated size, checksum source, licence as written, wave), seeded from the SonoCorpus manifest
    and the five census tables of the notes.
@@ -534,3 +537,66 @@ ultrasound datasets by Alsharid et al., npj Digital Medicine 2025,
 [AWS Price List for S3 in us-east-1](https://pricing.us-east-1.amazonaws.com/offers/v1.0/aws/AmazonS3/current/us-east-1/index.csv)
 and the [EC2 network bandwidth guide](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-network-bandwidth.html).
 Every dataset row in the notes carries its own source link.
+
+## 11. Details from the notes that the sections above leave out
+
+Added on 2026-11-26 at the user's request ("record those you missed"). Each row names the note that
+holds the evidence; the links and sources are there.
+
+Table 9. Findings in the research notes, or facts from the session, that Sections 0 to 10 do not carry.
+
+| # | Detail | Why it matters | Where |
+|---|---|---|---|
+| 1 | A curated GitHub atlas, [TIanCat/open-medical-ultrasound-datasets](https://github.com/TIanCat/open-medical-ultrasound-datasets), was used by two researchers; the papers note found no such list | the largest community list to cross-check in round 2 (Section 12) | fetal, abdomen notes |
+| 2 | SonoCorpus's repository ([AlfredQin/sonobase](https://github.com/AlfredQin/sonobase)) publishes dedup hashes and split indices; the method is in its docs/DATA_SPLITS.md (not read) | can be reused for the stage 2 dedup | other-anatomies note, section 4 |
+| 3 | Other indexes not read in full: Project Imaging-X's datasets.json (1,152 entries, only 6 breast or thyroid ultrasound entries), UMUD (an index of 14 musculoskeletal datasets, 76,124 images), the SHTI 2025 review of 14 public fetal databases, the two 2026-11-18 journal notes | possible missed datasets | breast, other-anatomies, fetal notes |
+| 4 | MICCAI 2025 FLARE ultrasound subset on HF (4.92 GB, CC BY-NC 4.0: fetal abdomen, breast, carotid, thyroid, fetal head, heart; no adult abdomen) | a wave 1 candidate missing from Table 5 | abdomen note, "seen, other groups" |
+| 5 | UUSIC 2025 and UUSIVC 2026 challenges, built from public sets (Fatty-Liver, KidneyUS, the appendicitis set and others) plus private data; registration on Codabench | wave 3 candidate with liver and kidney content | other-anatomies note, Table 4 |
+| 6 | Mendeley Data's site footer reserves rights "for text and data mining, AI training", while many of its records say CC BY 4.0 | a legal check before bulk use of Mendeley sets | other-anatomies note, section 1 |
+| 7 | BUSI: 155 of 780 images are duplicates; a mapping CSV is on Mendeley ([doi:10.17632/k8t3gnx9h6.1](https://doi.org/10.17632/k8t3gnx9h6.1)); about 32.5% of random-split test images have a duplicate or same-subject image in training (unverified); cleaned subsets and a cleaning tool (BUSClean) exist | dedup and split rules for breast data | breast note |
+| 8 | Burned-in marks: handwritten diameter marks in DDTI and TN3K; crosshair markers in about 40% of TN5000 images; scanner text in the Karim and Ball set; heavy on-image annotations in LEPset | DEC-063 (public non-patient root) worries about patient text on images; marks also bias training | breast, abdomen, papers notes |
+| 9 | Duplicates inside sets: Karim and Ball has 13,088 files for 5,468 unique images; SMC-LUD has patients in both its "clean" and "caliper" groups; Byra has 10 frames per patient; TN5000 is split by image, not by patient | split by patient or group, dedup before splitting | abdomen, breast notes |
+| 10 | Aggregator lists hold errors: OpenUS's "Cactus" link points to an unrelated repository (the cardiac CACTUS is on FRDR and Academic Torrents); some anatomy labels are wrong (105US as pancreas in OPUS, ASUS as abdomen and CCAUI as echo in OpenUS) | check every link and label at the original source | heart note, Q2; papers note, section 6 |
+| 11 | LUS-7Seg's uploader re-hosts other people's data; no paper or original host was found | do not use LUS-7Seg until its origin is known | abdomen note |
+| 12 | Copies not to use: third-party copies of EchoNet data (on HF and Academic Torrents) break the Stanford RUA; HMC-QU left Kaggle and is now by email (SAMUS points to a Baidu AI Studio copy) | take only the official routes | heart note, Q2 |
+| 13 | EchoXFlow is beamspace data: frames need scan conversion before B-mode models can use them | its 480 GB has a processing cost | heart note |
+| 14 | How long manual steps wait: instant (HF automatic gates, Kaggle rules), days (HF manual gates, Stanford AIMI, Synapse), weeks or more (PhysioNet credentialing, dbGaP) | plan wave 3 early | hosts note, section 7 |
+| 15 | Licences of model weights, if pretrained models are reused: USFM, FetalCLIP and DeblurringMIM CC BY-NC 4.0; MedSAM, SAM-Med2D, BiomedParse and UltraDINO Apache-2.0; UltraSam CC BY-NC-SA 4.0 | pretrained weights for epics 1 and 3 carry their own terms | papers note, section 4 |
+| 16 | UltraBench 2 left out BUSI (data quality), LEPset (on-image annotations), Butterfly, POCUS and the Kaggle nerve set (licensing) and the Stanford thyroid set (size) | a second opinion on which sets to trust | papers note, section 2 |
+| 17 | Security findings about today's AWS setup, not only epic 4: the agent's EC2 rights cover every instance, and the SSM tag guard is weak because `ec2:CreateTags` is allowed on every resource | worth a Triage task | AWS note, section 1 |
+| 18 | AWS state not checked live: whether the scrape bucket exists, whether the default VPC has an S3 gateway endpoint or IPv6, and the account-level Block Public Access; the downloader must live in the default VPC (the agent cannot create a VPC or an endpoint) | first read-only checks for the aws agent | AWS note, section 1 |
+| 19 | TCIA: a new Data Retriever (command line, MD5, resume) replaces the old NBIA tool; IDC buckets need no AWS account; restricted collections moved to dbGaP after an NIH change in April 2025 | the route for the TCIA sets in wave 1 | hosts note |
+| 20 | Zenodo announced anti-bot measures in January 2026; figshare web pages show a bot challenge while its API works; Grand Challenge, Radiopaedia and some PMC pages refused automated fetches | use the APIs, test each host first | hosts, other-anatomies notes |
+| 21 | Five of the eight researchers stopped on the 5-hour usage limit right after writing their notes, so their last self-checks may be missing (the heart note was adding acronym definitions and a wording fix) | read those notes with care | this session |
+| 22 | OpenThyroidDB holds parts of unknown origin (AHU, KMVE, PKTN, TGVideo); whether its "AHU" is the AHU database of the other-anatomies note is unknown | a dedup risk inside the thyroid data | breast note |
+
+## 12. Further research rounds
+
+Each round is best started in a new session, which costs far less than continuing a long one; this
+study, its notes and the [epic 4 relay note](../journal/2026/2026-11-26-epic4-relay-claude.md) hold
+what such a session needs. Run each round inline or with at most two agents, each with a stated budget.
+
+1. **Round 2: close the gaps that block the plan.**
+   - Draft the plan file: merge the five census tables and the SonoCorpus manifest into one list of
+     releases; resolve rows that sit in two groups and the aliases (for example UDIAT = BUS Dataset B,
+     BLUES = COVID-BLUES, MASLD = the Byra set).
+   - Check the high-priority abdomen and liver items at their source: LUS-7Seg's origin, RadImageNet's
+     access terms, the agreements of the Saudi NAFLD set, GBCU, GBUSV and Open Kidney, SYSU-FLL-CEUS,
+     the Concordia liver elastography set, M2-US's liver part against SMC-LUD, the size of the MONAI
+     repository, the FLARE and UUSIC sets (Table 9, rows 4 and 5).
+   - Search what was skipped: Science Data Bank, IEEE DataPort, a full Kaggle search through its API,
+     Baidu AI Studio, Synapse; read the indexes of Table 9, rows 1 to 3; SAMUS's supplement; the
+     dataset lists of MedSAM and BiomedParse; EchoCare's 138 names.
+   - Read terms: Mendeley Data (Table 9, row 6), figshare, Harvard Dataverse, OSF, Dryad, the Kaggle
+     nerve competition rules, CAMUS at CREATIS, AWS acceptable use for BitTorrent.
+   - AWS: confirm the unverified prices of Section 9 and read the example policies of the AWS note;
+     live read-only checks (Table 9, row 18) go to the aws agent, only with the user's ok.
+2. **Round 3: prepare stage 2.** The dedup method (SonoCorpus's hashes; the epic 2 fingerprints of
+   rule 4 of DEC-096, the epic 2 retrieval rules, so that both epics compare images alike); the
+   manifest and super-dataset schema; how a public release becomes a datasource; mapping public labels
+   to the project's label set; which public sets help epics 1 and 3 (pretraining, view classification
+   or fine-tuning).
+3. **Round 4: the later focuses of DEC-117** (anatomical and pathological diagnosis across organs). A
+   census by disease and organ, for example breast BI-RADS, thyroid TI-RADS, liver, kidney,
+   gallbladder, appendix, lung and heart, with the reference standard behind each label (biopsy,
+   pathology, follow-up imaging or clinical).
