@@ -89,14 +89,14 @@ DEC-114 pair and survivors (DEC-100 rule 5). This needs no new code and costs ab
 
 Scaled from the Epic 1 R5 step time by pixel count (5.2 times), not measured, bf16 gain not counted:
 about 1.6 s per step, 354 steps per epoch, about 9.4 min of training plus about 3 min of val and test
-evaluation per epoch; about 4.2 h and $9 per 20-epoch run at $2.19/h. The timing run of TASK-294
+evaluation per epoch; about 4.2 h and $9 per 20-epoch run at $2.19/h. The timing run of [TASK-294](../../backlog/tasks/task-294%20-%20Epic-3-one-epoch-timing-run-on-RunPod-peak-memory-at-micro-batch-32-in-bf16-step-time-minutes-per-epoch-and-cost-of-the-stretch-recipe-DEC-115-rule-7.md)
 replaces these.
 
 ## Conclusion
 
 Accepted by the user on 2026-11-26:
 [DEC-115](../decisions/DEC-115-epic3-model-balancing-loss-augmentation-precision-length.md) (epic 3
-model and optimisation). Board, milestone m-1: TASK-292 (repeat-factor sampler, method), TASK-293
+model and optimisation). Board, milestone m-1: [TASK-292](../../backlog/tasks/task-292%20-%20Repeat-factor-sampler-for-the-segmentation-trainer-per-sample-weight-max1-sqrtt-f-over-named-state-classes-draws-with-replacement-per-epoch-set-by-the-recipe-factors-and-shares-in-the-run-synthetic-tests-DEC-115-rule-2.md) (repeat-factor sampler, method), [TASK-293](../../backlog/tasks/task-293%20-%20Epic-3-recipes-for-seg_spot_v1-and-RunPod-plans-DINOv3-U-Net-style-decoder-repeat-factor-sampling-bf16-20-epochs-DEC-114-selection-stretch-and-fit-scale-one-epoch-timing-plan-load-test-DEC-115.md)
 (epic 3 recipes, stretch and fit-scale, RunPod plans and the one-epoch timing plan, method; after
 TASK-292, [TASK-286](../../backlog/tasks/task-286%20-%20Epic-3-evaluation-for-seg_spot_v1-top-50-image-score-pixel-scores-with-the-stone-counted-for-its-mass-per-sample-record-validation-AUC-and-Dice-measures-synthetic-tests-DEC-112.md) epic 3 evaluation and [TASK-288](../../backlog/tasks/task-288%20-%20Checkpoint-selection-mode-that-keeps-several-checkpoints-and-removes-the-beaten-ones-weighted-criteria-floors-steps-removal-threshold-veto-near-copy-rule-cap-primary-by-weighted-sum-set-by-the-recipe-synthetic-tests-DEC-113.md) two-group selection mode), TASK-294 (one-epoch timing
 run on RunPod, exp; after TASK-293).
