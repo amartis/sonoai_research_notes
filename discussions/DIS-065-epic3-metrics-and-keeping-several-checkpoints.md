@@ -232,7 +232,7 @@ would be judged on the head's AUC and the drawer group on Dice.
   (top-50 score); a yes needs a new DEC and maybe a new task version (DEC-004, training tasks; not
   checked). Proposed form: a comparison run after the first one-head run, on the same recipe, like
   the sigmoid comparison run of DEC-110 rule 7.
-- Board: TASK-290 (decide whether to try the two-head model). Reopen when the first epic 3 one-head
+- Board: [TASK-290](../../backlog/tasks/task-290%20-%20Decide-whether-to-try-a-two-head-model-for-epic-3-segmentation-plus-an-image-level-classification-head-as-a-comparison-run-after-the-first-one-head-run-DIS-065-idea-A.md) (decide whether to try the two-head model). Reopen when the first epic 3 one-head
   run is done and its false positives on negative images are known.
 
 ### Idea B: box detection plus segmentation
@@ -243,7 +243,7 @@ A detector with a box head and a mask head (as Mask R-CNN): one score and one ou
 - Against: a much larger change (boxes made from outlines, lesion-level measures beside the DEC-112
   measures, a new task form). The repo already has a box detector, FCOS for bmode_det v1
   ([DEC-062](../decisions/DEC-062-bmode-box-detector-bmode-det-v1.md) item 1), as a possible start.
-- Board: TASK-291 (decide whether to try box detection plus segmentation). Reopen when idea A is
+- Board: [TASK-291](../../backlog/tasks/task-291%20-%20Decide-whether-to-try-box-detection-plus-segmentation-one-score-and-one-mask-per-lesion-for-the-epic-3-spot-classes-DIS-065-idea-B.md) (decide whether to try box detection plus segmentation). Reopen when idea A is
   tried, or images with several lesions turn out to matter for the product.
 
 ### HD95, if added for the drawers (open question above)
