@@ -59,7 +59,7 @@ mission.
 
 The user took A ("ok", 2026-11-25):
 [DEC-106](../decisions/DEC-106-references-carry-a-reminder-and-coined-names-pass-a-returning-reader-test.md)
-is accepted. Board task TASK-275 (reference reminders and the returning-reader test written into
+is accepted. Board task [TASK-275](../../backlog/tasks/task-275%20-%20References-carry-a-short-reminder-of-what-they-point-to-coined-names-pass-a-returning-reader-test-DEC-106.md) (reference reminders and the returning-reader test written into
 `CLAUDE.md`, `docs/writing.md`, `docs/glossary/README.md` and the reviewer agent) carries it.
 
 The user also said yes to the two open questions:
