@@ -1,14 +1,16 @@
 ---
 id: DEC-113
 title: Checkpoint selection from epic 3 on - keep several checkpoints and remove the beaten ones by weighted criteria, a removal threshold and a veto; one primary checkpoint named on validation for the bar
-status: accepted
+status: superseded
 area: [training]
 created: 2026-11-26
 from: [DIS-065]
 related: [DEC-006, DEC-045, DEC-076, DEC-100, DEC-112]
-superseded_by:
+superseded_by: DEC-114
 ---
 # DEC-113: Keep several checkpoints, remove the beaten ones
+
+> Superseded on 2026-11-26 by [DEC-114](DEC-114-checkpoint-selection-in-two-groups-assessors-and-drawers.md) (checkpoint selection in two groups, assessors and drawers).
 
 ## Context
 

@@ -69,3 +69,30 @@ Not epic 3 (left as they are): [TASK-065](../../../backlog/tasks/task-065%20-%20
 (projects with no crop row), [TASK-265](../../../backlog/tasks/task-265%20-%20Epic-1-candidate-builder-reads-the-presence-table-by-policy-only-pass-the-configs-index-tag-to-presence_name-DEC-101.md)
 (index tag in the Epic 1 candidate builder), [TASK-266](../../../backlog/tasks/task-266%20-%20derived.md-presence-section-still-says-not-yet-built-for-261023-TASK-124-is-done-give-the-build-date-and-link-the-dataset-record.md)
 (stale line in derived.md; check whether [TASK-274](../../../backlog/tasks/task-274%20-%20Docs-sample-label-index-v2-of-261023-is-built-update-derived.md-and-fact-driven-model.md-TASK-264.md), index v2 docs, already fixed it).
+
+## Update, later on 2026-11-26
+
+After one `/lead` pass (TASK-281 and TASK-282) and the metrics consult
+([DIS-065](../../discussions/DIS-065-epic3-metrics-and-keeping-several-checkpoints.md), epic 3 metrics
+and keeping several checkpoints; concluded). Rows 1 and 2 of Table 3 (next sessions) are done or wait
+only for the user.
+
+| Task | What | Board | Waits for |
+|---|---|---|---|
+| TASK-281 | task seg_spot_v1 (DEC-110, allowed-class sets) | Review; merged to code `master` | the user: Done |
+| TASK-282 | fit-scale resize mode (DEC-109, two resize modes) | Review on its branch; all checks ticked; not merged | the user: merge (method task), then Done |
+| [TASK-285](../../../backlog/tasks/task-285%20-%20Brightness-shift-test-with-fit-scale-reads-level-change-and-input-normalisation-on-the-crop-pixels-only-padding-kept-at-image-0-DEC-109-rule-5.md) | brightness shift test with fit-scale reads | Triage; filed on the TASK-282 branch | `/consult` triage |
+| TASK-284 | decide epic 3 metrics | Done: [DEC-112](../../decisions/DEC-112-epic3-metrics-image-score-stone-scoring-cirrhosis-bar.md) (epic 3 metrics), [DEC-114](../../decisions/DEC-114-checkpoint-selection-in-two-groups-assessors-and-drawers.md) (checkpoint selection in two groups; supersedes [DEC-113](../../decisions/DEC-113-checkpoint-selection-by-removing-beaten-checkpoints.md)) | none |
+| [TASK-286](../../../backlog/tasks/task-286%20-%20Epic-3-evaluation-for-seg_spot_v1-top-50-image-score-pixel-scores-with-the-stone-counted-for-its-mass-per-sample-record-validation-AUC-and-Dice-measures-synthetic-tests-DEC-112.md) | epic 3 evaluation for seg_spot_v1 (DEC-112) | To Do, not ready | TASK-281 Done |
+| [TASK-287](../../../backlog/tasks/task-287%20-%20Epic-3-metrics-report-thresholds-fixed-on-validation-bar-and-cirrhosis-bar-verdicts-group-bootstrap-intervals-per-group-values-negatives-in-four-parts-contested-table-from-per-sample-records-synthetic-tests-DEC-112.md) | epic 3 metrics report (DEC-112) | To Do, not ready | TASK-286 |
+| [TASK-288](../../../backlog/tasks/task-288%20-%20Checkpoint-selection-mode-that-keeps-several-checkpoints-and-removes-the-beaten-ones-weighted-criteria-floors-steps-removal-threshold-veto-near-copy-rule-cap-primary-by-weighted-sum-set-by-the-recipe-synthetic-tests-DEC-113.md) | checkpoint selection mode (DEC-114) | To Do, not ready | TASK-282 (same files) |
+| TASK-283 | sigmoid comparison run (DEC-110 rule 7) | Parked | first softmax results |
+
+Table 4. Epic 3 tasks after the lead pass and the metrics consult. "Not ready" as reported by
+`scripts/ready_tasks.py --why`.
+
+Next, in the order of Table 3: (a) the user moves TASK-281 to Done and merges TASK-282, which makes
+TASK-286 and TASK-288 ready; (b) `/consult` on **model and optimisation** (Table 3 row 3), which can
+start now because the selection criterion (DEC-114) is in; (c) `/lead` on TASK-286 and TASK-288, then
+TASK-287. Open from DIS-065: DEC-114 rule 10 lets the selection steps, floors, veto, threshold and cap
+be set once more after the first run's validation values.

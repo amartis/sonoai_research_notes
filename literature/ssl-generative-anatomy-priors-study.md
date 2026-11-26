@@ -447,7 +447,7 @@ Table 5. A reading order for the user, books first. Chapters checked in the PDFs
 PDFs: [ssl-generative-anatomy-priors-papers/](ssl-generative-anatomy-priors-papers/README.md),
 file names start with the reference number. All papers are arXiv versions (version as saved);
 a venue is given only where the PDF's first pages print it. Title and version of every file
-were checked against its first page on 2026-11-24.
+were checked against its first page on 2026-11-24. Citation counts of every reference: Appendix A.
 
 Self-distillation and DINO for medical images
 
@@ -601,3 +601,116 @@ Books (free PDFs from their authors)
 - B4. Murphy KP. *Probabilistic Machine Learning: Advanced Topics*. MIT Press; PDF release
   2025-dec-10 ([probml/pml2-book](https://github.com/probml/pml2-book/releases/tag/2025-dec-10)),
   1,370 pages, CC BY-NC-ND. [PDF](files/ssl-generative-anatomy-priors-papers/books/B4-murphy-2025-pml2-advanced-topics.pdf)
+
+## Appendix A. Citation counts of the references
+
+Added 2026-11-26 at the user's request, as one indicator of how widely each paper is used.
+Counts were read on 2026-11-26 from two free bibliographic databases:
+
+- **Semantic Scholar** (Allen Institute for AI), looked up by arXiv ID through its batch API
+  (`api.semanticscholar.org/graph/v1/paper/batch`). All 59 papers and books B1 and B2 matched,
+  and each returned title was checked against the reference title. This is the main column.
+- **OpenAlex** (OurResearch), looked up by DOI (the published DOI where Semantic Scholar gave
+  one, else the arXiv DOI), and by exact title where the DOI did not match. It is a second
+  opinion only: OpenAlex sometimes keeps the arXiv and the published version as two records, so
+  a count can cover one version only. "Not matched" means no record with the same title was
+  found (for DINOv3 [56] the title search found only a record with 0 citations, taken as a stray
+  duplicate).
+
+Google Scholar, the source of the familiar "Cited by" number, was not queried: it has no API and
+blocks automated reading. Its counts are usually higher than both databases above (it also
+counts theses, slides and preprint versions); how much higher was not checked here.
+
+How to read the counts (the grouping below is mine, made for this appendix):
+
+- **Age matters.** A paper three months old has had no time to be cited, so a low count is not
+  a negative verdict. The per-year column divides by the age; it is left out under one year.
+- **Field matters.** Medical-imaging papers are cited far less than general vision and machine
+  learning papers. Median Semantic Scholar count: 40.5 for the 36 medical-imaging papers versus
+  1,605 for the 23 general papers.
+- **A citation is not an approval.** It counts use and mention, including criticism. The
+  "highly influential citations" column (Semantic Scholar's own measure of citing papers that use
+  the work substantially, not only mention it; its method was not checked here) is a closer, but
+  still rough, sign of uptake.
+- **Peer review** is a separate sign. The last column is the venue Semantic Scholar lists; it
+  can lag or miss a venue (iBOT [02] is listed with none, but its PDF prints ICLR 2022). The
+  reference list above gives the venue printed in the saved PDF.
+
+Over the 59 papers (Semantic Scholar): median 145 citations (range 0 to 15,791); 5 papers have
+10,000 or more (DINO [01], DINOv2 [03], MAE [11], MAML [49], prototypical networks [50]);
+32 have 100 or more; 7 have fewer than 10, and all 7 are under 4 years old (6 under 2 years).
+The papers that Table 5 (Section 7, reading order) names as the main evidence for the
+candidate changes C7 to C10 (changes to recipe R4, Section 6) are mostly below that median:
+HALOS [32] 7, UltraDINO [57] 19, MedDINOv3 [05] 43, Post-DAE [25] 91, against SAML [60] 300 and
+Painchaud et al. [26] 145. Their support rests on the reported results more than on wide uptake.
+
+Table 6. Citation counts of every reference, in reference-number order (ref 36 is not used),
+read on 2026-11-26. Age is from the month of the first arXiv version (from the arXiv ID).
+"Cited by per year" is the Semantic Scholar count divided by the age, rounded. Sources and
+caveats are in the text above.
+
+| Ref | Paper | First arXiv version, year | Age on 2026-11-26, years | Cited by, Semantic Scholar | Highly influential citations, Semantic Scholar | Cited by per year, Semantic Scholar | Cited by, OpenAlex | Venue listed by Semantic Scholar |
+|---|---|---|---|---|---|---|---|---|
+| 01 | DINO | 2021 | 5.6 | 11,188 | 1,808 | 2,004 | 12,538 | IEEE International Conference on Computer Vision |
+| 02 | iBOT | 2021 | 5.0 | 1,310 | 160 | 262 | 1,441 | none listed |
+| 03 | DINOv2 | 2023 | 3.6 | 12,602 | 1,773 | 3,517 | 14,347 | Trans. Mach. Learn. Res. |
+| 04 | RAD-DINO | 2024 | 2.8 | 239 | 18 | 84 | 298 | Nature Machine Intelligence |
+| 05 | MedDINOv3 | 2025 | 1.2 | 43 | 7 | 37 | 57 | none listed |
+| 06 | DINOv3 medical benchmark | 2025 | 1.2 | 16 | 0 | 14 | 59 | none listed |
+| 07 | SegDINO | 2025 | 1.2 | 50 | 9 | 43 | 74 | none listed |
+| 08 | Dino U-Net | 2025 | 1.2 | 27 | 4 | 22 | 29 | International Conference on Medical Image Computing and Computer-Assisted Intervention |
+| 09 | DINO-AugSeg | 2026 | 0.8 | 10 | 2 | n/a (under 1 year) | 7 | Machine Learning: Science and Technology |
+| 10 | DINO-Med3D | 2026 | 0.4 | 0 | 0 | n/a (under 1 year) | 0 | International Conference on Medical Image Computing and Computer-Assisted Intervention |
+| 11 | MAE | 2021 | 5.0 | 13,861 | 2,209 | 2,772 | 16,521 | Computer Vision and Pattern Recognition |
+| 12 | SimMIM | 2021 | 5.0 | 2,021 | 277 | 404 | 2,336 | Computer Vision and Pattern Recognition |
+| 13 | ConvNeXt V2 | 2023 | 3.8 | 2,306 | 186 | 602 | 3,131 | Computer Vision and Pattern Recognition |
+| 14 | SparK | 2023 | 3.8 | 167 | 26 | 44 | 178 | International Conference on Learning Representations |
+| 15 | Deblurring MAE (ultrasound) | 2023 | 3.4 | 23 | 3 | 7 | 34 | International Conference on Medical Image Computing and Computer-Assisted Intervention |
+| 16 | I-JEPA | 2023 | 3.8 | 1,703 | 207 | 444 | 2,062 | Computer Vision and Pattern Recognition |
+| 17 | V-JEPA 2 | 2025 | 1.4 | 1,219 | 174 | 860 | 1,372 | none listed |
+| 18 | V-JEPA 2.1 | 2026 | 0.7 | 211 | 81 | n/a (under 1 year) | 219 | European Conference on Computer Vision |
+| 19 | LeJEPA | 2025 | 1.0 | 385 | 85 | 385 | 437 | none listed |
+| 20 | Adam | 2023 | 3.2 | 22 | 0 | 7 | 33 | DART@MICCAI |
+| 21 | Adam-v2 | 2024 | 2.6 | 20 | 1 | 8 | 29 | Computer Vision and Pattern Recognition |
+| 22 | PEAC | 2023 | 2.9 | 17 | 0 | 6 | 20 | British Machine Vision Conference |
+| 23 | Alice | 2023 | 3.8 | 45 | 4 | 12 | 52 | IEEE International Conference on Computer Vision |
+| 24 | ACNN | 2017 | 9.5 | 752 | 41 | 79 | 853 | IEEE Transactions on Medical Imaging |
+| 25 | Post-DAE | 2020 | 6.4 | 91 | 11 | 14 | 101 | IEEE Transactions on Medical Imaging |
+| 26 | Painchaud et al. (cardiac guarantees) | 2020 | 6.4 | 145 | 10 | 23 | 195 | IEEE Transactions on Medical Imaging |
+| 27 | HybridGNet | 2022 | 4.7 | 75 | 3 | 16 | 98 | IEEE Transactions on Medical Imaging |
+| 28 | Mask-HybridGNet | 2026 | 0.8 | 1 | 0 | n/a (under 1 year) | 1 | none listed |
+| 29 | Topological interaction | 2022 | 4.3 | 64 | 6 | 15 | 76 | European Conference on Computer Vision |
+| 30 | Constrained-CNN losses | 2018 | 8.5 | 286 | 18 | 34 | 342 | Medical Image Anal. |
+| 31 | Shape-constraint survey | 2021 | 5.8 | 79 | 0 | 14 | 96 | IEEE Reviews in Biomedical Engineering |
+| 32 | HALOS | 2023 | 3.7 | 7 | 1 | 2 | 10 | Information Processing in Medical Imaging |
+| 33 | RAOS | 2024 | 2.4 | 34 | 1 | 14 | 46 | International Conference on Medical Image Computing and Computer-Assisted Intervention |
+| 34 | Textual anatomical knowledge | 2025 | 1.8 | 1 | 0 | 1 | 4 | none listed |
+| 35 | Prior-aware pseudo-labelling (ultrasound) | 2025 | 1.7 | 9 | 1 | 5 | 13 | International Conference on Medical Image Computing and Computer-Assisted Intervention |
+| 37 | Probabilistic U-Net | 2018 | 8.4 | 808 | 105 | 96 | 846 | Neural Information Processing Systems |
+| 38 | MedSegDiff | 2022 | 4.0 | 528 | 39 | 132 | 558 | International Conference on Medical Imaging with Deep Learning |
+| 39 | Ambiguous segmentation with diffusion | 2023 | 3.6 | 236 | 11 | 66 | 346 | Computer Vision and Pattern Recognition |
+| 40 | DDPM segmentation | 2021 | 4.9 | 763 | 56 | 155 | 835 | International Conference on Learning Representations |
+| 41 | Deconstructing diffusion for SSL | 2024 | 2.8 | 138 | 12 | 49 | 174 | International Conference on Learning Representations |
+| 42 | Diffusion QA of organ-at-risk masks | 2026 | 0.2 | 0 | 0 | n/a (under 1 year) | 0 | none listed |
+| 43 | Diffusion anatomical feature learning | 2026 | 0.2 | 0 | 0 | n/a (under 1 year) | 0 | none listed |
+| 44 | REPA | 2024 | 2.1 | 907 | 188 | 435 | 932 | International Conference on Learning Representations |
+| 45 | RAE | 2025 | 1.1 | 387 | 74 | 357 | not matched | International Conference on Learning Representations |
+| 46 | ControlNet | 2023 | 3.8 | 8,406 | 1,176 | 2,242 | 10,874 | IEEE International Conference on Computer Vision |
+| 47 | Echo from noise | 2023 | 3.5 | 69 | 7 | 20 | 87 | ASMUS@MICCAI |
+| 48 | Segmentation-guided diffusion | 2024 | 2.8 | 123 | 10 | 45 | 160 | International Conference on Medical Image Computing and Computer-Assisted Intervention |
+| 49 | MAML | 2017 | 9.7 | 15,791 | 2,818 | 1,634 | 15,595 | International Conference on Machine Learning |
+| 50 | Prototypical networks | 2017 | 9.7 | 11,239 | 2,043 | 1,163 | 8,762 | Neural Information Processing Systems |
+| 51 | PANet | 2019 | 7.2 | 1,605 | 247 | 221 | 2,021 | IEEE International Conference on Computer Vision |
+| 52 | SSL-ALPNet | 2020 | 6.3 | 312 | 76 | 49 | 386 | European Conference on Computer Vision |
+| 53 | UniverSeg | 2023 | 3.6 | 220 | 29 | 61 | 387 | IEEE International Conference on Computer Vision |
+| 54 | Tyche | 2024 | 2.8 | 38 | 3 | 13 | 55 | Computer Vision and Pattern Recognition |
+| 55 | RbA | 2022 | 4.0 | 94 | 27 | 24 | 116 | IEEE International Conference on Computer Vision |
+| 56 | DINOv3 | 2025 | 1.2 | 2,102 | 377 | 1,682 | not matched | none listed |
+| 57 | UltraDINO | 2025 | 1.4 | 19 | 1 | 13 | 21 | International Conference on Medical Image Computing and Computer-Assisted Intervention |
+| 58 | USF-MAE | 2025 | 1.1 | 21 | 2 | 19 | 11 | none listed |
+| 59 | MLDG | 2017 | 9.1 | 1,886 | 190 | 208 | 1,878 | AAAI Conference on Artificial Intelligence |
+| 60 | SAML | 2020 | 6.3 | 300 | 33 | 47 | 369 | International Conference on Medical Image Computing and Computer-Assisted Intervention |
+| B1 | Geometric Deep Learning (book) | 2021 | 5.6 | 1,893 | 108 | 339 | 2,683 | none listed |
+| B2 | The Principles of Diffusion Models (book) | 2025 | 1.1 | 104 | 4 | 96 | not matched | none listed |
+| B3 | Understanding Deep Learning (book) | 2023 (MIT Press, from the reference) | 3.0 | not found | not found | n/a | not found | MIT Press (from the reference) |
+| B4 | Probabilistic Machine Learning: Advanced Topics (book) | not stated in the reference | n/a | not found | not found | n/a | not found | MIT Press (from the reference) |
