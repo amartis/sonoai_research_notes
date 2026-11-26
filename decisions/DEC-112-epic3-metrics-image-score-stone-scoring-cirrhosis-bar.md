@@ -79,3 +79,4 @@ Accepted by the user on 2026-11-26.
   {`hepatic_stone`} there).
 - Reversal: before the first run, low; after, re-score the stored per-sample records (cheap), except
   rule 1's values, which need inference again if changed.
+- Code: [TASK-286](../../backlog/tasks/task-286%20-%20Epic-3-evaluation-for-seg_spot_v1-top-50-image-score-pixel-scores-with-the-stone-counted-for-its-mass-per-sample-record-validation-AUC-and-Dice-measures-synthetic-tests-DEC-112.md) (epic 3 evaluation for seg_spot_v1, method; rules 1 to 3, 9, 10) and [TASK-287](../../backlog/tasks/task-287%20-%20Epic-3-metrics-report-thresholds-fixed-on-validation-bar-and-cirrhosis-bar-verdicts-group-bootstrap-intervals-per-group-values-negatives-in-four-parts-contested-table-from-per-sample-records-synthetic-tests-DEC-112.md) (epic 3 metrics report, method; rules 4 to 8).

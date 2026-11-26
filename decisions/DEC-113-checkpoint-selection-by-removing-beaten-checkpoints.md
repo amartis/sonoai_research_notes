@@ -56,3 +56,4 @@ Accepted by the user on 2026-11-26, with the five changes of DIS-065 Table 2.
 - The order of epochs can change the survivors (rule 7).
 - Reversal: survivors are chosen from stored per-epoch measures, so a changed rule can be re-run on
   past measures; deleted weights cannot be recovered.
+- Code: [TASK-288](../../backlog/tasks/task-288%20-%20Checkpoint-selection-mode-that-keeps-several-checkpoints-and-removes-the-beaten-ones-weighted-criteria-floors-steps-removal-threshold-veto-near-copy-rule-cap-primary-by-weighted-sum-set-by-the-recipe-synthetic-tests-DEC-113.md) (selection mode that removes beaten checkpoints, method).
