@@ -1,7 +1,7 @@
 ---
 id: DIS-061
 title: Reminders for references - when a pointer to a record, a numbered point, a list label or a term needs a few words of what it is, and coined names a returning reader can read
-status: open
+status: concluded
 created: 2026-11-25
 outcomes: [DEC-106]
 related: [DIS-053, DEC-095, DEC-021, DEC-073, DIS-035]
@@ -57,14 +57,20 @@ mission.
 
 ## Conclusion
 
-Proposed: A, as [DEC-106](../decisions/DEC-106-references-carry-a-reminder-and-coined-names-pass-a-returning-reader-test.md)
-(proposed until the user agrees). Existing text keeps its words; the board task that writes the
-rules into `CLAUDE.md`, `docs/writing.md`, `docs/glossary/README.md` and the reviewer agent is
-created in this session and waits for the user's "ok" on DEC-106.
+The user took A ("ok", 2026-11-25):
+[DEC-106](../decisions/DEC-106-references-carry-a-reminder-and-coined-names-pass-a-returning-reader-test.md)
+is accepted. Board task TASK-275 (reference reminders and the returning-reader test written into
+`CLAUDE.md`, `docs/writing.md`, `docs/glossary/README.md` and the reviewer agent) carries it.
+
+The user also said yes to the two open questions:
+
+- the reminder rule goes into the user-level `~/.claude/CLAUDE.md` as well (2 lines, done in
+  this session), so it applies in the user's other projects;
+- TASK-275 also fixes the passage of the second example in
+  `literature/ssl-generative-anatomy-priors-study.md` (the study of self-supervised and
+  generative anatomy priors). This is a one-off exception to DEC-106 rule 10 (existing text
+  keeps its words); no other older text is rewritten.
 
 ## Open questions
 
-- Should the rule also go into the user-level `~/.claude/CLAUDE.md`, so that it applies in the
-  user's other projects?
-- Should the study document of the second example (`literature/ssl-generative-anatomy-priors-study.md`)
-  be fixed now, as the first text written under the rule?
+None.

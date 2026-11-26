@@ -1,7 +1,7 @@
 ---
 id: DEC-106
 title: Every reference to something defined elsewhere carries a short reminder of what it is, at its first use in a text and again after 5 sentences without it; numbered points get short names; coined names pass a returning-reader test (amends DEC-021, DEC-073, DEC-095)
-status: proposed
+status: accepted
 area: [workflow]
 created: 2026-11-25
 from: [DIS-061]
