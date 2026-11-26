@@ -3,8 +3,7 @@
 Local copies of the papers cited in
 [epic1-anatomy-segmentation-models-and-papers.md](../epic1-anatomy-segmentation-models-and-papers.md).
 Each file name starts with the reference number used there. Downloaded on 2026-11-18 on
-machine01. The PDFs are kept out of git (`.gitignore` in this folder); only this index is
-tracked.
+machine01. The files are kept out of git, in the shared literature folder ([DEC-107](../../decisions/DEC-107-literature-files-in-one-shared-folder.md)), and are reached through the ignored link `research_notes/literature/files`: they are in `files/epic1-anatomy-segmentation-papers/` (set up with `scripts/link_literature.py`, [onboarding](../../../docs/onboarding.md)). Only this index is tracked.
 
 Table 1. Saved PDFs by reference number, with the version saved and its source.
 

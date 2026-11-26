@@ -3,8 +3,7 @@
 Local copies of the papers and books cited in
 [ssl-generative-anatomy-priors-study.md](../ssl-generative-anatomy-priors-study.md). Each file name
 starts with the reference number used there (no reference 36). Downloaded on 2026-11-24 on
-machine01: papers from arXiv, books from arXiv or the authors' GitHub releases. The PDFs are kept
-out of git (`.gitignore` in this folder); only this index is tracked. Title and version of every
+machine01: papers from arXiv, books from arXiv or the authors' GitHub releases. The files are kept out of git, in the shared literature folder ([DEC-107](../../decisions/DEC-107-literature-files-in-one-shared-folder.md)), and are reached through the ignored link `research_notes/literature/files`: they are in `files/ssl-generative-anatomy-priors-papers/` (set up with `scripts/link_literature.py`, [onboarding](../../../docs/onboarding.md)). Only this index is tracked. Title and version of every
 file were checked against its first page.
 
 Table 1. Saved files by reference number, with page count and source.

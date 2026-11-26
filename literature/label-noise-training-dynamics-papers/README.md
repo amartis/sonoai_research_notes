@@ -3,8 +3,7 @@
 Local copies of the papers cited in the journal entry
 [2026-11-24-label-noise-heatmap-claude.md](../../journal/2026/2026-11-24-label-noise-heatmap-claude.md)
 (per-sample, per-epoch heatmap to check suspected label errors). Each file name starts with
-the reference number used there. Downloaded from arXiv on 2026-11-24 on machine01. The PDFs
-are kept out of git (`.gitignore` in this folder); only this index is tracked.
+the reference number used there. Downloaded from arXiv on 2026-11-24 on machine01. The files are kept out of git, in the shared literature folder ([DEC-107](../../decisions/DEC-107-literature-files-in-one-shared-folder.md)), and are reached through the ignored link `research_notes/literature/files`: they are in `files/label-noise-training-dynamics-papers/` (set up with `scripts/link_literature.py`, [onboarding](../../../docs/onboarding.md)). Only this index is tracked.
 
 Table 1. Saved PDFs by reference number, with the version saved and its source.
 

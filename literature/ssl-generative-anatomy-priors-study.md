@@ -452,152 +452,152 @@ were checked against its first page on 2026-11-24.
 Self-distillation and DINO for medical images
 
 1. Caron M, et al. Emerging properties in self-supervised vision transformers (DINO).
-   [arXiv:2104.14294](https://arxiv.org/abs/2104.14294) v2. [PDF](ssl-generative-anatomy-priors-papers/01-caron-2021-dino.pdf)
+   [arXiv:2104.14294](https://arxiv.org/abs/2104.14294) v2. [PDF](files/ssl-generative-anatomy-priors-papers/01-caron-2021-dino.pdf)
 2. Zhou J, et al. iBOT: image BERT pre-training with online tokenizer. ICLR 2022.
-   [arXiv:2111.07832](https://arxiv.org/abs/2111.07832) v3. [PDF](ssl-generative-anatomy-priors-papers/02-zhou-2022-ibot.pdf)
+   [arXiv:2111.07832](https://arxiv.org/abs/2111.07832) v3. [PDF](files/ssl-generative-anatomy-priors-papers/02-zhou-2022-ibot.pdf)
 3. Oquab M, et al. DINOv2: learning robust visual features without supervision. TMLR 2024.
-   [arXiv:2304.07193](https://arxiv.org/abs/2304.07193) v2. [PDF](ssl-generative-anatomy-priors-papers/03-oquab-2024-dinov2.pdf)
+   [arXiv:2304.07193](https://arxiv.org/abs/2304.07193) v2. [PDF](files/ssl-generative-anatomy-priors-papers/03-oquab-2024-dinov2.pdf)
 4. Pérez-García F, et al. Exploring scalable medical image encoders beyond text supervision
-   (RAD-DINO). [arXiv:2401.10815](https://arxiv.org/abs/2401.10815) v3. [PDF](ssl-generative-anatomy-priors-papers/04-perez-garcia-2025-rad-dino.pdf)
+   (RAD-DINO). [arXiv:2401.10815](https://arxiv.org/abs/2401.10815) v3. [PDF](files/ssl-generative-anatomy-priors-papers/04-perez-garcia-2025-rad-dino.pdf)
 5. Li Y, et al. MedDINOv3: how to adapt vision foundation models for medical image segmentation?
-   [arXiv:2509.02379](https://arxiv.org/abs/2509.02379) v3. [PDF](ssl-generative-anatomy-priors-papers/05-li-2025-meddinov3.pdf)
+   [arXiv:2509.02379](https://arxiv.org/abs/2509.02379) v3. [PDF](files/ssl-generative-anatomy-priors-papers/05-li-2025-meddinov3.pdf)
 6. Liu C, et al. Does DINOv3 set a new medical vision standard? Benchmarking 2D and 3D
-   classification, segmentation, and registration. [arXiv:2509.06467](https://arxiv.org/abs/2509.06467) v3. [PDF](ssl-generative-anatomy-priors-papers/06-liu-2025-dinov3-medical-benchmark.pdf)
+   classification, segmentation, and registration. [arXiv:2509.06467](https://arxiv.org/abs/2509.06467) v3. [PDF](files/ssl-generative-anatomy-priors-papers/06-liu-2025-dinov3-medical-benchmark.pdf)
 7. Yang S, et al. SegDINO: an efficient design for medical and natural image segmentation with
-   DINO-V3. [arXiv:2509.00833](https://arxiv.org/abs/2509.00833) v1. [PDF](ssl-generative-anatomy-priors-papers/07-yang-2025-segdino.pdf)
+   DINO-V3. [arXiv:2509.00833](https://arxiv.org/abs/2509.00833) v1. [PDF](files/ssl-generative-anatomy-priors-papers/07-yang-2025-segdino.pdf)
 8. Li H, Gao Y, et al. Dino U-Net: exploiting high-fidelity dense features from foundation
-   models for medical image segmentation. [arXiv:2508.20909](https://arxiv.org/abs/2508.20909) v2. [PDF](ssl-generative-anatomy-priors-papers/08-li-2025-dino-unet.pdf)
+   models for medical image segmentation. [arXiv:2508.20909](https://arxiv.org/abs/2508.20909) v2. [PDF](files/ssl-generative-anatomy-priors-papers/08-li-2025-dino-unet.pdf)
 9. Xu G, et al. Exploiting DINOv3-based self-supervised features for robust few-shot medical
-   image segmentation (DINO-AugSeg). [arXiv:2601.08078](https://arxiv.org/abs/2601.08078). [PDF](ssl-generative-anatomy-priors-papers/09-xu-2026-dino-augseg.pdf)
+   image segmentation (DINO-AugSeg). [arXiv:2601.08078](https://arxiv.org/abs/2601.08078). [PDF](files/ssl-generative-anatomy-priors-papers/09-xu-2026-dino-augseg.pdf)
 10. Hu H, et al. DINO-Med3D: bridging dimension and domain gaps in volumetric segmentation via
-    progressive adaptation. MICCAI 2026. [arXiv:2606.18886](https://arxiv.org/abs/2606.18886) v1. [PDF](ssl-generative-anatomy-priors-papers/10-hu-2026-dino-med3d.pdf)
-56. Siméoni O, et al. DINOv3. [arXiv:2508.10104](https://arxiv.org/abs/2508.10104) v1. [PDF](ssl-generative-anatomy-priors-papers/56-simeoni-2025-dinov3.pdf)
+    progressive adaptation. MICCAI 2026. [arXiv:2606.18886](https://arxiv.org/abs/2606.18886) v1. [PDF](files/ssl-generative-anatomy-priors-papers/10-hu-2026-dino-med3d.pdf)
+56. Siméoni O, et al. DINOv3. [arXiv:2508.10104](https://arxiv.org/abs/2508.10104) v1. [PDF](files/ssl-generative-anatomy-priors-papers/56-simeoni-2025-dinov3.pdf)
 57. Ambsdorf J, et al. General methods make great domain-specific foundation models: a
-    case-study on fetal ultrasound (UltraDINO). [arXiv:2506.19552](https://arxiv.org/abs/2506.19552) v1. [PDF](ssl-generative-anatomy-priors-papers/57-ambsdorf-2025-ultradino.pdf)
+    case-study on fetal ultrasound (UltraDINO). [arXiv:2506.19552](https://arxiv.org/abs/2506.19552) v1. [PDF](files/ssl-generative-anatomy-priors-papers/57-ambsdorf-2025-ultradino.pdf)
 
 Masked image modelling
 
-11. He K, et al. Masked autoencoders are scalable vision learners. [arXiv:2111.06377](https://arxiv.org/abs/2111.06377) v3. [PDF](ssl-generative-anatomy-priors-papers/11-he-2022-mae.pdf)
-12. Xie Z, et al. SimMIM: a simple framework for masked image modeling. [arXiv:2111.09886](https://arxiv.org/abs/2111.09886). [PDF](ssl-generative-anatomy-priors-papers/12-xie-2022-simmim.pdf)
+11. He K, et al. Masked autoencoders are scalable vision learners. [arXiv:2111.06377](https://arxiv.org/abs/2111.06377) v3. [PDF](files/ssl-generative-anatomy-priors-papers/11-he-2022-mae.pdf)
+12. Xie Z, et al. SimMIM: a simple framework for masked image modeling. [arXiv:2111.09886](https://arxiv.org/abs/2111.09886). [PDF](files/ssl-generative-anatomy-priors-papers/12-xie-2022-simmim.pdf)
 13. Woo S, et al. ConvNeXt V2: co-designing and scaling ConvNets with masked autoencoders.
-    [arXiv:2301.00808](https://arxiv.org/abs/2301.00808) v1. [PDF](ssl-generative-anatomy-priors-papers/13-woo-2023-convnext-v2.pdf)
+    [arXiv:2301.00808](https://arxiv.org/abs/2301.00808) v1. [PDF](files/ssl-generative-anatomy-priors-papers/13-woo-2023-convnext-v2.pdf)
 14. Tian K, et al. Designing BERT for convolutional networks: sparse and hierarchical masked
-    modeling (SparK). ICLR 2023 submission version. [arXiv:2301.03580](https://arxiv.org/abs/2301.03580) v2. [PDF](ssl-generative-anatomy-priors-papers/14-tian-2023-spark.pdf)
+    modeling (SparK). ICLR 2023 submission version. [arXiv:2301.03580](https://arxiv.org/abs/2301.03580) v2. [PDF](files/ssl-generative-anatomy-priors-papers/14-tian-2023-spark.pdf)
 15. Kang Q, et al. Deblurring masked autoencoder is better recipe for ultrasound image
-    recognition. [arXiv:2306.08249](https://arxiv.org/abs/2306.08249) v3. [PDF](ssl-generative-anatomy-priors-papers/15-kang-2023-deblurring-mae-ultrasound.pdf)
+    recognition. [arXiv:2306.08249](https://arxiv.org/abs/2306.08249) v3. [PDF](files/ssl-generative-anatomy-priors-papers/15-kang-2023-deblurring-mae-ultrasound.pdf)
 58. Megahed Y, et al. USF-MAE: ultrasound self-supervised foundation model with masked
-    autoencoding. [arXiv:2510.22990](https://arxiv.org/abs/2510.22990) v2. [PDF](ssl-generative-anatomy-priors-papers/58-megahed-2025-usf-mae.pdf)
+    autoencoding. [arXiv:2510.22990](https://arxiv.org/abs/2510.22990) v2. [PDF](files/ssl-generative-anatomy-priors-papers/58-megahed-2025-usf-mae.pdf)
 
 Latent prediction
 
 16. Assran M, et al. Self-supervised learning from images with a joint-embedding predictive
-    architecture (I-JEPA). [arXiv:2301.08243](https://arxiv.org/abs/2301.08243) v3. [PDF](ssl-generative-anatomy-priors-papers/16-assran-2023-i-jepa.pdf)
+    architecture (I-JEPA). [arXiv:2301.08243](https://arxiv.org/abs/2301.08243) v3. [PDF](files/ssl-generative-anatomy-priors-papers/16-assran-2023-i-jepa.pdf)
 17. Assran M, et al. V-JEPA 2: self-supervised video models enable understanding, prediction and
-    planning. [arXiv:2506.09985](https://arxiv.org/abs/2506.09985) v1. [PDF](ssl-generative-anatomy-priors-papers/17-assran-2025-v-jepa-2.pdf)
+    planning. [arXiv:2506.09985](https://arxiv.org/abs/2506.09985) v1. [PDF](files/ssl-generative-anatomy-priors-papers/17-assran-2025-v-jepa-2.pdf)
 18. Mur-Labadia L, et al. V-JEPA 2.1: unlocking dense features in video self-supervised learning.
-    [arXiv:2603.14482](https://arxiv.org/abs/2603.14482) v3. [PDF](ssl-generative-anatomy-priors-papers/18-mur-labadia-2026-v-jepa-2-1.pdf)
+    [arXiv:2603.14482](https://arxiv.org/abs/2603.14482) v3. [PDF](files/ssl-generative-anatomy-priors-papers/18-mur-labadia-2026-v-jepa-2-1.pdf)
 19. Balestriero R, LeCun Y. LeJEPA: provable and scalable self-supervised learning without the
-    heuristics. [arXiv:2511.08544](https://arxiv.org/abs/2511.08544) v3. [PDF](ssl-generative-anatomy-priors-papers/19-balestriero-2025-lejepa.pdf)
+    heuristics. [arXiv:2511.08544](https://arxiv.org/abs/2511.08544) v3. [PDF](files/ssl-generative-anatomy-priors-papers/19-balestriero-2025-lejepa.pdf)
 
 Anatomy-aware SSL
 
 20. Hosseinzadeh Taher MR, et al. Towards foundation models learned from anatomy in medical
-    imaging via self-supervision (Adam). [arXiv:2309.15358](https://arxiv.org/abs/2309.15358) v1. [PDF](ssl-generative-anatomy-priors-papers/20-hosseinzadeh-2023-adam.pdf)
+    imaging via self-supervision (Adam). [arXiv:2309.15358](https://arxiv.org/abs/2309.15358) v1. [PDF](files/ssl-generative-anatomy-priors-papers/20-hosseinzadeh-2023-adam.pdf)
 21. Hosseinzadeh Taher MR, Gotway MB, Liang J. Representing part-whole hierarchies in foundation
     models by learning localizability, composability, and decomposability from anatomy via
-    self-supervision (Adam-v2). CVPR 2024. [arXiv:2404.15672](https://arxiv.org/abs/2404.15672) v1. [PDF](ssl-generative-anatomy-priors-papers/21-hosseinzadeh-2024-adam-v2.pdf)
+    self-supervision (Adam-v2). CVPR 2024. [arXiv:2404.15672](https://arxiv.org/abs/2404.15672) v1. [PDF](files/ssl-generative-anatomy-priors-papers/21-hosseinzadeh-2024-adam-v2.pdf)
 22. Zhou Z, et al. Learning anatomically consistent embedding for chest radiography (PEAC).
-    [arXiv:2312.00335](https://arxiv.org/abs/2312.00335) v2. [PDF](ssl-generative-anatomy-priors-papers/22-zhou-2023-peac.pdf)
+    [arXiv:2312.00335](https://arxiv.org/abs/2312.00335) v2. [PDF](files/ssl-generative-anatomy-priors-papers/22-zhou-2023-peac.pdf)
 23. Jiang Y, et al. Anatomical invariance modeling and semantic alignment for self-supervised
-    learning in 3D medical image analysis (Alice). [arXiv:2302.05615](https://arxiv.org/abs/2302.05615) v3. [PDF](ssl-generative-anatomy-priors-papers/23-jiang-2023-alice.pdf)
+    learning in 3D medical image analysis (Alice). [arXiv:2302.05615](https://arxiv.org/abs/2302.05615) v3. [PDF](files/ssl-generative-anatomy-priors-papers/23-jiang-2023-alice.pdf)
 
 Shape, relation and size priors; hallucination
 
 24. Oktay O, et al. Anatomically constrained neural networks (ACNN): application to cardiac image
-    enhancement and segmentation. IEEE Trans Med Imaging. [arXiv:1705.08302](https://arxiv.org/abs/1705.08302) v4. [PDF](ssl-generative-anatomy-priors-papers/24-oktay-2018-acnn.pdf)
+    enhancement and segmentation. IEEE Trans Med Imaging. [arXiv:1705.08302](https://arxiv.org/abs/1705.08302) v4. [PDF](files/ssl-generative-anatomy-priors-papers/24-oktay-2018-acnn.pdf)
 25. Larrazabal AJ, Martínez C, Glocker B, Ferrante E. Post-DAE: anatomically plausible
     segmentation via post-processing with denoising autoencoders. IEEE Trans Med Imaging.
-    [arXiv:2006.13791](https://arxiv.org/abs/2006.13791) v1. [PDF](ssl-generative-anatomy-priors-papers/25-larrazabal-2020-post-dae.pdf)
+    [arXiv:2006.13791](https://arxiv.org/abs/2006.13791) v1. [PDF](files/ssl-generative-anatomy-priors-papers/25-larrazabal-2020-post-dae.pdf)
 26. Painchaud N, et al. Cardiac segmentation with strong anatomical guarantees. IEEE Trans Med
-    Imaging 2020. [arXiv:2006.08825](https://arxiv.org/abs/2006.08825) v1. [PDF](ssl-generative-anatomy-priors-papers/26-painchaud-2020-cardiac-anatomical-guarantees.pdf)
+    Imaging 2020. [arXiv:2006.08825](https://arxiv.org/abs/2006.08825) v1. [PDF](files/ssl-generative-anatomy-priors-papers/26-painchaud-2020-cardiac-anatomical-guarantees.pdf)
 27. Gaggion N, Mansilla L, Mosquera C, Milone DH, Ferrante E. Improving anatomical plausibility
     in medical image segmentation via hybrid graph neural networks: applications to chest x-ray
-    analysis (HybridGNet). IEEE Trans Med Imaging. [arXiv:2203.10977](https://arxiv.org/abs/2203.10977) v3. [PDF](ssl-generative-anatomy-priors-papers/27-gaggion-2023-hybridgnet.pdf)
+    analysis (HybridGNet). IEEE Trans Med Imaging. [arXiv:2203.10977](https://arxiv.org/abs/2203.10977) v3. [PDF](files/ssl-generative-anatomy-priors-papers/27-gaggion-2023-hybridgnet.pdf)
 28. Gaggion N, et al. Mask-HybridGNet: graph-based segmentation with emergent anatomical
-    correspondence from pixel-level supervision. [arXiv:2602.21179](https://arxiv.org/abs/2602.21179) v1. [PDF](ssl-generative-anatomy-priors-papers/28-gaggion-2026-mask-hybridgnet.pdf)
+    correspondence from pixel-level supervision. [arXiv:2602.21179](https://arxiv.org/abs/2602.21179) v1. [PDF](files/ssl-generative-anatomy-priors-papers/28-gaggion-2026-mask-hybridgnet.pdf)
 29. Gupta S, et al. Learning topological interactions for multi-class medical image
-    segmentation. [arXiv:2207.09654](https://arxiv.org/abs/2207.09654) v1. [PDF](ssl-generative-anatomy-priors-papers/29-gupta-2022-topological-interaction.pdf)
+    segmentation. [arXiv:2207.09654](https://arxiv.org/abs/2207.09654) v1. [PDF](files/ssl-generative-anatomy-priors-papers/29-gupta-2022-topological-interaction.pdf)
 30. Kervadec H, Dolz J, Tang M, Granger E, Boykov Y, Ben Ayed I. Constrained-CNN losses for
-    weakly supervised segmentation. [arXiv:1805.04628](https://arxiv.org/abs/1805.04628) v2. [PDF](ssl-generative-anatomy-priors-papers/30-kervadec-2019-constrained-cnn-losses.pdf)
+    weakly supervised segmentation. [arXiv:1805.04628](https://arxiv.org/abs/1805.04628) v2. [PDF](files/ssl-generative-anatomy-priors-papers/30-kervadec-2019-constrained-cnn-losses.pdf)
 31. Bohlender S, Oksuz I, Mukhopadhyay A. A survey on shape-constraint deep learning for medical
-    image segmentation. [arXiv:2101.07721](https://arxiv.org/abs/2101.07721) v1. [PDF](ssl-generative-anatomy-priors-papers/31-bohlender-2021-shape-constraint-survey.pdf)
+    image segmentation. [arXiv:2101.07721](https://arxiv.org/abs/2101.07721) v1. [PDF](files/ssl-generative-anatomy-priors-papers/31-bohlender-2021-shape-constraint-survey.pdf)
 32. Rickmann AM, et al. HALOS: hallucination-free organ segmentation after organ resection
-    surgery. [arXiv:2303.07717](https://arxiv.org/abs/2303.07717) v1. [PDF](ssl-generative-anatomy-priors-papers/32-rickmann-2023-halos.pdf)
+    surgery. [arXiv:2303.07717](https://arxiv.org/abs/2303.07717) v1. [PDF](files/ssl-generative-anatomy-priors-papers/32-rickmann-2023-halos.pdf)
 33. Luo X, Li Z, Zhang S, Liao W, Wang G. Rethinking abdominal organ segmentation (RAOS) in the
     clinical scenario: a robustness evaluation benchmark with challenging cases.
-    [arXiv:2406.13674](https://arxiv.org/abs/2406.13674) v1. [PDF](ssl-generative-anatomy-priors-papers/33-luo-2024-raos.pdf)
+    [arXiv:2406.13674](https://arxiv.org/abs/2406.13674) v1. [PDF](files/ssl-generative-anatomy-priors-papers/33-luo-2024-raos.pdf)
 34. Gu Y, Tsao W, et al. Leveraging textual anatomical knowledge for class-imbalanced
-    semi-supervised multi-organ segmentation. [arXiv:2501.13470](https://arxiv.org/abs/2501.13470) v2. [PDF](ssl-generative-anatomy-priors-papers/34-gu-2025-textual-anatomical-knowledge.pdf)
+    semi-supervised multi-organ segmentation. [arXiv:2501.13470](https://arxiv.org/abs/2501.13470) v2. [PDF](files/ssl-generative-anatomy-priors-papers/34-gu-2025-textual-anatomical-knowledge.pdf)
 35. Chen Y, Wang Y, et al. Striving for simplicity: simple yet effective prior-aware
     pseudo-labeling for semi-supervised ultrasound image segmentation.
-    [arXiv:2503.13987](https://arxiv.org/abs/2503.13987) v1. [PDF](ssl-generative-anatomy-priors-papers/35-chen-2025-prior-aware-pseudo-labelling-ultrasound.pdf)
+    [arXiv:2503.13987](https://arxiv.org/abs/2503.13987) v1. [PDF](files/ssl-generative-anatomy-priors-papers/35-chen-2025-prior-aware-pseudo-labelling-ultrasound.pdf)
 
 Generative segmentation, generative data, and the merging trend
 
 37. Kohl SAA, et al. A probabilistic U-Net for segmentation of ambiguous images. NeurIPS 2018.
-    [arXiv:1806.05034](https://arxiv.org/abs/1806.05034) v4. [PDF](ssl-generative-anatomy-priors-papers/37-kohl-2018-probabilistic-unet.pdf)
+    [arXiv:1806.05034](https://arxiv.org/abs/1806.05034) v4. [PDF](files/ssl-generative-anatomy-priors-papers/37-kohl-2018-probabilistic-unet.pdf)
 38. Wu J, et al. MedSegDiff: medical image segmentation with diffusion probabilistic model.
-    [arXiv:2211.00611](https://arxiv.org/abs/2211.00611) v5. [PDF](ssl-generative-anatomy-priors-papers/38-wu-2022-medsegdiff.pdf)
+    [arXiv:2211.00611](https://arxiv.org/abs/2211.00611) v5. [PDF](files/ssl-generative-anatomy-priors-papers/38-wu-2022-medsegdiff.pdf)
 39. Rahman A, Valanarasu JMJ, Hacihaliloglu I, Patel VM. Ambiguous medical image segmentation
-    using diffusion models. [arXiv:2304.04745](https://arxiv.org/abs/2304.04745) v1. [PDF](ssl-generative-anatomy-priors-papers/39-rahman-2023-ambiguous-diffusion.pdf)
+    using diffusion models. [arXiv:2304.04745](https://arxiv.org/abs/2304.04745) v1. [PDF](files/ssl-generative-anatomy-priors-papers/39-rahman-2023-ambiguous-diffusion.pdf)
 40. Baranchuk D, et al. Label-efficient semantic segmentation with diffusion models. ICLR 2022.
-    [arXiv:2112.03126](https://arxiv.org/abs/2112.03126) v3. [PDF](ssl-generative-anatomy-priors-papers/40-baranchuk-2022-ddpm-segmentation.pdf)
+    [arXiv:2112.03126](https://arxiv.org/abs/2112.03126) v3. [PDF](files/ssl-generative-anatomy-priors-papers/40-baranchuk-2022-ddpm-segmentation.pdf)
 41. Chen X, Liu Z, Xie S, He K. Deconstructing denoising diffusion models for self-supervised
-    learning. [arXiv:2401.14404](https://arxiv.org/abs/2401.14404) v1. [PDF](ssl-generative-anatomy-priors-papers/41-chen-2024-deconstructing-diffusion-ssl.pdf)
+    learning. [arXiv:2401.14404](https://arxiv.org/abs/2401.14404) v1. [PDF](files/ssl-generative-anatomy-priors-papers/41-chen-2024-deconstructing-diffusion-ssl.pdf)
 42. Dronne C, et al. Image-conditioned diffusion models for quality assurance of organ-at-risk
-    segmentations in radiotherapy. [arXiv:2608.23432](https://arxiv.org/abs/2608.23432) v1. [PDF](ssl-generative-anatomy-priors-papers/42-dronne-2026-diffusion-qa-organ-at-risk.pdf)
+    segmentations in radiotherapy. [arXiv:2608.23432](https://arxiv.org/abs/2608.23432) v1. [PDF](files/ssl-generative-anatomy-priors-papers/42-dronne-2026-diffusion-qa-organ-at-risk.pdf)
 43. Akshat G, et al. Unsupervised anatomical feature learning via diffusion models.
-    [arXiv:2608.25693](https://arxiv.org/abs/2608.25693) v1. [PDF](ssl-generative-anatomy-priors-papers/43-akshat-2026-diffusion-anatomical-feature-learning.pdf)
+    [arXiv:2608.25693](https://arxiv.org/abs/2608.25693) v1. [PDF](files/ssl-generative-anatomy-priors-papers/43-akshat-2026-diffusion-anatomical-feature-learning.pdf)
 44. Yu S, et al. Representation alignment for generation: training diffusion transformers is
-    easier than you think (REPA). ICLR 2025. [arXiv:2410.06940](https://arxiv.org/abs/2410.06940) v4. [PDF](ssl-generative-anatomy-priors-papers/44-yu-2025-repa.pdf)
+    easier than you think (REPA). ICLR 2025. [arXiv:2410.06940](https://arxiv.org/abs/2410.06940) v4. [PDF](files/ssl-generative-anatomy-priors-papers/44-yu-2025-repa.pdf)
 45. Zheng B, Ma N, Tong S, Xie S. Diffusion transformers with representation autoencoders (RAE).
-    [arXiv:2510.11690](https://arxiv.org/abs/2510.11690) v1. [PDF](ssl-generative-anatomy-priors-papers/45-zheng-2026-rae.pdf)
+    [arXiv:2510.11690](https://arxiv.org/abs/2510.11690) v1. [PDF](files/ssl-generative-anatomy-priors-papers/45-zheng-2026-rae.pdf)
 46. Zhang L, Rao A, Agrawala M. Adding conditional control to text-to-image diffusion models
-    (ControlNet). [arXiv:2302.05543](https://arxiv.org/abs/2302.05543) v3. [PDF](ssl-generative-anatomy-priors-papers/46-zhang-2023-controlnet.pdf)
+    (ControlNet). [arXiv:2302.05543](https://arxiv.org/abs/2302.05543) v3. [PDF](files/ssl-generative-anatomy-priors-papers/46-zhang-2023-controlnet.pdf)
 47. Stojanovski D, et al. Echo from noise: synthetic ultrasound image generation using diffusion
-    models for real image segmentation. [arXiv:2305.05424](https://arxiv.org/abs/2305.05424) v2. [PDF](ssl-generative-anatomy-priors-papers/47-stojanovski-2023-echo-from-noise.pdf)
+    models for real image segmentation. [arXiv:2305.05424](https://arxiv.org/abs/2305.05424) v2. [PDF](files/ssl-generative-anatomy-priors-papers/47-stojanovski-2023-echo-from-noise.pdf)
 48. Konz N, Chen Y, Dong H, Mazurowski MA. Anatomically-controllable medical image generation
-    with segmentation-guided diffusion models. [arXiv:2402.05210](https://arxiv.org/abs/2402.05210) v4. [PDF](ssl-generative-anatomy-priors-papers/48-konz-2024-segmentation-guided-diffusion.pdf)
+    with segmentation-guided diffusion models. [arXiv:2402.05210](https://arxiv.org/abs/2402.05210) v4. [PDF](files/ssl-generative-anatomy-priors-papers/48-konz-2024-segmentation-guided-diffusion.pdf)
 
 Meta-learning, few-shot, in-context and open set
 
 49. Finn C, Abbeel P, Levine S. Model-agnostic meta-learning for fast adaptation of deep networks
-    (MAML). ICML 2017. [arXiv:1703.03400](https://arxiv.org/abs/1703.03400) v3. [PDF](ssl-generative-anatomy-priors-papers/49-finn-2017-maml.pdf)
+    (MAML). ICML 2017. [arXiv:1703.03400](https://arxiv.org/abs/1703.03400) v3. [PDF](files/ssl-generative-anatomy-priors-papers/49-finn-2017-maml.pdf)
 50. Snell J, Swersky K, Zemel R. Prototypical networks for few-shot learning.
-    [arXiv:1703.05175](https://arxiv.org/abs/1703.05175) v2. [PDF](ssl-generative-anatomy-priors-papers/50-snell-2017-prototypical-networks.pdf)
+    [arXiv:1703.05175](https://arxiv.org/abs/1703.05175) v2. [PDF](files/ssl-generative-anatomy-priors-papers/50-snell-2017-prototypical-networks.pdf)
 51. Wang K, et al. PANet: few-shot image semantic segmentation with prototype alignment.
-    [arXiv:1908.06391](https://arxiv.org/abs/1908.06391) v2. [PDF](ssl-generative-anatomy-priors-papers/51-wang-2019-panet.pdf)
+    [arXiv:1908.06391](https://arxiv.org/abs/1908.06391) v2. [PDF](files/ssl-generative-anatomy-priors-papers/51-wang-2019-panet.pdf)
 52. Ouyang C, et al. Self-supervision with superpixels: training few-shot medical image
-    segmentation without annotation (SSL-ALPNet). [arXiv:2007.09886](https://arxiv.org/abs/2007.09886) v2. [PDF](ssl-generative-anatomy-priors-papers/52-ouyang-2020-ssl-alpnet.pdf)
+    segmentation without annotation (SSL-ALPNet). [arXiv:2007.09886](https://arxiv.org/abs/2007.09886) v2. [PDF](files/ssl-generative-anatomy-priors-papers/52-ouyang-2020-ssl-alpnet.pdf)
 53. Butoi VI, et al. UniverSeg: universal medical image segmentation.
-    [arXiv:2304.06131](https://arxiv.org/abs/2304.06131) v1. [PDF](ssl-generative-anatomy-priors-papers/53-butoi-2023-universeg.pdf)
+    [arXiv:2304.06131](https://arxiv.org/abs/2304.06131) v1. [PDF](files/ssl-generative-anatomy-priors-papers/53-butoi-2023-universeg.pdf)
 54. Rakic M, et al. Tyche: stochastic in-context learning for medical image segmentation.
-    [arXiv:2401.13650](https://arxiv.org/abs/2401.13650) v2. [PDF](ssl-generative-anatomy-priors-papers/54-rakic-2024-tyche.pdf)
+    [arXiv:2401.13650](https://arxiv.org/abs/2401.13650) v2. [PDF](files/ssl-generative-anatomy-priors-papers/54-rakic-2024-tyche.pdf)
 55. Nayal N, et al. RbA: segmenting unknown regions rejected by all.
-    [arXiv:2211.14293](https://arxiv.org/abs/2211.14293) v2. [PDF](ssl-generative-anatomy-priors-papers/55-nayal-2023-rba.pdf)
+    [arXiv:2211.14293](https://arxiv.org/abs/2211.14293) v2. [PDF](files/ssl-generative-anatomy-priors-papers/55-nayal-2023-rba.pdf)
 59. Li D, Yang Y, Song YZ, Hospedales TM. Learning to generalize: meta-learning for domain
-    generalization (MLDG). [arXiv:1710.03463](https://arxiv.org/abs/1710.03463) v1. [PDF](ssl-generative-anatomy-priors-papers/59-li-2018-mldg.pdf)
+    generalization (MLDG). [arXiv:1710.03463](https://arxiv.org/abs/1710.03463) v1. [PDF](files/ssl-generative-anatomy-priors-papers/59-li-2018-mldg.pdf)
 60. Liu Q, Dou Q, Heng PA. Shape-aware meta-learning for generalizing prostate MRI segmentation
-    to unseen domains (SAML). [arXiv:2007.02035](https://arxiv.org/abs/2007.02035) v1. [PDF](ssl-generative-anatomy-priors-papers/60-liu-2020-saml-shape-aware-meta-learning.pdf)
+    to unseen domains (SAML). [arXiv:2007.02035](https://arxiv.org/abs/2007.02035) v1. [PDF](files/ssl-generative-anatomy-priors-papers/60-liu-2020-saml-shape-aware-meta-learning.pdf)
 
 Books (free PDFs from their authors)
 
 - B1. Bronstein MM, Bruna J, Cohen T, Veličković P. *Geometric Deep Learning: Grids, Groups,
-  Graphs, Geodesics, and Gauges*. [arXiv:2104.13478](https://arxiv.org/abs/2104.13478) v2, 160 pages. [PDF](ssl-generative-anatomy-priors-papers/books/B1-bronstein-2021-geometric-deep-learning.pdf)
+  Graphs, Geodesics, and Gauges*. [arXiv:2104.13478](https://arxiv.org/abs/2104.13478) v2, 160 pages. [PDF](files/ssl-generative-anatomy-priors-papers/books/B1-bronstein-2021-geometric-deep-learning.pdf)
 - B2. Lai CH, Song Y, Kim D, Mitsufuji Y, Ermon S. *The Principles of Diffusion Models*
-  (forthcoming, MIT Press). [arXiv:2510.21890](https://arxiv.org/abs/2510.21890) v3, 522 pages. [PDF](ssl-generative-anatomy-priors-papers/books/B2-lai-2025-principles-of-diffusion-models.pdf)
+  (forthcoming, MIT Press). [arXiv:2510.21890](https://arxiv.org/abs/2510.21890) v3, 522 pages. [PDF](files/ssl-generative-anatomy-priors-papers/books/B2-lai-2025-principles-of-diffusion-models.pdf)
 - B3. Prince SJD. *Understanding Deep Learning*. MIT Press 2023; PDF version of 2026-02-08
-  (release v5.0.3, [udlbook](https://github.com/udlbook/udlbook/releases/tag/v5.0.3)), 541 pages. [PDF](ssl-generative-anatomy-priors-papers/books/B3-prince-2026-understanding-deep-learning-v5.0.3.pdf)
+  (release v5.0.3, [udlbook](https://github.com/udlbook/udlbook/releases/tag/v5.0.3)), 541 pages. [PDF](files/ssl-generative-anatomy-priors-papers/books/B3-prince-2026-understanding-deep-learning-v5.0.3.pdf)
 - B4. Murphy KP. *Probabilistic Machine Learning: Advanced Topics*. MIT Press; PDF release
   2025-dec-10 ([probml/pml2-book](https://github.com/probml/pml2-book/releases/tag/2025-dec-10)),
-  1,370 pages, CC BY-NC-ND. [PDF](ssl-generative-anatomy-priors-papers/books/B4-murphy-2025-pml2-advanced-topics.pdf)
+  1,370 pages, CC BY-NC-ND. [PDF](files/ssl-generative-anatomy-priors-papers/books/B4-murphy-2025-pml2-advanced-topics.pdf)
