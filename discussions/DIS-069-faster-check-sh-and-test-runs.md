@@ -72,3 +72,8 @@ workers passed 3 of 3 and were 55% faster on the full suite. The user chose 3 wo
 least half the memory kept free:
 [DEC-121](../decisions/DEC-121-check-sh-runs-pytest-with-3-workers.md) (check.sh runs pytest
 with 3 workers, amends DEC-120).
+
+Later the same day the user turned the default back to serial, because a fixed worker count
+does not fit other machines and the full suite runs seldom:
+[DEC-122](../decisions/DEC-122-check-sh-runs-pytest-serially-by-default.md) (check.sh runs
+pytest serially by default, amends DEC-121); `CHECK_WORKERS` opts in.
