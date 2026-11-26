@@ -13,8 +13,11 @@
   result tables or conclusion of the core ones. No paper was read in full; Section 9 says what was
   read of each. Numbers are as the sources state them, with the PDF page (p.), and none were
   reproduced. No table, per-sample record or image of the project was read.
-- **Nothing is decided here.** The candidate changes C7 to C13 continue the C1 to C6 of DIS-052;
-  like those, they are labels in this note only.
+- **Nothing is decided here.** The candidate changes C7 to C13 (Table 4 in Section 6: seven
+  changes to the recipe R4 defined below) come after the six candidate changes C1 to C6 of
+  DIS-052 (Table 3 there: weight averaging, a shorter run, a larger input, stronger augmentation,
+  parameter-efficient tuning, and a presence head that gates the masks). Like those, C7 to C13
+  are labels in this note only.
 
 Terms and abbreviations: **SSL**, self-supervised learning (learning from unlabelled images
 through a pretext task); **MIM**, masked image modelling (hide parts of the image, predict them);
@@ -25,13 +28,17 @@ autoencoder; **DG**, domain generalisation. **R4**: the DINOv3 ConvNeXt-B recipe
 head of [DEC-077](../decisions/DEC-077-epic1-model-choice-six-recipes.md). **W1, W2, W3**: the
 epic 1 scores of [DEC-076](../decisions/DEC-076-epic1-metrics-label-set-score-selection-ci-and-pass-rule.md)
 (W2 is the "no phantom organs" score). **Phantom organ**: an organ predicted on a sample where it
-is a closed negative (known absent). **Datasource group**: as in DIS-052.
+is a closed negative (known absent). **Datasource group**: as in DIS-052. **P1 to P7**: the seven proposals of DIS-052 (P1 relabel
+liver in kidney views, P2 grouped 5-fold selection, P3 stomach report-only, P4 base recipe, P5
+first changes, P6 inference steps, P7 seeds and comparisons). **O1 to O3**: the user's three
+observations in Section 1. **Fact 1 to fact 7**: the numbered facts of DIS-052.
 
 ## 0. Summary
 
 1. **Next changes to R4, cheapest first** (Section 6): a decoder that is conditioned on
    per-organ presence (C7), and a model of plausible organ layouts learnt from label masks
-   (C8), both after the liver labels in kidney views are settled (DIS-052 P1). The strongest
+   (C8), both after the liver labels in kidney views are settled (P1 of DIS-052, the relabel
+   proposal). The strongest
    evidence on phantom organs is HALOS [32]: a presence classifier that only shares the encoder
    did not lower the FPR (0.285 against 0.259 for nnU-Net), but feeding the predicted presence
    into the segmentation features did (0.031) [32, p.9].
@@ -40,30 +47,30 @@ is a closed negative (known absent). **Datasource group**: as in DIS-052.
    RAD-DINO on chest X-ray [04]. The gain is real but modest when labels are plentiful
    (MedDINOv3: 85.51 to 87.38 DSC on AMOS22 [05, p.8]; UltraDINO: 79.51 against 79.26 DSC for
    DINOv2 on the full FASS set, 74.24 against 69.11 with 20 training images [57, p.5]). For us
-   it is the bigger bet C10, mainly because the same encoder will serve diagnosis.
+   it is the bigger bet C10 (continued SSL of R4's encoder), mainly because the same encoder will serve diagnosis.
 3. **The generative principle enters in three places**, in the order I would try them: as a
-   prior on masks (C8: plausibility check, label audit, post-processing [24]–[26], [42]); as a
-   pretext task (MIM in C10 [11], [14], [15]); and as a data source (mask-conditioned synthetic
+   prior on masks (C8, the mask-plausibility model: plausibility check, label audit, post-processing [24]–[26], [42]); as a
+   pretext task (MIM in C10, continued SSL [11], [14], [15]); and as a data source (mask-conditioned synthetic
    images [46]–[48], later). A generative segmentation head that samples several masks [37],
    [39], [54] is for uncertainty and label audit, not for the bar.
 4. **Geometric and size relations.** No paper found here learns general anatomical relations
    for abdominal ultrasound. The evidence covers single-structure shape priors [24]–[28],
    hand-coded pairwise rules (containment and exclusion [29], size bounds [30]) and image-level
-   organ existence [32]. My recommendation: learn the joint layout from masks (C8) and
-   image-level presence (C7); hand-code a rule only where a clinician confirms it.
+   organ existence [32]. My recommendation: learn the joint layout from masks (C8, the mask-plausibility model) and
+   image-level presence (C7, the presence-conditioned decoder); hand-code a rule only where a clinician confirms it.
 5. **Meta-learning.** DINO is SSL, not meta-learning. The meta-learning that fits our main
-   problem (the datasource gap, W3) is episodic domain generalisation over datasource groups:
+   problem (the datasource gap, W3, the val-to-test drop of W1) is episodic domain generalisation over datasource groups:
    MLDG [59], and SAML [60], which beat pooled training by 2.15 DSC points on six prostate MRI
-   sites [60, p.8] (C9). Few-shot and in-context segmenters [50]–[54] fit new structures in
+   sites [60, p.8] (C9, episodic training over datasource groups). Few-shot and in-context segmenters [50]–[54] fit new structures in
    later epics.
 6. **Spleen read as liver.** By [DEC-066](../decisions/DEC-066-epic1-model-task-label-set-softmax.md)
    rule 3, a drawn spleen lies outside every first-set polygon, so its pixels are trained as
    background, or as "background or liver" with no liver loss when liver is unknown (my reading
    of the rule; the share of such samples is not counted). Little in training separates spleen
-   from liver. C11 puts spleen back as a training class or adds an "unknown region" score [55].
+   from liver. C11 (spleen as a training class) puts spleen back or adds an "unknown region" score [55].
 7. **The 224 × 224 stretch distorts geometry.** [DEC-069](../decisions/DEC-069-epic1-data-preparation.md)
    rule 4 stretches each crop to 224 × 224 without keeping its aspect, so shape and size
-   relations change from crop to crop. An aspect-preserving resize (C13) is a cheap
+   relations change from crop to crop. An aspect-preserving resize (C13, a change to R4's input) is a cheap
    precondition for any shape or size prior (my reasoning; no paper tested it on our data).
 
 ## 1. Question and scope
@@ -77,8 +84,8 @@ The user's observations from the liver-negative gallery of [TASK-197](../../back
 (R4 and R6 reviewed; counts not given):
 
 - O1. Most of the "F-both-large" samples (both models predict a large liver on a sample labelled
-  liver-absent; my reading of the gallery group's name) show a liver. This supports DIS-052
-  section 1: those are label errors, not model errors.
+  liver-absent; my reading of the gallery group's name) show a liver. This supports section 1 of
+  DIS-052 (the user's liver view): those are label errors, not model errors.
 - O2. On a few samples one or both models read the spleen as liver. Spleen has few samples and
   is not a first-set class (DEC-066 rule 1).
 - O3. On a few samples a phantom organ appears.
@@ -92,8 +99,8 @@ Questions for this study:
 - Q4. Which meta-learning or few-shot methods fit, and for which problem?
 - Q5. Which methods address O2 and O3 directly?
 
-Out of scope: architectures and decoders already compared (the 2026-11-18 note, DIS-052 fact 1),
-promptable segmenters (SAM family, DIS-052 section 3), and label-noise methods (the
+Out of scope: architectures and decoders already compared (the 2026-11-18 note, fact 1 of DIS-052: decoders differ little),
+promptable segmenters (SAM family, section 3 of DIS-052: bigger bets), and label-noise methods (the
 2026-11-24 label-noise journal note).
 
 ## 2. Keyword map
@@ -212,7 +219,7 @@ note, Section 3.1) already found ultrasound encoders level with DINOv3 ConvNeXt-
 
 Reading for us: JEPA is the cleanest form of "predict the hidden anatomy from its context",
 which is the relational knowledge the user wants. No medical segmentation result was found for
-it here, so it is a research option for C10, not a recipe.
+it here, so it is a research option for C10 (continued SSL of R4's encoder), not a recipe.
 
 ### 4.4 Anatomy-aware SSL
 
@@ -263,9 +270,9 @@ a clinician's check for every pair and view. A mask prior learnt from our label 
   [33, p.4], and that most of the seven state-of-the-art methods tested could not tell a
   removed organ was missing [33, p.7].
 
-Reading for us: this is direct evidence for O3 and for DIS-052's C6 (presence head), with one
+Reading for us: this is direct evidence for O3 (phantom organs) and for C6 of DIS-052 (the presence head), with one
 correction. A presence head that only shares the encoder is not enough; its output must
-condition the segmentation features (C7).
+condition the segmentation features (C7, the presence-conditioned decoder).
 
 ### 4.7 Generative segmentation and uncertainty
 
@@ -287,7 +294,7 @@ this image" is a label-audit tool. For diagnosis it gives an uncertainty per org
 ControlNet [46] adds mask conditioning to a pretrained image diffusion model. Stojanovski et al.
 [47] generated echocardiograms from label maps; a segmenter trained only on synthetic images
 reached DSC 88.6% (left-ventricle endocardium) on real images [47, p.1]. SegGuidedDiff [48]
-follows a multi-class mask at each sampling step (CT, MRI). For spleen (O2) this could add rare
+follows a multi-class mask at each sampling step (CT, MRI). For spleen (O2, spleen read as liver) this could add rare
 examples, but generated images come from patient images and carry their rules, and their
 realism for abdominal ultrasound is untested here. Later.
 
@@ -305,7 +312,8 @@ realism for abdominal ultrasound is untested here. Later.
   UniverSeg [53] segments a new task from example image-mask pairs with no training, after
   training on 53 medical datasets [53, p.1]; Tyche [54] adds several outputs per image.
 
-Reading for us: episodic DG targets W3 (DIS-052 fact 4) and fits DIS-052 P2 (grouped folds),
+Reading for us: episodic DG targets W3 (the val-to-test drop of W1; fact 4 of DIS-052: val does not see the
+datasource gap) and fits P2 of DIS-052 (grouped 5-fold selection),
 which already defines the groups. Few-shot methods fit new structures in later epics (vessels,
 lesions), not the epic 1 bar.
 
@@ -334,32 +342,34 @@ strength of the evidence. "My reading" marks reasoning not tested in a source.
 
 | Observation | Likely mechanism | Methods that act on it | Evidence |
 |---|---|---|---|
-| O1: large false livers are mostly real livers | "liver absent" closures on kidney views with a visible liver ([DIS-049](../discussions/DIS-049-epic1-low-test-w2-liver-label-check.md), DIS-052 fact 5) | relabel (DIS-052 P1, [TASK-233](../../backlog/tasks/task-233%20-%20Blinded-re-read-of-test-liver-negatives-in-Label-Studio-40-both-fail-and-40-both-pass-samples-of-R1-and-R4-no-model-output-liver-visible-spleen-visible-kidney-side-dataset-record-DIS-049.md)); a mask-given-image model as a label audit [42], [37] | strong for the mechanism (the user's gallery review; the blinded re-read is still to come); weak to medium for the audit tool (CT, not ultrasound) |
+| O1: large false livers are mostly real livers | "liver absent" closures on kidney views with a visible liver ([DIS-049](../discussions/DIS-049-epic1-low-test-w2-liver-label-check.md), DIS-052 fact 5: the W2 liver failures look like undrawn small liver) | relabel (P1 of DIS-052, the relabel proposal; [TASK-233](../../backlog/tasks/task-233%20-%20Blinded-re-read-of-test-liver-negatives-in-Label-Studio-40-both-fail-and-40-both-pass-samples-of-R1-and-R4-no-model-output-liver-visible-spleen-visible-kidney-side-dataset-record-DIS-049.md)); a mask-given-image model as a label audit [42], [37] | strong for the mechanism (the user's gallery review; the blinded re-read is still to come); weak to medium for the audit tool (CT, not ultrasound) |
 | O2: spleen read as liver | spleen not a class; its pixels are trained as background, or as "background or liver" with no liver loss when liver is unknown (my reading of DEC-066 rule 3); few spleen samples | spleen as a training class (C11); one-vs-all heads and an unknown score [55]; more spleen data, public or synthetic [47], [48]; context from SSL (C10) | medium for one-vs-all [55] (natural images); none tested on spleen versus liver in ultrasound |
 | O3: phantom organs | image-level error: the model segments an organ the image does not show | presence-conditioned decoder (C7) [32]; mask prior (C8) [25], [26]; plausibility by construction [27], [28] | strong for C7 in MRI [32]; medium for mask priors (cardiac, chest) |
 
 ## 6. Candidate changes to R4
 
 Table 4. Candidates C7 to C13, each a change against R4, in the suggested order within each tier.
-Costs are my estimates from DIS-052 fact 7 (1.6 to 1.9 A100 hours per 30-epoch R4 run) unless a
-source is named. Every candidate is chosen on out-of-group predictions (DIS-052 P2), never on test.
+Costs are my estimates from fact 7 of DIS-052 (1.6 to 1.9 A100 hours per 30-epoch R4 run) unless a
+source is named. Every candidate is chosen on out-of-group predictions (P2 of DIS-052, grouped
+5-fold selection), never on test. O1 to O3 are the observations of Section 1 (false livers that
+show a liver, spleen read as liver, phantom organs); W1 to W3 are the scores defined at the top.
 
 | Tier | Candidate | Change | Aims at | Evidence | Cost and needs |
 |---|---|---|---|---|---|
-| 1 | C7 | Presence-conditioned decoder: a per-organ presence head (sigmoid, unknown masked), whose output scales and shifts decoder features (FiLM, as in [32]); replaces DIS-052 C6 | O3, W2 | [32]: FPR 0.259 to 0.031; encoder sharing alone 0.285 | method task; R4's training cost; after DIS-052 P1, or it learns the wrong closures harder |
+| 1 | C7 | Presence-conditioned decoder: a per-organ presence head (sigmoid, unknown masked), whose output scales and shifts decoder features (FiLM, as in [32]); replaces C6 of DIS-052 (the presence head that gates masks) | O3, W2 | [32]: FPR 0.259 to 0.031; encoder sharing alone 0.285 | method task; R4's training cost; after P1 of DIS-052 (settling liver labels in kidney views), or it learns the wrong closures harder |
 | 1 | C8 | Mask-plausibility model: a DAE or VAE trained on epic 1 label masks only; used (a) to flag labels and predictions far from plausible layouts, (b) as post-processing [25], (c) later as a training loss [24] | O1 audit, O3, organ relations and sizes | [24]–[26]: cardiac MRI and ultrasound, chest X-ray; single structures, not multi-organ abdomen | method task; small model, a few GPU hours (my estimate); masks are derived from label tables, so a table ask; where it may run needs a check of the data rules |
-| 1 | C13 | Aspect-preserving resize (pad to square) instead of the stretch | geometry for C8 and any size prior | none (my reasoning) | a DEC replacing DEC-069 rule 4; one R4 run; can go with DIS-052 C3 (input 384) |
-| 2 | C9 | Episodic training over datasource groups (MLDG [59]; SAML's shape losses [60]) | W3 | [60]: +2.15 DSC on six MRI sites; DomainBed caution | method task; about twice the cost per step (my estimate); needs P2's groups |
+| 1 | C13 | Aspect-preserving resize (pad to square) instead of the stretch | geometry for C8 and any size prior | none (my reasoning) | a DEC replacing DEC-069 rule 4; one R4 run; can go with C3 of DIS-052 (input 384) |
+| 2 | C9 | Episodic training over datasource groups (MLDG [59]; SAML's shape losses [60]) | W3 | [60]: +2.15 DSC on six MRI sites; DomainBed caution | method task; about twice the cost per step (my estimate); needs the groups of P2 of DIS-052 (grouped 5-fold selection) |
 | 2 | C11 | Spleen back as a training class where drawn (scored as report only), or per-organ sigmoids with an unknown score | O2 | [55] natural images; TASK-199 | a DEC changing DEC-066 rule 1; a count of drawn spleens by group (needs a table ask) |
 | 2 | C10 | Continued SSL of R4's encoder on all the project's unlabelled ultrasound: DINO-style self-distillation with a masked-token term (as in DINOv2/v3), Gram anchoring optional; SparK [14] as the MIM alternative that keeps the ConvNeXt weights; LeJEPA [19] as a simpler research alternative | W1, W3, and the diagnosis backbone | [05], [57], [04], [15] | tens of A100 hours (DIS-052 estimate, unverified); enc1 data on RunPod only ([DEC-024](../decisions/DEC-024-plain-never-leaves-machine01-ec2-label-studio-decrypts-in-ram.md)); a count of usable unlabelled images |
 | 3 | C12 | Generative segmentation head (probabilistic U-Net [37] or diffusion [39]) for several masks per image | uncertainty for diagnosis, label audit | [37], [39], [54] | method task; after C7 and C8 |
 | 3 | later | Mask-conditioned synthetic ultrasound for rare organs [46]–[48]; a generative model in our encoder's latent space [44], [45]; anatomy-aware SSL [20]–[23]; contour-graph decoders [27], [28] | O2, data, geometry | weak for our case | research tasks |
 
 Figure 1. Proposed order of the candidates against R4. Each arrow starts only after the step
-above it is done; C1 and C2 are DIS-052's weight averaging and shorter-run candidates.
+above it is done; C1 and C2 are DIS-052's weight-averaging and shorter-run candidates, and P1, P2, P6 and P7 are its proposals (relabel, grouped selection, inference steps, seeds).
 
 ```
-DIS-052 P1 (settle liver in kidney views; TASK-232, TASK-233)
+DIS-052 P1 (relabel: settle liver in kidney views; TASK-232, TASK-233)
    │
    ├──▶ C8 mask-plausibility model ── first use: audit the relabelled masks
    │
@@ -369,7 +379,7 @@ DIS-052 P1 (settle liver in kidney views; TASK-232, TASK-233)
 DIS-052 P2 (grouped folds, out-of-group selection)
    │
    ├──▶ C7 presence-conditioned decoder      ┐
-   ├──▶ C1/C2 of DIS-052                     ├─ each against R4, 2 seeds (DIS-052 P7)
+   ├──▶ C1/C2 of DIS-052                     ├─ each against R4, 2 seeds (DIS-052 P7, seeds)
    ├──▶ C9 episodic DG over groups           ┘
    ├──▶ C11 spleen as a class (after its count)
    ▼
@@ -377,9 +387,9 @@ C10 continued SSL of the encoder ──▶ shared backbone for the diagnosis epi
 ```
 
 For the inference model (what runs at test time), my suggestion from the literature read here:
-R4, or its C7 version, as a 5-fold ensemble from P2, with flip test-time augmentation (DIS-052
-P6), a presence gate from C7
-and, if C8 works, a plausibility projection or flag. All thresholds are set on out-of-group
+R4, or its C7 version (presence-conditioned decoder), as a 5-fold ensemble from P2 of DIS-052
+(grouped 5-fold selection), with flip test-time augmentation (P6 of DIS-052, inference steps),
+a presence gate from C7 and, if C8 (mask-plausibility model) works, a plausibility projection or flag. All thresholds are set on out-of-group
 predictions.
 
 ## 7. What to read first
@@ -391,20 +401,20 @@ Table 5. A reading order for the user, books first. Chapters checked in the PDFs
 | 1 | Prince, *Understanding Deep Learning* [B3] | ch. 12 (transformers), 14 (unsupervised learning), 17 (VAEs), 18 (diffusion) | the clearest short path to the generative models used here |
 | 2 | Murphy, *Probabilistic ML: Advanced Topics* [B4] | sections 19.6.2 and 19.6.4 (domain generalisation, meta-learning, book pages 752-758); 32.3.2 and 32.3.3 (generative and self-supervised representation learning, book pages 1059-1064); ch. 20 (generative models overview) | how meta-learning, DG and SSL relate |
 | 3 | DINOv3 [56] | sections on Gram anchoring and the ConvNeXt distillation (pp.12, 31) | R4's encoder |
-| 4 | HALOS [32] | whole paper (13 pages) | the most direct evidence for C7 |
-| 5 | MedDINOv3 [05] and UltraDINO [57] | whole papers (10 and 11 pages) | the "DINO-Med" pattern for C10 |
-| 6 | Post-DAE [25] and Painchaud et al. [26] | whole papers | mask priors for C8 |
-| 7 | SAML [60] | whole paper | episodic DG for C9 |
+| 4 | HALOS [32] | whole paper (13 pages) | the most direct evidence for C7 (presence-conditioned decoder) |
+| 5 | MedDINOv3 [05] and UltraDINO [57] | whole papers (10 and 11 pages) | the "DINO-Med" pattern for C10 (continued SSL) |
+| 6 | Post-DAE [25] and Painchaud et al. [26] | whole papers | mask priors for C8 (mask-plausibility model) |
+| 7 | SAML [60] | whole paper | episodic DG for C9 (episodic training over groups) |
 | 8 | I-JEPA [16] and LeJEPA [19] | sections 1-3 | the predictive family |
 | 9 | Bronstein et al., *Geometric Deep Learning* [B1] | ch. 3 (geometric priors) | symmetry and invariance as design tools |
-| 10 | Lai et al., *The Principles of Diffusion Models* [B2] | Parts A and B | diffusion in depth, if C12 or synthetic data go ahead |
+| 10 | Lai et al., *The Principles of Diffusion Models* [B2] | Parts A and B | diffusion in depth, if C12 (generative segmentation head) or synthetic data go ahead |
 
 ## 8. Open questions for a consult session
 
-- How many unlabelled ultrasound images, by datasource, could C10 use (enc1 on RunPod)? A count
+- How many unlabelled ultrasound images, by datasource, could C10 (continued SSL of R4's encoder) use (enc1 on RunPod)? A count
   without images; needs a table ask.
-- How many samples have a drawn spleen, and in how many of those is liver unknown? (O2, C11.)
-- May a model trained on label masks only (C8) run on RunPod, or only on machine01? A data-rule
+- How many samples have a drawn spleen, and in how many of those is liver unknown? (O2, spleen read as liver, and C11, spleen as a training class.)
+- May a model trained on label masks only (C8, the mask-plausibility model) run on RunPod, or only on machine01? A data-rule
   question (the masks are derived from label tables).
 - Which organ pairs are known to touch or never touch in each standard view? A clinician's input
   before any hand-coded relation rule.
