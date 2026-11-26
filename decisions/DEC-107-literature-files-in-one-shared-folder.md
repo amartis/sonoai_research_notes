@@ -44,5 +44,5 @@ literature files shared between members).
 - The 64 existing links to local PDFs and the three index files are rewritten once; the
   per-folder ignore files are replaced by one rule in `research_notes/.gitignore`.
 - Copyright of sharing the copies inside the team: assumed acceptable, not checked (DIS-062).
-- Carried out by TASK-276 (link script, ignore rules, link rewrite, docs) and TASK-277 (roll-out,
+- Carried out by [TASK-276](../../backlog/tasks/task-276%20-%20Literature-files-through-one-link-research_notes-literature-files-link-script-one-ignore-rule-rewrite-the-note-links-onboarding-and-writing-docs-DEC-107.md) (link script, ignore rules, link rewrite, docs) and [TASK-277](../../backlog/tasks/task-277%20-%20Roll-out-the-shared-literature-folder-the-Samba-share-on-machine01-host-the-mount-and-link-on-machine01-senior-existing-files-moved-in-user-steps-DEC-107.md) (roll-out,
   user steps).

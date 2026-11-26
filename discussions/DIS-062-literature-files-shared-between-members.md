@@ -56,7 +56,7 @@ a script (no note text changed, but the script must be rerun after every new pap
 
 The user accepted the shared folder, the new Samba share and one link per machine named `files`
 ([DEC-107](../decisions/DEC-107-literature-files-in-one-shared-folder.md)). Board tasks:
-TASK-276 (link script, ignore rules, link rewrite, onboarding and writing docs) and TASK-277
+[TASK-276](../../backlog/tasks/task-276%20-%20Literature-files-through-one-link-research_notes-literature-files-link-script-one-ignore-rule-rewrite-the-note-links-onboarding-and-writing-docs-DEC-107.md) (link script, ignore rules, link rewrite, onboarding and writing docs) and [TASK-277](../../backlog/tasks/task-277%20-%20Roll-out-the-shared-literature-folder-the-Samba-share-on-machine01-host-the-mount-and-link-on-machine01-senior-existing-files-moved-in-user-steps-DEC-107.md)
 (roll-out, user steps: the share on machine01-host by the team lead, the mount and moving the
 existing files on each machine).
 
