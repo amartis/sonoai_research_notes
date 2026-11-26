@@ -202,3 +202,68 @@ Record: [DEC-114](../decisions/DEC-114-checkpoint-selection-in-two-groups-assess
 - A boundary measure for the drawers (e.g. the 95th-percentile Hausdorff distance) if outline
   quality beyond overlap matters; not a criterion now.
 - One checkpoint per class (per-class drawers or assessors), once validation has more positives.
+
+## Further ideas, parked (the user, 2026-11-26)
+
+Asked by the user after the second thought above, reviewed by the analyst (a separate session), and
+parked by the user: the plan stays DEC-114 (checkpoint selection in two groups). One Parked board
+task per idea, label `needs-decision`. Each idea separates the same two jobs as the two groups: saying
+whether a class is present (image-level, judged by AUC) and drawing it (judged by Dice).
+
+### Idea A: one model with two heads, segmentation plus an image-level classification head
+
+Add a small image-level head to the epic 3 segmentation model (pooling on the deepest encoder
+features, one sigmoid per spot class and ascites); training loss = segmentation loss + lambda x binary
+cross-entropy on the image labels. Store both the head's score and the top-50 score (DEC-112 rule 1)
+per sample, so one run compares their AUC on the same checkpoints. With DEC-114, the assessor group
+would be judged on the head's AUC and the drawer group on Dice.
+
+- For: the image decision gets its own trained output and loss, with direct pressure against false
+  positives on negative images (the top-50 score is derived from the pixels, not trained for).
+- Main risk, shortcut learning: an image-level head can learn the look of a site or device instead
+  of the lesion. Validation hepatoma positives (193) come from fewer than 5 datasource groups, the
+  largest holding 68% (Facts used, above); DEC-100 (epic 3 mission) records a cirrhosis model that
+  fell from 0.696 Dice on validation to 0.047 on test. The top-50 score is tied to where the model
+  draws; the head is not. Checks if tried: AUC per datasource group, and how often the head says
+  "present" where the segmentation draws nothing.
+- The head adds information only from samples with an image label and no outline; whether such
+  samples exist was not checked (it needs a table read, with the user's ok).
+- Records: departs from DEC-110 rule 5 (image score from the pixel probabilities) and DEC-112 rule 1
+  (top-50 score); a yes needs a new DEC and maybe a new task version (DEC-004, training tasks; not
+  checked). Proposed form: a comparison run after the first one-head run, on the same recipe, like
+  the sigmoid comparison run of DEC-110 rule 7.
+- Board: TASK-290 (decide whether to try the two-head model). Reopen when the first epic 3 one-head
+  run is done and its false positives on negative images are known.
+
+### Idea B: box detection plus segmentation
+
+A detector with a box head and a mask head (as Mask R-CNN): one score and one outline per lesion.
+
+- For: handles several lesions per image; false positives can be counted per lesion.
+- Against: a much larger change (boxes made from outlines, lesion-level measures beside the DEC-112
+  measures, a new task form). The repo already has a box detector, FCOS for bmode_det v1
+  ([DEC-062](../decisions/DEC-062-bmode-box-detector-bmode-det-v1.md) item 1), as a possible start.
+- Board: TASK-291 (decide whether to try box detection plus segmentation). Reopen when idea A is
+  tried, or images with several lesions turn out to matter for the product.
+
+### HD95, if added for the drawers (open question above)
+
+Rules needed first: a fixed cap when the prediction is empty (HD95, the 95th-percentile Hausdorff
+distance, is undefined then); pixels at the 512 input, not mm, because pixel spacing differs between
+devices. HD95 also punishes small far-away blobs inside positive images, which the assessor's gate
+does not remove.
+
+### More related work
+
+| Work | What it does | Source |
+|---|---|---|
+| Classify, then segment (SIIM-ACR pneumothorax challenge, 2019) | a review says the second-place team separated classification from segmentation; partly answers the unverified row of Table 4 | [scitepress 2021](https://www.scitepress.org/Papers/2021/101854/101854.pdf) |
+| Localise, then segment, breast ultrasound | a two-stage pipeline said to reduce false positives | [CEUR Vol-4164 paper 27](https://ceur-ws.org/Vol-4164/paper27.pdf) |
+| Y-Net (Mehta et al., MICCAI 2018) | U-Net with an added classification branch (idea A), breast biopsy slides | [arXiv 1806.01313](https://arxiv.org/abs/1806.01313) |
+| Zhou et al., Medical Image Analysis 70:101918 (2021) | joint segmentation and classification of tumours in 3D breast ultrasound; the abstract reports both improved over single-task models (idea A) | [record](https://pure.korea.ac.kr/en/publications/multi-task-learning-for-segmentation-and-classification-of-tumors/) |
+| Mask R-CNN (He et al. 2017) | box head and mask head on one network (idea B) | [arXiv 1703.06870](https://arxiv.org/abs/1703.06870) |
+| ELECTRE outranking | weighted agreement index against a cut level (0.5 to 1), indifference and veto thresholds; confirms the analogy of the review above, given there from memory | [R MCDA ELECTRE3](https://search.r-project.org/CRAN/refmans/MCDA/html/ELECTRE3.html), [arXiv 2511.09120](https://arxiv.org/pdf/2511.09120) |
+| Shortcut learning (Geirhos et al. 2020) | models solving a task through an unintended cue (the main risk of idea A) | [doi:10.1038/s42256-020-00257-z](https://doi.org/10.1038/s42256-020-00257-z) |
+
+Table 5. Work related to ideas A and B, checked by web search on 2026-11-26 (titles and abstracts or
+search summaries, not full papers).
