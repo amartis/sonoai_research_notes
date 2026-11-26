@@ -57,10 +57,10 @@ The user chose:
 - [DEC-120](../decisions/DEC-120-parallel-tests-measured-before-adoption.md): parallel
   tests are measured first and adopted only past a set bar.
 
-Board: TASK-296 (check.sh pytest skip, DEC-119) and TASK-297 (parallel test measurement,
+Board: TASK-299 (check.sh pytest skip, DEC-119) and TASK-300 (parallel test measurement,
 DEC-120), the second after the first, because both change `scripts/check.sh`. TASK-230
 (check.sh mode-choice fixes) stays in Triage.
 
 ## Open questions
 
-- None now. TASK-297's numbers decide whether parallel runs are adopted.
+- None now. TASK-300's numbers decide whether parallel runs are adopted.

@@ -38,4 +38,4 @@ method, data, infra and reviewer agent definitions and the lead skill point to i
 - The Definition of Done stays "scripts/check.sh passes" (DEC-084).
 - Once [DEC-119](DEC-119-check-sh-skips-pytest-on-unchanged-code.md) (check.sh skips
   pytest on unchanged code) is in the script, points 2 to 4 shrink to "run
-  `scripts/check.sh`; the script decides": TASK-296 cuts the text to that.
+  `scripts/check.sh`; the script decides": TASK-299 cuts the text to that.
