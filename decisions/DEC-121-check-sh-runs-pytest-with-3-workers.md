@@ -18,14 +18,16 @@ adoption) asked for timings with 6 workers before `scripts/check.sh` runs tests 
 (parallel test measurement) measured on machine01 (6 cores, 15 GB memory), n = 3 runs each,
 math threads capped at 1 per worker, with other sessions running at the same time:
 
-| Setup | Full suite mean | Fast set mean | Full runs passed | Peak memory, full suite |
-| --- | --- | --- | --- | --- |
-| Serial | 143.6 s | 77.6 s | 3 of 3 | not measured |
-| 6 workers | 72.5 s (50% lower) | 27.4 s (65% lower) | 2 of 3 | one worker killed out of memory at 2.5 GB |
-| 3 workers | 65.2 s (55% lower) | 34.5 s (56% lower) | 3 of 3 | 6.1 GB total, 3.1 GB largest process |
+**Table 1. pytest-xdist timings and memory for TASK-300 on machine01**, n = 3 runs per cell,
+mean (min to max); no confidence interval for n = 3. Full suite: all tests (`pytest -q`); fast
+set: the tests not marked slow (`pytest -q -m "not slow"`). The 3 times per cell are in
+TASK-300's notes.
 
-*Table: pytest-xdist timings for TASK-300 on machine01, n = 3 runs per cell; no confidence
-interval for n = 3. Run times and notes are on TASK-300.*
+| Setup | Full suite, s | Fast set, s | Full runs passed | Peak memory, full suite, GB |
+| --- | --- | --- | --- | --- |
+| Serial | 143.6 (137.0 to 152.6) | 77.6 (77.0 to 78.0) | 3 of 3 | not measured |
+| 6 workers | 72.5 (49.1 to 87.0), 50% lower | 27.4 (27.1 to 27.6), 65% lower | 2 of 3 | one worker killed out of memory at 2.5 |
+| 3 workers | 65.2 (64.4 to 66.5), 55% lower | 34.5 (34.1 to 34.7), 56% lower | 3 of 3 | 6.1 total, 3.1 largest process |
 
 The user asked to leave room for other work: at least 50% of the memory free while tests run.
 
@@ -42,8 +44,8 @@ The user asked to leave room for other work: at least 50% of the memory free whi
 
 ## Consequences
 
-- The full suite drops from about 2.5 minutes to about 1 minute on machine01; the fast set from
-  about 78 s to about 35 s.
+- The full suite (all tests) drops from about 2.5 minutes to about 1 minute on machine01; the
+  fast set (tests not marked slow) from about 78 s to about 35 s.
 - A test that fails only in parallel is fixed or marked to run serially, as DEC-120 says.
 - Another machine with less memory may need fewer workers; the count is one setting in
   `scripts/check.sh`.
