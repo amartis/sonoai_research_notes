@@ -4,7 +4,6 @@ Lab notebook for the sonoai ultrasound ML project. Separate git repo from the
 code in `..` (which ignores this folder).
 
 ```
-INDEX.md       generated overview of all DIS / DEC / EXP notes and their links
 discussions/   DIS-NNN: a discussion, the options weighed, and what came out of it
 decisions/     DEC-NNN: short records of choices that shape the project (ADR style)
 experiments/   EXP-NNN: hypothesis, runs, results, conclusion
@@ -12,8 +11,7 @@ journal/       daily notes: journal/2026/2026-10-22.md
 datasets/      dataset/label versions, cleaning decisions, statistics (aggregates only)
 literature/    paper notes
 templates/     copy these to start a note
-tools/         build_index.py (regenerates INDEX.md, links IDs in note text);
-               setup_merge.py + post_merge_index.sh (INDEX.md merge setup)
+tools/         build_index.py (links IDs in note text, checks front matter, lists DECs by area)
 ```
 
 ## Workflow: discussion → decision → task
@@ -40,11 +38,13 @@ DIS-007 ──▶ DEC-007, DEC-008 ──▶ TASK-015, TASK-016 ──▶ EXP-00
    names, problems) and final summary. Status goes
    `Triage → To Do → In Progress → Review → Done` (or `Parked` while it
    waits on a decision); small, obvious tasks skip Triage (DEC-009). The why stays here in DIS / DEC / EXP.
-5. **Index.** Run `python tools/build_index.py` after any change to a note;
-   it links IDs in the text (see "Links in note text") and rewrites
-   `INDEX.md`. Commit both with the notes. `--check` changes nothing and
-   exits 1 if `INDEX.md` is stale, an ID in the text is unlinked or unknown,
-   or a link does not resolve.
+5. **Links.** Run `python tools/build_index.py` after any change to a note;
+   it links IDs in the text (see "Links in note text"). Commit with the notes.
+   `--check` changes nothing and exits 1 if an ID in the text is unlinked or
+   unknown, a link does not resolve, or front matter is wrong.
+   `--area <area>` prints the accepted DECs of one area. There is no committed
+   index (dropped 2026-11-26); `--index` writes a local, gitignored `INDEX.md`
+   if you want an overview to browse.
 
 Rules:
 
@@ -56,10 +56,10 @@ Rules:
   `tools/build_index.py`). Pick by what the decision governs now, not by where it
   came from; use two areas only when it truly governs both (e.g. an AWS service
   that holds patient data: `aws`, `data-security`). Superseded DECs get an area too.
-  `INDEX.md` lists accepted DECs by area; `--check` fails on a missing or unknown area.
+  `--area` lists accepted DECs by area; `--check` fails on a missing or unknown area.
 - Links live in front matter: `from` (what this came out of), `outcomes`
   (DIS only: what it produced), `related` (anything else),
-  `superseded_by` (DEC only). `INDEX.md` shows them as links. Mention IDs
+  `superseded_by` (DEC only). Mention IDs
   freely in the text too; the index tool links them.
 - Board task IDs (`TASK-NNN`) go in the text, not front matter: front matter
   only resolves DIS / DEC / EXP links.
@@ -69,23 +69,16 @@ Rules:
 - TSK records are replaced by Backlog.md tasks; no TSK was ever created.
 - The journal stays the free-form daily log; it refers to IDs.
 
-## After a merge (INDEX.md)
+## Old INDEX.md merge setup (remove once per clone)
 
-`INDEX.md` is generated, so it never needs a hand-resolved conflict. Once per clone, run
-`python3 tools/setup_merge.py` (a merge driver and a post-merge hook live in each clone's own
-git config, so a new clone must run it; it is in `docs/onboarding.md` step 3). `.gitattributes`
-sends `INDEX.md` to the driver `index`, which keeps our copy without a conflict; the hook then runs
-`tools/build_index.py` and puts the regenerated `INDEX.md` into the merge commit.
+`INDEX.md` was a committed, generated file with its own merge driver and post-merge hook
+(TASK-245). It is no longer committed, so that setup is not needed. A clone that ran the old
+`tools/setup_merge.py` removes it once (the hook body `tools/post_merge_index.sh` is now a no-op,
+so nothing breaks before that):
 
-- Conflicts in note files themselves are still resolved by hand. `git commit` does not run the hook
-  (git runs post-merge only from `git merge`), so after resolving run `python3 tools/build_index.py`,
-  stage `INDEX.md` with the resolution before committing (or `git commit --amend --no-edit` after),
-  and confirm with `python3 tools/build_index.py --check`.
-- After a fast-forward (`git pull`) or `--squash` merge, without the setup, or after a rebase,
-  cherry-pick or stash pop (the driver silently keeps our `INDEX.md` there and no hook runs): run
-  `python3 tools/build_index.py` and commit `INDEX.md`. Never edit `INDEX.md` by hand.
-- If `core.hooksPath` points to a tracked folder, setup adds an untracked `post-merge` file there;
-  do not commit it, or call `tools/post_merge_index.sh` from your own hook.
+```bash
+git config --remove-section merge.index; rm -f "$(git rev-parse --git-path hooks/post-merge)"
+```
 
 ## Links in note text
 
@@ -95,7 +88,7 @@ DIS / DEC / EXP / TASK ID in a note into a relative markdown link, e.g.
 `DEC-012` becomes `[DEC-012](DEC-012-dataset-docs-layout.md)` in a decision.
 
 - Notes covered: `discussions/`, `decisions/`, `experiments/`, `journal/`,
-  `datasets/`, `literature/`. Not `README.md`, `INDEX.md` or `templates/`.
+  `datasets/`, `literature/`. Not `README.md` or `templates/`.
 - TASK IDs (subtasks too, e.g. `TASK-001.01`) link to the task file under
   `../backlog/tasks/` (or `completed/`, `archive/tasks/` once moved there).
 - Left alone: front matter, fenced code, code spans, existing links (an ID

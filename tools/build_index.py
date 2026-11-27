@@ -1,8 +1,13 @@
 #!/usr/bin/env python3
-"""Build INDEX.md from the front matter of DIS / DEC / EXP notes, and link IDs in note bodies.
+"""Link IDs in note bodies and check front matter; list accepted DECs by area; optional INDEX.md.
 
-    python tools/build_index.py           # link IDs in note bodies, write INDEX.md
-    python tools/build_index.py --check   # exit 1 if anything is stale, unlinked, moved or broken
+    python tools/build_index.py                 # link IDs in note bodies
+    python tools/build_index.py --check         # exit 1 if anything is unlinked, moved or broken
+    python tools/build_index.py --area datasets # print the accepted DECs of one area (DEC-040)
+    python tools/build_index.py --index         # also write INDEX.md, a local overview
+
+INDEX.md is no longer committed (2026-11-26): it is gitignored, written only with --index,
+and nothing reads it. Use --area, or grep the front matter, instead.
 
 Standard library only. Front matter is the block between the first two `---`
 lines; values are plain strings or `[A, B]` lists, `#` starts a comment.
@@ -240,6 +245,13 @@ def link_body(
     return front + "".join(out), added, errors, moved
 
 
+def accepted_by_area(notes: dict[str, dict]) -> dict[str, list[str]]:
+    """Accepted DEC IDs per area (DEC-040); a decision with two areas is under both."""
+    return {a: sorted(n for n, m in notes.items() if n.startswith("DEC") and m.get("status") == "accepted"
+                      and a in ([m["area"]] if isinstance(m.get("area"), str) else m.get("area") or []))
+            for a in AREAS}
+
+
 def render(notes: dict[str, dict]) -> str:
     # Reverse links, so each row also shows what came out of it.
     children: dict[str, set[str]] = {nid: set() for nid in notes}
@@ -284,9 +296,7 @@ def render(notes: dict[str, dict]) -> str:
             out.append("| " + " | ".join(row) + " |")
         out.append("")
 
-    by_area = {a: sorted(n for n, m in notes.items() if n.startswith("DEC") and m.get("status") == "accepted"
-                         and a in ([m["area"]] if isinstance(m.get("area"), str) else m.get("area") or []))
-               for a in AREAS}
+    by_area = accepted_by_area(notes)
     out += ["## Accepted decisions by area", "",
             "Accepted DECs only; a decision with two areas is listed under both. "
             "Superseded and proposed ones are in the Decisions table above.", ""]
@@ -308,9 +318,15 @@ def render(notes: dict[str, dict]) -> str:
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--check", action="store_true", help="verify only, do not write")
+    ap.add_argument("--index", action="store_true", help="also write INDEX.md (gitignored, local only)")
+    ap.add_argument("--area", choices=AREAS, help="print the accepted DECs of this area and stop")
     args = ap.parse_args()
 
     notes, errors = load_notes()
+    if args.area:
+        for nid in accepted_by_area(notes)[args.area]:
+            print(f"{nid}: {notes[nid].get('title', '')} ({notes[nid]['path']})")
+        return 0
     targets = link_targets(notes)
     own_ids = {ROOT / m["path"]: nid for nid, m in notes.items()}
     relinked = 0
@@ -328,14 +344,11 @@ def main() -> int:
                 errors.append(f"{name}: moved task file link {', '.join(moved)}; run tools/build_index.py")
         else:
             path.write_text(new, encoding="utf-8")
-    text = render(notes)
-    if args.check:
-        current = INDEX.read_text(encoding="utf-8") if INDEX.exists() else ""
-        if current != text:
-            errors.append("INDEX.md is stale; run tools/build_index.py")
-    else:
-        INDEX.write_text(text, encoding="utf-8")
-        print(f"wrote {INDEX.relative_to(ROOT)} ({len(notes)} notes); linked or re-pointed IDs in {relinked} notes")
+    if args.index and not args.check:
+        INDEX.write_text(render(notes), encoding="utf-8")
+        print(f"wrote {INDEX.relative_to(ROOT)} ({len(notes)} notes)")
+    if not args.check:
+        print(f"{len(notes)} notes; linked or re-pointed IDs in {relinked} notes")
     for e in errors:
         print(f"error: {e}", file=sys.stderr)
     return 1 if errors else 0

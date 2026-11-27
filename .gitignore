@@ -17,3 +17,5 @@
 # literature/files on each machine; no paper file goes into git (copyright, repo size).
 literature/files
 literature/**/*.pdf
+# Local overview from tools/build_index.py --index; not committed (2026-11-26)
+INDEX.md
